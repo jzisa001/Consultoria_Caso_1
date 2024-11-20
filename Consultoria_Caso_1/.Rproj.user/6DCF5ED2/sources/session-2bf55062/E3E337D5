@@ -1,7 +1,7 @@
 {
     "id": "E3E337D5",
-    "path": null,
-    "project_path": null,
+    "path": "~/Unest/Consultoria 2024-2/Caso 1 - Talla adultos mayores/Consultoria_Caso_1/Consultoria_Caso_1/Codigo_1.R",
+    "project_path": "Codigo_1.R",
     "type": "r_source",
     "hash": "0",
     "contents": "",
@@ -15,11 +15,11 @@
         "Source": "Source"
     },
     "folds": "",
-    "lastKnownWriteTime": 18296208499671089,
-    "encoding": "",
+    "lastKnownWriteTime": 1732063344,
+    "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1732063247806,
+    "last_content_update": 1732063344442,
     "read_only": false,
     "read_only_alternatives": []
 }
