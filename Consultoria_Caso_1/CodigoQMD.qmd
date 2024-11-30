@@ -1130,6 +1130,7 @@ for (j in 1:k) {
   }
 }
 # Hay un pequeño problema de multicolinealidad (parece que sucede cuando se incluye la etnia)
+# por eso en vez del 8 puse 7 (porque generaba un error por multicolinealidad)
 
 mean.cv.errors <- apply(cv.errors , 2, mean, na.rm = TRUE)
 mean.cv.errors # El menor MSE promedio es cuando se usa un modelo con 3 variables
