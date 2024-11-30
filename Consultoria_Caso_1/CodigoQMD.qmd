@@ -1164,7 +1164,7 @@ reg <- lm(Talla ~ LRT_A + Edad + Sexo, data = datos)
 
 El modelo tiene un $R^2$ ajustado de $0.8861$, es decir que aproximadamente un $88.61\%$ de la variabilidad de la talla es explicada por LRT_A, la edad y el sexo. 
 
-***Linealidad:*** Con el fin de verificar que la relación entre la talla y las variables LRT_A (discriminando por sexo) y la edad es lineal, se visualiza el gráfico de los residuos vs los valores predichos del modelo ($\left(\hat{e},\hat{y} \right)$):
+***Linealidad:*** Con el fin de verificar que la relación entre la talla y las variables LRT_A (discriminando por sexo) y la edad es lineal, se visualiza el gráfico de los residuos vs los valores predichos del modelo $\left(\hat{e},\hat{y} \right)$:
 
 ```{r}
 plot(reg, which = 1)
@@ -1172,7 +1172,7 @@ plot(reg, which = 1)
 
 El gráfico no muestra ningún patrón marcado, la ubicación de los puntos parece ser aleatoria alrededor de cero, indicando también homoscedasticidad en los residuales y posible independencia de los mismos. El gráfico muestra algunos valores atípicos que valdría la pena explorar.
 
-***Independencia de los errores:*** Aunque nuestros datos no son temporales, el test de Durbin-Watson nos puede ayudar a evealuar la autocorrelación de los errores del modelo:
+***Independencia de los errores:*** Aunque nuestros datos no son temporales, el test de Durbin-Watson nos puede ayudar a evaluar la autocorrelación de los errores del modelo:
 
 ```{r}
 dwtest(reg)
@@ -1190,7 +1190,7 @@ ad.test(reg$residuals)
 
 El QQ-plot muestra que los residuales se ajustan aceptablemente a una distribución normal. Las pruebas de normalidad de Lilliefors y Anderson-Darling también apoyan este resultado.
 
-***Homoscedasticidad:*** Aunque no se vio un patron que indicara heteroscedasticidad en el gráfico de los residuales vs los valores predichos, a continuación se muestra el gráfico de los residuales estandatizados vs los valores predichos con el fin de mejorar la interpretabilidad de la homoscedasticidad y tener una visión más clara de las observaciones atípicas e influyentes:
+***Homoscedasticidad:*** Aunque no se vio un patron que indicara heteroscedasticidad en el gráfico de los residuales vs los valores predichos, a continuación se muestra el gráfico de los residuales estandarizados vs los valores predichos con el fin de mejorar la interpretabilidad de la homoscedasticidad y tener una visión más clara de las observaciones atípicas e influyentes:
 
 ```{r}
 plot(reg, which = 3)
@@ -1255,5 +1255,5 @@ reg2<-update(reg,subset={setdiff(row(datos)[,1], c(533,43,549))})
 summary(reg2)
 ```
 
-Las estimaciones de los coeficientes del modelo sin las obervaciones influyentes han cambiado un poco respecto al modelo original. El $R^2$ ajustado a incrementado un poco también.
+Las estimaciones de los coeficientes del modelo sin las obervaciones influyentes han cambiado un poco respecto al modelo original. El $R^2$ ajustado ha incrementado un poco también.
 
