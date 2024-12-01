@@ -27,6 +27,7 @@ editor_options:
 ```{r}
 # Librerias 
 library(readxl)
+library(tidyverse)
 library(nortest)
 library(dplyr)
 library(ggplot2)
@@ -936,6 +937,12 @@ t.test(talla_dif, alternative = "two.sided", mu = 0)
 
 Luego de aplicar la prueba $t$, con una significancia del $5\%$, existe evidencia estadística para rechazar la hipótesis nula ya que el p-valor es $2.2 \times 10^{-16}$, por lo tanto, se concluye que la media de las diferencias entre la talla real y la estimación con las fórmulas de Benjumea con cinta métrica no es cero, luego, parece que las estimaciones no son cercanas a la talla real.
 
+El MSE del modelo de Benjumea sobre nuestros datos es el siguiente:
+
+```{r}
+mean((datos$Talla - datos$benjumea_cm)^2, na.rm = TRUE)
+```
+
 #### Sin los outliers
 
 ```{r}
@@ -1031,6 +1038,12 @@ t.test(talla_dif, alternative = "two.sided", mu = 0)
 
 Luego de aplicar la prueba $t$, con una significancia del $5\%$, existe evidencia estadística para rechazar la hipótesis nula ya que el p-valor es $4.103 \times 10^{-12}$, por lo tanto, se concluye que la media de las diferencias entre la talla real y la estimación con las fórmulas de Benjumea con antropómetro no es cero, luego, parece que las estimaciones no son cercanas a la talla real.
 
+El MSE del modelo de Benjumea sobre nuestros datos es el siguiente:
+
+```{r}
+mean((datos$Talla - datos$benjumea_a)^2, na.rm = TRUE)
+```
+
 #### Sin los outliers
 
 ```{r}
@@ -1103,6 +1116,12 @@ t.test(talla_dif, alternative = "two.sided", mu = 0)
 
 Luego de aplicar la prueba $t$, con una significancia del $5\%$, existe evidencia estadística para rechazar la hipótesis nula ya que el p-valor es $9.685 \times 10^{-12}$, por lo tanto, se concluye que la media de las diferencias entre la talla real y la estimación con las fórmulas de Arango y Zamora con la pierna a $90°$ no es cero, luego, parece que las estimaciones no son cercanas a la talla real.
 
+El MSE del modelo de Arango y Zamora sobre nuestros datos es el siguiente:
+
+```{r}
+mean((datos$Talla - datos$arango_90)^2, na.rm = TRUE)
+```
+
 #### Sin los outliers
 
 ```{r}
@@ -1174,6 +1193,12 @@ t.test(talla_dif, alternative = "two.sided", mu = 0)
 ```
 
 Luego de aplicar la prueba $t$, con una significancia del $5\%$, existe evidencia estadística para rechazar la hipótesis nula ya que el p-valor es $2.2 \times 10^{-16}$, por lo tanto, se concluye que la media de las diferencias entre la talla real y la estimación con las fórmulas de Arango y Zamora con la pierna estirada no es cero, luego, parece que las estimaciones no son cercanas a la talla real.
+
+El MSE del modelo de Arango y Zamora sobre nuestros datos es el siguiente:
+
+```{r}
+mean((datos$Talla - datos$arango_r)^2, na.rm = TRUE)
+```
 
 ## Modelos
 
@@ -1515,3 +1540,4 @@ lasso.coef[lasso.coef != 0]
 ```
 
 Se obtiene un modelo más sencillo con un MSE de $10.37$.
+
