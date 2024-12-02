@@ -1,0 +1,10 @@
+title: My GitHub Pages Site
+description: A site with custom SCSS
+theme: minima
+sass:
+  style: compressed
+markdown: kramdown
+source: docs
+exclude:
+  - node_modules
+  - vendor
