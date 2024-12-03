@@ -1474,6 +1474,7 @@ Algunos coeficientes se hacen cero:
   
 ```{r}
 lasso.mod <- glmnet(x[train , ], y[train], alpha = 1, lambda = grid)
+glmnet(x[train , ], y[train], alpha = 1, lambda = grid, family = "gamma") 
 plot(lasso.mod)
 ```
 
@@ -1560,4 +1561,76 @@ lasso.coef[lasso.coef != 0]
 ```
 
 Se obtiene un modelo más sencillo con un MSE de $10.37$.
+
+### Modelo Gamma
+
+```{r}
+
+
+
+# StepCriterion
+library(glmtoolbox)
+library(MASS)
+#sc <- stepCriterion(gamma.reg, direction="backward", criterion="aic", test="wald")
+
+# Ajuste con stepAIC, guardando resultados intermedios
+
+# Forward
+gamma.reg_null <- glm(Talla ~ 1, family= Gamma(),data = datos)
+
+gamma.reg <- glm(Talla ~ LRT_A + LRT_CM + LRM_90 + LRM_R + Edad + Etnia + Peso + Sexo + Programa, family= Gamma(),data = datos)
+summary(gamma.reg)
+
+stepwise <- stepAIC(gamma.reg_null, scope = list(lower = gamma.reg_null, upper = gamma.reg), trace = TRUE, k= 2, direction="forward") # k= log(nrow(datos)) - BIC
+
+modelos_intermedios <- list()
+
+# Función para guardar modelos en cada paso
+guardar_modelos <- function(object, ...) {
+  modelos_intermedios[[length(modelos_intermedios) + 1]] <<- object
+  FALSE  # Devuelve FALSE para continuar con el proceso
+}
+
+# Selección hacia adelante con BIC y almacenamiento de modelos intermedios
+stepwise <- stepAIC(
+  gamma.reg_null,
+  scope = list(lower = gamma.reg_null, upper = gamma.reg),
+  direction = "forward",
+  trace = TRUE,
+  k = log(nrow(datos)),  # Usar BIC en lugar de AIC
+  keep = guardar_modelos  # Guardar cada modelo intermedio
+)
+
+
+forms_gamma <- lapply(modelos_intermedios, formula)
+#forms_gamma
+
+
+#kfolds
+best.fit <- pred <- CV.ERRORS <- cv.errors <- NULL
+
+k = 10
+for (j in 1:k) {
+  best.fit <- lapply(forms_gamma, function(formula){
+    glm(formula, family = Gamma(), data = datos[folds != j, ])
+})
+  #for (i in 1:length(forms_gamma)) {
+    pred <- lapply(best.fit, function(model){
+      predict(model, datos[folds == j, ], type = "response")
+      })
+    cv.errors <- lapply(pred, function(coefs){
+       mean((datos$Talla[folds == j] - coefs)^2)
+    })
+    cv.errors <- as.data.frame(cv.errors)
+    colnames(cv.errors) <- c(paste("Mod", 1:length(forms_gamma)))
+    CV.ERRORS <- rbind(CV.ERRORS, cv.errors)
+  #}
+}
+
+# Error cuadratico medio
+mean.cv.errors <- apply(CV.ERRORS , 2, mean, na.rm = TRUE)
+mean.cv.errors 
+
+
+```
 
