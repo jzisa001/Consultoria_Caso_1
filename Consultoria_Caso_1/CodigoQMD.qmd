@@ -1476,7 +1476,6 @@ Algunos coeficientes se hacen cero:
   
 ```{r}
 lasso.mod <- glmnet(x[train , ], y[train], alpha = 1, lambda = grid)
-#glmnet(x[train , ], y[train], alpha = 1, lambda = grid) 
 plot(lasso.mod)
 ```
 
