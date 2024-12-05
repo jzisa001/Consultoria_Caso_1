@@ -1,6 +1,6 @@
 project:
   type: website
-  output-dir: root
+  output-dir: docs
 language: _language.yml
 
 
