@@ -1,0 +1,501 @@
+---
+page-layout: article
+section-divs: true
+sidebar: true
+search: true
+echo: false
+warning: false
+toc: true
+---
+
+# Análisis descriptivo
+
+```{r}
+# Librerias 
+library(readxl)
+library(tidyverse)
+library(nortest)
+library(dplyr)
+library(ggplot2)
+library(GGally) # para la funcion ggpairs
+library(gt)
+library(gtExtras)
+library(moments)
+library(leaps)
+library(MASS)
+library(lmtest)
+library(car)
+library(BSDA) # Test del signo
+library(glmnet)
+library(glmtoolbox)
+library(MASS)
+library(rsample)
+```
+
+## Lectura de datos
+ 
+Se muestra a continuación la forma que tienen los datos.  
+ 
+```{r}
+# Lectura base de datos
+datos <- read_excel("Datos/Corregida - COMPILADO DATOS COMUNIDAD DE CUIDADO Y CENTRO DÍA.xlsx", 
+                      range = "B2:AN561", col_types = c("date", 
+                      "skip", "text", "text", "text", "skip", 
+                      "text", "numeric", "text", "skip", 
+                      "skip", "skip", "skip", "numeric", 
+                      "skip", "skip", "skip", "skip", "numeric", 
+                      "skip", "skip", "skip", "skip", "numeric", 
+                      "skip", "skip", "skip", "skip", "numeric", 
+                      "skip", "skip", "skip", "skip", "numeric", 
+                      "skip", "skip", "skip", "skip", "numeric"))
+colnames(datos) <- c("Fecha", "Localidad", "Programa", "Unidad_atencion", 
+                     "Sexo", "Edad", "Etnia", "Peso", "Talla",
+                     "LRT_CM","LRT_A", "LRM_90","LRM_R")
+datos$Sexo <- as.factor(datos$Sexo)
+datos$Etnia <- as.factor(datos$Etnia)
+datos <- datos[-which(datos$Edad<60),] # >60
+datos <- datos |> as.data.frame()
+head(datos) |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
+```
+
+
+## Distribución, atípicos y test de normalidad
+
+#### Sexo
+
+```{r}
+#| layout-ncol: 2
+
+# summary(datos$Sexo)
+# summary(datos$Sexo)/length(datos$Sexo)
+
+datos_resumen <- datos %>%
+  dplyr::count(Sexo) %>%
+  dplyr::mutate(porcentaje = round(n / sum(n) * 100, digits=3))
+datos_resumen |> gt() |> gtExtras::gt_theme_538()
+
+ggplot(datos_resumen, aes(x = "", y = porcentaje, fill = Sexo)) +
+  geom_bar(stat = "identity", width = 1, color = "white") +
+  coord_polar("y", start = 0) +
+  theme_void() +  # Elimina fondo y ejes
+  labs(title = "Porcentaje de Hombres y Mujeres", fill = "Sexo") +
+  geom_text(aes(label = paste0(round(porcentaje, 1), "%")),
+            position = position_stack(vjust = 0.5), color = "white")
+```
+
+La muestra cuenta con 284 personas de sexo femenino y 275 masculino
+
+#### Edad
+
+Resumen de la variable `Edad`:
+
+```{r}
+summary(datos$Edad)
+```
+
+Distribución de la variable `Edad`
+
+```{r}
+#| layout-ncol: 2
+hist(datos$Edad, freq=FALSE, main = 'Histograma de Edad', xlab = 'Edad', ylab = 'Densidad')
+lines(density(datos$Edad), col ="red")
+box_Edad <- boxplot(datos$Edad)
+```
+
+Datos atípicos en la variable `Edad`:
+
+```{r}
+datos[which(datos$Edad>box_Edad$stats[5]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> 
+  tab_options(table.font.size = 9)
+```
+
+Pruebas de Normalidad:
+
+```{r}
+#| layout-ncol: 2
+shapiro.test(datos$Edad) # No se tiene normalidad en la edad según el test de Shapiro-Wilks
+# ks.test(datos$Edad, pnorm) # No se tiene normalidad en la edad según el test de Kolmogorov-Smirnov
+lillie.test(datos$Edad) # No se tiene normalidad en la edad según el test de lillie
+```
+
+El mínimo de edad en la muestra es `r summary(datos$Edad)[1]` años, el máximo son `r max(datos$Edad)` años, la media es `r mean(datos$Edad)` años y la mediana es de`median(datos$Edad)` años. Existen dos datos atípicos: 93 y 95 años. 
+No hay evidencia estadística de que la edad siga una distribución normal ya que el test Shapiro-Wilk arrojó un p-valor 4.496e-09, y el test Lilliefors muestra un p-valor de 1.168e-09. 
+
+
+#### Etnia
+
+Resumen de la variable `Etnia`:
+
+```{r}
+datos %>%
+  dplyr::count(Etnia) %>%
+  dplyr::mutate(porcentaje = round(n / sum(n) * 100, digits=3)) |> 
+  gt() |> gtExtras::gt_theme_538()
+# No se debería incluír un factor tan sesgado en el modelo
+# Se puede tener en cuenta, sin embargo
+```
+
+
+#### Peso
+
+Resumen de la variable `Peso`:
+
+```{r}
+summary(datos$Peso)
+```
+
+Distribución de la variable `Peso`:
+
+```{r}
+#| layout-ncol: 2
+hist(datos$Peso, freq = FALSE, main = 'Histograma del peso', xlab = 'Peso', ylab = 'Densidad')
+lines(density(datos$Peso), col = "red")
+box_peso <- boxplot(datos$Peso)
+```
+
+Tenemos los siguientes datos atípicos en la variable `Peso`:
+
+```{r}
+datos[which(datos$Peso>box_peso$stats[5]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
+```
+
+Distribución de la variable `Peso` distinguiendo por `Sexo`:
+
+```{r}
+box_peso_fm <- boxplot(datos$Peso ~ datos$Sexo, xlab = 'Sexo', ylab = 'Peso')
+```
+
+Datos atípicos cuando se distingue por `Sexo` en mujeres:
+
+::: {layout-nrow="2"}
+
+```{r}
+(datos |> filter(Sexo == "Femenino"))[which((datos |> filter(Sexo == "Femenino"))$Peso>box_peso_fm$stats[5,1]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
+```
+
+Datos atípicos cuando se distingue por `Sexo` en hombres:
+
+```{r}
+(datos |> filter(Sexo == "Masculino"))[which((datos |> filter(Sexo == "Masculino"))$Peso>box_peso_fm$stats[5,2]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 8)
+```
+:::
+
+En resúmen el mínimo de peso en la muestra es 34.20 kg, el máximo son 101.8 kg, la media son 63.34 kg y la mediana 62.8 kg. En la muestra junta, tenemos $8$ datos atípicos $101.80, 98.70, 97.65, 97.40, 97.10, 95.60, 95.10$ y $94.20$.  Cuando se separa por Sexo, tenemos $2$ datos atípicos en Femenino (97.10 y 91.6), y $4$ en Masculino (101.80, 98.70, 97.65 y 97.40). 
+
+
+Pruebas de Normalidad:
+
+```{r}
+#| layout-ncol: 2
+shapiro.test(datos$Peso) # No se tiene normalidad en la edad según el test de Shapiro-Wilks
+# ks.test(datos$Peso, pnorm) # No se tiene normalidad en la edad según el test de Kolmogorov-Smirnov
+lillie.test(datos$Peso) # No se tiene normalidad en la edad según el test de Lilliefors
+```
+
+No hay evidencia estadística de que el peso siga una distribución normal ya que el test Shapiro-Wilk arrojó un p-valor 7.563e-05 y el test Lilliefors muestra un p-valor de 0.047304. 
+
+#### Talla
+
+Resumen de la variable `Talla`:
+
+```{r}
+summary(datos$Talla)
+```
+
+Distribución de la variable `Talla`:
+
+```{r}
+#| layout-ncol: 2
+hist(datos$Talla, freq = FALSE, main = 'Histograma de Talla', xlab= 'Talla', ylab = 'Densidad')
+lines(density(datos$Talla), col = "red")
+box_talla <- boxplot(datos$Talla)
+```
+
+Tenemos un dato atípico en la variable `Talla`:
+
+```{r}
+datos[which(datos$Talla<box_talla$stats[1]|datos$Talla>box_talla$stats[5]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
+```
+
+Distinguiendo por `Sexo`:
+
+```{r}
+box_talla_fm <- boxplot(datos$Talla ~ datos$Sexo, xlab='Sexo', ylab='Talla')
+```
+
+Datos atípicos cuando se distingue por `Sexo` en mujeres:
+
+::: {layout-nrow="2"}
+
+```{r}
+(datos |> filter(Sexo == "Femenino"))[which((datos |> filter(Sexo == "Femenino"))$Talla<box_talla_fm$stats[1,1]|(datos |> filter(Sexo == "Femenino"))$Talla>box_talla_fm$stats[5,1]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
+```
+
+En hombres: 
+
+```{r}
+(datos |> filter(Sexo == "Masculino"))[which((datos |> filter(Sexo == "Masculino"))$Talla<box_talla_fm$stats[1,2]|(datos |> filter(Sexo == "Masculino"))$Talla>box_talla_fm$stats[5,2]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
+```
+:::
+
+En resúmen, el mínimo de talla en la muestra es 127.1 cm, el máximo son 181.5 cm, la media son 155.95 cm y la mediana 155.15 cm. En la muestra junta, tenemos un dato atípico (127.1). Cuando se separa por Sexo, hay tres datos atípicos en Femenino (133.00, 133.85, 127.10, 129.25 y 132.55, 133.90) y en Masculino dos (142.00 y 141.50). 
+
+Pruebas de Normalidad:
+
+```{r}
+#| layout-ncol: 2
+shapiro.test(datos$Talla) # No se tiene normalidad en la edad según el test de Shapiro-Wilks
+# ks.test(datos$Peso, pnorm) # No se tiene normalidad en la edad según el test de Kolmogorov-Smirnov
+lillie.test(datos$Talla) # No se tiene normalidad en la edad según el test de Lilliefors
+```
+
+El test Shapiro-Wilk arrojó un p-valor 0.05641 sugiriendo normalidad pero sin ser muy significativo, mientras que el test Lilliefors muestra un p-valor de 0.04836, por lo que no habría normalidad.
+
+
+
+#### Longitud Rodilla Talón con cinta métrica `LRT_CM`
+
+Resumen de la variable `LRT_CM`:
+
+```{r}
+summary(datos$LRT_CM)
+```
+
+Distribución de la variable `LRT_CM`:
+
+```{r}
+#| layout-ncol: 2
+hist(datos$LRT_CM, freq = FALSE, main = 'Histograma de LRT medido con cinta métrica', xlab = 'Longitud en cm', ylab = 'Densidad')
+lines(density(datos$LRT_CM), col = "red")
+box_LRT_CM <- boxplot(datos$LRT_CM)
+```
+
+Datos atípicos:
+
+```{r}
+datos[which(datos$LRT_CM<box_LRT_CM$stats[1]|datos$LRT_CM>box_LRT_CM$stats[5]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
+```
+
+Distribución de la variable `LRT_CM` distinguiendo por `Sexo`:
+
+```{r}
+box_LRT_CM_fm <- boxplot(datos$LRT_CM ~ datos$Sexo, xlab='Sexo', ylab='Longitud en cm')
+```
+
+Datos atípicos cuando se distingue por `Sexo` en mujeres:
+
+::: {layout-nrow="2"}
+
+```{r}
+(datos |> filter(Sexo == "Femenino"))[which((datos |> filter(Sexo == "Femenino"))$LRT_CM<box_LRT_CM_fm$stats[1,1]|(datos |> filter(Sexo == "Femenino"))$LRT_CM>box_LRT_CM_fm$stats[5,1]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
+```
+
+Datos atípicos cuando se distingue por `Sexo` en hombres:
+
+```{r}
+(datos |> filter(Sexo == "Masculino"))[which((datos |> filter(Sexo == "Masculino"))$LRT_CM<box_LRT_CM_fm$stats[1,2]|(datos |> filter(Sexo == "Masculino"))$LRT_CM>box_LRT_CM_fm$stats[5,2]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
+```
+:::
+
+Pruebas de Normalidad:
+
+En resúmen, el mínimo de LRT con cinta métrica en la muestra es 38 cm, el máximo son 59 cm, la media son 49 cm y la mediana 48.65 cm. En la muestra junta, parece haber tres datos atípicos (59, 39 y 38), cuando se separa por Sexo, parece haber dos datos atípicos en Femenino (39 y 38) y uno en Masculino (59). 
+
+```{r}
+#| layout-ncol: 2
+shapiro.test(datos$LRT_CM) # No se tiene normalidad en la edad según el test de Shapiro-Wilks
+# ks.test(datos$Peso, pnorm) # No se tiene normalidad en la edad según el test de Kolmogorov-Smirnov
+lillie.test(datos$LRT_CM) # No se tiene normalidad en la edad según el test de Lilliefors
+```
+
+No hay evidencia estadística de que la LRT con cinta métrica siga una distribución normal ya que el test Shapiro-Wilk arrojó un p-valor 0.02391, y el test Lilliefors muestra un p-valor de 0.01056.
+
+#### Longitud Rodilla Talón con Antropómetro `LRT_A`: 
+
+Resumen de la variable `LRT_A`:
+
+```{r}
+summary(datos$LRT_A)
+```
+
+Distribución de la variable `LRT_A`:
+
+```{r}
+#| layout-ncol: 2
+hist(datos$LRT_A, freq = FALSE, main ='Histograma de LRT con antropómetro', xlab = 'Longitud en cm', ylab = 'Densidad')
+lines(density(datos$LRT_A), col = "red")
+box_LRT_A <- boxplot(datos$LRT_A)
+```
+
+Datos atípicos en la variable `LRT_A`:
+
+```{r}
+datos[which(datos$LRT_A<box_LRT_A$stats[1]|datos$LRT_A>box_LRT_A$stats[5]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
+```
+
+Distribución de la variable `LRT_A` distinguiendo por `Sexo`:
+
+```{r}
+box_LRT_A_fm <- boxplot(datos$LRT_A ~ datos$Sexo, xlab = 'Sexo', ylab = 'LRT con antropómetro en cm')
+```
+
+
+Datos atípicos cuando se distingue por `Sexo` en mujeres:
+
+::: {layout-nrow="2"}
+
+```{r}
+(datos |> filter(Sexo == "Femenino"))[which((datos |> filter(Sexo == "Femenino"))$LRT_A<box_LRT_A_fm$stats[1,1]|(datos |> filter(Sexo == "Femenino"))$LRT_A>box_LRT_A_fm$stats[5,1]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
+```
+
+Datos atípicos cuando se distingue por `Sexo` en hombres:
+
+```{r}
+(datos |> filter(Sexo == "Masculino"))[which((datos |> filter(Sexo == "Masculino"))$LRT_A<box_LRT_A_fm$stats[1,2]|(datos |> filter(Sexo == "Masculino"))$LRT_A>box_LRT_A_fm$stats[5,2]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
+```
+:::
+
+En resúmen, el mínimo de LRT con antropómetro en la muestra es 36.85 cm, el máximo son 58.35 cm, la media son 47.54 cm y la mediana 47.4 cm. En la muestra junta, tenemos 3 datos atípicos (58.35, 37.00 y 36.85). Cuando se separa por Sexo, parece haber tres datos atípicos en Femenino (37.00, 36.85 y 38.20) y en Masculino dos (57.65 y 58.35).
+
+Pruebas de Normalidad:
+
+```{r}
+#| layout-ncol: 2
+shapiro.test(datos$LRT_A) # No se tiene normalidad en la edad según el test de Shapiro-Wilks
+# ks.test(datos$Peso, pnorm) # No se tiene normalidad en la edad según el test de Kolmogorov-Smirnov
+lillie.test(datos$LRT_A) # No se tiene normalidad en la edad según el test de Lilliefors
+```
+
+No hay evidencia estadística de que la LRT con antropómetro siga una distribución normal ya que el test Shapiro-Wilk arrojó un p-valor 0.0507 (no es muy significativo), y el test Lilliefors muestra un p-valor de 0.01345. 
+
+#### Longitud Rodilla-Maléolo a 90° `LRM_90`
+
+Resumen de la variable `LRM_90`:
+
+```{r}
+summary(datos$LRM_90)
+```
+
+Distribución de la variable `LRM_90`:
+
+```{r}
+#| layout-ncol: 2
+hist(datos$LRM_90, freq = FALSE, main = 'Histograma de LRM a 90°', xlab = 'Longitud en cm', ylab = 'Densidad')
+lines(density(datos$LRM_90), col = "red")
+box_LRM_90<- boxplot(datos$LRM_90)
+```
+
+Datos atípicos en la variable `LRM_90`:
+
+```{r}
+datos[which(datos$LRM_90<box_LRM_90$stats[1]|datos$LRM_90>box_LRM_90$stats[5]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
+```
+
+Distribución de la variable `LRM_90` distinguiendo por `Sexo`:
+
+```{r}
+box_LRM_90_fm <- boxplot(datos$LRM_90 ~ datos$Sexo, xlab = 'Sexo', ylab = 'LRM a 90° en cm')
+```
+
+
+Datos atípicos en mujeres cuando se distingue por `Sexo`:
+
+::: {layout-nrow="2"}
+
+```{r}
+(datos |> filter(Sexo == "Femenino"))[which((datos |> filter(Sexo == "Femenino"))$LRM_90<box_LRM_90_fm$stats[1,1]|(datos |> filter(Sexo == "Femenino"))$LRM_90>box_LRM_90_fm$stats[5,1]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
+```
+
+Datos atípicos en hombres cuando se distingue por `Sexo`:
+
+```{r}
+(datos |> filter(Sexo == "Masculino"))[which((datos |> filter(Sexo == "Masculino"))$LRM_90<box_LRM_90_fm$stats[1,2]|(datos |> filter(Sexo == "Masculino"))$LRM_90>box_LRM_90_fm$stats[5,2]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
+```
+:::
+
+El mínimo de LRM con la pierna a 90° en la muestra es 31.85 cm, el máximo son 54.65 cm, la media son 43.33 cm y la mediana 43.2 cm. En la muestra junta, tenemos 6 datos atípicos (53.00, 54.65, 52.30, 52.30, 34.00, 31.85). Cuando se separa por Sexo, tenemos 2 datos atípicos en Femenino (34.00 y 31.85), y en Masculino 2 (53.00, 54.65).
+
+Pruebas de Normalidad:
+
+```{r}
+#| layout-ncol: 2
+shapiro.test(datos$LRM_90) # No se tiene normalidad en la edad según el test de Shapiro-Wilks
+# ks.test(datos$Peso, pnorm) # No se tiene normalidad en la edad según el test de Kolmogorov-Smirnov
+lillie.test(datos$LRM_90) # No se tiene normalidad en la edad según el test de Lilliefors
+```
+
+Con el test Shapiro-Wilk no tenemos normalidad en distribución pues tenemos un p-valor de 0.01393, mientras que el test Lilliefors muestra un p-valor de 0.001307, por lo que no habría normalidad.
+
+#### Longitud Rodilla-Maléolo la pierna totalmente estirada `LRM_R`
+
+Resumen de la variable `LRM_R`:
+
+```{r}
+summary(datos$LRM_R)
+```
+
+Distribución de la variable `LRM_R`:
+
+```{r}
+#| layout-ncol: 2
+hist(datos$LRM_R, freq = FALSE, main = 'Histograma de LRM recta', xlab = 'Longitud en cm', ylab='Densidad')
+lines(density(datos$LRM_R), col = "red")
+box_LRM_R<- boxplot(datos$LRM_R)
+```
+
+Datos atípicos en la variable `LRM_R`:
+
+```{r}
+datos[which(datos$LRM_R<box_LRM_R$stats[1]|datos$LRM_R>box_LRM_R$stats[5]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
+```
+
+Distribución de la variable `LRM_R` distinguiendo por `Sexo`:
+
+```{r}
+box_LRM_R_fm <- boxplot(datos$LRM_R ~ datos$Sexo, xlab = 'Sexo', ylab = 'LRM recta en cm')
+```
+
+
+Datos atípicos en mujeres cuando se distingue por `Sexo`:
+
+::: {layout-nrow="2"}
+
+```{r}
+(datos |> filter(Sexo == "Femenino"))[which((datos |> filter(Sexo == "Femenino"))$LRM_R<box_LRM_R_fm$stats[1,1]|(datos |> filter(Sexo == "Femenino"))$LRM_R>box_LRM_R_fm$stats[5,1]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
+```
+
+Datos atípicos en hombres cuando se distingue por `Sexo`:
+
+```{r}
+(datos |> filter(Sexo == "Masculino"))[which((datos |> filter(Sexo == "Masculino"))$LRM_R<box_LRM_R_fm$stats[1,2]|(datos |> filter(Sexo == "Masculino"))$LRM_R>box_LRM_R_fm$stats[5,2]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
+```
+:::
+
+El mínimo de LRM con la pierna recta en la muestra es 31.45 cm, el máximo son 52.5 cm, la media son 42.54 cm y la mediana 42.50 cm. En la muestra junta, parece haber un dato atípico (31.45), cuando se separa por Sexo, parece haber dos datos atípicos en Femenino (33.50 y 31.45), y en Masculino cuatro (52.50, 51.35, 52.50, 51.25, 37.70 y 37.75).
+
+Pruebas de Normalidad:
+
+```{r}
+#| layout-ncol: 2
+shapiro.test(datos$LRM_R) # No se tiene normalidad en la edad según el test de Shapiro-Wilks
+# ks.test(datos$Peso, pnorm) # No se tiene normalidad en la edad según el test de Kolmogorov-Smirnov
+lillie.test(datos$LRM_R) # No se tiene normalidad en la edad según el test de Lilliefors
+```
+
+Con el test Shapiro-Wilk parece haber normalidad pues tenemos un p-valor de 0.09192, mientras que el test Lilliefors muestra un p-valor de 0.004743, por lo que no habría normalidad.
+
+## Análisis de correlación
+
+```{r}
+ggpairs(
+  datos[,-c(1:5, 7)],  # Tu subconjunto de datos
+  lower = list(continuous = wrap("smooth", method = "lm", color = "lightblue")),  # Línea de regresión en rojo
+  title = "Matriz de correlaciones"
+)
+```
+
+Existe una fuerte correlación lineal positiva entre la variable talla y cada una de las mediciones de la longitud rodilla-talón y rodilla-maléolo, considerarlas para los diferentes modelos de regresión parece ser una buena opción. La talla está correlacionada con el peso de forma moderada, por lo que valdría la pena explorar su contribución en los modelos propuestos. No parece haber una correlación lineal significativa entre la talla y la edad, sugiriendo que no sería necesario incluir la edad en los modelos propuestos.
+
+En principio, dado que la relación entre cada una de las medidas de la longitud rodilla-talón y rodilla-maléolo presentan una relación lineal fuerte con la talla, se podría pensar que la que tenga una mayor correlación con la talla, es la que daría mejores estimaciones de la talla real. En este caso, la longitud rodilla-talón con antropómetro, es la que presenta una mayor correlación con la talla, por lo que posiblemente sea más preciso usar esta medida para estimar la talla real de los adultos mayores. Como sabemos, el antropómetro es una herramienta que no siempre es de fácil acceso y justamente queremos evaluar si existen diferencias significativas entre usar esta medición y las demás mediciones que sí son de fácil acceso y aplicación.
+
+En ese orden de ideas, después de la longitud de rodilla talón con antropómetro, la longitud rodilla-talón con cinta métrica es la variable que tiene más correlación con la talla, luego sigue la longitud rodilla-maléolo con la pierna totalmente estirada y por último la longitud rodilla-maléolo con la pierna a 90 grados.

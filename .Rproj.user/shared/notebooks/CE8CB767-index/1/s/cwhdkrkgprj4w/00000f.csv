@@ -1,0 +1,2 @@
+"0","lasso.mod <- glmnet(x[train , ], y[train], alpha = 1, lambda = grid)"
+"0","plot(lasso.mod)"

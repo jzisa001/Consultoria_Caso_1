@@ -1,0 +1,3 @@
+"0","stud_res<-studres(reg)"
+"0","# head(sort(abs(stud_res),decreasing=TRUE))"
+"0","boxplot(stud_res)"

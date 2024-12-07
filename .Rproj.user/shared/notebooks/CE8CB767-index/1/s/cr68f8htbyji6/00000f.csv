@@ -1,0 +1,7 @@
+"0","# Promedio del error cuadrático medio"
+"0","mean(errores)"
+"1","[1]"
+"1"," 11.95892"
+"1","
+"
+"0","MSEs <- rbind(MSEs, data.frame(Modelo = ""Normal"", Medida = ""LRT_A"", MSE = mean(errores)))"

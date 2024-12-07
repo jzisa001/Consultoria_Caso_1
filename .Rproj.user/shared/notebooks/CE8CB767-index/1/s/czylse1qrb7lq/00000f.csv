@@ -1,0 +1,3 @@
+"0","set.seed(123)"
+"0","cv.out <- cv.glmnet(x[train, ], y[train], alpha = 1, nfolds = 10) # validación cruzada para buscar el lambda"
+"0","plot(cv.out)"

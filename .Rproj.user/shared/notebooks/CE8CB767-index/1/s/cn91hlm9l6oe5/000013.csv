@@ -1,0 +1,4 @@
+"0","cooksd<-cooks.distance(reg)"
+"0","# cooksd[which(cooksd>corte)]"
+"0",""
+"0","influencePlot(reg, id.method=""identify"", main=""Gráfico de influencia"", sub=""El tamaño del círculo es proporcional a la D_Cook"")"
