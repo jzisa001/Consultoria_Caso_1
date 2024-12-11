@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -45,7 +45,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "Ninguna coincidencia",
     "search-matching-documents-text": "coincidencias",
@@ -54,14 +60,42 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "",
     "search-label": "Search"
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -70,34 +104,34 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html" rel="" target="">
- <span class="menu-text">Inicio</span></a>
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Inicio</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./descriptivo.html" rel="" target="">
- <span class="menu-text">Análisis descriptivo</span></a>
+    <a class="nav-link" href="./descriptivo.html"> 
+<span class="menu-text">Análisis descriptivo</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./hipotesis.html" rel="" target="" aria-current="page">
- <span class="menu-text">Evaluación de hipótesis</span></a>
+    <a class="nav-link active" href="./hipotesis.html" aria-current="page"> 
+<span class="menu-text">Evaluación de hipótesis</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./modelos.html" rel="" target="">
- <span class="menu-text">Modelos</span></a>
+    <a class="nav-link" href="./modelos.html"> 
+<span class="menu-text">Modelos</span></a>
   </li>  
 </ul>
+          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -140,6 +174,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+
 <section id="hipótesis" class="level1">
 <h1>Hipótesis</h1>
 <section id="lectura-de-datos" class="level2">
@@ -147,28 +182,27 @@ ul.task-list li input[type="checkbox"] {
 <p>Se muestra a continuación la forma que tienen los datos.</p>
 <div class="cell">
 <div class="cell-output-display">
-
-<div id="xrwrvoqzma" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="cfhkgrllda" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#xrwrvoqzma table {
+#cfhkgrllda table {
   font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xrwrvoqzma thead, #xrwrvoqzma tbody, #xrwrvoqzma tfoot, #xrwrvoqzma tr, #xrwrvoqzma td, #xrwrvoqzma th {
+#cfhkgrllda thead, #cfhkgrllda tbody, #cfhkgrllda tfoot, #cfhkgrllda tr, #cfhkgrllda td, #cfhkgrllda th {
   border-style: none;
 }
 
-#xrwrvoqzma p {
+#cfhkgrllda p {
   margin: 0;
   padding: 0;
 }
 
-#xrwrvoqzma .gt_table {
+#cfhkgrllda .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -194,12 +228,12 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-#xrwrvoqzma .gt_caption {
+#cfhkgrllda .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xrwrvoqzma .gt_title {
+#cfhkgrllda .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -211,7 +245,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-#xrwrvoqzma .gt_subtitle {
+#cfhkgrllda .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -223,7 +257,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-#xrwrvoqzma .gt_heading {
+#cfhkgrllda .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -235,13 +269,13 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#xrwrvoqzma .gt_bottom_border {
+#cfhkgrllda .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xrwrvoqzma .gt_col_headings {
+#cfhkgrllda .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -256,7 +290,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#xrwrvoqzma .gt_col_heading {
+#cfhkgrllda .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -276,7 +310,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#xrwrvoqzma .gt_column_spanner_outer {
+#cfhkgrllda .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -288,15 +322,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-#xrwrvoqzma .gt_column_spanner_outer:first-child {
+#cfhkgrllda .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xrwrvoqzma .gt_column_spanner_outer:last-child {
+#cfhkgrllda .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xrwrvoqzma .gt_column_spanner {
+#cfhkgrllda .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -308,11 +342,11 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-#xrwrvoqzma .gt_spanner_row {
+#cfhkgrllda .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xrwrvoqzma .gt_group_heading {
+#cfhkgrllda .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -338,7 +372,7 @@ ul.task-list li input[type="checkbox"] {
   text-align: left;
 }
 
-#xrwrvoqzma .gt_empty_group_heading {
+#cfhkgrllda .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -353,15 +387,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-#xrwrvoqzma .gt_from_md > :first-child {
+#cfhkgrllda .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xrwrvoqzma .gt_from_md > :last-child {
+#cfhkgrllda .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xrwrvoqzma .gt_row {
+#cfhkgrllda .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -380,7 +414,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#xrwrvoqzma .gt_stub {
+#cfhkgrllda .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -393,7 +427,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#xrwrvoqzma .gt_stub_row_group {
+#cfhkgrllda .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -407,15 +441,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-#xrwrvoqzma .gt_row_group_first td {
+#cfhkgrllda .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xrwrvoqzma .gt_row_group_first th {
+#cfhkgrllda .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xrwrvoqzma .gt_summary_row {
+#cfhkgrllda .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -425,16 +459,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#xrwrvoqzma .gt_first_summary_row {
+#cfhkgrllda .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xrwrvoqzma .gt_first_summary_row.thick {
+#cfhkgrllda .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xrwrvoqzma .gt_last_summary_row {
+#cfhkgrllda .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -444,7 +478,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#xrwrvoqzma .gt_grand_summary_row {
+#cfhkgrllda .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -454,7 +488,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#xrwrvoqzma .gt_first_grand_summary_row {
+#cfhkgrllda .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -464,7 +498,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-#xrwrvoqzma .gt_last_grand_summary_row_top {
+#cfhkgrllda .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -474,11 +508,11 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#xrwrvoqzma .gt_striped {
+#cfhkgrllda .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xrwrvoqzma .gt_table_body {
+#cfhkgrllda .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -487,7 +521,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#xrwrvoqzma .gt_footnotes {
+#cfhkgrllda .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -501,7 +535,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#xrwrvoqzma .gt_footnote {
+#cfhkgrllda .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -510,7 +544,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#xrwrvoqzma .gt_sourcenotes {
+#cfhkgrllda .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -524,7 +558,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#xrwrvoqzma .gt_sourcenote {
+#cfhkgrllda .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -532,72 +566,72 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#xrwrvoqzma .gt_left {
+#cfhkgrllda .gt_left {
   text-align: left;
 }
 
-#xrwrvoqzma .gt_center {
+#cfhkgrllda .gt_center {
   text-align: center;
 }
 
-#xrwrvoqzma .gt_right {
+#cfhkgrllda .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xrwrvoqzma .gt_font_normal {
+#cfhkgrllda .gt_font_normal {
   font-weight: normal;
 }
 
-#xrwrvoqzma .gt_font_bold {
+#cfhkgrllda .gt_font_bold {
   font-weight: bold;
 }
 
-#xrwrvoqzma .gt_font_italic {
+#cfhkgrllda .gt_font_italic {
   font-style: italic;
 }
 
-#xrwrvoqzma .gt_super {
+#cfhkgrllda .gt_super {
   font-size: 65%;
 }
 
-#xrwrvoqzma .gt_footnote_marks {
+#cfhkgrllda .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xrwrvoqzma .gt_asterisk {
+#cfhkgrllda .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xrwrvoqzma .gt_indent_1 {
+#cfhkgrllda .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xrwrvoqzma .gt_indent_2 {
+#cfhkgrllda .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xrwrvoqzma .gt_indent_3 {
+#cfhkgrllda .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xrwrvoqzma .gt_indent_4 {
+#cfhkgrllda .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xrwrvoqzma .gt_indent_5 {
+#cfhkgrllda .gt_indent_5 {
   text-indent: 25px;
 }
 
-#xrwrvoqzma .katex-display {
+#cfhkgrllda .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#xrwrvoqzma div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#cfhkgrllda div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 
@@ -605,107 +639,119 @@ tbody tr:last-child {
   border-bottom: 2px solid #ffffff00;
 }
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-  <thead>
-    <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Fecha">Fecha</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Localidad">Localidad</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Programa">Programa</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Unidad_atencion">Unidad_atencion</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Sexo">Sexo</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Edad">Edad</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Etnia">Etnia</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Peso">Peso</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Talla">Talla</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="LRT_CM">LRT_CM</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="LRT_A">LRT_A</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="LRM_90">LRM_90</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="LRM_R">LRM_R</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-03</td>
-<td headers="Localidad" class="gt_row gt_left">Ciudad Bolivar</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Tejedores de Sueños</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">63</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">101.80</td>
-<td headers="Talla" class="gt_row gt_right">177.00</td>
-<td headers="LRT_CM" class="gt_row gt_right">57.50</td>
-<td headers="LRT_A" class="gt_row gt_right">57.65</td>
-<td headers="LRM_90" class="gt_row gt_right">52.00</td>
-<td headers="LRM_R" class="gt_row gt_right">52.50</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-09-25</td>
-<td headers="Localidad" class="gt_row gt_left">Ciudad Bolivar</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Sierra Morena</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">77</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">98.70</td>
-<td headers="Talla" class="gt_row gt_right">165.00</td>
-<td headers="LRT_CM" class="gt_row gt_right">52.50</td>
-<td headers="LRT_A" class="gt_row gt_right">51.20</td>
-<td headers="LRM_90" class="gt_row gt_right">46.50</td>
-<td headers="LRM_R" class="gt_row gt_right">45.00</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-16</td>
-<td headers="Localidad" class="gt_row gt_left">Engativa</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Los Cerezos</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">78</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">97.65</td>
-<td headers="Talla" class="gt_row gt_right">175.70</td>
-<td headers="LRT_CM" class="gt_row gt_right">58.45</td>
-<td headers="LRT_A" class="gt_row gt_right">56.90</td>
-<td headers="LRM_90" class="gt_row gt_right">50.60</td>
-<td headers="LRM_R" class="gt_row gt_right">51.35</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-09-23</td>
-<td headers="Localidad" class="gt_row gt_left">Rafel Uribe</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Palabras Mayores</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">74</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">97.40</td>
-<td headers="Talla" class="gt_row gt_right">172.95</td>
-<td headers="LRT_CM" class="gt_row gt_right">55.80</td>
-<td headers="LRT_A" class="gt_row gt_right">54.10</td>
-<td headers="LRM_90" class="gt_row gt_right">51.05</td>
-<td headers="LRM_R" class="gt_row gt_right">49.00</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-09-25</td>
-<td headers="Localidad" class="gt_row gt_left">Ciudad Bolivar</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Sierra Morena</td>
-<td headers="Sexo" class="gt_row gt_center">Femenino</td>
-<td headers="Edad" class="gt_row gt_right">70</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">97.10</td>
-<td headers="Talla" class="gt_row gt_right">153.35</td>
-<td headers="LRT_CM" class="gt_row gt_right">50.50</td>
-<td headers="LRT_A" class="gt_row gt_right">49.45</td>
-<td headers="LRM_90" class="gt_row gt_right">45.20</td>
-<td headers="LRM_R" class="gt_row gt_right">43.10</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-09-09</td>
-<td headers="Localidad" class="gt_row gt_left">Engativa</td>
-<td headers="Programa" class="gt_row gt_left">Comunidad de Cuidado</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Comunidad de Cuidado Bosque Popular</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">72</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">95.60</td>
-<td headers="Talla" class="gt_row gt_right">174.40</td>
-<td headers="LRT_CM" class="gt_row gt_right">56.70</td>
-<td headers="LRT_A" class="gt_row gt_right">55.10</td>
-<td headers="LRM_90" class="gt_row gt_right">50.85</td>
-<td headers="LRM_R" class="gt_row gt_right">48.15</td></tr>
-  </tbody>
-  
-  
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="Fecha" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Fecha</th>
+<th id="Localidad" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Localidad</th>
+<th id="Programa" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Programa</th>
+<th id="Unidad_atencion" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Unidad_atencion</th>
+<th id="Sexo" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Sexo</th>
+<th id="Edad" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Edad</th>
+<th id="Etnia" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Etnia</th>
+<th id="Peso" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Peso</th>
+<th id="Talla" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Talla</th>
+<th id="LRT_CM" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">LRT_CM</th>
+<th id="LRT_A" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">LRT_A</th>
+<th id="LRM_90" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">LRM_90</th>
+<th id="LRM_R" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">LRM_R</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="Fecha">2024-10-03</td>
+<td class="gt_row gt_left" headers="Localidad">Ciudad Bolivar</td>
+<td class="gt_row gt_left" headers="Programa">Centro Día Casa de la Sabiduría</td>
+<td class="gt_row gt_left" headers="Unidad_atencion">Centro Día Casa de la Sabiduría Tejedores de Sueños</td>
+<td class="gt_row gt_center" headers="Sexo">Masculino</td>
+<td class="gt_row gt_right" headers="Edad">63</td>
+<td class="gt_row gt_center" headers="Etnia">Blanco-Mestizo</td>
+<td class="gt_row gt_right" headers="Peso">101.80</td>
+<td class="gt_row gt_right" headers="Talla">177.00</td>
+<td class="gt_row gt_right" headers="LRT_CM">57.50</td>
+<td class="gt_row gt_right" headers="LRT_A">57.65</td>
+<td class="gt_row gt_right" headers="LRM_90">52.00</td>
+<td class="gt_row gt_right" headers="LRM_R">52.50</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="Fecha">2024-09-25</td>
+<td class="gt_row gt_left" headers="Localidad">Ciudad Bolivar</td>
+<td class="gt_row gt_left" headers="Programa">Centro Día Casa de la Sabiduría</td>
+<td class="gt_row gt_left" headers="Unidad_atencion">Centro Día Casa de la Sabiduría Sierra Morena</td>
+<td class="gt_row gt_center" headers="Sexo">Masculino</td>
+<td class="gt_row gt_right" headers="Edad">77</td>
+<td class="gt_row gt_center" headers="Etnia">Blanco-Mestizo</td>
+<td class="gt_row gt_right" headers="Peso">98.70</td>
+<td class="gt_row gt_right" headers="Talla">165.00</td>
+<td class="gt_row gt_right" headers="LRT_CM">52.50</td>
+<td class="gt_row gt_right" headers="LRT_A">51.20</td>
+<td class="gt_row gt_right" headers="LRM_90">46.50</td>
+<td class="gt_row gt_right" headers="LRM_R">45.00</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="Fecha">2024-10-16</td>
+<td class="gt_row gt_left" headers="Localidad">Engativa</td>
+<td class="gt_row gt_left" headers="Programa">Centro Día Casa de la Sabiduría</td>
+<td class="gt_row gt_left" headers="Unidad_atencion">Centro Día Casa de la Sabiduría Los Cerezos</td>
+<td class="gt_row gt_center" headers="Sexo">Masculino</td>
+<td class="gt_row gt_right" headers="Edad">78</td>
+<td class="gt_row gt_center" headers="Etnia">Blanco-Mestizo</td>
+<td class="gt_row gt_right" headers="Peso">97.65</td>
+<td class="gt_row gt_right" headers="Talla">175.70</td>
+<td class="gt_row gt_right" headers="LRT_CM">58.45</td>
+<td class="gt_row gt_right" headers="LRT_A">56.90</td>
+<td class="gt_row gt_right" headers="LRM_90">50.60</td>
+<td class="gt_row gt_right" headers="LRM_R">51.35</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="Fecha">2024-09-23</td>
+<td class="gt_row gt_left" headers="Localidad">Rafel Uribe</td>
+<td class="gt_row gt_left" headers="Programa">Centro Día Casa de la Sabiduría</td>
+<td class="gt_row gt_left" headers="Unidad_atencion">Centro Día Casa de la Sabiduría Palabras Mayores</td>
+<td class="gt_row gt_center" headers="Sexo">Masculino</td>
+<td class="gt_row gt_right" headers="Edad">74</td>
+<td class="gt_row gt_center" headers="Etnia">Blanco-Mestizo</td>
+<td class="gt_row gt_right" headers="Peso">97.40</td>
+<td class="gt_row gt_right" headers="Talla">172.95</td>
+<td class="gt_row gt_right" headers="LRT_CM">55.80</td>
+<td class="gt_row gt_right" headers="LRT_A">54.10</td>
+<td class="gt_row gt_right" headers="LRM_90">51.05</td>
+<td class="gt_row gt_right" headers="LRM_R">49.00</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="Fecha">2024-09-25</td>
+<td class="gt_row gt_left" headers="Localidad">Ciudad Bolivar</td>
+<td class="gt_row gt_left" headers="Programa">Centro Día Casa de la Sabiduría</td>
+<td class="gt_row gt_left" headers="Unidad_atencion">Centro Día Casa de la Sabiduría Sierra Morena</td>
+<td class="gt_row gt_center" headers="Sexo">Femenino</td>
+<td class="gt_row gt_right" headers="Edad">70</td>
+<td class="gt_row gt_center" headers="Etnia">Blanco-Mestizo</td>
+<td class="gt_row gt_right" headers="Peso">97.10</td>
+<td class="gt_row gt_right" headers="Talla">153.35</td>
+<td class="gt_row gt_right" headers="LRT_CM">50.50</td>
+<td class="gt_row gt_right" headers="LRT_A">49.45</td>
+<td class="gt_row gt_right" headers="LRM_90">45.20</td>
+<td class="gt_row gt_right" headers="LRM_R">43.10</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="Fecha">2024-09-09</td>
+<td class="gt_row gt_left" headers="Localidad">Engativa</td>
+<td class="gt_row gt_left" headers="Programa">Comunidad de Cuidado</td>
+<td class="gt_row gt_left" headers="Unidad_atencion">Comunidad de Cuidado Bosque Popular</td>
+<td class="gt_row gt_center" headers="Sexo">Masculino</td>
+<td class="gt_row gt_right" headers="Edad">72</td>
+<td class="gt_row gt_center" headers="Etnia">Blanco-Mestizo</td>
+<td class="gt_row gt_right" headers="Peso">95.60</td>
+<td class="gt_row gt_right" headers="Talla">174.40</td>
+<td class="gt_row gt_right" headers="LRT_CM">56.70</td>
+<td class="gt_row gt_right" headers="LRT_A">55.10</td>
+<td class="gt_row gt_right" headers="LRM_90">50.85</td>
+<td class="gt_row gt_right" headers="LRM_R">48.15</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -715,16 +761,28 @@ tbody tr:last-child {
 <p>Inicialmente se hace una comparación gráfica de ambas técnicas a través de un box-plot:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Según el gráfico de cajas (boxplot), parece que hay una pequeña diferencia entre las mediciones de la longitud desde la rodilla hasta el talón realizadas con cinta métrica y con antropómetro. Sin embargo, para estar seguros, es necesario hacer una prueba estadística más formal. Para esto, se calculan las diferencias entre las mediciones de ambos métodos y se verifica si esas diferencias siguen una distribución normal. Dependiendo del resultado, se elegirá la prueba estadística adecuada para comprobar si realmente no hay una diferencia significativa entre ambos tipos de medición.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -774,10 +832,18 @@ Upper Achieved CI     0.9535    1.4   1.55</code></pre>
 <h5 class="anchored" data-anchor-id="masculino">Masculino:</h5>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -824,10 +890,18 @@ Upper Achieved CI     0.9599    1.2   1.35</code></pre>
 <h5 class="anchored" data-anchor-id="femenino">Femenino:</h5>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-10-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-10-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -870,10 +944,18 @@ alternative hypothesis: true location is not equal to 0</code></pre>
 <h5 class="anchored" data-anchor-id="centro-día">Centro día:</h5>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -913,10 +995,18 @@ alternative hypothesis: true location is not equal to 0</code></pre>
 <h5 class="anchored" data-anchor-id="comunidad-de-cuidado">Comunidad de cuidado</h5>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-16-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-16-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -966,10 +1056,18 @@ Upper Achieved CI     0.9574   1.45   1.65</code></pre>
 <h5 class="anchored" data-anchor-id="blanco-mestizo">Blanco-Mestizo</h5>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-19-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-19-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1016,10 +1114,18 @@ Upper Achieved CI     0.9558 1.4000   1.55</code></pre>
 <h5 class="anchored" data-anchor-id="afrocolombiano-indigenas-rrom">Afrocolombiano, indigenas, Rrom</h5>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-22-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-22-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1086,16 +1192,28 @@ Upper Achieved CI     0.9614 1.0500    1.7</code></pre>
 <p>Inicialmente se hace una comparación gráfica de ambas técnicas a través de un box-plot:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Según el boxplot, se puede observar que sí existe una leve diferencia entre las distribuciones de las mediciones de la longitud rodilla maléolo con la pierna a 90° y con la pierna completamente estirada. Sin embargo, es necesario, realizar una prueba estadística formal para concluir algo, por lo que se calculan las diferencias entre ambos métodos y se les aplica un test de normalidad para elegir qué prueba utilizar para evaluar la hipótesis nula de que la medición longitud rodilla-maléolo con la pierna completamente estirada es igual a la medición de la longitud rodilla-maléolo con la pierna a <span class="math inline">\(90°\)</span>.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-27-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-27-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1144,16 +1262,28 @@ Upper Achieved CI     0.9535   0.75    0.9</code></pre>
 <p>Como antes, se hizo un análisis visual a través de un box-plot, donde se observa que aparentemente no hay una diferencia entre la estimación de la talla con las fórmulas de Benjumea con cinta métrica y la talla real. Sin embargo, es necesario realizar una prueba estadística formal para concluir.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Se calculan las diferencias entre la talla real y la estimación de la talla con las fórmulas de Benjumea con cinta métrica, luego, a estas diferencias se les aplica el test de Sahpiro-Wilk para normalidad y el test Lilliefors de normalidad, esto para decidir qué test utilizar para evaluar la media de las diferencias.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-32-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-32-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1197,13 +1327,25 @@ mean of x
 <h3 class="anchored" data-anchor-id="sin-los-outliers">Sin los outliers</h3>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-35-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-35-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-35-3.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-35-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1242,16 +1384,28 @@ mean of x
 <p>Como antes, se hizo un análisis visual a través de un box-plot, donde se observa que aparentemente no hay una diferencia entre la estimación de la talla con las fórmulas de Benjumea con antropómetro y la talla real. Sin embargo, es necesario realizar una prueba estadística formal para concluir.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Se calculan las diferencias entre la talla real y la estimación de la talla con las fórmulas de Benjumea con antropómetro, luego, a estas diferencias se les aplica el test de Sahpiro-Wilk para normalidad y el test Lilliefors de normalidad, esto para decidir qué test utilizar para evaluar la media de las diferencias.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-38-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-38-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1295,13 +1449,25 @@ mean of x
 <h3 class="anchored" data-anchor-id="sin-los-outliers-1">Sin los outliers</h3>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-41-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-41-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-41-3.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-41-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1340,16 +1506,28 @@ mean of x
 <p>Como antes, se hizo un análisis visual a través de un box-plot, donde se observa que aparentemente no hay una diferencia entre la estimación de la talla con las fórmulas de Arango y Zamora con la pierna a <span class="math inline">\(90°\)</span> y la talla real. Sin embargo, es necesario realizar una prueba estadística formal para concluir.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Se calculan las diferencias entre la talla real y la estimación de la talla con las fórmulas de Arango y Zamora con la pierna a <span class="math inline">\(90°\)</span>, luego, a estas diferencias se les aplica el test de Sahpiro-Wilk para normalidad y el test Lilliefors de normalidad, esto para decidir qué test utilizar para evaluar la media de las diferencias.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-44-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-44-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1393,13 +1571,25 @@ mean of x
 <h3 class="anchored" data-anchor-id="sin-los-outliers-2">Sin los outliers</h3>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-47-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-47-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-47-3.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-47-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1438,16 +1628,28 @@ mean of x
 <p>Como antes, se hizo un análisis visual a través de un box-plot, donde se observa que aparentemente no hay una diferencia entre la estimación de la talla con las fórmulas de Arango y Zamora con la pierna estirada y la talla real. Sin embargo, es necesario realizar una prueba estadística formal para concluir.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-49-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-49-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Se calculan las diferencias entre la talla real y la estimación de la talla con las fórmulas de Arango y Zamora con la pierna a estirada, luego, a estas diferencias se les aplica el test de Sahpiro-Wilk para normalidad y el test Lilliefors de normalidad, esto para decidir qué test utilizar para evaluar la media de las diferencias.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-50-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-50-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1528,18 +1730,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1571,11 +1762,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1585,8 +1815,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1598,7 +1837,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1642,6 +2004,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1667,6 +2030,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1727,6 +2116,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

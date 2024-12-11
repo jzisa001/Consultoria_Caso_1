@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -45,7 +45,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "Ninguna coincidencia",
     "search-matching-documents-text": "coincidencias",
@@ -54,14 +60,42 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "",
     "search-label": "Search"
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -70,34 +104,34 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html" rel="" target="">
- <span class="menu-text">Inicio</span></a>
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Inicio</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./descriptivo.html" rel="" target="">
- <span class="menu-text">Análisis descriptivo</span></a>
+    <a class="nav-link" href="./descriptivo.html"> 
+<span class="menu-text">Análisis descriptivo</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./hipotesis.html" rel="" target="">
- <span class="menu-text">Evaluación de hipótesis</span></a>
+    <a class="nav-link" href="./hipotesis.html"> 
+<span class="menu-text">Evaluación de hipótesis</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./modelos.html" rel="" target="" aria-current="page">
- <span class="menu-text">Modelos</span></a>
+    <a class="nav-link active" href="./modelos.html" aria-current="page"> 
+<span class="menu-text">Modelos</span></a>
   </li>  
 </ul>
+          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -147,6 +181,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+
 <section id="modelos" class="level1">
 <h1>Modelos</h1>
 <section id="lectura-de-datos" class="level2">
@@ -154,28 +189,27 @@ ul.task-list li input[type="checkbox"] {
 <p>Se muestra a continuación la forma que tienen los datos.</p>
 <div class="cell">
 <div class="cell-output-display">
-
-<div id="qicdnuekdl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="jiprxjyzub" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#qicdnuekdl table {
+#jiprxjyzub table {
   font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qicdnuekdl thead, #qicdnuekdl tbody, #qicdnuekdl tfoot, #qicdnuekdl tr, #qicdnuekdl td, #qicdnuekdl th {
+#jiprxjyzub thead, #jiprxjyzub tbody, #jiprxjyzub tfoot, #jiprxjyzub tr, #jiprxjyzub td, #jiprxjyzub th {
   border-style: none;
 }
 
-#qicdnuekdl p {
+#jiprxjyzub p {
   margin: 0;
   padding: 0;
 }
 
-#qicdnuekdl .gt_table {
+#jiprxjyzub .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -201,12 +235,12 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-#qicdnuekdl .gt_caption {
+#jiprxjyzub .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qicdnuekdl .gt_title {
+#jiprxjyzub .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -218,7 +252,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-#qicdnuekdl .gt_subtitle {
+#jiprxjyzub .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -230,7 +264,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-#qicdnuekdl .gt_heading {
+#jiprxjyzub .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -242,13 +276,13 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#qicdnuekdl .gt_bottom_border {
+#jiprxjyzub .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qicdnuekdl .gt_col_headings {
+#jiprxjyzub .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -263,7 +297,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#qicdnuekdl .gt_col_heading {
+#jiprxjyzub .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -283,7 +317,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#qicdnuekdl .gt_column_spanner_outer {
+#jiprxjyzub .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -295,15 +329,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-#qicdnuekdl .gt_column_spanner_outer:first-child {
+#jiprxjyzub .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qicdnuekdl .gt_column_spanner_outer:last-child {
+#jiprxjyzub .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qicdnuekdl .gt_column_spanner {
+#jiprxjyzub .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -315,11 +349,11 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-#qicdnuekdl .gt_spanner_row {
+#jiprxjyzub .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qicdnuekdl .gt_group_heading {
+#jiprxjyzub .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -345,7 +379,7 @@ ul.task-list li input[type="checkbox"] {
   text-align: left;
 }
 
-#qicdnuekdl .gt_empty_group_heading {
+#jiprxjyzub .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -360,15 +394,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-#qicdnuekdl .gt_from_md > :first-child {
+#jiprxjyzub .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qicdnuekdl .gt_from_md > :last-child {
+#jiprxjyzub .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qicdnuekdl .gt_row {
+#jiprxjyzub .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -387,7 +421,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#qicdnuekdl .gt_stub {
+#jiprxjyzub .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -400,7 +434,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#qicdnuekdl .gt_stub_row_group {
+#jiprxjyzub .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -414,15 +448,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-#qicdnuekdl .gt_row_group_first td {
+#jiprxjyzub .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qicdnuekdl .gt_row_group_first th {
+#jiprxjyzub .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qicdnuekdl .gt_summary_row {
+#jiprxjyzub .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -432,16 +466,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#qicdnuekdl .gt_first_summary_row {
+#jiprxjyzub .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qicdnuekdl .gt_first_summary_row.thick {
+#jiprxjyzub .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qicdnuekdl .gt_last_summary_row {
+#jiprxjyzub .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -451,7 +485,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#qicdnuekdl .gt_grand_summary_row {
+#jiprxjyzub .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -461,7 +495,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#qicdnuekdl .gt_first_grand_summary_row {
+#jiprxjyzub .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -471,7 +505,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-#qicdnuekdl .gt_last_grand_summary_row_top {
+#jiprxjyzub .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -481,11 +515,11 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#qicdnuekdl .gt_striped {
+#jiprxjyzub .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qicdnuekdl .gt_table_body {
+#jiprxjyzub .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -494,7 +528,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#qicdnuekdl .gt_footnotes {
+#jiprxjyzub .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -508,7 +542,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#qicdnuekdl .gt_footnote {
+#jiprxjyzub .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -517,7 +551,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#qicdnuekdl .gt_sourcenotes {
+#jiprxjyzub .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -531,7 +565,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#qicdnuekdl .gt_sourcenote {
+#jiprxjyzub .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -539,72 +573,72 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#qicdnuekdl .gt_left {
+#jiprxjyzub .gt_left {
   text-align: left;
 }
 
-#qicdnuekdl .gt_center {
+#jiprxjyzub .gt_center {
   text-align: center;
 }
 
-#qicdnuekdl .gt_right {
+#jiprxjyzub .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qicdnuekdl .gt_font_normal {
+#jiprxjyzub .gt_font_normal {
   font-weight: normal;
 }
 
-#qicdnuekdl .gt_font_bold {
+#jiprxjyzub .gt_font_bold {
   font-weight: bold;
 }
 
-#qicdnuekdl .gt_font_italic {
+#jiprxjyzub .gt_font_italic {
   font-style: italic;
 }
 
-#qicdnuekdl .gt_super {
+#jiprxjyzub .gt_super {
   font-size: 65%;
 }
 
-#qicdnuekdl .gt_footnote_marks {
+#jiprxjyzub .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qicdnuekdl .gt_asterisk {
+#jiprxjyzub .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qicdnuekdl .gt_indent_1 {
+#jiprxjyzub .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qicdnuekdl .gt_indent_2 {
+#jiprxjyzub .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qicdnuekdl .gt_indent_3 {
+#jiprxjyzub .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qicdnuekdl .gt_indent_4 {
+#jiprxjyzub .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qicdnuekdl .gt_indent_5 {
+#jiprxjyzub .gt_indent_5 {
   text-indent: 25px;
 }
 
-#qicdnuekdl .katex-display {
+#jiprxjyzub .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#qicdnuekdl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jiprxjyzub div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 
@@ -612,107 +646,119 @@ tbody tr:last-child {
   border-bottom: 2px solid #ffffff00;
 }
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-  <thead>
-    <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Fecha">Fecha</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Localidad">Localidad</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Programa">Programa</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Unidad_atencion">Unidad_atencion</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Sexo">Sexo</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Edad">Edad</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Etnia">Etnia</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Peso">Peso</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Talla">Talla</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="LRT_CM">LRT_CM</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="LRT_A">LRT_A</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="LRM_90">LRM_90</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="LRM_R">LRM_R</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-03</td>
-<td headers="Localidad" class="gt_row gt_left">Ciudad Bolivar</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Tejedores de Sueños</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">63</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">101.80</td>
-<td headers="Talla" class="gt_row gt_right">177.00</td>
-<td headers="LRT_CM" class="gt_row gt_right">57.50</td>
-<td headers="LRT_A" class="gt_row gt_right">57.65</td>
-<td headers="LRM_90" class="gt_row gt_right">52.00</td>
-<td headers="LRM_R" class="gt_row gt_right">52.50</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-09-25</td>
-<td headers="Localidad" class="gt_row gt_left">Ciudad Bolivar</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Sierra Morena</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">77</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">98.70</td>
-<td headers="Talla" class="gt_row gt_right">165.00</td>
-<td headers="LRT_CM" class="gt_row gt_right">52.50</td>
-<td headers="LRT_A" class="gt_row gt_right">51.20</td>
-<td headers="LRM_90" class="gt_row gt_right">46.50</td>
-<td headers="LRM_R" class="gt_row gt_right">45.00</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-16</td>
-<td headers="Localidad" class="gt_row gt_left">Engativa</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Los Cerezos</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">78</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">97.65</td>
-<td headers="Talla" class="gt_row gt_right">175.70</td>
-<td headers="LRT_CM" class="gt_row gt_right">58.45</td>
-<td headers="LRT_A" class="gt_row gt_right">56.90</td>
-<td headers="LRM_90" class="gt_row gt_right">50.60</td>
-<td headers="LRM_R" class="gt_row gt_right">51.35</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-09-23</td>
-<td headers="Localidad" class="gt_row gt_left">Rafel Uribe</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Palabras Mayores</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">74</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">97.40</td>
-<td headers="Talla" class="gt_row gt_right">172.95</td>
-<td headers="LRT_CM" class="gt_row gt_right">55.80</td>
-<td headers="LRT_A" class="gt_row gt_right">54.10</td>
-<td headers="LRM_90" class="gt_row gt_right">51.05</td>
-<td headers="LRM_R" class="gt_row gt_right">49.00</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-09-25</td>
-<td headers="Localidad" class="gt_row gt_left">Ciudad Bolivar</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Sierra Morena</td>
-<td headers="Sexo" class="gt_row gt_center">Femenino</td>
-<td headers="Edad" class="gt_row gt_right">70</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">97.10</td>
-<td headers="Talla" class="gt_row gt_right">153.35</td>
-<td headers="LRT_CM" class="gt_row gt_right">50.50</td>
-<td headers="LRT_A" class="gt_row gt_right">49.45</td>
-<td headers="LRM_90" class="gt_row gt_right">45.20</td>
-<td headers="LRM_R" class="gt_row gt_right">43.10</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-09-09</td>
-<td headers="Localidad" class="gt_row gt_left">Engativa</td>
-<td headers="Programa" class="gt_row gt_left">Comunidad de Cuidado</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Comunidad de Cuidado Bosque Popular</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">72</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">95.60</td>
-<td headers="Talla" class="gt_row gt_right">174.40</td>
-<td headers="LRT_CM" class="gt_row gt_right">56.70</td>
-<td headers="LRT_A" class="gt_row gt_right">55.10</td>
-<td headers="LRM_90" class="gt_row gt_right">50.85</td>
-<td headers="LRM_R" class="gt_row gt_right">48.15</td></tr>
-  </tbody>
-  
-  
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="Fecha" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Fecha</th>
+<th id="Localidad" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Localidad</th>
+<th id="Programa" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Programa</th>
+<th id="Unidad_atencion" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Unidad_atencion</th>
+<th id="Sexo" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Sexo</th>
+<th id="Edad" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Edad</th>
+<th id="Etnia" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Etnia</th>
+<th id="Peso" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Peso</th>
+<th id="Talla" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Talla</th>
+<th id="LRT_CM" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">LRT_CM</th>
+<th id="LRT_A" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">LRT_A</th>
+<th id="LRM_90" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">LRM_90</th>
+<th id="LRM_R" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">LRM_R</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="Fecha">2024-10-03</td>
+<td class="gt_row gt_left" headers="Localidad">Ciudad Bolivar</td>
+<td class="gt_row gt_left" headers="Programa">Centro Día Casa de la Sabiduría</td>
+<td class="gt_row gt_left" headers="Unidad_atencion">Centro Día Casa de la Sabiduría Tejedores de Sueños</td>
+<td class="gt_row gt_center" headers="Sexo">Masculino</td>
+<td class="gt_row gt_right" headers="Edad">63</td>
+<td class="gt_row gt_center" headers="Etnia">Blanco-Mestizo</td>
+<td class="gt_row gt_right" headers="Peso">101.80</td>
+<td class="gt_row gt_right" headers="Talla">177.00</td>
+<td class="gt_row gt_right" headers="LRT_CM">57.50</td>
+<td class="gt_row gt_right" headers="LRT_A">57.65</td>
+<td class="gt_row gt_right" headers="LRM_90">52.00</td>
+<td class="gt_row gt_right" headers="LRM_R">52.50</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="Fecha">2024-09-25</td>
+<td class="gt_row gt_left" headers="Localidad">Ciudad Bolivar</td>
+<td class="gt_row gt_left" headers="Programa">Centro Día Casa de la Sabiduría</td>
+<td class="gt_row gt_left" headers="Unidad_atencion">Centro Día Casa de la Sabiduría Sierra Morena</td>
+<td class="gt_row gt_center" headers="Sexo">Masculino</td>
+<td class="gt_row gt_right" headers="Edad">77</td>
+<td class="gt_row gt_center" headers="Etnia">Blanco-Mestizo</td>
+<td class="gt_row gt_right" headers="Peso">98.70</td>
+<td class="gt_row gt_right" headers="Talla">165.00</td>
+<td class="gt_row gt_right" headers="LRT_CM">52.50</td>
+<td class="gt_row gt_right" headers="LRT_A">51.20</td>
+<td class="gt_row gt_right" headers="LRM_90">46.50</td>
+<td class="gt_row gt_right" headers="LRM_R">45.00</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="Fecha">2024-10-16</td>
+<td class="gt_row gt_left" headers="Localidad">Engativa</td>
+<td class="gt_row gt_left" headers="Programa">Centro Día Casa de la Sabiduría</td>
+<td class="gt_row gt_left" headers="Unidad_atencion">Centro Día Casa de la Sabiduría Los Cerezos</td>
+<td class="gt_row gt_center" headers="Sexo">Masculino</td>
+<td class="gt_row gt_right" headers="Edad">78</td>
+<td class="gt_row gt_center" headers="Etnia">Blanco-Mestizo</td>
+<td class="gt_row gt_right" headers="Peso">97.65</td>
+<td class="gt_row gt_right" headers="Talla">175.70</td>
+<td class="gt_row gt_right" headers="LRT_CM">58.45</td>
+<td class="gt_row gt_right" headers="LRT_A">56.90</td>
+<td class="gt_row gt_right" headers="LRM_90">50.60</td>
+<td class="gt_row gt_right" headers="LRM_R">51.35</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="Fecha">2024-09-23</td>
+<td class="gt_row gt_left" headers="Localidad">Rafel Uribe</td>
+<td class="gt_row gt_left" headers="Programa">Centro Día Casa de la Sabiduría</td>
+<td class="gt_row gt_left" headers="Unidad_atencion">Centro Día Casa de la Sabiduría Palabras Mayores</td>
+<td class="gt_row gt_center" headers="Sexo">Masculino</td>
+<td class="gt_row gt_right" headers="Edad">74</td>
+<td class="gt_row gt_center" headers="Etnia">Blanco-Mestizo</td>
+<td class="gt_row gt_right" headers="Peso">97.40</td>
+<td class="gt_row gt_right" headers="Talla">172.95</td>
+<td class="gt_row gt_right" headers="LRT_CM">55.80</td>
+<td class="gt_row gt_right" headers="LRT_A">54.10</td>
+<td class="gt_row gt_right" headers="LRM_90">51.05</td>
+<td class="gt_row gt_right" headers="LRM_R">49.00</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="Fecha">2024-09-25</td>
+<td class="gt_row gt_left" headers="Localidad">Ciudad Bolivar</td>
+<td class="gt_row gt_left" headers="Programa">Centro Día Casa de la Sabiduría</td>
+<td class="gt_row gt_left" headers="Unidad_atencion">Centro Día Casa de la Sabiduría Sierra Morena</td>
+<td class="gt_row gt_center" headers="Sexo">Femenino</td>
+<td class="gt_row gt_right" headers="Edad">70</td>
+<td class="gt_row gt_center" headers="Etnia">Blanco-Mestizo</td>
+<td class="gt_row gt_right" headers="Peso">97.10</td>
+<td class="gt_row gt_right" headers="Talla">153.35</td>
+<td class="gt_row gt_right" headers="LRT_CM">50.50</td>
+<td class="gt_row gt_right" headers="LRT_A">49.45</td>
+<td class="gt_row gt_right" headers="LRM_90">45.20</td>
+<td class="gt_row gt_right" headers="LRM_R">43.10</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="Fecha">2024-09-09</td>
+<td class="gt_row gt_left" headers="Localidad">Engativa</td>
+<td class="gt_row gt_left" headers="Programa">Comunidad de Cuidado</td>
+<td class="gt_row gt_left" headers="Unidad_atencion">Comunidad de Cuidado Bosque Popular</td>
+<td class="gt_row gt_center" headers="Sexo">Masculino</td>
+<td class="gt_row gt_right" headers="Edad">72</td>
+<td class="gt_row gt_center" headers="Etnia">Blanco-Mestizo</td>
+<td class="gt_row gt_right" headers="Peso">95.60</td>
+<td class="gt_row gt_right" headers="Talla">174.40</td>
+<td class="gt_row gt_right" headers="LRT_CM">56.70</td>
+<td class="gt_row gt_right" headers="LRT_A">55.10</td>
+<td class="gt_row gt_right" headers="LRM_90">50.85</td>
+<td class="gt_row gt_right" headers="LRM_R">48.15</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -794,16 +840,28 @@ Selection Algorithm: exhaustive
 <pre><code>[1] 3</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Usando el <span class="math inline">\(R^2\)</span> ajustado, se sugiere un modelo con 5 variables:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Los coeficientes del mejor modelo usando el criterio de BIC son:</p>
@@ -844,7 +902,11 @@ Selection Algorithm: exhaustive
 <p>El MSE se minimiza usando un modelo de 3 variables:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Se busca nuevamente el mejor modelo de tres variables usando todos los datos:</p>
@@ -888,7 +950,11 @@ F-statistic:  1446 on 3 and 554 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><strong><em>Linealidad:</em></strong> Con el fin de verificar que la relación entre la talla y las variables LRT_A (discriminando por sexo) y la edad es lineal, se visualiza el gráfico de los residuos vs los valores predichos del modelo <span class="math inline">\(\left(\hat{e},\hat{y} \right)\)</span>:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>El gráfico no muestra ningún patrón marcado, la ubicación de los puntos parece ser aleatoria alrededor de cero, indicando también homoscedasticidad en los residuales y posible independencia de los mismos. El gráfico muestra algunos valores atípicos que valdría la pena explorar.</p>
@@ -907,7 +973,11 @@ alternative hypothesis: true autocorrelation is greater than 0</code></pre>
 <p><strong><em>Normalidad de los errores:</em></strong> Se realiza el gráfico QQ-plot para comparar la distribución de los residuales del modelo con la distribución teórica de una normal. También se hace el test de normalidad de Lilliefors y Anderson-Darling:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -928,7 +998,11 @@ A = 0.32808, p-value = 0.5169</code></pre>
 <p><strong><em>Homoscedasticidad:</em></strong> Aunque no se vio un patron que indicara heteroscedasticidad en el gráfico de los residuales vs los valores predichos, a continuación se muestra el gráfico de los residuales estandarizados vs los valores predichos con el fin de mejorar la interpretabilidad de la homoscedasticidad y tener una visión más clara de las observaciones atípicas e influyentes:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>No se observan patrones que indiquen hereroscedasticidad en los residuos (forma de cono o embudo). Se siguien observando algunas observaciones atípicas y/o influyentes.</p>
@@ -970,28 +1044,34 @@ RESET = 0.55668, df1 = 2, df2 = 552, p-value = 0.5734</code></pre>
 </div>
 <p>No se rechaza la hipótesis nula de que el modelo está bien especificado.</p>
 <p><strong><em>Obervaciones atípicas y de alto apalancamiento:</em></strong></p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-20-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
 <p>Usando los residuales estudentizados, se observan <span class="math inline">\(5\)</span> datos atípicos.</p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-21-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>       StudRes        Hat       CookD
 43  -2.9217034 0.01478212 0.031589921
 518 -0.6883523 0.02931721 0.003581125
@@ -1081,10 +1161,18 @@ Selection Algorithm: exhaustive
 <pre><code>[1] 3</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-25-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-25-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Los coeficientes del mejor modelo usando el criterio de BIC son:</p>
@@ -1138,7 +1226,11 @@ F-statistic:  1446 on 3 and 554 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><strong><em>Linealidad:</em></strong> Con el fin de verificar que la relación entre la talla y las variables LRT_A (discriminando por sexo) y la edad es lineal, se visualiza el gráfico de los residuos vs los valores predichos del modelo <span class="math inline">\(\left(\hat{e},\hat{y} \right)\)</span>:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>El gráfico no muestra ningún patrón marcado, la ubicación de los puntos parece ser aleatoria alrededor de cero, indicando también homoscedasticidad en los residuales y posible independencia de los mismos. El gráfico muestra algunos valores atípicos que valdría la pena explorar.</p>
@@ -1157,7 +1249,11 @@ alternative hypothesis: true autocorrelation is greater than 0</code></pre>
 <p><strong><em>Normalidad de los errores:</em></strong> Se realiza el gráfico QQ-plot para comparar la distribución de los residuales del modelo con la distribución teórica de una normal. También se hace el test de normalidad de Lilliefors y Anderson-Darling:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1178,7 +1274,11 @@ A = 0.32808, p-value = 0.5169</code></pre>
 <p><strong><em>Homoscedasticidad:</em></strong> Aunque no se vio un patron que indicara heteroscedasticidad en el gráfico de los residuales vs los valores predichos, a continuación se muestra el gráfico de los residuales estandarizados vs los valores predichos con el fin de mejorar la interpretabilidad de la homoscedasticidad y tener una visión más clara de las observaciones atípicas e influyentes:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>No se observan patrones que indiquen hereroscedasticidad en los residuos (forma de cono o embudo). Se siguien observando algunas observaciones atípicas y/o influyentes.</p>
@@ -1220,28 +1320,34 @@ RESET = 0.55668, df1 = 2, df2 = 552, p-value = 0.5734</code></pre>
 </div>
 <p>No se rechaza la hipótesis nula de que el modelo está bien especificado.</p>
 <p><strong><em>Observaciones atípicas y de alto apalancamiento:</em></strong></p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-37-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
 <p>Usando los residuales estudentizados, se observan <span class="math inline">\(5\)</span> datos atípicos.</p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-38-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>       StudRes        Hat       CookD
 43  -2.9217034 0.01478212 0.031589921
 518 -0.6883523 0.02931721 0.003581125
@@ -1322,10 +1428,18 @@ Selection Algorithm: exhaustive
 <pre><code>[1] 3</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-42-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-42-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Los coeficientes del mejor modelo usando el criterio de BIC son:</p>
@@ -1379,7 +1493,11 @@ F-statistic:  1417 on 3 and 542 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><strong><em>Linealidad:</em></strong> Con el fin de verificar que la relación entre la talla y las variables LRT_A (discriminando por sexo) y la edad es lineal, se visualiza el gráfico de los residuos vs los valores predichos del modelo <span class="math inline">\(\left(\hat{e},\hat{y} \right)\)</span>:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>El gráfico no muestra ningún patrón marcado, la ubicación de los puntos parece ser aleatoria alrededor de cero, indicando también homoscedasticidad en los residuales y posible independencia de los mismos. El gráfico muestra algunos valores atípicos que valdría la pena explorar.</p>
@@ -1398,7 +1516,11 @@ alternative hypothesis: true autocorrelation is greater than 0</code></pre>
 <p><strong><em>Normalidad de los errores:</em></strong> Se realiza el gráfico QQ-plot para comparar la distribución de los residuales del modelo con la distribución teórica de una normal. También se hace el test de normalidad de Lilliefors y Anderson-Darling:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-49-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-49-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1419,7 +1541,11 @@ A = 0.37224, p-value = 0.4193</code></pre>
 <p><strong><em>Homoscedasticidad:</em></strong> Aunque no se vio un patron que indicara heteroscedasticidad en el gráfico de los residuales vs los valores predichos, a continuación se muestra el gráfico de los residuales estandarizados vs los valores predichos con el fin de mejorar la interpretabilidad de la homoscedasticidad y tener una visión más clara de las observaciones atípicas e influyentes:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>No se observan patrones que indiquen hereroscedasticidad en los residuos (forma de cono o embudo). Se siguien observando algunas observaciones atípicas y/o influyentes.</p>
@@ -1461,28 +1587,34 @@ RESET = 0.57179, df1 = 2, df2 = 540, p-value = 0.5649</code></pre>
 </div>
 <p>No se rechaza la hipótesis nula de que el modelo está bien especificado.</p>
 <p><strong><em>Observaciones atípicas y de alto apalancamiento:</em></strong></p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-54-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-54-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
 <p>Usando los residuales estudentizados, se observan <span class="math inline">\(5\)</span> datos atípicos.</p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-55-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-55-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>       StudRes        Hat       CookD
 43  -2.9359701 0.01530685 0.033034282
 518 -0.6931209 0.02977243 0.003689056
@@ -1572,10 +1704,18 @@ Selection Algorithm: exhaustive
 <pre><code>[1] 3</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-59-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-59-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-59-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-59-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Los coeficientes del mejor modelo usando el criterio de BIC son:</p>
@@ -1629,7 +1769,11 @@ F-statistic:  1229 on 3 and 554 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><strong><em>Linealidad:</em></strong> Con el fin de verificar que la relación entre la talla y las variables LRT_CM (discriminando por sexo) y la edad es lineal, se visualiza el gráfico de los residuos vs los valores predichos del modelo <span class="math inline">\(\left(\hat{e},\hat{y} \right)\)</span>:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-64-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-64-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>El gráfico no muestra ningún patrón marcado, la ubicación de los puntos parece ser aleatoria alrededor de cero, indicando también homoscedasticidad en los residuales y posible independencia de los mismos. El gráfico muestra algunos valores atípicos que valdría la pena explorar.</p>
@@ -1648,7 +1792,11 @@ alternative hypothesis: true autocorrelation is greater than 0</code></pre>
 <p><strong><em>Normalidad de los errores:</em></strong> Se realiza el gráfico QQ-plot para comparar la distribución de los residuales del modelo con la distribución teórica de una normal. También se hace el test de normalidad de Lilliefors y Anderson-Darling:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-66-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-66-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1669,7 +1817,11 @@ A = 0.3255, p-value = 0.5213</code></pre>
 <p><strong><em>Homoscedasticidad:</em></strong> Aunque no se vio un patron que indicara heteroscedasticidad en el gráfico de los residuales vs los valores predichos, a continuación se muestra el gráfico de los residuales estandarizados vs los valores predichos con el fin de mejorar la interpretabilidad de la homoscedasticidad y tener una visión más clara de las observaciones atípicas e influyentes:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-67-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-67-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>No se observan patrones que indiquen hereroscedasticidad en los residuos (forma de cono o embudo). Se siguien observando algunas observaciones atípicas y/o influyentes.</p>
@@ -1711,28 +1863,34 @@ RESET = 0.26394, df1 = 2, df2 = 552, p-value = 0.7681</code></pre>
 </div>
 <p>No se rechaza la hipótesis nula de que el modelo está bien especificado.</p>
 <p><strong><em>Observaciones atípicas y de alto apalancamiento:</em></strong></p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-71-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-71-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
 <p>Usando los residuales estudentizados, se observan <span class="math inline">\(5\)</span> datos atípicos.</p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-72-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-72-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>       StudRes         Hat       CookD
 43  -2.9806385 0.016649964 0.037078890
 284  2.9957912 0.003681190 0.008172332
@@ -1821,10 +1979,18 @@ Selection Algorithm: exhaustive
 <pre><code>[1] 3</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-76-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-76-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-76-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-76-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Los coeficientes del mejor modelo usando el criterio de BIC son:</p>
@@ -1878,7 +2044,11 @@ F-statistic:  1123 on 3 and 554 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><strong><em>Linealidad:</em></strong> Con el fin de verificar que la relación entre la talla y las variables LRM_R (discriminando por sexo) y la edad es lineal, se visualiza el gráfico de los residuos vs los valores predichos del modelo <span class="math inline">\(\left(\hat{e},\hat{y} \right)\)</span>:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-81-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-81-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>El gráfico no muestra ningún patrón marcado, la ubicación de los puntos parece ser aleatoria alrededor de cero, indicando también homoscedasticidad en los residuales y posible independencia de los mismos. El gráfico muestra algunos valores atípicos que valdría la pena explorar.</p>
@@ -1897,7 +2067,11 @@ alternative hypothesis: true autocorrelation is greater than 0</code></pre>
 <p><strong><em>Normalidad de los errores:</em></strong> Se realiza el gráfico QQ-plot para comparar la distribución de los residuales del modelo con la distribución teórica de una normal. También se hace el test de normalidad de Lilliefors y Anderson-Darling:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-83-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-83-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1918,7 +2092,11 @@ A = 0.27849, p-value = 0.6483</code></pre>
 <p><strong><em>Homoscedasticidad:</em></strong> Aunque no se vio un patron que indicara heteroscedasticidad en el gráfico de los residuales vs los valores predichos, a continuación se muestra el gráfico de los residuales estandarizados vs los valores predichos con el fin de mejorar la interpretabilidad de la homoscedasticidad y tener una visión más clara de las observaciones atípicas e influyentes:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-84-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-84-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>No se observan patrones que indiquen hereroscedasticidad en los residuos (forma de cono o embudo). Se siguien observando algunas observaciones atípicas y/o influyentes.</p>
@@ -1960,28 +2138,34 @@ RESET = 0.012072, df1 = 2, df2 = 552, p-value = 0.988</code></pre>
 </div>
 <p>No se rechaza la hipótesis nula de que el modelo está bien especificado.</p>
 <p><strong><em>Observaciones atípicas y de alto apalancamiento:</em></strong></p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-88-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-88-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
 <p>Usando los residuales estudentizados, se observan <span class="math inline">\(5\)</span> datos atípicos.</p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-89-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-89-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>       StudRes         Hat        CookD
 518  0.2187011 0.032266703 0.0003993814
 533 -3.7468704 0.008055180 0.0278459402
@@ -2068,10 +2252,18 @@ Selection Algorithm: exhaustive
 <pre><code>[1] 3</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-93-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-93-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-93-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-93-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Los coeficientes del mejor modelo usando el criterio de BIC son:</p>
@@ -2125,7 +2317,11 @@ F-statistic: 967.9 on 3 and 554 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><strong><em>Linealidad:</em></strong> Con el fin de verificar que la relación entre la talla y las variables LRT_A (discriminando por sexo) y la edad es lineal, se visualiza el gráfico de los residuos vs los valores predichos del modelo <span class="math inline">\(\left(\hat{e},\hat{y} \right)\)</span>:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-98-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-98-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>El gráfico no muestra ningún patrón marcado, la ubicación de los puntos parece ser aleatoria alrededor de cero, indicando también homoscedasticidad en los residuales y posible independencia de los mismos. El gráfico muestra algunos valores atípicos que valdría la pena explorar.</p>
@@ -2144,7 +2340,11 @@ alternative hypothesis: true autocorrelation is greater than 0</code></pre>
 <p><strong><em>Normalidad de los errores:</em></strong> Se realiza el gráfico QQ-plot para comparar la distribución de los residuales del modelo con la distribución teórica de una normal. También se hace el test de normalidad de Lilliefors y Anderson-Darling:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-100-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-100-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -2165,7 +2365,11 @@ A = 0.6184, p-value = 0.1071</code></pre>
 <p><strong><em>Homoscedasticidad:</em></strong> Aunque no se vio un patron que indicara heteroscedasticidad en el gráfico de los residuales vs los valores predichos, a continuación se muestra el gráfico de los residuales estandarizados vs los valores predichos con el fin de mejorar la interpretabilidad de la homoscedasticidad y tener una visión más clara de las observaciones atípicas e influyentes:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-101-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-101-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>No se observan patrones que indiquen hereroscedasticidad en los residuos (forma de cono o embudo). Se siguien observando algunas observaciones atípicas y/o influyentes.</p>
@@ -2207,28 +2411,34 @@ RESET = 6.8777, df1 = 2, df2 = 552, p-value = 0.001121</code></pre>
 </div>
 <p>En ambos casos, se rechaza la hipótesis nula de que el modelo está bien especificado.</p>
 <p><strong><em>Observaciones atípicas y de alto apalancamiento:</em></strong></p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-105-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-105-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
 <p>Usando los residuales estudentizados, se observan <span class="math inline">\(5\)</span> datos atípicos.</p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-106-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-106-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>       StudRes        Hat        CookD
 80  -5.9106093 0.02989242 0.2535863431
 147 -3.8402724 0.01935197 0.0709954316
@@ -2274,13 +2484,21 @@ F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Algunos coeficientes se hacen cero:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-109-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-109-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Se hace <strong><em>k-fold cross validation</em></strong> con <span class="math inline">\(k = 10\)</span> y se promedia el MSE:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-110-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-110-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8.92835</code></pre>
@@ -2321,7 +2539,11 @@ F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Se ajusta el modelo Lasso con las tres mediciones LRT_CM, LRM_90 y LRM_R.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-113-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-113-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10.30675</code></pre>
@@ -2388,13 +2610,21 @@ SexoMasculino
 <p>Algunos coeficientes se hacen cero:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-116-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-116-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Se hace <strong><em>k-fold cross validation</em></strong> con <span class="math inline">\(k = 10\)</span> y se promedia el MSE:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-117-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-117-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 9.840965</code></pre>
@@ -2423,13 +2653,21 @@ EtniaBlanco-Mestizo       EtniaIndigena           EtniaRrom
 <p>Algunos coeficientes se hacen cero:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-121-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-121-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Se hace <strong><em>k-fold cross validation</em></strong> con <span class="math inline">\(k = 10\)</span> y se promedia el MSE:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-122-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-122-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 12.85664</code></pre>
@@ -2460,13 +2698,21 @@ EtniaBlanco-Mestizo       EtniaIndigena
 <p>Algunos coeficientes se hacen cero:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-126-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-126-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Se hace <strong><em>k-fold cross validation</em></strong> con <span class="math inline">\(k = 10\)</span> y se promedia el MSE:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-127-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-127-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 11.01789</code></pre>
@@ -2497,13 +2743,21 @@ EtniaBlanco-Mestizo       EtniaIndigena           EtniaRrom
 <p>Algunos coeficientes se hacen cero:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-131-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-131-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Se hace <strong><em>k-fold cross validation</em></strong> con <span class="math inline">\(k = 10\)</span> y se promedia el MSE:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-132-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="modelos_files/figure-html/unnamed-chunk-132-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 13.63767</code></pre>
@@ -2867,18 +3121,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -2910,11 +3153,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -2924,8 +3206,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -2937,7 +3228,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -2981,6 +3395,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -3006,6 +3421,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -3066,6 +3507,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

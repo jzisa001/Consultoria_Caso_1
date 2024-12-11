@@ -41,6 +41,7 @@ library(glmnet)
 library(glmtoolbox)
 library(MASS)
 library(rsample)
+library(lawstat)
 ```
 
 ## Lectura de datos
@@ -516,22 +517,45 @@ En ese orden de ideas, después de la longitud de rodilla talón con antropómet
 
 ### Longitud rodilla-talón
 
+Se quiere determinar si existe diferencia significativa entre las mediciones realizadas con cinta métrica y con antropómetro medidas en los mismos individuos: 
+
+$$ \begin{cases}
+H_0: \, \, \, \theta_Y - \theta_X = 0 \\
+H_1: \, \, \,  \theta_Y - \theta_X \neq 0
+\end{cases}$$
+
+
+
+Donde $\theta_Y$ representa una medida de tendencia central de  las mediciones realizadas con antropómetro y $\theta_X$ representa dicha medida evaluada a las mediciones realizadas con cinta métrica. 
+
 Inicialmente se hace una comparación gráfica de ambas técnicas a través de un box-plot:
 
-```{r}
+```{r} 
 # Comparar LRT CM y A
-boxplot(data.frame(datos$LRT_CM, datos$LRT_A))
+boxplot(data.frame(datos$LRT_CM, datos$LRT_A), ylab = 'Longitud Rodilla-Talón (cm)', xgap.axis = c("Cinta métrica","Antropómetro"), xaxt = "n")
+axis(1, at = c(1, 2),
+     labels = c("Cinta Métrica", "Antropómetro"))
 ```
 
-Según el gráfico de cajas (boxplot), parece que hay una pequeña diferencia entre las mediciones de la longitud desde la rodilla hasta el talón realizadas con cinta métrica y con antropómetro. Sin embargo, para estar seguros, es necesario hacer una prueba estadística más formal. Para esto, se calculan las diferencias entre las mediciones de ambos métodos y se verifica si esas diferencias siguen una distribución normal. Dependiendo del resultado, se elegirá la prueba estadística adecuada para comprobar si realmente no hay una diferencia significativa entre ambos tipos de medición.
+Según el gráfico de cajas (boxplot), parece que existe diferencia entre las mediciones de la longitud desde la rodilla hasta el talón realizadas con cinta métrica y con antropómetro. Sin embargo, es necesario hacer una prueba estadística más formal. Para esto, se calculan las diferencias entre las mediciones de ambos métodos y se verifica si esas diferencias siguen una distribución normal para determinar qué prueba estadística es adecuada para la comparación. 
 
 ```{r}
 # Diferencias CM y A
 LRT_dif <- datos$LRT_CM - datos$LRT_A
 
 # Como se ve graficamente, parece que no hay normalidad
-hist(LRT_dif)
+par(mfrow=c(1,2))
+hist(LRT_dif, freq = FALSE, main = 'Histograma de las la diferencia de mediciones LRT', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
+lines(density(LRT_dif), col = "red")
+abline(v = median(LRT_dif, na.rm = TRUE), col = "red", lty = 2)
 boxplot(LRT_dif) # hay muchos outliers
+
+par(mfrow=c(1,2))
+qqnorm(LRT_dif, main = "Q-Q Plot de las diferencias")
+qqline(LRT_dif, col = "red")
+
+summary(LRT_dif)
+IQR(LRT_dif)
 
 # Pruebas de normalidad
 ## Test Shapiro-Wilk
@@ -540,7 +564,7 @@ shapiro.test(LRT_dif) # No se tiene normalidad en la edad según el test de Shap
 ## Test lilliefors
 lillie.test(LRT_dif) # No se tiene normalidad en la edad según el test de Lilliefors
 ```
-Los resultados de dos pruebas estadísticas, Shapiro-Wilk y Lilliefors, mostraron un valor menor a 0.05. Esto significa que, con un nivel de confianza del 95%, no podemos decir que las diferencias entre las mediciones de rodilla-talón tomadas con una cinta métrica y con un antropómetro sigan una distribución normal. Por lo tanto, es necesario usar un tipo de prueba estadística diferente, que no dependa de suposiciones sobre la distribución de los datos, para analizar las diferencias en los promedios.
+Los resultados de dos pruebas estadísticas, Shapiro-Wilk y Lilliefors, mostraron un valor menor a 0.05. Esto significa que, con un nivel de confianza del 95%, no podemos decir que las diferencias entre las mediciones de rodilla-talón tomadas con una cinta métrica y con un antropómetro sigan una distribución normal. Por lo tanto, para analizar las diferencias en los promedios, es necesario usar un tipo de prueba que no dependa de suposiciones sobre la distribución de los datos.
 
 ```{r}
 #| eval: false
@@ -549,13 +573,15 @@ Los resultados de dos pruebas estadísticas, Shapiro-Wilk y Lilliefors, mostraro
 
 ## Requiere simetria en los datos, por lo que se realiza un test de simetria basado en momentos
 
+symmetry.test(LRT_dif, boot = FALSE)
+
 asimetria <- moments::skewness(LRT_dif)
 
 t_test <- asimetria / sqrt(6 / length(LRT_dif))  # Estadístico t
 p_value <- 2 * (1 - pt(abs(t_test), df = length(LRT_dif) - 1))
 p_value # parece que no hay simetria, entonces no se puede aplicar Wilcoxon 
 
-# wilcox.test(LRT_dif, mu = 0, alternative = "two.sided") # usando las diferencias
+#wilcox.test(LRT_dif, mu = 0, alternative = "two.sided") # usando las diferencias
 # wilcox.test(datos$LRT_CM, datos$LRT_A, mu = 0, alternative = "two.sided", paired = TRUE) # usando directamente los datos
 ```
 
@@ -566,9 +592,9 @@ p_value # parece que no hay simetria, entonces no se puede aplicar Wilcoxon
 SIGN.test(LRT_dif, md = 0, alternative = "two.sided")
 ```
 
-Al principio, se pensó en usar la prueba de Wilcoxon, que es una prueba estadística no paramétrica para evaluar el promedio de las diferencias. Sin embargo, esta prueba asume que las diferencias entre las mediciones son simétricas, pero eso no ocurrió en nuestros datos, ya que el coeficiente de asimetría fue de -0.785, lo que muestra que las diferencias no son simétricas. Por eso, se decidió usar una prueba diferente llamada "prueba del signo para muestras pareadas", que no necesita asumir normalidad ni simetría. Aunque esta prueba no da información sobre el promedio de las diferencias, sí permite evaluar la mediana de las diferencias.
+Al principio, se pensó en usar la prueba de Wilcoxon, que es una prueba estadística no paramétrica para evaluar el promedio de las diferencias. Sin embargo, esta prueba asume que la distribución de las diferencias entre las mediciones son simétricas alrededor de una media $\theta$ pero eso no ocurrió en nuestros datos, ya que el coeficiente de asimetría (D'Agostino) fue de -0.785, lo que indica asimetría ligera. Por eso, se decidió usar unala prueba del signo para muestras pareadas, que no necesita asumir normalidad ni simetría. Aunque esta prueba no da información sobre el promedio de las diferencias, sí permite evaluar la mediana de las diferencias.
 
-El resultado de la prueba del signo mostró un p-valor de $2.2 \times 10^{-16}$, lo que indica que hay suficiente evidencia estadística para rechazar la idea de que la mediana de las diferencias es igual a cero. Esto significa que las mediciones de la longitud rodilla-talón hechas con la cinta métrica no son equivalentes a las obtenidas con el antropómetro.
+El resultado de la prueba del signo mostró un p-valor de $2.2 \times 10^{-16}$, lo que indica que en este caso rechazamos la igualdad de medianas. Esto significa que las mediciones de la longitud rodilla-talón hechas con la cinta métrica no son equivalentes a las obtenidas con el antropómetro.
 
 #### Análisis por separado
 
@@ -581,7 +607,10 @@ hombres <- datos[datos$Sexo == "Masculino",]
 LRT_dif <- hombres$LRT_CM - hombres$LRT_A
 
 # Como se ve graficamente, parece que no hay normalidad
-hist(LRT_dif)
+par(mfrow=c(1,2))
+hist(LRT_dif, freq = FALSE, main = 'Diferencia de mediciones LRT (hombres)', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
+lines(density(LRT_dif), col = "red")
+abline(v = median(LRT_dif, na.rm = TRUE), col = "red", lty = 2)
 boxplot(LRT_dif) # hay muchos outliers
 
 # Pruebas de normalidad
@@ -593,6 +622,7 @@ lillie.test(LRT_dif) # No se tiene normalidad en la edad según el test de Lilli
 
 ```
 Los resultados de dos pruebas estadísticas, Shapiro-Wilk y Lilliefors, mostraron un valor menor a 0.05. Esto significa que, con un nivel de confianza del 95%, no podemos decir que las diferencias entre las mediciones de rodilla-talón tomadas con una cinta métrica y con un antropómetro en los adultos mayores de sexo masculino sigan una distribución normal. 
+
 ```{r}
 #| eval: false
 #| echo: false
@@ -615,9 +645,10 @@ p_value # parece que no hay simetria, entonces no se puede aplicar Wilcoxon
 # Prueba del signo para muestras pareadas
 SIGN.test(LRT_dif, md = 0, alternative = "two.sided")
 ```
-Al principio, se pensó en usar la prueba de Wilcoxon, pero las diferencias entre las mediciones no son simétricas ya que el coeficiente de asimetría fue de -1.69. Por eso, se decidió usar la prueba del signo para muestras pareadas para evaluar la mediana de las diferencias.
 
-El resultado de la prueba del signo mostró un p-valor de $2.2 \times 10^{-16}$, lo que indica que hay suficiente evidencia estadística para rechazar la idea de que la mediana de las diferencias es igual a cero. Esto significa que las mediciones de la longitud rodilla-talón hechas con la cinta métrica no son equivalentes a las obtenidas con el antropómetro, en los adultos mayores de sexo masculino.
+Nuevamente, las diferencias entre las mediciones no son simétricas ya que el coeficiente de asimetría fue de -1.69. Por eso, se decidió usar la prueba del signo para muestras pareadas para evaluar la mediana de las diferencias.
+
+El resultado de la prueba del signo mostró un p-valor de $2.2 \times 10^{-16}$, así que nuevamente se rechazó la hipótesis de igualdad de medianas. Esto significa que las mediciones de la longitud rodilla-talón hechas con la cinta métrica no son equivalentes a las obtenidas con el antropómetro, en los adultos mayores de sexo masculino.
 
 ###### Femenino:
 ```{r}
@@ -626,7 +657,10 @@ mujeres <- datos[datos$Sexo == "Femenino",]
 LRT_dif <- mujeres$LRT_CM - mujeres$LRT_A
 
 # Como se ve graficamente, parece que no hay normalidad
-hist(LRT_dif)
+par(mfrow=c(1,2))
+hist(LRT_dif, freq = FALSE, main = 'Diferencia de mediciones LRT (mujeres)', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
+lines(density(LRT_dif), col = "red")
+abline(v = median(LRT_dif, na.rm = TRUE), col = "red", lty = 2)
 boxplot(LRT_dif) # hay muchos outliers
 
 # Pruebas de normalidad
@@ -646,18 +680,22 @@ Los resultados de dos pruebas estadísticas, Shapiro-Wilk y Lilliefors, mostraro
 
 asimetria <- moments::skewness(LRT_dif)
 
+symmetry.test(LRT_dif)
+
 t_test <- asimetria / sqrt(6 / length(LRT_dif))  # Estadístico t
 p_value <- 2 * (1 - pt(abs(t_test), df = length(LRT_dif) - 1))
 p_value # parece que hay simetria, entonces se aplica Wilcoxon 
 
 ```
-Probrando la simetría de las diferencias, se obtuvo un valor p mayor que 0.05, por lo que no hay suficiente evidencia para rechazar la hipótesis de simetría, lo que sugiere que la distribución de las diferencias es lo suficientemente simétrica como para aplicar una prueba no paramétrica como Wilcoxon.
+
+Probrando la simetría de las diferencias, se obtuvo un valor p mayor que 0.05, por lo que no hay suficiente evidencia para rechazar la hipótesis de simetría, lo que sugiere que podemos aplicar una prueba no paramétrica como Wilcoxon.
+
 ```{r}
 
 wilcox.test(LRT_dif, mu = 0, alternative = "two.sided") # usando las diferencias
 #wilcox.test(datos$LRT_CM, datos$LRT_A, mu = 0, alternative = "two.sided", paired = TRUE) # usando directamente los datos
 ```
-El resultado de la prueba de Wilcoxon mostró un p-valor de $2.2 \times 10^{-16}$, lo que indica que hay suficiente evidencia estadística para rechazar la idea de que la mediana de las diferencias es igual a cero. Esto significa que las mediciones de la longitud rodilla-talón hechas con la cinta métrica no son equivalentes a las obtenidas con el antropómetro, en las mujeres mayores.
+El resultado de la prueba de Wilcoxon mostró un p-valor de $2.2 \times 10^{-16}$, lo que indica que rechazamos la hipótesis de igualdad de medias. Esto significa que las mediciones de la longitud rodilla-talón hechas con la cinta métrica no son equivalentes a las obtenidas con el antropómetro, en las mujeres mayores.
 
 ##### Por programa
 
@@ -668,7 +706,10 @@ cd <- datos[datos$Programa == "Centro Día Casa de la Sabiduría",]
 LRT_dif <- cd$LRT_CM - cd$LRT_A
 
 # Como se ve graficamente, parece que no hay normalidad
-hist(LRT_dif)
+par(mfrow=c(1,2))
+hist(LRT_dif, freq = FALSE, main = 'Histograma de las la diferencia de mediciones LRT', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
+lines(density(LRT_dif), col = "red")
+abline(v = median(LRT_dif, na.rm = TRUE), col = "red", lty = 2)
 boxplot(LRT_dif) # hay muchos outliers
 
 # Pruebas de normalidad
@@ -700,7 +741,8 @@ Probrando la simetría de las diferencias, se obtuvo un valor p mayor que 0.05, 
 wilcox.test(LRT_dif, mu = 0, alternative = "two.sided") # usando las diferencias
 #wilcox.test(datos$LRT_CM, datos$LRT_A, mu = 0, alternative = "two.sided", paired = TRUE) # usando directamente los datos
 ```
-El resultado de la prueba de Wilcoxon mostró un p-valor de $2.2 \times 10^{-16}$, lo que indica que hay suficiente evidencia estadística para rechazar la idea de que la mediana de las diferencias es igual a cero. Esto significa que las mediciones de la longitud rodilla-talón hechas con la cinta métrica no son equivalentes a las obtenidas con el antropómetro, en los adultos mayores del centro día.
+
+El resultado de la prueba del signo mostró un p-valor de $2.2 \times 10^{-16}$, lo que indica que en este caso rechazamos la igualdad de medianas. Esto significa que las mediciones de la longitud rodilla-talón hechas con la cinta métrica no son equivalentes a las obtenidas con el antropómetro en los adultos mayores del centro día.
 
 ###### Comunidad de cuidado
 ```{r}
@@ -708,7 +750,10 @@ El resultado de la prueba de Wilcoxon mostró un p-valor de $2.2 \times 10^{-16}
 cc <- datos[datos$Programa == "Comunidad de Cuidado",]
 LRT_dif <- cc$LRT_CM - cc$LRT_A
 
-hist(LRT_dif)
+par(mfrow=c(1,2))
+hist(LRT_dif, freq = FALSE, main = 'Histograma de las la diferencia de mediciones LRT', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
+lines(density(LRT_dif), col = "red")
+abline(v = median(LRT_dif, na.rm = TRUE), col = "red", lty = 2)
 boxplot(LRT_dif) # hay muchos outliers
 
 # Pruebas de normalidad
@@ -738,9 +783,10 @@ p_value # parece que no hay simetria, entonces no se aplica Wilcoxon
 # Prueba del signo para muestras pareadas
 SIGN.test(LRT_dif, md = 0, alternative = "two.sided")
 ```
-Al principio, se pensó en usar la prueba de Wilcoxon, pero las diferencias entre las mediciones no son simétricas ya que el coeficiente de asimetría fue de -1.64. Por eso, se decidió usar la prueba del signo para muestras pareadas para evaluar la mediana de las diferencias.
 
-El resultado de la prueba del signo mostró un p-valor de $2.2 \times 10^{-16}$, lo que indica que hay suficiente evidencia estadística para rechazar la idea de que la mediana de las diferencias es igual a cero. Esto significa que las mediciones de la longitud rodilla-talón hechas con la cinta métrica no son equivalentes a las obtenidas con el antropómetro,  en los adultos mayores de las comunidades de cuidado.
+Nuevamente, la diferencia entre las mediciones no son simétricas ya que el coeficiente de asimetría fue de -1.64. Por eso, se decidió usar la prueba del signo para muestras pareadas para evaluar la mediana de las diferencias.
+
+El resultado de la prueba del signo mostró un p-valor de $2.2 \times 10^{-16}$, lo que indica que en este caso rechazamos la igualdad de medianas. Esto significa que las mediciones de la longitud rodilla-talón hechas con la cinta métrica no son equivalentes a las obtenidas con el antropómetro en los adultos mayores de las comunidades de cuidado.
 
 ##### Por etnia
 
@@ -751,7 +797,10 @@ bm <- datos[datos$Etnia=="Blanco-Mestizo",]
 LRT_dif <- bm$LRT_CM - bm$LRT_A
 
 # Como se ve graficamente, parece que no hay normalidad
-hist(LRT_dif)
+par(mfrow=c(1,2))
+hist(LRT_dif, freq = FALSE, main = 'Histograma de las la diferencia de mediciones LRT', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
+lines(density(LRT_dif), col = "red")
+abline(v = median(LRT_dif, na.rm = TRUE), col = "red", lty = 2)
 boxplot(LRT_dif) # hay muchos outliers
 
 # Pruebas de normalidad
@@ -780,9 +829,10 @@ p_value # parece que no hay simetria, entonces no se aplica Wilcoxon
 # Prueba del signo para muestras pareadas
 SIGN.test(LRT_dif, md = 0, alternative = "two.sided")
 ```
-Al principio, se pensó en usar la prueba de Wilcoxon, pero las diferencias entre las mediciones no son simétricas ya que el coeficiente de asimetría fue de -0.78. Por eso, se decidió usar la prueba del signo para muestras pareadas para evaluar la mediana de las diferencias.
 
-El resultado de la prueba del signo mostró un p-valor de $2.2 \times 10^{-16}$, lo que indica que hay suficiente evidencia estadística para rechazar la idea de que la mediana de las diferencias es igual a cero. Esto significa que las mediciones de la longitud rodilla-talón hechas con la cinta métrica no son equivalentes a las obtenidas con el antropómetro, en los adultos mayores Blancos-Mestizos.
+Las diferencias entre las mediciones no son simétricas ya que el coeficiente de asimetría fue de -0.78. Por eso, se decidió usar la prueba del signo para muestras pareadas para evaluar la mediana de las diferencias.
+
+El resultado de la prueba del signo mostró un p-valor de $2.2 \times 10^{-16}$, lo que indica que en este caso rechazamos la igualdad de medianas. Esto significa que las mediciones de la longitud rodilla-talón hechas con la cinta métrica no son equivalentes a las obtenidas con el antropómetro en los adultos mayores Blancos-Mestizos.
 
 ###### Afrocolombiano, indigenas, Rrom 
 
@@ -793,7 +843,10 @@ LRT_dif <- nobm$LRT_CM - nobm$LRT_A
 #length(LRT_dif)
 
 # Como se ve graficamente, parece que no hay normalidad
-hist(LRT_dif)
+par(mfrow=c(1,2))
+hist(LRT_dif, freq = FALSE, main = 'Histograma de las la diferencia de mediciones LRT', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
+lines(density(LRT_dif), col = "red")
+abline(v = median(LRT_dif, na.rm = TRUE), col = "red", lty = 2)
 boxplot(LRT_dif) # No hay outliers
 # Pruebas de normalidad
 ## Test Shapiro-Wilk
@@ -833,21 +886,34 @@ El resultado de la prueba del signo mostró un p-valor menor a 0.5, lo que indic
 
 ### Longitud rodilla-maléolo
 
+
 Inicialmente se hace una comparación gráfica de ambas técnicas a través de un box-plot:
 
 ```{r}
 # Comparar LRM 90 y R
-boxplot(data.frame(datos$LRM_90, datos$LRM_R))
+boxplot(data.frame(datos$LRM_90, datos$LRM_R), ylab = 'Longitud Rodilla-Maleolo (cm)', xaxt = "n")
+axis(1, at = c(1, 2),
+     labels = c("Pierna a 90°", "Pierna recta"))
 ```
 
-Según el boxplot, se puede observar que sí existe una leve diferencia entre las distribuciones de las mediciones de la longitud rodilla maléolo con la pierna a 90° y con la pierna completamente estirada. Sin embargo, es necesario, realizar una prueba estadística formal para concluir algo, por lo que se calculan las diferencias entre ambos métodos y se les aplica un test de normalidad para elegir qué prueba utilizar para evaluar la hipótesis nula de que la medición longitud rodilla-maléolo con la pierna completamente estirada es igual a la medición de la longitud rodilla-maléolo con la pierna a $90°$.
+Según el boxplot, se puede observar que podría existir una leve diferencia entre las distribuciones de las mediciones de la longitud rodilla maléolo con la pierna a 90° y con la pierna completamente estirada. Sin embargo, es necesario realizar una prueba estadística formal. Inicalmente se calculan las diferencias entre ambos métodos y se les aplica un test de normalidad para elegir qué prueba utilizar para evaluar la hipótesis nula de que la medición longitud rodilla-maléolo con la pierna completamente estirada es igual a la medición de la longitud rodilla-maléolo con la pierna a $90°$.
+
+$$ \begin{cases}
+H_0: \, \, \, \theta_Y - \theta_X = 0 \\
+H_1: \, \, \,  \theta_Y - \theta_X \neq 0
+\end{cases}$$
+
+donde $\theta_X$ es una medida de tendencia central de las mediciones realizadas con la pierna recta y $\theta_Y$ es la misma medida de tendencia central para las mediciones con la pierna a 90°. 
 
 ```{r}
 # Diferencias CM y A
 LRM_dif <- datos$LRM_90 - datos$LRM_R
 
 # Como se ve graficamente, parece que no hay normalidad
-hist(LRM_dif)
+par(mfrow=c(1,2))
+hist(LRM_dif, freq = FALSE, main = 'Histograma de las la diferencia de mediciones LRT', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
+lines(density(LRM_dif), col = "red")
+abline(v = median(LRM_dif, na.rm = TRUE), col = "red", lty = 2)
 boxplot(LRM_dif) # hay muchos outliers
 
 # Pruebas de normalidad
@@ -873,8 +939,8 @@ t_test <- asimetria / sqrt(6 / length(LRM_dif))  # Estadístico t
 p_value <- 2 * (1 - pt(abs(t_test), df = length(LRM_dif) - 1))
 p_value # parece que no hay simetria, entonces no se puede aplicar Wilcoxon 
 
-# wilcox.test(LRT_dif, mu = 0, alternative = "two.sided") # usando las diferencias
-# wilcox.test(datos$LRT_CM, datos$LRT_A, mu = 0, alternative = "two.sided", paired = TRUE) # usando directamente los datos
+# wilcox.test(LRM_dif, mu = 0, alternative = "two.sided") # usando las diferencias
+# wilcox.test(datos$LRM_90, datos$LRM_R, mu = 0, alternative = "two.sided", paired = TRUE) # usando directamente los datos
 ```
 
 ```{r}
