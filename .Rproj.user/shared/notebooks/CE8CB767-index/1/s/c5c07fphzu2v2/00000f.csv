@@ -1,3 +1,0 @@
-"0","#| layout-ncol: 2"
-"0","corte <- 4/(n-length(reg$coefficients)-2) #Es una regla usada en la práctica"
-"0","plot(reg, which=4, cook.levels=corte)"

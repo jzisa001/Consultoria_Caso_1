@@ -526,7 +526,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
 
 
 
-Donde $\theta_Y$ representa una medida de tendencia central de  las mediciones realizadas con antropómetro y $\theta_X$ representa dicha medida evaluada a las mediciones realizadas con cinta métrica. 
+Donde $\theta_Y$ representa una medida de tendencia central de  las mediciones realizadas con cinta métrica y $\theta_X$ representa dicha medida evaluada a las mediciones realizadas con antropómetro. 
 
 Inicialmente se hace una comparación gráfica de ambas técnicas a través de un box-plot:
 
@@ -548,8 +548,17 @@ par(mfrow=c(1,2))
 hist(LRT_dif, freq = FALSE, main = 'Histograma de las la diferencia de mediciones LRT', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
 lines(density(LRT_dif), col = "red")
 abline(v = median(LRT_dif, na.rm = TRUE), col = "red", lty = 2)
-boxplot(LRT_dif) # hay muchos outliers
+boxplot_dif <- boxplot(LRT_dif) # hay muchos outliers
 
+```
+
+Tenemos estos datos atípicos.
+
+```{r}
+(atipicos <- datos[which(LRT_dif %in% boxplot_dif$out),])
+```
+
+```{r}
 par(mfrow=c(1,2))
 qqnorm(LRT_dif, main = "Q-Q Plot de las diferencias")
 qqline(LRT_dif, col = "red")
@@ -564,6 +573,7 @@ shapiro.test(LRT_dif) # No se tiene normalidad en la edad según el test de Shap
 ## Test lilliefors
 lillie.test(LRT_dif) # No se tiene normalidad en la edad según el test de Lilliefors
 ```
+
 Los resultados de dos pruebas estadísticas, Shapiro-Wilk y Lilliefors, mostraron un valor menor a 0.05. Esto significa que, con un nivel de confianza del 95%, no podemos decir que las diferencias entre las mediciones de rodilla-talón tomadas con una cinta métrica y con un antropómetro sigan una distribución normal. Por lo tanto, para analizar las diferencias en los promedios, es necesario usar un tipo de prueba que no dependa de suposiciones sobre la distribución de los datos.
 
 ```{r}
@@ -915,7 +925,15 @@ hist(LRM_dif, freq = FALSE, main = 'Histograma de las la diferencia de medicione
 lines(density(LRM_dif), col = "red")
 abline(v = median(LRM_dif, na.rm = TRUE), col = "red", lty = 2)
 boxplot(LRM_dif) # hay muchos outliers
+```
 
+Tenemos estos datos atípicos.
+
+```{r}
+(atipicos <- datos[which(LRT_dif %in% boxplot_dif$out),])
+```
+
+```{r}
 # Pruebas de normalidad
 ## Test Shapiro-Wilk
 shapiro.test(LRM_dif) # No se tiene normalidad en la edad según el test de Shapiro-Wilks
@@ -1748,18 +1766,13 @@ Los coeficientes del mejor modelo usando el criterio de BIC son:
 coef(regfit.full, 3)
 ```
 
-Esto sugiere usar el modelo $Talla = 57.24 + 2.16 LRT\_A - 0.13 Edad + 4.25 Sexo$,\
+Esto sugiere usar el modelo $Talla = 57.25 + 2.16 LRT\_CM - 0.13 Edad + 4.25 Sexo$,\
 $$Sexo = \begin{cases} 1 & \text{si sexo = hombre} \\ 0 & \text{si sexo = mujer} \end{cases}$$
 
-Ahora se hará la búsqueda del mejor modelo usando ***K - fold cross validation*** con el fin de calcular directamente los errores de predicción sobre los datos de testeo y evitar así el sobreajuste.
-
--   Se crean ***K - folds*** (pliegues) de aproximadamente igual tamaño. En este caso fijamos $k = 10$. Como tenemos $558$ datos, cada pliegue será de tamaño 55 o 56.
--   El $k-ésimo$ pliegue servirá para testear, y los demás pliegues se juntan para entrenar los modelos. Osea que se usará un $90\%$ de los datos para entrenamiento y $10\%$ para test.
--   Para $k = 1,\cdots,10,$ se calcula el MSE.
--   Luego, se promedia el MSE a través de los $10$ pliegues y se obtiene el MSE promedio.
+AAhora usamos nuevamente ***K - fold cross validation*** con el fin de calcular directamente los errores de predicción sobre los datos de testeo y evitar así el sobreajuste de la misma manera que se realizó para el modelo normal de $LRT_A$. 
 
 ```{r}
-# Crear 5 folds
+# Crear 10 folds
 set.seed(123)  # Semilla para reproducibilidad
 folds <- vfold_cv(datos, v = 10)
 
@@ -1799,15 +1812,17 @@ reg <- lm(Talla ~ LRT_CM + Edad + Sexo, data = datos)
 (summary.reg <- summary(reg))
 ```
 
-El modelo tiene un $R^2$ ajustado de $0.8686$, es decir que aproximadamente un $86.86\%$ de la variabilidad de la talla es explicada por LRT_CM, la edad y el sexo. 
+El modelo tiene un $R^2$ ajustado de $0.8686$, es decir que aproximadamente un $86.86\%$ de la variabilidad de la talla es explicada por el modelo. 
 
-***Linealidad:*** Con el fin de verificar que la relación entre la talla y las variables LRT_CM (discriminando por sexo) y la edad es lineal, se visualiza el gráfico de los residuos vs los valores predichos del modelo $\left(\hat{e},\hat{y} \right)$:
+***Linealidad:*** Con el fin de verificar que la relación entre la talla y las variables LRT_CM, Sexo y Edad es lineal, se visualiza el gráfico de los residuos vs los valores predichos del modelo $\left(\hat{y}, \hat{e} \right)$:
 
 ```{r}
+print("La media de los residuales es cercana a 0: ")
+mean(reg$residuals)
 plot(reg, which = 1)
 ```
 
-El gráfico no muestra ningún patrón marcado, la ubicación de los puntos parece ser aleatoria alrededor de cero, indicando también homoscedasticidad en los residuales y posible independencia de los mismos. El gráfico muestra algunos valores atípicos que valdría la pena explorar.
+El gráfico no muestra ningún patrón marcado, la ubicación de los puntos parece ser aleatoria alrededor de cero, indicando también homoscedasticidad en los residuales y posible independencia de los mismos. El gráfico muestra 3 valores atípicos que valdría la pena explorar.
 
 ***Independencia de los errores:*** Aunque nuestros datos no son temporales, el test de Durbin-Watson nos puede ayudar a evaluar la autocorrelación de los errores del modelo:
 
