@@ -555,7 +555,11 @@ boxplot_dif <- boxplot(LRT_dif) # hay muchos outliers
 Tenemos estos datos atípicos.
 
 ```{r}
-(atipicos <- datos[which(LRT_dif %in% boxplot_dif$out),])
+atipicos <- datos[which(LRT_dif %in% boxplot_dif$out),]
+
+atipicos <- atipicos |> as.data.frame()
+atipicos |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
+
 ```
 
 ```{r}
@@ -930,7 +934,10 @@ boxplot(LRM_dif) # hay muchos outliers
 Tenemos estos datos atípicos.
 
 ```{r}
-(atipicos <- datos[which(LRT_dif %in% boxplot_dif$out),])
+atipicos <- datos[which(LRT_dif %in% boxplot_dif$out),]
+
+atipicos <- atipicos |> as.data.frame()
+atipicos |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
 ```
 
 ```{r}
