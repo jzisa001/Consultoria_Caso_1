@@ -2287,7 +2287,7 @@ Todos los modelos usaron las variables Edad, Sexo y el intercepto variando entre
 
 La tabla de los errores cuadráticos medios  para la regresión lineal simple es la siguiente: 
 
-````{r}
+```{r}
 MSEs <- MSEs |> as.data.frame()
 MSEs |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
 ```
