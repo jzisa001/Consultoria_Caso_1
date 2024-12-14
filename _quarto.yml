@@ -1,3 +1,4 @@
+---
 project:
   type: website
   output-dir: docs
@@ -22,5 +23,4 @@ format:
     code-copy: true
 
 language: _language.yml
-
-
+---
