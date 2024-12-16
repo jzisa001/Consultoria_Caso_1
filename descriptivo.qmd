@@ -86,7 +86,7 @@ ggplot(datos_resumen, aes(x = "", y = porcentaje, fill = Sexo)) +
             position = position_stack(vjust = 0.5), color = "white")
 ```
 
-La muestra cuenta con 272 personas de sexo femenino y 271 masculino
+La muestra cuenta con 272 personas de sexo femenino y 271 de sexo masculino.
 
 #### Edad
 

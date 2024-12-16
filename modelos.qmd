@@ -27,7 +27,6 @@ library(lawstat)
 ```
 
 ```{r}
-# Lectura base de datos
 datos <- read_excel("Datos/Corregida - COMPILADO DATOS COMUNIDAD DE CUIDADO Y CENTRO DÍA.xlsx", 
                       range = "B2:AN561", col_types = c("date", 
                       "skip", "text", "text", "text", "skip", 
@@ -44,6 +43,7 @@ colnames(datos) <- c("Fecha", "Localidad", "Programa", "Unidad_atencion",
 datos$Sexo <- as.factor(datos$Sexo)
 datos$Etnia <- as.factor(datos$Etnia)
 datos <- datos[-which(datos$Edad<60),] # >60
+datos <- datos |> filter(!(abs(LRT_A-LRT_CM) > 3 | abs(LRM_90-LRM_R) > 3))
 datos <- datos |> as.data.frame()
 ```
 
