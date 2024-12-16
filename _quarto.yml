@@ -4,6 +4,7 @@ project:
 
 website:
   navbar:
+  # sidebar: true
     right: 
       - text: Inicio
         file: index.qmd
@@ -18,7 +19,10 @@ format:
   html:
     theme: cosmo
     css: styles.css
-    toc: false
+    toc: true
     code-copy: true
+    search: true
+    section-divs: true
+    page-layout: article
 
 language: _language.yml

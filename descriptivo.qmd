@@ -1,11 +1,6 @@
 ---
-page-layout: article
-section-divs: true
-sidebar: true
-search: true
 echo: false
 warning: false
-toc: true
 ---
 
 # Análisis descriptivo
@@ -30,6 +25,7 @@ library(glmnet)
 library(glmtoolbox)
 library(MASS)
 library(rsample)
+library(lawstat)
 ```
 
 ## Lectura de datos
@@ -58,8 +54,9 @@ datos <- datos |> as.data.frame()
 head(datos) |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
 ```
 
+## Análisis descriptivo
 
-## Distribución, atípicos y test de normalidad
+### Distribución, atípicos y test de normalidad
 
 #### Sexo
 
@@ -484,7 +481,7 @@ lillie.test(datos$LRM_R) # No se tiene normalidad en la edad según el test de L
 
 Con el test Shapiro-Wilk parece haber normalidad pues tenemos un p-valor de 0.09192, mientras que el test Lilliefors muestra un p-valor de 0.004743, por lo que no habría normalidad.
 
-## Análisis de correlación
+### Análisis de correlación
 
 ```{r}
 ggpairs(
@@ -499,3 +496,28 @@ Existe una fuerte correlación lineal positiva entre la variable talla y cada un
 En principio, dado que la relación entre cada una de las medidas de la longitud rodilla-talón y rodilla-maléolo presentan una relación lineal fuerte con la talla, se podría pensar que la que tenga una mayor correlación con la talla, es la que daría mejores estimaciones de la talla real. En este caso, la longitud rodilla-talón con antropómetro, es la que presenta una mayor correlación con la talla, por lo que posiblemente sea más preciso usar esta medida para estimar la talla real de los adultos mayores. Como sabemos, el antropómetro es una herramienta que no siempre es de fácil acceso y justamente queremos evaluar si existen diferencias significativas entre usar esta medición y las demás mediciones que sí son de fácil acceso y aplicación.
 
 En ese orden de ideas, después de la longitud de rodilla talón con antropómetro, la longitud rodilla-talón con cinta métrica es la variable que tiene más correlación con la talla, luego sigue la longitud rodilla-maléolo con la pierna totalmente estirada y por último la longitud rodilla-maléolo con la pierna a 90 grados.
+
+### Variables cualitativas
+
+Se explora la relación entre la Talla y las variables cualitativas: Edad y Etnia. 
+
+```{r}
+#| layout-ncol: 2 
+ggplot(datos, aes(x = Sexo, y = Talla)) +
+    geom_boxplot() +
+    labs(title = "Distribución de la Talla por Sexo",
+         x = "Sexo",
+         y = "Talla") +
+    theme_minimal()
+
+ggplot(datos, aes(x = Etnia, y = Talla)) +
+    geom_boxplot() +
+    labs(title = "Distribución de la Talla por Etnia",
+         x = "Etnia",
+         y = "Talla") +
+    theme_minimal()
+```
+
+Se observa que la diferencia de la Talla entre hombres y mujeres es  muy marcada. Esto sugiere que puede ser importante tener en cuenta el Sexo al momento del ajuste de los modelos para predecir la Talla.
+
+En cuanto a la distribución de la Talla diferenciando por Etnia, se observan algunas diferencias pero no son muy concluyentes debido que hay muy pocos datos en las etnias Afrocolombiano, Indígena y Rrom.
