@@ -1,6 +1,11 @@
 project:
   type: website
   output-dir: docs
+  render:
+    - "*.qmd"
+    # - "!descriptivo.qmd"
+    # - "!hipotesis.qmd"
+    # - "!modelos.qmd"
 
 website:
   navbar:
@@ -20,9 +25,10 @@ format:
     theme: cosmo
     css: styles.css
     toc: true
+    toc-depth: 4
     code-copy: true
     search: true
     section-divs: true
-    page-layout: article
+    page-layout: full
 
 language: _language.yml
