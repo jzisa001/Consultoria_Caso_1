@@ -1,14 +1,7 @@
 ---
-page-layout: article
-section-divs: true
-sidebar: true
-search: true
 echo: false
 warning: false
-toc: true
 ---
-
-# Modelos
 
 ```{r}
 # Librerias 
@@ -30,12 +23,9 @@ library(glmnet)
 library(glmtoolbox)
 library(MASS)
 library(rsample)
+library(lawstat)
 ```
 
-## Lectura de datos
- 
-Se muestra a continuación la forma que tienen los datos.  
- 
 ```{r}
 # Lectura base de datos
 datos <- read_excel("Datos/Corregida - COMPILADO DATOS COMUNIDAD DE CUIDADO Y CENTRO DÍA.xlsx", 
@@ -55,8 +45,9 @@ datos$Sexo <- as.factor(datos$Sexo)
 datos$Etnia <- as.factor(datos$Etnia)
 datos <- datos[-which(datos$Edad<60),] # >60
 datos <- datos |> as.data.frame()
-head(datos) |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
 ```
+
+# Modelos
 
 A continuación el resumen de la evaluación de las hipótesis de interés:
 
@@ -480,198 +471,6 @@ summary(reg2)
 
 Las estimaciones de los coeficientes del modelo sin las obervaciones influyentes han cambiado un poco respecto al modelo original. El $R^2$ ajustado ha incrementado un poco también.
 
-#### Solo para etnia Blanco-Mestizo
-
-A continuación se hace una búsqueda del mejor modelo por cada número de posibles combinaciones de variables de las cuales se tenga evidencia que influyen en la talla de adultos mayores. Primero se hará la búsqueda usando todo el conjunto de datos.
-
-```{r}
-blmt <- datos[datos$Etnia=="Blanco-Mestizo",]
-
-regfit.full <- regsubsets(Talla ~ LRT_A + Edad + Sexo,
-                          blmt, nbest = 1, nvmax = 10) # Mejor modelo de cada número de variables 
-
-(reg.summary <- summary(regfit.full))
-# names(reg.summary)
-```
-
-$R^2$, $R^2$ ajustado, SCE, y BIC para cada mejor modelo del correspondiente tamaño:
-
-```{r}
-reg.summary$rsq
-reg.summary$adjr2
-reg.summary$rss
-reg.summary$bic
-```
-
-Usando el criterio BIC, el mejor modelo es el de 3 variables:
-
-```{r}
-which.min(reg.summary$bic)
-plot(reg.summary$bic , xlab = "Number of Variables",
-ylab = "BIC", type = "l")
-points(3, reg.summary$bic[3], col = "red", cex = 2,
-pch = 20)
-plot(regfit.full , scale = "bic")
-```
-
-Los coeficientes del mejor modelo usando el criterio de BIC son:
-
-```{r}
-coef(regfit.full, 3)
-```
-
-Esto sugiere usar el modelo (que es exactamente igual al obtenido teniendo en cuenta todas las etnias) $Talla = 58.67 + 2.19 LRT\_A - 0.12 Edad + 3.06 Sexo$,\
-$$Sexo = \begin{cases} 1 & \text{si sexo = hombre} \\ 0 & \text{si sexo = mujer} \end{cases}$$
-
-Ahora se hará la búsqueda del mejor modelo usando ***K - fold cross validation*** con el fin de calcular directamente los errores de predicción sobre los datos de testeo y evitar así el sobreajuste.
-
--   Se crean ***K - folds*** (pliegues) de aproximadamente igual tamaño. En este caso fijamos $k = 10$. Como tenemos $558$ datos, cada pliegue será de tamaño 55 o 56.
--   El $k-ésimo$ pliegue servirá para testear, y los demás pliegues se juntan para entrenar los modelos. Osea que se usará un $90\%$ de los datos para entrenamiento y $10\%$ para test.
--   Para $k = 1,\cdots,10,$ se calcula el MSE.
--   Luego, se promedia el MSE a través de los $10$ pliegues y se obtiene el MSE promedio.
-
-```{r}
-# Crear 5 folds
-set.seed(123)  # Semilla para reproducibilidad
-folds <- vfold_cv(blmt, v = 10)
-
-# Inicializar lista para almacenar errores
-errores <- numeric(length(folds$splits))
-
-# Loop para entrenar y validar el modelo en cada fold
-for (i in seq_along(folds$splits)) {
-  # Dividir datos
-  train_data <- analysis(folds$splits[[i]])  # Datos de entrenamiento
-  test_data <- assessment(folds$splits[[i]]) # Datos de validación
-
-  # Ajustar el modelo
-  modelo <- lm(Talla ~ LRT_A + Edad + Sexo, data = train_data)
-
-  # Predicciones
-  predicciones <- predict(modelo, newdata = test_data)
-
-  # Calcular error cuadrático medio
-  errores[i] <- mean((test_data$Talla - predicciones)^2)
-}
-```
-
-El MSE para el modelo de 3 variables ($LRT\_A, Edad, Sexo$) es:
-
-```{r}
-# Para ir almacenando los MSE de los modelos y las longitudes
-MSEs_blmt <- data.frame(Modelo = character(),
-                   Medida = character(),
-                   MSE = numeric())
-
-# Promedio del error cuadrático medio
-mean(errores)
-
-MSEs_blmt <- rbind(MSEs_blmt, data.frame(Modelo = "Normal", Medida = "LRT_A", MSE = mean(errores)))
-```
-
-Ahora se validarán los supuestos para el mejor modelo obtenido:
-
-```{r}
-reg <- lm(Talla ~ LRT_A + Edad + Sexo, data = blmt)
-(summary.reg <- summary(reg))
-```
-
-El modelo tiene un $R^2$ ajustado de $0.8861$, es decir que aproximadamente un $88.61\%$ de la variabilidad de la talla es explicada por LRT_A, la edad y el sexo. 
-
-***Linealidad:*** Con el fin de verificar que la relación entre la talla y las variables LRT_A (discriminando por sexo) y la edad es lineal, se visualiza el gráfico de los residuos vs los valores predichos del modelo $\left(\hat{e},\hat{y} \right)$:
-
-```{r}
-plot(reg, which = 1)
-```
-
-El gráfico no muestra ningún patrón marcado, la ubicación de los puntos parece ser aleatoria alrededor de cero, indicando también homoscedasticidad en los residuales y posible independencia de los mismos. El gráfico muestra algunos valores atípicos que valdría la pena explorar.
-
-***Independencia de los errores:*** Aunque nuestros datos no son temporales, el test de Durbin-Watson nos puede ayudar a evaluar la autocorrelación de los errores del modelo:
-
-```{r}
-dwtest(reg)
-```
-
-La estadística del test de Durbin-Watson es muy cercano a $2$, se concluye que los errores son independientes.
-
-***Normalidad de los errores:*** Se realiza el gráfico QQ-plot para comparar la distribución de los residuales del modelo con la distribución teórica de una normal. También se hace el test de normalidad de Lilliefors y Anderson-Darling:
-
-```{r}
-plot(reg, which = 2)
-lillie.test(reg$residuals)
-ad.test(reg$residuals)
-```
-
-El QQ-plot muestra que los residuales se ajustan aceptablemente a una distribución normal. Las pruebas de normalidad de Lilliefors y Anderson-Darling también apoyan este resultado.
-
-***Homoscedasticidad:*** Aunque no se vio un patron que indicara heteroscedasticidad en el gráfico de los residuales vs los valores predichos, a continuación se muestra el gráfico de los residuales estandarizados vs los valores predichos con el fin de mejorar la interpretabilidad de la homoscedasticidad y tener una visión más clara de las observaciones atípicas e influyentes:
-
-```{r}
-plot(reg, which = 3)
-```
-
-No se observan patrones que indiquen hereroscedasticidad en los residuos (forma de cono o embudo). Se siguien observando algunas observaciones atípicas y/o influyentes.
-
-Adicional, se realiza la prueba de Breusch-Pagan para verificar la homoscedasticidad de los residuales:
-
-```{r}
-bptest(reg)
-```
-
-No se rechaza la hipótesis nula de que los errores del modelo son homoscedasticos.
-
-***Multicolinealidad:*** Se verifica que las variables incluídas en el modelo no están altamente correlacionadas entre sí, y así evitar obtener resultados inestables que dificulten la interpretabilidad de los coeficientes del modelo. Se calculan los Factores de Inflación de la Varianza (VIFs):
-
-```{r}
-vif(reg)
-```
-
-Dado que los VIFs son mucho menores a 5, esto indica que cada variable tiene una correlación moderada (leve) con las demás. Por lo que se puede concluir que los resultados del modelo posiblemente no estarán muy afectados por la multicolinealidad.
-
-***El modelo está bien especificado:*** Se hace el test de RESET para examinar si el modelo ajustado está bien especificado o si se han omitido términos no lineales o interacciones importantes:
-
-```{r}
-resettest(reg, type="regressor")
-resettest(reg, type="fitted")
-```
-
-No se rechaza la hipótesis nula de que el modelo está bien especificado.
-
-***Observaciones atípicas y de alto apalancamiento:*** 
-
-```{r}
-#| layout-ncol: 2
-plot(reg,which=5)
-stud_res<-studres(reg)
-# head(sort(abs(stud_res),decreasing=TRUE))
-boxplot(stud_res)
-```
-
-Usando los residuales estudentizados, se observan $5$ datos atípicos.
-
-```{r}
-#| layout-ncol: 2
-n <- nrow(datos)
-corte <- 4/(n-length(reg$coefficients)-2) #Es una regla usada en la práctica
-plot(reg, which=4, cook.levels=corte)
-abline(h=corte, lty=2, col="red")
-cooksd<-cooks.distance(reg)
-# cooksd[which(cooksd>corte)]
-
-influencePlot(reg, id.method="identify", main="Gráfico de influencia", sub="El tamaño del círculo es proporcional a la D_Cook")
-```
-
-En total 29 observaciones superan el umbral especificado para la distancia de Cook, pero esto no significa que todas sean influyentes (alto leverage). Particularmente hay 3 observaciones que son marcadas como influyentes significativamente según la distancia de Cook. Esto indica que la inclusión de estas observaciones en el modelo pueden tener una influencia significativa en los coeficientes del modelo y en la predicción de la talla. Se debe explorar con cautela estas observaciones y decidir qué hacer con ellas.
-
-Para esto, se puede comprobar el cambio en los coeficientes del modelo al excluir estas observaciones influyentes.
-
-```{r}
-reg2 <- update(reg,subset={setdiff(row(datos)[,1], c(533,43,549))})
-summary(reg2)
-```
-
-Las estimaciones de los coeficientes del modelo sin las obervaciones influyentes han cambiado un poco respecto al modelo original. El $R^2$ ajustado ha incrementado un poco también.
-
 ### LRT cinta métrica
 
 A continuación se hace una búsqueda del mejor modelo por cada número de posibles combinaciones de variables de las cuales se tenga evidencia que influyen en la talla de adultos mayores, como medida, se usa la medición de la longitud rodilla-talón con cinta métrica. Primero se hará la búsqueda usando todo el conjunto de datos.
@@ -710,18 +509,13 @@ Los coeficientes del mejor modelo usando el criterio de BIC son:
 coef(regfit.full, 3)
 ```
 
-Esto sugiere usar el modelo $Talla = 57.24 + 2.16 LRT\_A - 0.13 Edad + 4.25 Sexo$,\
+Esto sugiere usar el modelo $Talla = 57.25 + 2.16 LRT\_CM - 0.13 Edad + 4.25 Sexo$,\
 $$Sexo = \begin{cases} 1 & \text{si sexo = hombre} \\ 0 & \text{si sexo = mujer} \end{cases}$$
 
-Ahora se hará la búsqueda del mejor modelo usando ***K - fold cross validation*** con el fin de calcular directamente los errores de predicción sobre los datos de testeo y evitar así el sobreajuste.
-
--   Se crean ***K - folds*** (pliegues) de aproximadamente igual tamaño. En este caso fijamos $k = 10$. Como tenemos $558$ datos, cada pliegue será de tamaño 55 o 56.
--   El $k-ésimo$ pliegue servirá para testear, y los demás pliegues se juntan para entrenar los modelos. Osea que se usará un $90\%$ de los datos para entrenamiento y $10\%$ para test.
--   Para $k = 1,\cdots,10,$ se calcula el MSE.
--   Luego, se promedia el MSE a través de los $10$ pliegues y se obtiene el MSE promedio.
+AAhora usamos nuevamente ***K - fold cross validation*** con el fin de calcular directamente los errores de predicción sobre los datos de testeo y evitar así el sobreajuste de la misma manera que se realizó para el modelo normal de $LRT_A$. 
 
 ```{r}
-# Crear 5 folds
+# Crear 10 folds
 set.seed(123)  # Semilla para reproducibilidad
 folds <- vfold_cv(datos, v = 10)
 
@@ -761,19 +555,22 @@ reg <- lm(Talla ~ LRT_CM + Edad + Sexo, data = datos)
 (summary.reg <- summary(reg))
 ```
 
-El modelo tiene un $R^2$ ajustado de $0.8686$, es decir que aproximadamente un $86.86\%$ de la variabilidad de la talla es explicada por LRT_CM, la edad y el sexo. 
+El modelo tiene un $R^2$ ajustado de $0.8686$, es decir que aproximadamente un $86.86\%$ de la variabilidad de la talla es explicada por el modelo. 
 
-***Linealidad:*** Con el fin de verificar que la relación entre la talla y las variables LRT_CM (discriminando por sexo) y la edad es lineal, se visualiza el gráfico de los residuos vs los valores predichos del modelo $\left(\hat{e},\hat{y} \right)$:
+***Linealidad:*** Con el fin de verificar que la relación entre la talla y las variables LRT_CM, Sexo y Edad es lineal, se visualiza el gráfico de los residuos vs los valores predichos del modelo $\left(\hat{y}, \hat{e} \right)$:
 
 ```{r}
+print("La media de los residuales es cercana a 0: ")
+mean(reg$residuals)
 plot(reg, which = 1)
 ```
 
-El gráfico no muestra ningún patrón marcado, la ubicación de los puntos parece ser aleatoria alrededor de cero, indicando también homoscedasticidad en los residuales y posible independencia de los mismos. El gráfico muestra algunos valores atípicos que valdría la pena explorar.
+El gráfico no muestra ningún patrón marcado, la ubicación de los puntos parece ser aleatoria alrededor de cero, indicando también homoscedasticidad en los residuales y posible independencia de los mismos. El gráfico muestra 3 valores atípicos que valdría la pena explorar.
 
 ***Independencia de los errores:*** Aunque nuestros datos no son temporales, el test de Durbin-Watson nos puede ayudar a evaluar la autocorrelación de los errores del modelo:
 
 ```{r}
+
 dwtest(reg)
 ```
 
@@ -846,7 +643,7 @@ cooksd<-cooks.distance(reg)
 influencePlot(reg, id.method="identify", main="Gráfico de influencia", sub="El tamaño del círculo es proporcional a la D_Cook")
 ```
 
-En total 29 observaciones superan el umbral especificado para la distancia de Cook, pero esto no significa que todas sean influyentes (alto leverage). Particularmente hay 3 observaciones que son marcadas como influyentes significativamente según la distancia de Cook. Esto indica que la inclusión de estas observaciones en el modelo pueden tener una influencia significativa en los coeficientes del modelo y en la predicción de la talla. Se debe explorar con cautela estas observaciones y decidir qué hacer con ellas.
+En total 29 observaciones superan el umbral especificado para la distancia de Cook, pero esto no significa que todas sean influyentes (alto apalancamiento). Particularmente hay $3$ observaciones que son marcadas como influyentes significativamente según la distancia de Cook (43, 504 y 533) . Esto indica que la inclusión de estas observaciones en el modelo pueden tener una influencia significativa en los coeficientes del modelo y en la predicción de la talla. Se debe explorar con cautela estas observaciones y decidir qué hacer con ellas.
 
 Para esto, se puede comprobar el cambio en los coeficientes del modelo al excluir estas observaciones influyentes.
 
@@ -895,18 +692,11 @@ Los coeficientes del mejor modelo usando el criterio de BIC son:
 coef(regfit.full, 3)
 ```
 
-Esto sugiere usar el modelo $Talla = 68.82 + 2.21 LRM_R - 0.12 Edad + 3.86 Sexo$,\
-$$Sexo = \begin{cases} 1 & \text{si sexo = hombre} \\ 0 & \text{si sexo = mujer} \end{cases}$$
 
-Ahora se hará la búsqueda del mejor modelo usando ***K - fold cross validation*** con el fin de calcular directamente los errores de predicción sobre los datos de testeo y evitar así el sobreajuste.
-
--   Se crean ***K - folds*** (pliegues) de aproximadamente igual tamaño. En este caso fijamos $k = 10$. Como tenemos $558$ datos, cada pliegue será de tamaño 55 o 56.
--   El $k-ésimo$ pliegue servirá para testear, y los demás pliegues se juntan para entrenar los modelos. Osea que se usará un $90\%$ de los datos para entrenamiento y $10\%$ para test.
--   Para $k = 1,\cdots,10,$ se calcula el MSE.
--   Luego, se promedia el MSE a través de los $10$ pliegues y se obtiene el MSE promedio.
+Nuevamente se hará la búsqueda del mejor modelo usando ***K - fold cross validation*** con el fin de calcular directamente los errores de predicción sobre los datos de testeo y evitar así el sobreajuste.
 
 ```{r}
-# Crear 5 folds
+# Crear 10 folds
 set.seed(123)  # Semilla para reproducibilidad
 folds <- vfold_cv(datos, v = 10)
 
@@ -920,7 +710,7 @@ for (i in seq_along(folds$splits)) {
   test_data <- assessment(folds$splits[[i]]) # Datos de validación
 
   # Ajustar el modelo
-  modelo <- lm(Talla ~ LRT_A + Edad + Sexo, data = train_data)
+  modelo <- lm(Talla ~ LRM_R + Edad + Sexo, data = train_data)
 
   # Predicciones
   predicciones <- predict(modelo, newdata = test_data)
@@ -930,13 +720,14 @@ for (i in seq_along(folds$splits)) {
 }
 ```
 
+
 El MSE para el modelo de 3 variables ($LRT\_A, Edad, Sexo$) es:
 
 ```{r}
 # Promedio del error cuadrático medio
 mean(errores)
 
-# MSEs <- rbind(MSEs, data.frame(Modelo = "Normal", Medida = "LRM_R", MSE = mean(errores))) # No se incluye pq aparentemente hay una leve homocedasticidad en los errores
+ MSEs <- rbind(MSEs, data.frame(Modelo = "Normal", Medida = "LRM_R", MSE = mean(errores))) # No se incluye pq aparentemente hay una leve homocedasticidad en los errores
 ```
 
 Ahora se validarán los supuestos para el mejor modelo obtenido:
@@ -946,7 +737,11 @@ reg <- lm(Talla ~ LRM_R + Edad + Sexo, data = datos)
 (summary.reg <- summary(reg))
 ```
 
-El modelo tiene un $R^2$ ajustado de $0.8861$, es decir que aproximadamente un $88.61\%$ de la variabilidad de la talla es explicada por LRM_R, la edad y el sexo. 
+El modelo propuesto parala medida Longitud Rodilla-Maleólo $(LRM_R)$ con la pierna estirada es: 
+
+$$Talla = 68.83 + 2.21 \, LRM_R - 0.12 \, Edad+ 3.87 \, Sexo $$
+
+Según el $R^2$ ajustado aproximadamente un $85.81\%$ de la variabilidad de la talla es explicada por el modelo. 
 
 ***Linealidad:*** Con el fin de verificar que la relación entre la talla y las variables LRM_R (discriminando por sexo) y la edad es lineal, se visualiza el gráfico de los residuos vs los valores predichos del modelo $\left(\hat{e},\hat{y} \right)$:
 
@@ -959,7 +754,7 @@ El gráfico no muestra ningún patrón marcado, la ubicación de los puntos pare
 ***Independencia de los errores:*** Aunque nuestros datos no son temporales, el test de Durbin-Watson nos puede ayudar a evaluar la autocorrelación de los errores del modelo:
 
 ```{r}
-dwtest(reg)
+dwtest(reg, alternative = "two.sided")
 ```
 
 La estadística del test de Durbin-Watson es muy cercano a $2$, se concluye que los errores son independientes.
@@ -985,7 +780,7 @@ No se observan patrones que indiquen hereroscedasticidad en los residuos (forma 
 Adicional, se realiza la prueba de Breusch-Pagan para verificar la homoscedasticidad de los residuales:
 
 ```{r}
-bptest(reg)
+bptest(reg, studentize = FALSE)
 ```
 
 Se rechaza la hipótesis nula de que los errores del modelo son homoscedasticos.
@@ -996,7 +791,7 @@ Se rechaza la hipótesis nula de que los errores del modelo son homoscedasticos.
 vif(reg)
 ```
 
-Dado que los VIFs son mucho menores a 5, esto indica que cada variable tiene una correlación moderada (leve) con las demás. Por lo que se puede concluir que los resultados del modelo posiblemente no estarán muy afectados por la multicolinealidad.
+Dado que los VIFs son mucho menores a 5, cada variable tiene una correlación moderada (leve) con las demás. Los resultados del modelo no deberían verse afectados por la multicolinealidad.
 
 ***El modelo está bien especificado:*** Se hace el test de RESET para examinar si el modelo ajustado está bien especificado o si se han omitido términos no lineales o interacciones importantes:
 
@@ -1030,7 +825,7 @@ cooksd<-cooks.distance(reg)
 influencePlot(reg, id.method="identify", main="Gráfico de influencia", sub="El tamaño del círculo es proporcional a la D_Cook")
 ```
 
-En total 29 observaciones superan el umbral especificado para la distancia de Cook, pero esto no significa que todas sean influyentes (alto leverage). Particularmente hay 3 observaciones que son marcadas como influyentes significativamente según la distancia de Cook. Esto indica que la inclusión de estas observaciones en el modelo pueden tener una influencia significativa en los coeficientes del modelo y en la predicción de la talla. Se debe explorar con cautela estas observaciones y decidir qué hacer con ellas.
+En total 29 observaciones superan el umbral especificado para la distancia de Cook, pero esto no significa que todas sean influyentes (alto apalancamiento). Particularmente hay 3 observaciones que son marcadas como influyentes significativamente según la distancia de Cook (504, 533, 542). Esto indica que la inclusión de estas observaciones en el modelo pueden tener una influencia significativa en los coeficientes del modelo y en la predicción de la talla. Se debe explorar con cautela estas observaciones y decidir qué hacer con ellas.
 
 Para esto, se puede comprobar el cambio en los coeficientes del modelo al excluir estas observaciones influyentes.
 
@@ -1043,7 +838,7 @@ Las estimaciones de los coeficientes del modelo sin las obervaciones influyentes
 
 ### LRM pierna a 90°
 
-A continuación se hace una búsqueda del mejor modelo por cada número de posibles combinaciones de variables de las cuales se tenga evidencia que influyen en la talla de adultos mayores, únicamente se tiene en cuenta la longitud rodilla-malélo con la pierna a 90°. Primero se hará la búsqueda usando todo el conjunto de datos.
+Ahora, se hará una búsqueda del mejor modelo por cada número de posibles combinaciones de variables de las cuales se tenga evidencia que influyen en la talla de adultos mayores, únicamente se tiene en cuenta la longitud rodilla-malélo con la pierna a 90°. Primero se hará la búsqueda usando todo el conjunto de datos.
 
 ```{r}
 regfit.full <- regsubsets(Talla ~ LRM_90 + Edad + Sexo + Etnia,
@@ -1084,13 +879,9 @@ $$Sexo = \begin{cases} 1 & \text{si sexo = hombre} \\ 0 & \text{si sexo = mujer}
 
 Ahora se hará la búsqueda del mejor modelo usando ***K - fold cross validation*** con el fin de calcular directamente los errores de predicción sobre los datos de testeo y evitar así el sobreajuste.
 
--   Se crean ***K - folds*** (pliegues) de aproximadamente igual tamaño. En este caso fijamos $k = 10$. Como tenemos $558$ datos, cada pliegue será de tamaño 55 o 56.
--   El $k-ésimo$ pliegue servirá para testear, y los demás pliegues se juntan para entrenar los modelos. Osea que se usará un $90\%$ de los datos para entrenamiento y $10\%$ para test.
--   Para $k = 1,\cdots,10,$ se calcula el MSE.
--   Luego, se promedia el MSE a través de los $10$ pliegues y se obtiene el MSE promedio.
 
 ```{r}
-# Crear 5 folds
+# Crear 10 folds
 set.seed(123)  # Semilla para reproducibilidad
 folds <- vfold_cv(datos, v = 10)
 
@@ -1104,7 +895,7 @@ for (i in seq_along(folds$splits)) {
   test_data <- assessment(folds$splits[[i]]) # Datos de validación
 
   # Ajustar el modelo
-  modelo <- lm(Talla ~ LRT_A + Edad + Sexo, data = train_data)
+  modelo <- lm(Talla ~ LRM_90 + Edad + Sexo, data = train_data)
 
   # Predicciones
   predicciones <- predict(modelo, newdata = test_data)
@@ -1130,9 +921,9 @@ reg <- lm(Talla ~ LRM_90 + Edad + Sexo, data = datos)
 (summary.reg <- summary(reg))
 ```
 
-El modelo tiene un $R^2$ ajustado de $0.8861$, es decir que aproximadamente un $88.61\%$ de la variabilidad de la talla es explicada por LRT_A, la edad y el sexo. 
+El $R^2$ ajustado indica que aproximadamente un $83.89\%$ de la variabilidad de la talla es explicada por LRT_CM, la edad y el sexo. 
 
-***Linealidad:*** Con el fin de verificar que la relación entre la talla y las variables LRT_A (discriminando por sexo) y la edad es lineal, se visualiza el gráfico de los residuos vs los valores predichos del modelo $\left(\hat{e},\hat{y} \right)$:
+***Linealidad:*** Con el fin de verificar que la relación entre la talla y las variables LRT_CM (discriminando por sexo) y la edad es lineal, se visualiza el gráfico de los residuos vs los valores predichos del modelo $\left(\hat{e},\hat{y} \right)$:
 
 ```{r}
 plot(reg, which = 1)
@@ -1143,7 +934,7 @@ El gráfico no muestra ningún patrón marcado, la ubicación de los puntos pare
 ***Independencia de los errores:*** Aunque nuestros datos no son temporales, el test de Durbin-Watson nos puede ayudar a evaluar la autocorrelación de los errores del modelo:
 
 ```{r}
-dwtest(reg)
+dwtest(reg, alternative = "two.sided")
 ```
 
 La estadística del test de Durbin-Watson es muy cercano a $2$, se concluye que los errores son independientes.
@@ -1169,7 +960,7 @@ No se observan patrones que indiquen hereroscedasticidad en los residuos (forma 
 Adicional, se realiza la prueba de Breusch-Pagan para verificar la homoscedasticidad de los residuales:
 
 ```{r}
-bptest(reg)
+bptest(reg, studentize = TRUE)
 ```
 
 No se rechaza la hipótesis nula de que los errores del modelo son homoscedasticos.
@@ -1214,7 +1005,7 @@ cooksd<-cooks.distance(reg)
 influencePlot(reg, id.method="identify", main="Gráfico de influencia", sub="El tamaño del círculo es proporcional a la D_Cook")
 ```
 
-En total 29 observaciones superan el umbral especificado para la distancia de Cook, pero esto no significa que todas sean influyentes (alto leverage). Particularmente hay 3 observaciones que son marcadas como influyentes significativamente según la distancia de Cook. Esto indica que la inclusión de estas observaciones en el modelo pueden tener una influencia significativa en los coeficientes del modelo y en la predicción de la talla. Se debe explorar con cautela estas observaciones y decidir qué hacer con ellas.
+En total 29 observaciones superan el umbral especificado para la distancia de Cook, pero esto no significa que todas sean influyentes (alto leverage). Particularmente hay 3 observaciones que son marcadas como influyentes significativamente según la distancia de Cook (80, 147 y 533). Esto indica que la inclusión de estas observaciones en el modelo pueden tener una influencia significativa en los coeficientes del modelo y en la predicción de la talla. Se debe explorar con cautela estas observaciones y decidir qué hacer con ellas.
 
 Para esto, se puede comprobar el cambio en los coeficientes del modelo al excluir estas observaciones influyentes.
 
@@ -1224,6 +1015,33 @@ summary(reg2)
 ```
 
 Las estimaciones de los coeficientes del modelo sin las obervaciones influyentes han cambiado un poco respecto al modelo original. El $R^2$ ajustado ha incrementado un poco también.
+
+
+### Resúmen de los modelos normales. 
+
+Todos los modelos usaron las variables Edad, Sexo y el intercepto variando entre LRT_A, LRT_CM, LRM_90 y LRM_R. Todos obtuvieron un coeficientes diferentes. 
+
+La tabla de los errores cuadráticos medios  para la regresión lineal simple es la siguiente: 
+
+```{r}
+MSEs <- MSEs |> as.data.frame()
+MSEs |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
+```
+El modelo que mejor comportamiento tuvo fue: 
+$Talla = 58.67 + 2.19 LRT\_A - 0.12Edad + 3.06Sexo$
+
+Sin embargo, vemos que también se tuvieron buenos resultados con 
+
+$Talla = 57.25 + 2.16 LRT\_CM - 0.13 Edad + 4.25 \, Sexo$,\
+
+donde 
+
+$$Sexo = \begin{cases} 1 & \text{si sexo = hombre} \\ 0 & \text{si sexo = mujer} \end{cases}$$
+
+Se validó que estos dos modelos en particular cumplen con los supuestos.  \\ 
+
+Aúnque estos tienen cada uno 3 observaciones con alto apalancamiento, el cambio al reajustar sin estas no parece ser muy grande. 
+
 
 ## Modelo Lasso
 

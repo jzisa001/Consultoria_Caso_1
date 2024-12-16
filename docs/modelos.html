@@ -111,7 +111,6 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#modelos" id="toc-modelos" class="nav-link active" data-scroll-target="#modelos">Modelos</a>
   <ul class="collapse">
-  <li><a href="#lectura-de-datos" id="toc-lectura-de-datos" class="nav-link" data-scroll-target="#lectura-de-datos">Lectura de datos</a></li>
   <li><a href="#selección-del-mejor-modelo-usando-lrt_a" id="toc-selección-del-mejor-modelo-usando-lrt_a" class="nav-link" data-scroll-target="#selección-del-mejor-modelo-usando-lrt_a">Selección del mejor modelo usando LRT_A</a></li>
   <li><a href="#modelo-normal" id="toc-modelo-normal" class="nav-link" data-scroll-target="#modelo-normal">Modelo normal</a>
   <ul class="collapse">
@@ -119,6 +118,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#lrt-cinta-métrica" id="toc-lrt-cinta-métrica" class="nav-link" data-scroll-target="#lrt-cinta-métrica">LRT cinta métrica</a></li>
   <li><a href="#lrm-pierna-estirada" id="toc-lrm-pierna-estirada" class="nav-link" data-scroll-target="#lrm-pierna-estirada">LRM pierna estirada</a></li>
   <li><a href="#lrm-pierna-a-90" id="toc-lrm-pierna-a-90" class="nav-link" data-scroll-target="#lrm-pierna-a-90">LRM pierna a 90°</a></li>
+  <li><a href="#resúmen-de-los-modelos-normales." id="toc-resúmen-de-los-modelos-normales." class="nav-link" data-scroll-target="#resúmen-de-los-modelos-normales.">Resúmen de los modelos normales.</a></li>
   </ul></li>
   <li><a href="#modelo-lasso" id="toc-modelo-lasso" class="nav-link" data-scroll-target="#modelo-lasso">Modelo Lasso</a></li>
   <li><a href="#lasso-sin-tener-en-cuenta-lrt_a" id="toc-lasso-sin-tener-en-cuenta-lrt_a" class="nav-link" data-scroll-target="#lasso-sin-tener-en-cuenta-lrt_a">Lasso sin tener en cuenta LRT_A</a></li>
@@ -148,573 +148,6 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="modelos" class="level1">
 <h1>Modelos</h1>
-<section id="lectura-de-datos" class="level2">
-<h2 class="anchored" data-anchor-id="lectura-de-datos">Lectura de datos</h2>
-<p>Se muestra a continuación la forma que tienen los datos.</p>
-<div class="cell">
-<div class="cell-output-display">
-
-<div id="awyftyjvsc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#awyftyjvsc table {
-  font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#awyftyjvsc thead, #awyftyjvsc tbody, #awyftyjvsc tfoot, #awyftyjvsc tr, #awyftyjvsc td, #awyftyjvsc th {
-  border-style: none;
-}
-
-#awyftyjvsc p {
-  margin: 0;
-  padding: 0;
-}
-
-#awyftyjvsc .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 9px;
-  font-weight: 400;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: none;
-  border-top-width: 3px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#awyftyjvsc .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#awyftyjvsc .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#awyftyjvsc .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#awyftyjvsc .gt_heading {
-  background-color: #FFFFFF;
-  text-align: left;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#awyftyjvsc .gt_bottom_border {
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#awyftyjvsc .gt_col_headings {
-  border-top-style: none;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #000000;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#awyftyjvsc .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#awyftyjvsc .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#awyftyjvsc .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#awyftyjvsc .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#awyftyjvsc .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #000000;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#awyftyjvsc .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#awyftyjvsc .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: none;
-  border-top-width: 2px;
-  border-top-color: #000000;
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#awyftyjvsc .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: none;
-  border-top-width: 2px;
-  border-top-color: #000000;
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  border-bottom-color: #FFFFFF;
-  vertical-align: middle;
-}
-
-#awyftyjvsc .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#awyftyjvsc .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#awyftyjvsc .gt_row {
-  padding-top: 3px;
-  padding-bottom: 3px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#awyftyjvsc .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 0px;
-  border-right-color: #FFFFFF;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#awyftyjvsc .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#awyftyjvsc .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#awyftyjvsc .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#awyftyjvsc .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#awyftyjvsc .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#awyftyjvsc .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#awyftyjvsc .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#awyftyjvsc .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#awyftyjvsc .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#awyftyjvsc .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#awyftyjvsc .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#awyftyjvsc .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#awyftyjvsc .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#awyftyjvsc .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#awyftyjvsc .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#awyftyjvsc .gt_sourcenote {
-  font-size: 12px;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#awyftyjvsc .gt_left {
-  text-align: left;
-}
-
-#awyftyjvsc .gt_center {
-  text-align: center;
-}
-
-#awyftyjvsc .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#awyftyjvsc .gt_font_normal {
-  font-weight: normal;
-}
-
-#awyftyjvsc .gt_font_bold {
-  font-weight: bold;
-}
-
-#awyftyjvsc .gt_font_italic {
-  font-style: italic;
-}
-
-#awyftyjvsc .gt_super {
-  font-size: 65%;
-}
-
-#awyftyjvsc .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#awyftyjvsc .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#awyftyjvsc .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#awyftyjvsc .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#awyftyjvsc .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#awyftyjvsc .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#awyftyjvsc .gt_indent_5 {
-  text-indent: 25px;
-}
-
-#awyftyjvsc .katex-display {
-  display: inline-flex !important;
-  margin-bottom: 0.75em !important;
-}
-
-#awyftyjvsc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-  height: 0px !important;
-}
-
-tbody tr:last-child {
-  border-bottom: 2px solid #ffffff00;
-}
-</style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-  <thead>
-    <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Fecha">Fecha</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Localidad">Localidad</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Programa">Programa</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Unidad_atencion">Unidad_atencion</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Sexo">Sexo</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Edad">Edad</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Etnia">Etnia</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Peso">Peso</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Talla">Talla</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="LRT_CM">LRT_CM</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="LRT_A">LRT_A</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="LRM_90">LRM_90</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="LRM_R">LRM_R</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-03</td>
-<td headers="Localidad" class="gt_row gt_left">Ciudad Bolivar</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Tejedores de Sueños</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">63</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">101.80</td>
-<td headers="Talla" class="gt_row gt_right">177.00</td>
-<td headers="LRT_CM" class="gt_row gt_right">57.50</td>
-<td headers="LRT_A" class="gt_row gt_right">57.65</td>
-<td headers="LRM_90" class="gt_row gt_right">52.00</td>
-<td headers="LRM_R" class="gt_row gt_right">52.50</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-09-25</td>
-<td headers="Localidad" class="gt_row gt_left">Ciudad Bolivar</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Sierra Morena</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">77</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">98.70</td>
-<td headers="Talla" class="gt_row gt_right">165.00</td>
-<td headers="LRT_CM" class="gt_row gt_right">52.50</td>
-<td headers="LRT_A" class="gt_row gt_right">51.20</td>
-<td headers="LRM_90" class="gt_row gt_right">46.50</td>
-<td headers="LRM_R" class="gt_row gt_right">45.00</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-16</td>
-<td headers="Localidad" class="gt_row gt_left">Engativa</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Los Cerezos</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">78</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">97.65</td>
-<td headers="Talla" class="gt_row gt_right">175.70</td>
-<td headers="LRT_CM" class="gt_row gt_right">58.45</td>
-<td headers="LRT_A" class="gt_row gt_right">56.90</td>
-<td headers="LRM_90" class="gt_row gt_right">50.60</td>
-<td headers="LRM_R" class="gt_row gt_right">51.35</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-09-23</td>
-<td headers="Localidad" class="gt_row gt_left">Rafel Uribe</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Palabras Mayores</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">74</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">97.40</td>
-<td headers="Talla" class="gt_row gt_right">172.95</td>
-<td headers="LRT_CM" class="gt_row gt_right">55.80</td>
-<td headers="LRT_A" class="gt_row gt_right">54.10</td>
-<td headers="LRM_90" class="gt_row gt_right">51.05</td>
-<td headers="LRM_R" class="gt_row gt_right">49.00</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-09-25</td>
-<td headers="Localidad" class="gt_row gt_left">Ciudad Bolivar</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Sierra Morena</td>
-<td headers="Sexo" class="gt_row gt_center">Femenino</td>
-<td headers="Edad" class="gt_row gt_right">70</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">97.10</td>
-<td headers="Talla" class="gt_row gt_right">153.35</td>
-<td headers="LRT_CM" class="gt_row gt_right">50.50</td>
-<td headers="LRT_A" class="gt_row gt_right">49.45</td>
-<td headers="LRM_90" class="gt_row gt_right">45.20</td>
-<td headers="LRM_R" class="gt_row gt_right">43.10</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-09-09</td>
-<td headers="Localidad" class="gt_row gt_left">Engativa</td>
-<td headers="Programa" class="gt_row gt_left">Comunidad de Cuidado</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Comunidad de Cuidado Bosque Popular</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">72</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">95.60</td>
-<td headers="Talla" class="gt_row gt_right">174.40</td>
-<td headers="LRT_CM" class="gt_row gt_right">56.70</td>
-<td headers="LRT_A" class="gt_row gt_right">55.10</td>
-<td headers="LRM_90" class="gt_row gt_right">50.85</td>
-<td headers="LRM_R" class="gt_row gt_right">48.15</td></tr>
-  </tbody>
-  
-  
-</table>
-</div>
-</div>
-</div>
 <p>A continuación el resumen de la evaluación de las hipótesis de interés:</p>
 <ul>
 <li>La diferencia en las mediciones de LRT con antropómetro y con cinta métrica resultó ser estadísticamente significativa.</li>
@@ -727,7 +160,6 @@ tbody tr:last-child {
 </ul>
 <p>Los resultados obtenidos al evaluar las fórmulas de <strong><em>Benjumea</em></strong> y de <strong><em>Arango y Zamora</em></strong> en muestra de adultos mayores que atiende la SDIS, parecen no tener muy buenos resultados a la hora de estimar la talla de los adultos mayores.</p>
 <p>Dado estos resultados, se concluye que se requiere de fórmulas específicas para la población que atiende la <strong>SDIS</strong>. Además, se deberá ajustar estos modelos para las cuatro mediciones pues la evaluación de las hipótesis no dieron indicios de la igualdad entre los métodos de las mediciones.</p>
-</section>
 <section id="selección-del-mejor-modelo-usando-lrt_a" class="level2">
 <h2 class="anchored" data-anchor-id="selección-del-mejor-modelo-usando-lrt_a">Selección del mejor modelo usando LRT_A</h2>
 <p>Inicialmente, se hará la selección del mejor modelo para LRT_A mediante un enfoque predictivo.</p>
@@ -1279,249 +711,6 @@ F-statistic:  1497 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Las estimaciones de los coeficientes del modelo sin las obervaciones influyentes han cambiado un poco respecto al modelo original. El <span class="math inline">\(R^2\)</span> ajustado ha incrementado un poco también.</p>
-<section id="solo-para-etnia-blanco-mestizo" class="level4">
-<h4 class="anchored" data-anchor-id="solo-para-etnia-blanco-mestizo">Solo para etnia Blanco-Mestizo</h4>
-<p>A continuación se hace una búsqueda del mejor modelo por cada número de posibles combinaciones de variables de las cuales se tenga evidencia que influyen en la talla de adultos mayores. Primero se hará la búsqueda usando todo el conjunto de datos.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>Subset selection object
-Call: regsubsets.formula(Talla ~ LRT_A + Edad + Sexo, blmt, nbest = 1, 
-    nvmax = 10)
-3 Variables  (and intercept)
-              Forced in Forced out
-LRT_A             FALSE      FALSE
-Edad              FALSE      FALSE
-SexoMasculino     FALSE      FALSE
-1 subsets of each size up to 3
-Selection Algorithm: exhaustive
-         LRT_A Edad SexoMasculino
-1  ( 1 ) "*"   " "  " "          
-2  ( 1 ) "*"   " "  "*"          
-3  ( 1 ) "*"   "*"  "*"          </code></pre>
-</div>
-</div>
-<p><span class="math inline">\(R^2\)</span>, <span class="math inline">\(R^2\)</span> ajustado, SCE, y BIC para cada mejor modelo del correspondiente tamaño:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8701108 0.8801804 0.8869187</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8698720 0.8797390 0.8862928</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 6366.133 5872.602 5542.343</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] -1101.821 -1139.577 -1164.877</code></pre>
-</div>
-</div>
-<p>Usando el criterio BIC, el mejor modelo es el de 3 variables:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3</code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-42-2.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>Los coeficientes del mejor modelo usando el criterio de BIC son:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>  (Intercept)         LRT_A          Edad SexoMasculino 
-   58.6715908     2.1900483    -0.1159196     3.0285097 </code></pre>
-</div>
-</div>
-<p>Esto sugiere usar el modelo (que es exactamente igual al obtenido teniendo en cuenta todas las etnias) <span class="math inline">\(Talla = 58.67 + 2.19 LRT\_A - 0.12 Edad + 3.06 Sexo\)</span>,<br>
-<span class="math display">\[Sexo = \begin{cases} 1 &amp; \text{si sexo = hombre} \\ 0 &amp; \text{si sexo = mujer} \end{cases}\]</span></p>
-<p>Ahora se hará la búsqueda del mejor modelo usando <strong><em>K - fold cross validation</em></strong> con el fin de calcular directamente los errores de predicción sobre los datos de testeo y evitar así el sobreajuste.</p>
-<ul>
-<li>Se crean <strong><em>K - folds</em></strong> (pliegues) de aproximadamente igual tamaño. En este caso fijamos <span class="math inline">\(k = 10\)</span>. Como tenemos <span class="math inline">\(558\)</span> datos, cada pliegue será de tamaño 55 o 56.</li>
-<li>El <span class="math inline">\(k-ésimo\)</span> pliegue servirá para testear, y los demás pliegues se juntan para entrenar los modelos. Osea que se usará un <span class="math inline">\(90\%\)</span> de los datos para entrenamiento y <span class="math inline">\(10\%\)</span> para test.</li>
-<li>Para <span class="math inline">\(k = 1,\cdots,10,\)</span> se calcula el MSE.</li>
-<li>Luego, se promedia el MSE a través de los <span class="math inline">\(10\)</span> pliegues y se obtiene el MSE promedio.</li>
-</ul>
-<p>El MSE para el modelo de 3 variables (<span class="math inline">\(LRT\_A, Edad, Sexo\)</span>) es:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 10.38783</code></pre>
-</div>
-</div>
-<p>Ahora se validarán los supuestos para el mejor modelo obtenido:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = Talla ~ LRT_A + Edad + Sexo, data = blmt)
-
-Residuals:
-     Min       1Q   Median       3Q      Max 
--10.4061  -2.0473   0.0986   2.2993   9.2179 
-
-Coefficients:
-              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   58.67159    2.89065  20.297  &lt; 2e-16 ***
-LRT_A          2.19005    0.05356  40.887  &lt; 2e-16 ***
-Edad          -0.11592    0.02040  -5.683 2.16e-08 ***
-SexoMasculino  3.02851    0.38843   7.797 3.27e-14 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 3.198 on 542 degrees of freedom
-Multiple R-squared:  0.8869,    Adjusted R-squared:  0.8863 
-F-statistic:  1417 on 3 and 542 DF,  p-value: &lt; 2.2e-16</code></pre>
-</div>
-</div>
-<p>El modelo tiene un <span class="math inline">\(R^2\)</span> ajustado de <span class="math inline">\(0.8861\)</span>, es decir que aproximadamente un <span class="math inline">\(88.61\%\)</span> de la variabilidad de la talla es explicada por LRT_A, la edad y el sexo.</p>
-<p><strong><em>Linealidad:</em></strong> Con el fin de verificar que la relación entre la talla y las variables LRT_A (discriminando por sexo) y la edad es lineal, se visualiza el gráfico de los residuos vs los valores predichos del modelo <span class="math inline">\(\left(\hat{e},\hat{y} \right)\)</span>:</p>
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>El gráfico no muestra ningún patrón marcado, la ubicación de los puntos parece ser aleatoria alrededor de cero, indicando también homoscedasticidad en los residuales y posible independencia de los mismos. El gráfico muestra algunos valores atípicos que valdría la pena explorar.</p>
-<p><strong><em>Independencia de los errores:</em></strong> Aunque nuestros datos no son temporales, el test de Durbin-Watson nos puede ayudar a evaluar la autocorrelación de los errores del modelo:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Durbin-Watson test
-
-data:  reg
-DW = 2.0089, p-value = 0.5342
-alternative hypothesis: true autocorrelation is greater than 0</code></pre>
-</div>
-</div>
-<p>La estadística del test de Durbin-Watson es muy cercano a <span class="math inline">\(2\)</span>, se concluye que los errores son independientes.</p>
-<p><strong><em>Normalidad de los errores:</em></strong> Se realiza el gráfico QQ-plot para comparar la distribución de los residuales del modelo con la distribución teórica de una normal. También se hace el test de normalidad de Lilliefors y Anderson-Darling:</p>
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-49-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Lilliefors (Kolmogorov-Smirnov) normality test
-
-data:  reg$residuals
-D = 0.022459, p-value = 0.7233</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Anderson-Darling normality test
-
-data:  reg$residuals
-A = 0.37224, p-value = 0.4193</code></pre>
-</div>
-</div>
-<p>El QQ-plot muestra que los residuales se ajustan aceptablemente a una distribución normal. Las pruebas de normalidad de Lilliefors y Anderson-Darling también apoyan este resultado.</p>
-<p><strong><em>Homoscedasticidad:</em></strong> Aunque no se vio un patron que indicara heteroscedasticidad en el gráfico de los residuales vs los valores predichos, a continuación se muestra el gráfico de los residuales estandarizados vs los valores predichos con el fin de mejorar la interpretabilidad de la homoscedasticidad y tener una visión más clara de las observaciones atípicas e influyentes:</p>
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>No se observan patrones que indiquen hereroscedasticidad en los residuos (forma de cono o embudo). Se siguien observando algunas observaciones atípicas y/o influyentes.</p>
-<p>Adicional, se realiza la prueba de Breusch-Pagan para verificar la homoscedasticidad de los residuales:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    studentized Breusch-Pagan test
-
-data:  reg
-BP = 0.64027, df = 3, p-value = 0.8872</code></pre>
-</div>
-</div>
-<p>No se rechaza la hipótesis nula de que los errores del modelo son homoscedasticos.</p>
-<p><strong><em>Multicolinealidad:</em></strong> Se verifica que las variables incluídas en el modelo no están altamente correlacionadas entre sí, y así evitar obtener resultados inestables que dificulten la interpretabilidad de los coeficientes del modelo. Se calculan los Factores de Inflación de la Varianza (VIFs):</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>   LRT_A     Edad     Sexo 
-1.964084 1.035017 2.012744 </code></pre>
-</div>
-</div>
-<p>Dado que los VIFs son mucho menores a 5, esto indica que cada variable tiene una correlación moderada (leve) con las demás. Por lo que se puede concluir que los resultados del modelo posiblemente no estarán muy afectados por la multicolinealidad.</p>
-<p><strong><em>El modelo está bien especificado:</em></strong> Se hace el test de RESET para examinar si el modelo ajustado está bien especificado o si se han omitido términos no lineales o interacciones importantes:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    RESET test
-
-data:  reg
-RESET = 0.63552, df1 = 4, df2 = 538, p-value = 0.6373</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    RESET test
-
-data:  reg
-RESET = 0.57179, df1 = 2, df2 = 540, p-value = 0.5649</code></pre>
-</div>
-</div>
-<p>No se rechaza la hipótesis nula de que el modelo está bien especificado.</p>
-<p><strong><em>Observaciones atípicas y de alto apalancamiento:</em></strong></p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="modelos_files/figure-html/unnamed-chunk-54-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="modelos_files/figure-html/unnamed-chunk-54-2.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</div>
-<p>Usando los residuales estudentizados, se observan <span class="math inline">\(5\)</span> datos atípicos.</p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="modelos_files/figure-html/unnamed-chunk-55-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="modelos_files/figure-html/unnamed-chunk-55-2.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<pre><code>       StudRes        Hat       CookD
-43  -2.9359701 0.01530685 0.033034282
-518 -0.6931209 0.02977243 0.003689056
-533 -3.3020436 0.01104369 0.029893640
-549  2.3843805 0.02334252 0.033678946
-552 -0.8197563 0.02432382 0.004190815</code></pre>
-</div>
-</div>
-</div>
-<p>En total 29 observaciones superan el umbral especificado para la distancia de Cook, pero esto no significa que todas sean influyentes (alto leverage). Particularmente hay 3 observaciones que son marcadas como influyentes significativamente según la distancia de Cook. Esto indica que la inclusión de estas observaciones en el modelo pueden tener una influencia significativa en los coeficientes del modelo y en la predicción de la talla. Se debe explorar con cautela estas observaciones y decidir qué hacer con ellas.</p>
-<p>Para esto, se puede comprobar el cambio en los coeficientes del modelo al excluir estas observaciones influyentes.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = Talla ~ LRT_A + Edad + Sexo, data = blmt, subset = {
-    setdiff(row(datos)[, 1], c(533, 43, 549))
-})
-
-Residuals:
-     Min       1Q   Median       3Q      Max 
--10.3424  -1.9641   0.0838   2.3050   8.4802 
-
-Coefficients:
-              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   58.10823    2.85589  20.347  &lt; 2e-16 ***
-LRT_A          2.21085    0.05310  41.634  &lt; 2e-16 ***
-Edad          -0.12168    0.02016  -6.035 2.95e-09 ***
-SexoMasculino  3.00695    0.38324   7.846 2.31e-14 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 3.153 on 540 degrees of freedom
-  (11 observations deleted due to missingness)
-Multiple R-squared:  0.8901,    Adjusted R-squared:  0.8895 
-F-statistic:  1458 on 3 and 540 DF,  p-value: &lt; 2.2e-16</code></pre>
-</div>
-</div>
-<p>Las estimaciones de los coeficientes del modelo sin las obervaciones influyentes han cambiado un poco respecto al modelo original. El <span class="math inline">\(R^2\)</span> ajustado ha incrementado un poco también.</p>
-</section>
 </section>
 <section id="lrt-cinta-métrica" class="level3">
 <h3 class="anchored" data-anchor-id="lrt-cinta-métrica">LRT cinta métrica</h3>
@@ -1571,10 +760,10 @@ Selection Algorithm: exhaustive
 <pre><code>[1] 3</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-59-1.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-59-2.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-42-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Los coeficientes del mejor modelo usando el criterio de BIC son:</p>
@@ -1584,15 +773,9 @@ Selection Algorithm: exhaustive
    57.2481566     2.1620113    -0.1299881     4.2477737 </code></pre>
 </div>
 </div>
-<p>Esto sugiere usar el modelo <span class="math inline">\(Talla = 57.24 + 2.16 LRT\_A - 0.13 Edad + 4.25 Sexo\)</span>,<br>
+<p>Esto sugiere usar el modelo <span class="math inline">\(Talla = 57.25 + 2.16 LRT\_CM - 0.13 Edad + 4.25 Sexo\)</span>,<br>
 <span class="math display">\[Sexo = \begin{cases} 1 &amp; \text{si sexo = hombre} \\ 0 &amp; \text{si sexo = mujer} \end{cases}\]</span></p>
-<p>Ahora se hará la búsqueda del mejor modelo usando <strong><em>K - fold cross validation</em></strong> con el fin de calcular directamente los errores de predicción sobre los datos de testeo y evitar así el sobreajuste.</p>
-<ul>
-<li>Se crean <strong><em>K - folds</em></strong> (pliegues) de aproximadamente igual tamaño. En este caso fijamos <span class="math inline">\(k = 10\)</span>. Como tenemos <span class="math inline">\(558\)</span> datos, cada pliegue será de tamaño 55 o 56.</li>
-<li>El <span class="math inline">\(k-ésimo\)</span> pliegue servirá para testear, y los demás pliegues se juntan para entrenar los modelos. Osea que se usará un <span class="math inline">\(90\%\)</span> de los datos para entrenamiento y <span class="math inline">\(10\%\)</span> para test.</li>
-<li>Para <span class="math inline">\(k = 1,\cdots,10,\)</span> se calcula el MSE.</li>
-<li>Luego, se promedia el MSE a través de los <span class="math inline">\(10\)</span> pliegues y se obtiene el MSE promedio.</li>
-</ul>
+<p>AAhora usamos nuevamente <strong><em>K - fold cross validation</em></strong> con el fin de calcular directamente los errores de predicción sobre los datos de testeo y evitar así el sobreajuste de la misma manera que se realizó para el modelo normal de <span class="math inline">\(LRT_A\)</span>.</p>
 <p>El MSE para el modelo de 3 variables (<span class="math inline">\(LRT\_A, Edad, Sexo\)</span>) es:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -1624,14 +807,20 @@ Multiple R-squared:  0.8693,    Adjusted R-squared:  0.8686
 F-statistic:  1229 on 3 and 554 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<p>El modelo tiene un <span class="math inline">\(R^2\)</span> ajustado de <span class="math inline">\(0.8686\)</span>, es decir que aproximadamente un <span class="math inline">\(86.86\%\)</span> de la variabilidad de la talla es explicada por LRT_CM, la edad y el sexo.</p>
-<p><strong><em>Linealidad:</em></strong> Con el fin de verificar que la relación entre la talla y las variables LRT_CM (discriminando por sexo) y la edad es lineal, se visualiza el gráfico de los residuos vs los valores predichos del modelo <span class="math inline">\(\left(\hat{e},\hat{y} \right)\)</span>:</p>
+<p>El modelo tiene un <span class="math inline">\(R^2\)</span> ajustado de <span class="math inline">\(0.8686\)</span>, es decir que aproximadamente un <span class="math inline">\(86.86\%\)</span> de la variabilidad de la talla es explicada por el modelo.</p>
+<p><strong><em>Linealidad:</em></strong> Con el fin de verificar que la relación entre la talla y las variables LRT_CM, Sexo y Edad es lineal, se visualiza el gráfico de los residuos vs los valores predichos del modelo <span class="math inline">\(\left(\hat{y}, \hat{e} \right)\)</span>:</p>
 <div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "La media de los residuales es cercana a 0: "</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9.170291e-17</code></pre>
+</div>
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-64-1.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>El gráfico no muestra ningún patrón marcado, la ubicación de los puntos parece ser aleatoria alrededor de cero, indicando también homoscedasticidad en los residuales y posible independencia de los mismos. El gráfico muestra algunos valores atípicos que valdría la pena explorar.</p>
+<p>El gráfico no muestra ningún patrón marcado, la ubicación de los puntos parece ser aleatoria alrededor de cero, indicando también homoscedasticidad en los residuales y posible independencia de los mismos. El gráfico muestra 3 valores atípicos que valdría la pena explorar.</p>
 <p><strong><em>Independencia de los errores:</em></strong> Aunque nuestros datos no son temporales, el test de Durbin-Watson nos puede ayudar a evaluar la autocorrelación de los errores del modelo:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -1647,7 +836,7 @@ alternative hypothesis: true autocorrelation is greater than 0</code></pre>
 <p><strong><em>Normalidad de los errores:</em></strong> Se realiza el gráfico QQ-plot para comparar la distribución de los residuales del modelo con la distribución teórica de una normal. También se hace el test de normalidad de Lilliefors y Anderson-Darling:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-66-1.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-49-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1668,7 +857,7 @@ A = 0.3255, p-value = 0.5213</code></pre>
 <p><strong><em>Homoscedasticidad:</em></strong> Aunque no se vio un patron que indicara heteroscedasticidad en el gráfico de los residuales vs los valores predichos, a continuación se muestra el gráfico de los residuales estandarizados vs los valores predichos con el fin de mejorar la interpretabilidad de la homoscedasticidad y tener una visión más clara de las observaciones atípicas e influyentes:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-67-1.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>No se observan patrones que indiquen hereroscedasticidad en los residuos (forma de cono o embudo). Se siguien observando algunas observaciones atípicas y/o influyentes.</p>
@@ -1713,10 +902,10 @@ RESET = 0.26394, df1 = 2, df2 = 552, p-value = 0.7681</code></pre>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="modelos_files/figure-html/unnamed-chunk-71-1.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-54-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="modelos_files/figure-html/unnamed-chunk-71-2.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-54-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
@@ -1724,10 +913,10 @@ RESET = 0.26394, df1 = 2, df2 = 552, p-value = 0.7681</code></pre>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="modelos_files/figure-html/unnamed-chunk-72-1.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-55-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="modelos_files/figure-html/unnamed-chunk-72-2.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-55-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
@@ -1742,7 +931,7 @@ RESET = 0.26394, df1 = 2, df2 = 552, p-value = 0.7681</code></pre>
 </div>
 </div>
 </div>
-<p>En total 29 observaciones superan el umbral especificado para la distancia de Cook, pero esto no significa que todas sean influyentes (alto leverage). Particularmente hay 3 observaciones que son marcadas como influyentes significativamente según la distancia de Cook. Esto indica que la inclusión de estas observaciones en el modelo pueden tener una influencia significativa en los coeficientes del modelo y en la predicción de la talla. Se debe explorar con cautela estas observaciones y decidir qué hacer con ellas.</p>
+<p>En total 29 observaciones superan el umbral especificado para la distancia de Cook, pero esto no significa que todas sean influyentes (alto apalancamiento). Particularmente hay <span class="math inline">\(3\)</span> observaciones que son marcadas como influyentes significativamente según la distancia de Cook (43, 504 y 533) . Esto indica que la inclusión de estas observaciones en el modelo pueden tener una influencia significativa en los coeficientes del modelo y en la predicción de la talla. Se debe explorar con cautela estas observaciones y decidir qué hacer con ellas.</p>
 <p>Para esto, se puede comprobar el cambio en los coeficientes del modelo al excluir estas observaciones influyentes.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -1820,10 +1009,10 @@ Selection Algorithm: exhaustive
 <pre><code>[1] 3</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-76-1.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-59-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-76-2.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-59-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Los coeficientes del mejor modelo usando el criterio de BIC son:</p>
@@ -1833,19 +1022,11 @@ Selection Algorithm: exhaustive
    68.8247189     2.2078940    -0.1211314     3.8654525 </code></pre>
 </div>
 </div>
-<p>Esto sugiere usar el modelo <span class="math inline">\(Talla = 68.82 + 2.21 LRM_R - 0.12 Edad + 3.86 Sexo\)</span>,<br>
-<span class="math display">\[Sexo = \begin{cases} 1 &amp; \text{si sexo = hombre} \\ 0 &amp; \text{si sexo = mujer} \end{cases}\]</span></p>
-<p>Ahora se hará la búsqueda del mejor modelo usando <strong><em>K - fold cross validation</em></strong> con el fin de calcular directamente los errores de predicción sobre los datos de testeo y evitar así el sobreajuste.</p>
-<ul>
-<li>Se crean <strong><em>K - folds</em></strong> (pliegues) de aproximadamente igual tamaño. En este caso fijamos <span class="math inline">\(k = 10\)</span>. Como tenemos <span class="math inline">\(558\)</span> datos, cada pliegue será de tamaño 55 o 56.</li>
-<li>El <span class="math inline">\(k-ésimo\)</span> pliegue servirá para testear, y los demás pliegues se juntan para entrenar los modelos. Osea que se usará un <span class="math inline">\(90\%\)</span> de los datos para entrenamiento y <span class="math inline">\(10\%\)</span> para test.</li>
-<li>Para <span class="math inline">\(k = 1,\cdots,10,\)</span> se calcula el MSE.</li>
-<li>Luego, se promedia el MSE a través de los <span class="math inline">\(10\)</span> pliegues y se obtiene el MSE promedio.</li>
-</ul>
+<p>Nuevamente se hará la búsqueda del mejor modelo usando <strong><em>K - fold cross validation</em></strong> con el fin de calcular directamente los errores de predicción sobre los datos de testeo y evitar así el sobreajuste.</p>
 <p>El MSE para el modelo de 3 variables (<span class="math inline">\(LRT\_A, Edad, Sexo\)</span>) es:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 10.37418</code></pre>
+<pre><code>[1] 12.93892</code></pre>
 </div>
 </div>
 <p>Ahora se validarán los supuestos para el mejor modelo obtenido:</p>
@@ -1873,11 +1054,13 @@ Multiple R-squared:  0.8588,    Adjusted R-squared:  0.8581
 F-statistic:  1123 on 3 and 554 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<p>El modelo tiene un <span class="math inline">\(R^2\)</span> ajustado de <span class="math inline">\(0.8861\)</span>, es decir que aproximadamente un <span class="math inline">\(88.61\%\)</span> de la variabilidad de la talla es explicada por LRM_R, la edad y el sexo.</p>
+<p>El modelo propuesto parala medida Longitud Rodilla-Maleólo <span class="math inline">\((LRM_R)\)</span> con la pierna estirada es:</p>
+<p><span class="math display">\[Talla = 68.83 + 2.21 \, LRM_R - 0.12 \, Edad+ 3.87 \, Sexo \]</span></p>
+<p>Según el <span class="math inline">\(R^2\)</span> ajustado aproximadamente un <span class="math inline">\(85.81\%\)</span> de la variabilidad de la talla es explicada por el modelo.</p>
 <p><strong><em>Linealidad:</em></strong> Con el fin de verificar que la relación entre la talla y las variables LRM_R (discriminando por sexo) y la edad es lineal, se visualiza el gráfico de los residuos vs los valores predichos del modelo <span class="math inline">\(\left(\hat{e},\hat{y} \right)\)</span>:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-81-1.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-64-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>El gráfico no muestra ningún patrón marcado, la ubicación de los puntos parece ser aleatoria alrededor de cero, indicando también homoscedasticidad en los residuales y posible independencia de los mismos. El gráfico muestra algunos valores atípicos que valdría la pena explorar.</p>
@@ -1888,15 +1071,15 @@ F-statistic:  1123 on 3 and 554 DF,  p-value: &lt; 2.2e-16</code></pre>
     Durbin-Watson test
 
 data:  reg
-DW = 1.9078, p-value = 0.1345
-alternative hypothesis: true autocorrelation is greater than 0</code></pre>
+DW = 1.9078, p-value = 0.2689
+alternative hypothesis: true autocorrelation is not 0</code></pre>
 </div>
 </div>
 <p>La estadística del test de Durbin-Watson es muy cercano a <span class="math inline">\(2\)</span>, se concluye que los errores son independientes.</p>
 <p><strong><em>Normalidad de los errores:</em></strong> Se realiza el gráfico QQ-plot para comparar la distribución de los residuales del modelo con la distribución teórica de una normal. También se hace el test de normalidad de Lilliefors y Anderson-Darling:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-83-1.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-66-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1917,7 +1100,7 @@ A = 0.27849, p-value = 0.6483</code></pre>
 <p><strong><em>Homoscedasticidad:</em></strong> Aunque no se vio un patron que indicara heteroscedasticidad en el gráfico de los residuales vs los valores predichos, a continuación se muestra el gráfico de los residuales estandarizados vs los valores predichos con el fin de mejorar la interpretabilidad de la homoscedasticidad y tener una visión más clara de las observaciones atípicas e influyentes:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-84-1.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-67-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>No se observan patrones que indiquen hereroscedasticidad en los residuos (forma de cono o embudo). Se siguien observando algunas observaciones atípicas y/o influyentes.</p>
@@ -1925,10 +1108,10 @@ A = 0.27849, p-value = 0.6483</code></pre>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    studentized Breusch-Pagan test
+    Breusch-Pagan test
 
 data:  reg
-BP = 7.8596, df = 3, p-value = 0.04901</code></pre>
+BP = 8.2039, df = 3, p-value = 0.04198</code></pre>
 </div>
 </div>
 <p>Se rechaza la hipótesis nula de que los errores del modelo son homoscedasticos.</p>
@@ -1939,7 +1122,7 @@ BP = 7.8596, df = 3, p-value = 0.04901</code></pre>
 1.907229 1.032902 1.952447 </code></pre>
 </div>
 </div>
-<p>Dado que los VIFs son mucho menores a 5, esto indica que cada variable tiene una correlación moderada (leve) con las demás. Por lo que se puede concluir que los resultados del modelo posiblemente no estarán muy afectados por la multicolinealidad.</p>
+<p>Dado que los VIFs son mucho menores a 5, cada variable tiene una correlación moderada (leve) con las demás. Los resultados del modelo no deberían verse afectados por la multicolinealidad.</p>
 <p><strong><em>El modelo está bien especificado:</em></strong> Se hace el test de RESET para examinar si el modelo ajustado está bien especificado o si se han omitido términos no lineales o interacciones importantes:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -1962,10 +1145,10 @@ RESET = 0.012072, df1 = 2, df2 = 552, p-value = 0.988</code></pre>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="modelos_files/figure-html/unnamed-chunk-88-1.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-71-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="modelos_files/figure-html/unnamed-chunk-88-2.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-71-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
@@ -1973,10 +1156,10 @@ RESET = 0.012072, df1 = 2, df2 = 552, p-value = 0.988</code></pre>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="modelos_files/figure-html/unnamed-chunk-89-1.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-72-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="modelos_files/figure-html/unnamed-chunk-89-2.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-72-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
@@ -1989,7 +1172,7 @@ RESET = 0.012072, df1 = 2, df2 = 552, p-value = 0.988</code></pre>
 </div>
 </div>
 </div>
-<p>En total 29 observaciones superan el umbral especificado para la distancia de Cook, pero esto no significa que todas sean influyentes (alto leverage). Particularmente hay 3 observaciones que son marcadas como influyentes significativamente según la distancia de Cook. Esto indica que la inclusión de estas observaciones en el modelo pueden tener una influencia significativa en los coeficientes del modelo y en la predicción de la talla. Se debe explorar con cautela estas observaciones y decidir qué hacer con ellas.</p>
+<p>En total 29 observaciones superan el umbral especificado para la distancia de Cook, pero esto no significa que todas sean influyentes (alto apalancamiento). Particularmente hay 3 observaciones que son marcadas como influyentes significativamente según la distancia de Cook (504, 533, 542). Esto indica que la inclusión de estas observaciones en el modelo pueden tener una influencia significativa en los coeficientes del modelo y en la predicción de la talla. Se debe explorar con cautela estas observaciones y decidir qué hacer con ellas.</p>
 <p>Para esto, se puede comprobar el cambio en los coeficientes del modelo al excluir estas observaciones influyentes.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -2021,7 +1204,7 @@ F-statistic:  1180 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section>
 <section id="lrm-pierna-a-90" class="level3">
 <h3 class="anchored" data-anchor-id="lrm-pierna-a-90">LRM pierna a 90°</h3>
-<p>A continuación se hace una búsqueda del mejor modelo por cada número de posibles combinaciones de variables de las cuales se tenga evidencia que influyen en la talla de adultos mayores, únicamente se tiene en cuenta la longitud rodilla-malélo con la pierna a 90°. Primero se hará la búsqueda usando todo el conjunto de datos.</p>
+<p>Ahora, se hará una búsqueda del mejor modelo por cada número de posibles combinaciones de variables de las cuales se tenga evidencia que influyen en la talla de adultos mayores, únicamente se tiene en cuenta la longitud rodilla-malélo con la pierna a 90°. Primero se hará la búsqueda usando todo el conjunto de datos.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>Subset selection object
@@ -2067,10 +1250,10 @@ Selection Algorithm: exhaustive
 <pre><code>[1] 3</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-93-1.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-76-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-93-2.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-76-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Los coeficientes del mejor modelo usando el criterio de BIC son:</p>
@@ -2083,16 +1266,10 @@ Selection Algorithm: exhaustive
 <p>Esto sugiere usar el modelo <span class="math inline">\(Talla = 69.33 + 2.12 LRM\_90 - 0.11 Edad + 5.18 Sexo\)</span>,<br>
 <span class="math display">\[Sexo = \begin{cases} 1 &amp; \text{si sexo = hombre} \\ 0 &amp; \text{si sexo = mujer} \end{cases}\]</span></p>
 <p>Ahora se hará la búsqueda del mejor modelo usando <strong><em>K - fold cross validation</em></strong> con el fin de calcular directamente los errores de predicción sobre los datos de testeo y evitar así el sobreajuste.</p>
-<ul>
-<li>Se crean <strong><em>K - folds</em></strong> (pliegues) de aproximadamente igual tamaño. En este caso fijamos <span class="math inline">\(k = 10\)</span>. Como tenemos <span class="math inline">\(558\)</span> datos, cada pliegue será de tamaño 55 o 56.</li>
-<li>El <span class="math inline">\(k-ésimo\)</span> pliegue servirá para testear, y los demás pliegues se juntan para entrenar los modelos. Osea que se usará un <span class="math inline">\(90\%\)</span> de los datos para entrenamiento y <span class="math inline">\(10\%\)</span> para test.</li>
-<li>Para <span class="math inline">\(k = 1,\cdots,10,\)</span> se calcula el MSE.</li>
-<li>Luego, se promedia el MSE a través de los <span class="math inline">\(10\)</span> pliegues y se obtiene el MSE promedio.</li>
-</ul>
 <p>El MSE para el modelo de 3 variables (<span class="math inline">\(LRT\_A, Edad, Sexo\)</span>) es:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 10.37418</code></pre>
+<pre><code>[1] 14.75788</code></pre>
 </div>
 </div>
 <p>Ahora se validarán los supuestos para el mejor modelo obtenido:</p>
@@ -2120,11 +1297,11 @@ Multiple R-squared:  0.8398,    Adjusted R-squared:  0.8389
 F-statistic: 967.9 on 3 and 554 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<p>El modelo tiene un <span class="math inline">\(R^2\)</span> ajustado de <span class="math inline">\(0.8861\)</span>, es decir que aproximadamente un <span class="math inline">\(88.61\%\)</span> de la variabilidad de la talla es explicada por LRT_A, la edad y el sexo.</p>
-<p><strong><em>Linealidad:</em></strong> Con el fin de verificar que la relación entre la talla y las variables LRT_A (discriminando por sexo) y la edad es lineal, se visualiza el gráfico de los residuos vs los valores predichos del modelo <span class="math inline">\(\left(\hat{e},\hat{y} \right)\)</span>:</p>
+<p>El <span class="math inline">\(R^2\)</span> ajustado indica que aproximadamente un <span class="math inline">\(83.89\%\)</span> de la variabilidad de la talla es explicada por LRT_CM, la edad y el sexo.</p>
+<p><strong><em>Linealidad:</em></strong> Con el fin de verificar que la relación entre la talla y las variables LRT_CM (discriminando por sexo) y la edad es lineal, se visualiza el gráfico de los residuos vs los valores predichos del modelo <span class="math inline">\(\left(\hat{e},\hat{y} \right)\)</span>:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-98-1.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-81-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>El gráfico no muestra ningún patrón marcado, la ubicación de los puntos parece ser aleatoria alrededor de cero, indicando también homoscedasticidad en los residuales y posible independencia de los mismos. El gráfico muestra algunos valores atípicos que valdría la pena explorar.</p>
@@ -2135,15 +1312,15 @@ F-statistic: 967.9 on 3 and 554 DF,  p-value: &lt; 2.2e-16</code></pre>
     Durbin-Watson test
 
 data:  reg
-DW = 2.0319, p-value = 0.6411
-alternative hypothesis: true autocorrelation is greater than 0</code></pre>
+DW = 2.0319, p-value = 0.7179
+alternative hypothesis: true autocorrelation is not 0</code></pre>
 </div>
 </div>
 <p>La estadística del test de Durbin-Watson es muy cercano a <span class="math inline">\(2\)</span>, se concluye que los errores son independientes.</p>
 <p><strong><em>Normalidad de los errores:</em></strong> Se realiza el gráfico QQ-plot para comparar la distribución de los residuales del modelo con la distribución teórica de una normal. También se hace el test de normalidad de Lilliefors y Anderson-Darling:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-100-1.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-83-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -2164,7 +1341,7 @@ A = 0.6184, p-value = 0.1071</code></pre>
 <p><strong><em>Homoscedasticidad:</em></strong> Aunque no se vio un patron que indicara heteroscedasticidad en el gráfico de los residuales vs los valores predichos, a continuación se muestra el gráfico de los residuales estandarizados vs los valores predichos con el fin de mejorar la interpretabilidad de la homoscedasticidad y tener una visión más clara de las observaciones atípicas e influyentes:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-101-1.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-84-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>No se observan patrones que indiquen hereroscedasticidad en los residuos (forma de cono o embudo). Se siguien observando algunas observaciones atípicas y/o influyentes.</p>
@@ -2209,10 +1386,10 @@ RESET = 6.8777, df1 = 2, df2 = 552, p-value = 0.001121</code></pre>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="modelos_files/figure-html/unnamed-chunk-105-1.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-88-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="modelos_files/figure-html/unnamed-chunk-105-2.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-88-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
@@ -2220,10 +1397,10 @@ RESET = 6.8777, df1 = 2, df2 = 552, p-value = 0.001121</code></pre>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="modelos_files/figure-html/unnamed-chunk-106-1.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-89-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="modelos_files/figure-html/unnamed-chunk-106-2.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-89-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
@@ -2235,7 +1412,7 @@ RESET = 6.8777, df1 = 2, df2 = 552, p-value = 0.001121</code></pre>
 </div>
 </div>
 </div>
-<p>En total 29 observaciones superan el umbral especificado para la distancia de Cook, pero esto no significa que todas sean influyentes (alto leverage). Particularmente hay 3 observaciones que son marcadas como influyentes significativamente según la distancia de Cook. Esto indica que la inclusión de estas observaciones en el modelo pueden tener una influencia significativa en los coeficientes del modelo y en la predicción de la talla. Se debe explorar con cautela estas observaciones y decidir qué hacer con ellas.</p>
+<p>En total 29 observaciones superan el umbral especificado para la distancia de Cook, pero esto no significa que todas sean influyentes (alto leverage). Particularmente hay 3 observaciones que son marcadas como influyentes significativamente según la distancia de Cook (80, 147 y 533). Esto indica que la inclusión de estas observaciones en el modelo pueden tener una influencia significativa en los coeficientes del modelo y en la predicción de la talla. Se debe explorar con cautela estas observaciones y decidir qué hacer con ellas.</p>
 <p>Para esto, se puede comprobar el cambio en los coeficientes del modelo al excluir estas observaciones influyentes.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -2265,6 +1442,504 @@ F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <p>Las estimaciones de los coeficientes del modelo sin las obervaciones influyentes han cambiado un poco respecto al modelo original. El <span class="math inline">\(R^2\)</span> ajustado ha incrementado un poco también.</p>
 </section>
+<section id="resúmen-de-los-modelos-normales." class="level3">
+<h3 class="anchored" data-anchor-id="resúmen-de-los-modelos-normales.">Resúmen de los modelos normales.</h3>
+<p>Todos los modelos usaron las variables Edad, Sexo y el intercepto variando entre LRT_A, LRT_CM, LRM_90 y LRM_R. Todos obtuvieron un coeficientes diferentes.</p>
+<p>La tabla de los errores cuadráticos medios para la regresión lineal simple es la siguiente:</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="wzcfgdjqph" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#wzcfgdjqph table {
+  font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#wzcfgdjqph thead, #wzcfgdjqph tbody, #wzcfgdjqph tfoot, #wzcfgdjqph tr, #wzcfgdjqph td, #wzcfgdjqph th {
+  border-style: none;
+}
+
+#wzcfgdjqph p {
+  margin: 0;
+  padding: 0;
+}
+
+#wzcfgdjqph .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 9px;
+  font-weight: 400;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: none;
+  border-top-width: 3px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#wzcfgdjqph .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#wzcfgdjqph .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#wzcfgdjqph .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#wzcfgdjqph .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wzcfgdjqph .gt_bottom_border {
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wzcfgdjqph .gt_col_headings {
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wzcfgdjqph .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#wzcfgdjqph .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#wzcfgdjqph .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#wzcfgdjqph .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#wzcfgdjqph .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#wzcfgdjqph .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#wzcfgdjqph .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#wzcfgdjqph .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #FFFFFF;
+  vertical-align: middle;
+}
+
+#wzcfgdjqph .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#wzcfgdjqph .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#wzcfgdjqph .gt_row {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#wzcfgdjqph .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-right-color: #FFFFFF;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wzcfgdjqph .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#wzcfgdjqph .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#wzcfgdjqph .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#wzcfgdjqph .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wzcfgdjqph .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#wzcfgdjqph .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#wzcfgdjqph .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wzcfgdjqph .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wzcfgdjqph .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#wzcfgdjqph .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wzcfgdjqph .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#wzcfgdjqph .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wzcfgdjqph .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wzcfgdjqph .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wzcfgdjqph .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wzcfgdjqph .gt_sourcenote {
+  font-size: 12px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wzcfgdjqph .gt_left {
+  text-align: left;
+}
+
+#wzcfgdjqph .gt_center {
+  text-align: center;
+}
+
+#wzcfgdjqph .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#wzcfgdjqph .gt_font_normal {
+  font-weight: normal;
+}
+
+#wzcfgdjqph .gt_font_bold {
+  font-weight: bold;
+}
+
+#wzcfgdjqph .gt_font_italic {
+  font-style: italic;
+}
+
+#wzcfgdjqph .gt_super {
+  font-size: 65%;
+}
+
+#wzcfgdjqph .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#wzcfgdjqph .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#wzcfgdjqph .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#wzcfgdjqph .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#wzcfgdjqph .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#wzcfgdjqph .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#wzcfgdjqph .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#wzcfgdjqph .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#wzcfgdjqph div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+
+tbody tr:last-child {
+  border-bottom: 2px solid #ffffff00;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Modelo">Modelo</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Medida">Medida</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="MSE">MSE</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Modelo" class="gt_row gt_left">Normal</td>
+<td headers="Medida" class="gt_row gt_left">LRT_A</td>
+<td headers="MSE" class="gt_row gt_right">10.37418</td></tr>
+    <tr><td headers="Modelo" class="gt_row gt_left">Normal</td>
+<td headers="Medida" class="gt_row gt_left">LRT_CM</td>
+<td headers="MSE" class="gt_row gt_right">11.95892</td></tr>
+    <tr><td headers="Modelo" class="gt_row gt_left">Normal</td>
+<td headers="Medida" class="gt_row gt_left">LRM_R</td>
+<td headers="MSE" class="gt_row gt_right">12.93892</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+<p>El modelo que mejor comportamiento tuvo fue: <span class="math inline">\(Talla = 58.67 + 2.19 LRT\_A - 0.12Edad + 3.06Sexo\)</span></p>
+<p>Sin embargo, vemos que también se tuvieron buenos resultados con</p>
+<p><span class="math inline">\(Talla = 57.25 + 2.16 LRT\_CM - 0.13 Edad + 4.25 \, Sexo\)</span>,<br>
+</p>
+<p>donde</p>
+<p><span class="math display">\[Sexo = \begin{cases} 1 &amp; \text{si sexo = hombre} \\ 0 &amp; \text{si sexo = mujer} \end{cases}\]</span></p>
+<p>Se validó que estos dos modelos en particular cumplen con los supuestos. \</p>
+<p>Aúnque estos tienen cada uno 3 observaciones con alto apalancamiento, el cambio al reajustar sin estas no parece ser muy grande.</p>
+</section>
 </section>
 <section id="modelo-lasso" class="level2">
 <h2 class="anchored" data-anchor-id="modelo-lasso">Modelo Lasso</h2>
@@ -2273,13 +1948,13 @@ F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Algunos coeficientes se hacen cero:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-109-1.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-93-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Se hace <strong><em>k-fold cross validation</em></strong> con <span class="math inline">\(k = 10\)</span> y se promedia el MSE:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-110-1.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-94-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8.92835</code></pre>
@@ -2320,7 +1995,7 @@ F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Se ajusta el modelo Lasso con las tres mediciones LRT_CM, LRM_90 y LRM_R.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-113-1.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-97-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10.30675</code></pre>
@@ -2387,13 +2062,13 @@ SexoMasculino
 <p>Algunos coeficientes se hacen cero:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-116-1.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-100-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Se hace <strong><em>k-fold cross validation</em></strong> con <span class="math inline">\(k = 10\)</span> y se promedia el MSE:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-117-1.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-101-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 9.840965</code></pre>
@@ -2422,13 +2097,13 @@ EtniaBlanco-Mestizo       EtniaIndigena           EtniaRrom
 <p>Algunos coeficientes se hacen cero:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-121-1.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-105-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Se hace <strong><em>k-fold cross validation</em></strong> con <span class="math inline">\(k = 10\)</span> y se promedia el MSE:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-122-1.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-106-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 12.85664</code></pre>
@@ -2459,13 +2134,13 @@ EtniaBlanco-Mestizo       EtniaIndigena
 <p>Algunos coeficientes se hacen cero:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-126-1.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-110-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Se hace <strong><em>k-fold cross validation</em></strong> con <span class="math inline">\(k = 10\)</span> y se promedia el MSE:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-127-1.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-111-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 11.01789</code></pre>
@@ -2496,13 +2171,13 @@ EtniaBlanco-Mestizo       EtniaIndigena           EtniaRrom
 <p>Algunos coeficientes se hacen cero:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-131-1.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-115-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Se hace <strong><em>k-fold cross validation</em></strong> con <span class="math inline">\(k = 10\)</span> y se promedia el MSE:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="modelos_files/figure-html/unnamed-chunk-132-1.png" class="img-fluid" width="672"></p>
+<p><img src="modelos_files/figure-html/unnamed-chunk-116-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 13.63767</code></pre>
