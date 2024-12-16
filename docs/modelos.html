@@ -204,19 +204,19 @@ Selection Algorithm: exhaustive
 <p><span class="math inline">\(R^2\)</span>, <span class="math inline">\(R^2\)</span> ajustado, SCE, y BIC para cada mejor modelo del correspondiente tamaño:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8698667 0.8801420 0.8867299 0.8869827 0.8873673 0.8877334 0.8879118
-[8] 0.8879344</code></pre>
+<pre><code>[1] 0.8686814 0.8789431 0.8862590 0.8865490 0.8869361 0.8873216 0.8875270
+[8] 0.8875271</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8696326 0.8797100 0.8861165 0.8861653 0.8863471 0.8865109 0.8864852
-[8] 0.8863014</code></pre>
+<pre><code>[1] 0.8684386 0.8784947 0.8856260 0.8857055 0.8858834 0.8860602 0.8860554
+[8] 0.8858421</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 6553.144 6035.711 5703.960 5691.228 5671.863 5653.429 5644.443 5643.306</code></pre>
+<pre><code>[1] 6398.986 5898.947 5542.449 5528.321 5509.455 5490.674 5480.665 5480.657</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -1125.223 -1164.794 -1190.016 -1184.938 -1180.516 -1176.008 -1170.571
-[8] -1164.359</code></pre>
+<pre><code>[1] -1089.766 -1127.650 -1155.202 -1150.291 -1145.850 -1141.407 -1136.101
+[8] -1129.804</code></pre>
 </div>
 </div>
 <p>Usando el criterio BIC, el mejor modelo es el de 3 variables:</p>
@@ -241,7 +241,7 @@ Selection Algorithm: exhaustive
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>  (Intercept)         LRT_A          Edad SexoMasculino 
-   58.6716838     2.1887673    -0.1154329     3.0592396 </code></pre>
+   59.1083106     2.1894102    -0.1216628     3.0653353 </code></pre>
 </div>
 </div>
 <p>Esto sugiere usar el modelo <span class="math inline">\(Talla = 58.67 + 2.19 LRT\_A - 0.12Edad + 3.06Sexo\)</span>,<br>
@@ -259,7 +259,7 @@ Selection Algorithm: exhaustive
 <div class="cell-output cell-output-stdout">
 <pre><code>folds
  1  2  3  4  5  6  7  8  9 10 
-56 56 56 56 56 56 56 56 55 55 </code></pre>
+55 55 55 54 54 54 54 54 54 54 </code></pre>
 </div>
 </div>
 <p>MSE promedio a través de los <span class="math inline">\(10\)</span> pliegues para cada número de variables incluídas en el modelo:</p>
@@ -269,7 +269,7 @@ Selection Algorithm: exhaustive
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       1        2        3        4        5        6        7 
-11.82329 10.93287 10.37418 10.64898 10.69236 10.62427 10.60688 </code></pre>
+11.88403 11.00914 10.39225 10.47051 10.55927 10.61288 10.55258 </code></pre>
 </div>
 </div>
 <p>El MSE se minimiza usando un modelo de 3 variables:</p>
@@ -281,12 +281,12 @@ Selection Algorithm: exhaustive
 <p>Se busca nuevamente el mejor modelo de tres variables usando todos los datos:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -1125.223 -1164.794 -1190.016 -1184.938 -1180.516 -1176.008 -1170.571
-[8] -1164.359</code></pre>
+<pre><code>[1] -1089.766 -1127.650 -1155.202 -1150.291 -1145.850 -1141.407 -1136.101
+[8] -1129.804</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  (Intercept)         LRT_A          Edad SexoMasculino 
-   58.6716838     2.1887673    -0.1154329     3.0592396 </code></pre>
+   59.1083106     2.1894102    -0.1216628     3.0653353 </code></pre>
 </div>
 </div>
 <p>Casualmente volvió a dar el mismo modelo con tres variables que incluye LRT_A, la Edad y el Sexo. Esto es seguramente porque las demás variables no contribuyen significativamente a la presición predictiva de los modelos.</p>
@@ -299,20 +299,20 @@ lm(formula = Talla ~ LRT_A + Edad + Sexo, data = datos)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--10.4143  -2.0653   0.0994   2.3139   9.2337 
+-10.4374  -2.0311   0.1058   2.2783   9.2680 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   58.67168    2.87941  20.376  &lt; 2e-16 ***
-LRT_A          2.18877    0.05318  41.160  &lt; 2e-16 ***
-Edad          -0.11543    0.02034  -5.676 2.22e-08 ***
-SexoMasculino  3.05924    0.38579   7.930 1.22e-14 ***
+(Intercept)   59.10831    2.90260  20.364  &lt; 2e-16 ***
+LRT_A          2.18941    0.05360  40.848  &lt; 2e-16 ***
+Edad          -0.12166    0.02066  -5.888 6.88e-09 ***
+SexoMasculino  3.06534    0.38877   7.885 1.76e-14 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 3.209 on 554 degrees of freedom
-Multiple R-squared:  0.8867,    Adjusted R-squared:  0.8861 
-F-statistic:  1446 on 3 and 554 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 3.207 on 539 degrees of freedom
+Multiple R-squared:  0.8863,    Adjusted R-squared:  0.8856 
+F-statistic:  1400 on 3 and 539 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>El modelo tiene un <span class="math inline">\(R^2\)</span> ajustado de <span class="math inline">\(0.8861\)</span>, es decir que aproximadamente un <span class="math inline">\(88.61\%\)</span> de la variabilidad de la talla es explicada por LRT_A, la edad y el sexo.</p>
@@ -330,7 +330,7 @@ F-statistic:  1446 on 3 and 554 DF,  p-value: &lt; 2.2e-16</code></pre>
     Durbin-Watson test
 
 data:  reg
-DW = 2.0611, p-value = 0.7602
+DW = 2.0507, p-value = 0.7173
 alternative hypothesis: true autocorrelation is greater than 0</code></pre>
 </div>
 </div>
@@ -345,14 +345,14 @@ alternative hypothesis: true autocorrelation is greater than 0</code></pre>
     Lilliefors (Kolmogorov-Smirnov) normality test
 
 data:  reg$residuals
-D = 0.020992, p-value = 0.7968</code></pre>
+D = 0.02184, p-value = 0.7651</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Anderson-Darling normality test
 
 data:  reg$residuals
-A = 0.32808, p-value = 0.5169</code></pre>
+A = 0.41295, p-value = 0.337</code></pre>
 </div>
 </div>
 <p>El QQ-plot muestra que los residuales se ajustan aceptablemente a una distribución normal. Las pruebas de normalidad de Lilliefors y Anderson-Darling también apoyan este resultado.</p>
@@ -370,7 +370,7 @@ A = 0.32808, p-value = 0.5169</code></pre>
     studentized Breusch-Pagan test
 
 data:  reg
-BP = 0.55158, df = 3, p-value = 0.9074</code></pre>
+BP = 0.8348, df = 3, p-value = 0.8411</code></pre>
 </div>
 </div>
 <p>No se rechaza la hipótesis nula de que los errores del modelo son homoscedasticos.</p>
@@ -378,7 +378,7 @@ BP = 0.55158, df = 3, p-value = 0.9074</code></pre>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>   LRT_A     Edad     Sexo 
-1.969323 1.033462 2.016124 </code></pre>
+1.942637 1.038371 1.995345 </code></pre>
 </div>
 </div>
 <p>Dado que los VIFs son mucho menores a 5, esto indica que cada variable tiene una correlación moderada (leve) con las demás. Por lo que se puede concluir que los resultados del modelo posiblemente no estarán muy afectados por la multicolinealidad.</p>
@@ -389,14 +389,14 @@ BP = 0.55158, df = 3, p-value = 0.9074</code></pre>
     RESET test
 
 data:  reg
-RESET = 0.59636, df1 = 4, df2 = 550, p-value = 0.6654</code></pre>
+RESET = 0.62101, df1 = 4, df2 = 535, p-value = 0.6477</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     RESET test
 
 data:  reg
-RESET = 0.55668, df1 = 2, df2 = 552, p-value = 0.5734</code></pre>
+RESET = 0.98691, df1 = 2, df2 = 537, p-value = 0.3734</code></pre>
 </div>
 </div>
 <p>No se rechaza la hipótesis nula de que el modelo está bien especificado.</p>
@@ -424,11 +424,10 @@ RESET = 0.55668, df1 = 2, df2 = 552, p-value = 0.5734</code></pre>
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <pre><code>       StudRes        Hat       CookD
-43  -2.9217034 0.01478212 0.031589921
-518 -0.6883523 0.02931721 0.003581125
-533 -3.2921956 0.01084187 0.029181318
-549  2.3779296 0.02294907 0.032927013
-552 -0.8119336 0.02399702 0.004054660</code></pre>
+41  -2.9464281 0.01514476 0.032906079
+505 -0.6485772 0.03066342 0.003330247
+520 -3.3029648 0.01104953 0.029923010
+538 -0.8302135 0.02463562 0.004354784</code></pre>
 </div>
 </div>
 </div>
@@ -443,21 +442,21 @@ lm(formula = Talla ~ LRT_A + Edad + Sexo, data = datos, subset = {
 })
 
 Residuals:
-   Min     1Q Median     3Q    Max 
--8.689 -1.982  0.043  2.264  9.363 
+     Min       1Q   Median       3Q      Max 
+-10.4573  -2.0353   0.1184   2.2692   9.2417 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   58.77804    2.83614  20.725  &lt; 2e-16 ***
-LRT_A          2.19904    0.05272  41.713  &lt; 2e-16 ***
-Edad          -0.12388    0.02007  -6.171 1.31e-09 ***
-SexoMasculino  3.12662    0.37990   8.230 1.36e-15 ***
+(Intercept)   59.22121    2.91027  20.349  &lt; 2e-16 ***
+LRT_A          2.18636    0.05401  40.477  &lt; 2e-16 ***
+Edad          -0.12112    0.02073  -5.843 8.88e-09 ***
+SexoMasculino  3.07005    0.38910   7.890 1.70e-14 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 3.145 on 551 degrees of freedom
-Multiple R-squared:  0.8907,    Adjusted R-squared:  0.8901 
-F-statistic:  1497 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 3.208 on 537 degrees of freedom
+Multiple R-squared:  0.8846,    Adjusted R-squared:  0.8839 
+F-statistic:  1372 on 3 and 537 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Las estimaciones de los coeficientes del modelo sin las obervaciones influyentes han cambiado un poco respecto al modelo original. El <span class="math inline">\(R^2\)</span> ajustado ha incrementado un poco también.</p>
@@ -494,16 +493,16 @@ Selection Algorithm: exhaustive
 <p><span class="math inline">\(R^2\)</span>, <span class="math inline">\(R^2\)</span> ajustado, SCE, y BIC para cada mejor modelo del correspondiente tamaño:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8698667 0.8801420 0.8867299 0.8868657 0.8873673 0.8877334</code></pre>
+<pre><code>[1] 0.8686814 0.8789431 0.8862590 0.8863940 0.8869361 0.8873216</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8696326 0.8797100 0.8861165 0.8860474 0.8863471 0.8865109</code></pre>
+<pre><code>[1] 0.8684386 0.8784947 0.8856260 0.8855493 0.8858834 0.8860602</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 6553.144 6035.711 5703.960 5697.122 5671.863 5653.429</code></pre>
+<pre><code>[1] 6398.986 5898.947 5542.449 5535.875 5509.455 5490.674</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -1125.223 -1164.794 -1190.016 -1184.360 -1180.516 -1176.008</code></pre>
+<pre><code>[1] -1089.766 -1127.650 -1155.202 -1149.550 -1145.850 -1141.407</code></pre>
 </div>
 </div>
 <p>Usando el criterio BIC, el mejor modelo es el de 3 variables:</p>
@@ -522,7 +521,7 @@ Selection Algorithm: exhaustive
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>  (Intercept)         LRT_A          Edad SexoMasculino 
-   58.6716838     2.1887673    -0.1154329     3.0592396 </code></pre>
+   59.1083106     2.1894102    -0.1216628     3.0653353 </code></pre>
 </div>
 </div>
 <p>Esto sugiere usar el modelo <span class="math inline">\(Talla = 58.67 + 2.19 LRT\_A - 0.12Edad + 3.06Sexo\)</span>,<br>
@@ -537,7 +536,7 @@ Selection Algorithm: exhaustive
 <p>El MSE para el modelo de 3 variables (<span class="math inline">\(LRT\_A, Edad, Sexo\)</span>) es:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 10.37418</code></pre>
+<pre><code>[1] 10.39225</code></pre>
 </div>
 </div>
 <p>Ahora se validarán los supuestos para el mejor modelo obtenido:</p>
@@ -549,20 +548,20 @@ lm(formula = Talla ~ LRT_A + Edad + Sexo, data = datos)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--10.4143  -2.0653   0.0994   2.3139   9.2337 
+-10.4374  -2.0311   0.1058   2.2783   9.2680 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   58.67168    2.87941  20.376  &lt; 2e-16 ***
-LRT_A          2.18877    0.05318  41.160  &lt; 2e-16 ***
-Edad          -0.11543    0.02034  -5.676 2.22e-08 ***
-SexoMasculino  3.05924    0.38579   7.930 1.22e-14 ***
+(Intercept)   59.10831    2.90260  20.364  &lt; 2e-16 ***
+LRT_A          2.18941    0.05360  40.848  &lt; 2e-16 ***
+Edad          -0.12166    0.02066  -5.888 6.88e-09 ***
+SexoMasculino  3.06534    0.38877   7.885 1.76e-14 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 3.209 on 554 degrees of freedom
-Multiple R-squared:  0.8867,    Adjusted R-squared:  0.8861 
-F-statistic:  1446 on 3 and 554 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 3.207 on 539 degrees of freedom
+Multiple R-squared:  0.8863,    Adjusted R-squared:  0.8856 
+F-statistic:  1400 on 3 and 539 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>El modelo tiene un <span class="math inline">\(R^2\)</span> ajustado de <span class="math inline">\(0.8861\)</span>, es decir que aproximadamente un <span class="math inline">\(88.61\%\)</span> de la variabilidad de la talla es explicada por LRT_A, la edad y el sexo.</p>
@@ -580,7 +579,7 @@ F-statistic:  1446 on 3 and 554 DF,  p-value: &lt; 2.2e-16</code></pre>
     Durbin-Watson test
 
 data:  reg
-DW = 2.0611, p-value = 0.7602
+DW = 2.0507, p-value = 0.7173
 alternative hypothesis: true autocorrelation is greater than 0</code></pre>
 </div>
 </div>
@@ -595,14 +594,14 @@ alternative hypothesis: true autocorrelation is greater than 0</code></pre>
     Lilliefors (Kolmogorov-Smirnov) normality test
 
 data:  reg$residuals
-D = 0.020992, p-value = 0.7968</code></pre>
+D = 0.02184, p-value = 0.7651</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Anderson-Darling normality test
 
 data:  reg$residuals
-A = 0.32808, p-value = 0.5169</code></pre>
+A = 0.41295, p-value = 0.337</code></pre>
 </div>
 </div>
 <p>El QQ-plot muestra que los residuales se ajustan aceptablemente a una distribución normal. Las pruebas de normalidad de Lilliefors y Anderson-Darling también apoyan este resultado.</p>
@@ -620,7 +619,7 @@ A = 0.32808, p-value = 0.5169</code></pre>
     studentized Breusch-Pagan test
 
 data:  reg
-BP = 0.55158, df = 3, p-value = 0.9074</code></pre>
+BP = 0.8348, df = 3, p-value = 0.8411</code></pre>
 </div>
 </div>
 <p>No se rechaza la hipótesis nula de que los errores del modelo son homoscedasticos.</p>
@@ -628,7 +627,7 @@ BP = 0.55158, df = 3, p-value = 0.9074</code></pre>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>   LRT_A     Edad     Sexo 
-1.969323 1.033462 2.016124 </code></pre>
+1.942637 1.038371 1.995345 </code></pre>
 </div>
 </div>
 <p>Dado que los VIFs son mucho menores a 5, esto indica que cada variable tiene una correlación moderada (leve) con las demás. Por lo que se puede concluir que los resultados del modelo posiblemente no estarán muy afectados por la multicolinealidad.</p>
@@ -639,14 +638,14 @@ BP = 0.55158, df = 3, p-value = 0.9074</code></pre>
     RESET test
 
 data:  reg
-RESET = 0.59636, df1 = 4, df2 = 550, p-value = 0.6654</code></pre>
+RESET = 0.62101, df1 = 4, df2 = 535, p-value = 0.6477</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     RESET test
 
 data:  reg
-RESET = 0.55668, df1 = 2, df2 = 552, p-value = 0.5734</code></pre>
+RESET = 0.98691, df1 = 2, df2 = 537, p-value = 0.3734</code></pre>
 </div>
 </div>
 <p>No se rechaza la hipótesis nula de que el modelo está bien especificado.</p>
@@ -674,11 +673,10 @@ RESET = 0.55668, df1 = 2, df2 = 552, p-value = 0.5734</code></pre>
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <pre><code>       StudRes        Hat       CookD
-43  -2.9217034 0.01478212 0.031589921
-518 -0.6883523 0.02931721 0.003581125
-533 -3.2921956 0.01084187 0.029181318
-549  2.3779296 0.02294907 0.032927013
-552 -0.8119336 0.02399702 0.004054660</code></pre>
+41  -2.9464281 0.01514476 0.032906079
+505 -0.6485772 0.03066342 0.003330247
+520 -3.3029648 0.01104953 0.029923010
+538 -0.8302135 0.02463562 0.004354784</code></pre>
 </div>
 </div>
 </div>
@@ -693,21 +691,21 @@ lm(formula = Talla ~ LRT_A + Edad + Sexo, data = datos, subset = {
 })
 
 Residuals:
-   Min     1Q Median     3Q    Max 
--8.689 -1.982  0.043  2.264  9.363 
+     Min       1Q   Median       3Q      Max 
+-10.4573  -2.0353   0.1184   2.2692   9.2417 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   58.77804    2.83614  20.725  &lt; 2e-16 ***
-LRT_A          2.19904    0.05272  41.713  &lt; 2e-16 ***
-Edad          -0.12388    0.02007  -6.171 1.31e-09 ***
-SexoMasculino  3.12662    0.37990   8.230 1.36e-15 ***
+(Intercept)   59.22121    2.91027  20.349  &lt; 2e-16 ***
+LRT_A          2.18636    0.05401  40.477  &lt; 2e-16 ***
+Edad          -0.12112    0.02073  -5.843 8.88e-09 ***
+SexoMasculino  3.07005    0.38910   7.890 1.70e-14 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 3.145 on 551 degrees of freedom
-Multiple R-squared:  0.8907,    Adjusted R-squared:  0.8901 
-F-statistic:  1497 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 3.208 on 537 degrees of freedom
+Multiple R-squared:  0.8846,    Adjusted R-squared:  0.8839 
+F-statistic:  1372 on 3 and 537 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Las estimaciones de los coeficientes del modelo sin las obervaciones influyentes han cambiado un poco respecto al modelo original. El <span class="math inline">\(R^2\)</span> ajustado ha incrementado un poco también.</p>
@@ -734,7 +732,7 @@ Selection Algorithm: exhaustive
 1  ( 1 ) "*"    " "  " "           " "                 " "           " "      
 2  ( 1 ) "*"    " "  "*"           " "                 " "           " "      
 3  ( 1 ) "*"    "*"  "*"           " "                 " "           " "      
-4  ( 1 ) "*"    "*"  "*"           " "                 "*"           " "      
+4  ( 1 ) "*"    "*"  "*"           "*"                 " "           " "      
 5  ( 1 ) "*"    "*"  "*"           "*"                 "*"           " "      
 6  ( 1 ) "*"    "*"  "*"           "*"                 "*"           "*"      </code></pre>
 </div>
@@ -742,16 +740,16 @@ Selection Algorithm: exhaustive
 <p><span class="math inline">\(R^2\)</span>, <span class="math inline">\(R^2\)</span> ajustado, SCE, y BIC para cada mejor modelo del correspondiente tamaño:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8380145 0.8609620 0.8693315 0.8694316 0.8699906 0.8700490</code></pre>
+<pre><code>[1] 0.8406283 0.8622339 0.8703559 0.8704753 0.8710482 0.8711093</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8377231 0.8604610 0.8686239 0.8684872 0.8688130 0.8686339</code></pre>
+<pre><code>[1] 0.8403337 0.8617236 0.8696344 0.8695123 0.8698475 0.8696665</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 8157.132 7001.557 6580.096 6575.054 6546.905 6543.963</code></pre>
+<pre><code>[1] 7765.975 6713.164 6317.387 6311.568 6283.655 6280.677</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -1003.050 -1081.966 -1110.284 -1104.387 -1100.457 -1094.383</code></pre>
+<pre><code>[1]  -984.6341 -1057.4421 -1084.1402 -1078.3435 -1074.4531 -1068.4135</code></pre>
 </div>
 </div>
 <p>Usando el criterio BIC, el mejor modelo es el de 3 variables:</p>
@@ -770,7 +768,7 @@ Selection Algorithm: exhaustive
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>  (Intercept)        LRT_CM          Edad SexoMasculino 
-   57.2481566     2.1620113    -0.1299881     4.2477737 </code></pre>
+   57.3048203     2.1612215    -0.1281442     4.1354010 </code></pre>
 </div>
 </div>
 <p>Esto sugiere usar el modelo <span class="math inline">\(Talla = 57.25 + 2.16 LRT\_CM - 0.13 Edad + 4.25 Sexo\)</span>,<br>
@@ -779,7 +777,7 @@ Selection Algorithm: exhaustive
 <p>El MSE para el modelo de 3 variables (<span class="math inline">\(LRT\_A, Edad, Sexo\)</span>) es:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 11.95892</code></pre>
+<pre><code>[1] 11.78225</code></pre>
 </div>
 </div>
 <p>Ahora se validarán los supuestos para el mejor modelo obtenido:</p>
@@ -791,20 +789,20 @@ lm(formula = Talla ~ LRT_CM + Edad + Sexo, data = datos)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--10.1768  -2.1772   0.0313   2.2208  10.5135 
+-10.2270  -2.1500   0.0739   2.1773  10.3679 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   57.24816    3.18643  17.966  &lt; 2e-16 ***
-LRT_CM         2.16201    0.05789  37.347  &lt; 2e-16 ***
-Edad          -0.12999    0.02182  -5.957 4.57e-09 ***
-SexoMasculino  4.24777    0.39777  10.679  &lt; 2e-16 ***
+(Intercept)   57.30482    3.19489  17.936  &lt; 2e-16 ***
+LRT_CM         2.16122    0.05781  37.386  &lt; 2e-16 ***
+Edad          -0.12814    0.02205  -5.811 1.06e-08 ***
+SexoMasculino  4.13540    0.40019  10.334  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 3.446 on 554 degrees of freedom
-Multiple R-squared:  0.8693,    Adjusted R-squared:  0.8686 
-F-statistic:  1229 on 3 and 554 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 3.424 on 539 degrees of freedom
+Multiple R-squared:  0.8704,    Adjusted R-squared:  0.8696 
+F-statistic:  1206 on 3 and 539 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>El modelo tiene un <span class="math inline">\(R^2\)</span> ajustado de <span class="math inline">\(0.8686\)</span>, es decir que aproximadamente un <span class="math inline">\(86.86\%\)</span> de la variabilidad de la talla es explicada por el modelo.</p>
@@ -814,7 +812,7 @@ F-statistic:  1229 on 3 and 554 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre><code>[1] "La media de los residuales es cercana a 0: "</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9.170291e-17</code></pre>
+<pre><code>[1] -2.221117e-17</code></pre>
 </div>
 <div class="cell-output-display">
 <p><img src="modelos_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid" width="672"></p>
@@ -828,7 +826,7 @@ F-statistic:  1229 on 3 and 554 DF,  p-value: &lt; 2.2e-16</code></pre>
     Durbin-Watson test
 
 data:  reg
-DW = 2.083, p-value = 0.8329
+DW = 2.0982, p-value = 0.8707
 alternative hypothesis: true autocorrelation is greater than 0</code></pre>
 </div>
 </div>
@@ -843,14 +841,14 @@ alternative hypothesis: true autocorrelation is greater than 0</code></pre>
     Lilliefors (Kolmogorov-Smirnov) normality test
 
 data:  reg$residuals
-D = 0.021411, p-value = 0.7732</code></pre>
+D = 0.023514, p-value = 0.66</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Anderson-Darling normality test
 
 data:  reg$residuals
-A = 0.3255, p-value = 0.5213</code></pre>
+A = 0.35371, p-value = 0.4625</code></pre>
 </div>
 </div>
 <p>El QQ-plot muestra que los residuales se ajustan aceptablemente a una distribución normal. Las pruebas de normalidad de Lilliefors y Anderson-Darling también apoyan este resultado.</p>
@@ -868,7 +866,7 @@ A = 0.3255, p-value = 0.5213</code></pre>
     studentized Breusch-Pagan test
 
 data:  reg
-BP = 4.3392, df = 3, p-value = 0.2271</code></pre>
+BP = 4.524, df = 3, p-value = 0.2102</code></pre>
 </div>
 </div>
 <p>No se rechaza la hipótesis nula de que los errores del modelo son homoscedasticos.</p>
@@ -876,7 +874,7 @@ BP = 4.3392, df = 3, p-value = 0.2271</code></pre>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>  LRT_CM     Edad     Sexo 
-1.816051 1.031567 1.857875 </code></pre>
+1.805247 1.037625 1.854874 </code></pre>
 </div>
 </div>
 <p>Dado que los VIFs son mucho menores a 5, esto indica que cada variable tiene una correlación moderada (leve) con las demás. Por lo que se puede concluir que los resultados del modelo posiblemente no estarán muy afectados por la multicolinealidad.</p>
@@ -887,14 +885,14 @@ BP = 4.3392, df = 3, p-value = 0.2271</code></pre>
     RESET test
 
 data:  reg
-RESET = 0.72797, df1 = 4, df2 = 550, p-value = 0.5731</code></pre>
+RESET = 0.95259, df1 = 4, df2 = 535, p-value = 0.4332</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     RESET test
 
 data:  reg
-RESET = 0.26394, df1 = 2, df2 = 552, p-value = 0.7681</code></pre>
+RESET = 0.52406, df1 = 2, df2 = 537, p-value = 0.5924</code></pre>
 </div>
 </div>
 <p>No se rechaza la hipótesis nula de que el modelo está bien especificado.</p>
@@ -922,12 +920,12 @@ RESET = 0.26394, df1 = 2, df2 = 552, p-value = 0.7681</code></pre>
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <pre><code>       StudRes         Hat       CookD
-43  -2.9806385 0.016649964 0.037078890
-284  2.9957912 0.003681190 0.008172332
-374  3.0807810 0.004470673 0.010494809
-518 -0.6637692 0.029371716 0.003336486
-533 -2.7413682 0.012751983 0.023985495
-552 -0.5013029 0.026976469 0.001744173</code></pre>
+41  -3.0080070 0.016908956 0.038333988
+346 -3.0192135 0.006311404 0.014259783
+363  3.0588792 0.004620190 0.010691877
+505 -0.7271639 0.030472832 0.004158506
+520 -2.7728983 0.012919280 0.024850615
+538 -0.5481181 0.027348700 0.002114618</code></pre>
 </div>
 </div>
 </div>
@@ -942,21 +940,21 @@ lm(formula = Talla ~ LRT_CM + Edad + Sexo, data = datos, subset = {
 })
 
 Residuals:
-     Min       1Q   Median       3Q      Max 
--10.2522  -2.2200   0.0548   2.2229  10.5288 
+    Min      1Q  Median      3Q     Max 
+-10.232  -2.158   0.065   2.165  10.364 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   57.91812    3.15350   18.37  &lt; 2e-16 ***
-LRT_CM         2.15106    0.05761   37.34  &lt; 2e-16 ***
-Edad          -0.13222    0.02143   -6.17 1.33e-09 ***
-SexoMasculino  4.40853    0.39386   11.19  &lt; 2e-16 ***
+(Intercept)   57.44618    3.20775  17.909  &lt; 2e-16 ***
+LRT_CM         2.15628    0.05825  37.017  &lt; 2e-16 ***
+Edad          -0.12667    0.02215  -5.718  1.8e-08 ***
+SexoMasculino  4.14110    0.40059  10.338  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 3.382 on 551 degrees of freedom
-Multiple R-squared:  0.8735,    Adjusted R-squared:  0.8728 
-F-statistic:  1269 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 3.426 on 536 degrees of freedom
+Multiple R-squared:  0.8684,    Adjusted R-squared:  0.8676 
+F-statistic:  1179 on 3 and 536 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Las estimaciones de los coeficientes del modelo sin las obervaciones influyentes han cambiado un poco respecto al modelo original. El <span class="math inline">\(R^2\)</span> ajustado ha incrementado un poco también.</p>
@@ -991,16 +989,16 @@ Selection Algorithm: exhaustive
 <p><span class="math inline">\(R^2\)</span>, <span class="math inline">\(R^2\)</span> ajustado, SCE, y BIC para cada mejor modelo del correspondiente tamaño:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8337629 0.8515724 0.8588308 0.8590271 0.8594850 0.8601303</code></pre>
+<pre><code>[1] 0.8341945 0.8516241 0.8581963 0.8583950 0.8588665 0.8595238</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8334639 0.8510376 0.8580664 0.8580074 0.8582122 0.8586072</code></pre>
+<pre><code>[1] 0.8338880 0.8510745 0.8574070 0.8573422 0.8575524 0.8579513</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 8371.228 7474.391 7108.879 7098.996 7075.937 7043.440</code></pre>
+<pre><code>[1] 8079.489 7230.166 6909.911 6900.229 6877.253 6845.224</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  -988.5931 -1045.5002 -1067.1529 -1061.6048 -1057.0959 -1053.3401</code></pre>
+<pre><code>[1]  -963.144 -1017.156 -1035.460 -1029.924 -1025.438 -1021.676</code></pre>
 </div>
 </div>
 <p>Usando el criterio BIC, el mejor modelo es el de 3 variables:</p>
@@ -1019,14 +1017,14 @@ Selection Algorithm: exhaustive
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>  (Intercept)         LRM_R          Edad SexoMasculino 
-   68.8247189     2.2078940    -0.1211314     3.8654525 </code></pre>
+    68.048537      2.217070     -0.115388      3.814406 </code></pre>
 </div>
 </div>
 <p>Nuevamente se hará la búsqueda del mejor modelo usando <strong><em>K - fold cross validation</em></strong> con el fin de calcular directamente los errores de predicción sobre los datos de testeo y evitar así el sobreajuste.</p>
 <p>El MSE para el modelo de 3 variables (<span class="math inline">\(LRT\_A, Edad, Sexo\)</span>) es:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 12.93892</code></pre>
+<pre><code>[1] 12.99465</code></pre>
 </div>
 </div>
 <p>Ahora se validarán los supuestos para el mejor modelo obtenido:</p>
@@ -1038,20 +1036,20 @@ lm(formula = Talla ~ LRM_R + Edad + Sexo, data = datos)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--13.2132  -2.2352   0.0492   2.3139  10.1632 
+-13.1766  -2.1806   0.0388   2.2805  10.1682 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   68.82472    3.07042  22.415  &lt; 2e-16 ***
-LRM_R          2.20789    0.06245  35.353  &lt; 2e-16 ***
-Edad          -0.12113    0.02270  -5.337 1.38e-07 ***
-SexoMasculino  3.86545    0.42383   9.120  &lt; 2e-16 ***
+(Intercept)   68.04854    3.12423  21.781  &lt; 2e-16 ***
+LRM_R          2.21707    0.06317  35.095  &lt; 2e-16 ***
+Edad          -0.11539    0.02309  -4.998 7.84e-07 ***
+SexoMasculino  3.81441    0.42819   8.908  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 3.582 on 554 degrees of freedom
-Multiple R-squared:  0.8588,    Adjusted R-squared:  0.8581 
-F-statistic:  1123 on 3 and 554 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 3.58 on 539 degrees of freedom
+Multiple R-squared:  0.8582,    Adjusted R-squared:  0.8574 
+F-statistic:  1087 on 3 and 539 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>El modelo propuesto parala medida Longitud Rodilla-Maleólo <span class="math inline">\((LRM_R)\)</span> con la pierna estirada es:</p>
@@ -1071,7 +1069,7 @@ F-statistic:  1123 on 3 and 554 DF,  p-value: &lt; 2.2e-16</code></pre>
     Durbin-Watson test
 
 data:  reg
-DW = 1.9078, p-value = 0.2689
+DW = 1.907, p-value = 0.2713
 alternative hypothesis: true autocorrelation is not 0</code></pre>
 </div>
 </div>
@@ -1086,14 +1084,14 @@ alternative hypothesis: true autocorrelation is not 0</code></pre>
     Lilliefors (Kolmogorov-Smirnov) normality test
 
 data:  reg$residuals
-D = 0.020548, p-value = 0.8212</code></pre>
+D = 0.021779, p-value = 0.7687</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Anderson-Darling normality test
 
 data:  reg$residuals
-A = 0.27849, p-value = 0.6483</code></pre>
+A = 0.30194, p-value = 0.5759</code></pre>
 </div>
 </div>
 <p>El QQ-plot muestra que los residuales se ajustan aceptablemente a una distribución normal. Las pruebas de normalidad de Lilliefors y Anderson-Darling también apoyan este resultado.</p>
@@ -1111,7 +1109,7 @@ A = 0.27849, p-value = 0.6483</code></pre>
     Breusch-Pagan test
 
 data:  reg
-BP = 8.2039, df = 3, p-value = 0.04198</code></pre>
+BP = 7.9093, df = 3, p-value = 0.04792</code></pre>
 </div>
 </div>
 <p>Se rechaza la hipótesis nula de que los errores del modelo son homoscedasticos.</p>
@@ -1119,7 +1117,7 @@ BP = 8.2039, df = 3, p-value = 0.04198</code></pre>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>   LRM_R     Edad     Sexo 
-1.907229 1.032902 1.952447 </code></pre>
+1.887057 1.039726 1.941441 </code></pre>
 </div>
 </div>
 <p>Dado que los VIFs son mucho menores a 5, cada variable tiene una correlación moderada (leve) con las demás. Los resultados del modelo no deberían verse afectados por la multicolinealidad.</p>
@@ -1130,14 +1128,14 @@ BP = 8.2039, df = 3, p-value = 0.04198</code></pre>
     RESET test
 
 data:  reg
-RESET = 0.67777, df1 = 4, df2 = 550, p-value = 0.6076</code></pre>
+RESET = 0.73773, df1 = 4, df2 = 535, p-value = 0.5665</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     RESET test
 
 data:  reg
-RESET = 0.012072, df1 = 2, df2 = 552, p-value = 0.988</code></pre>
+RESET = 0.045213, df1 = 2, df2 = 537, p-value = 0.9558</code></pre>
 </div>
 </div>
 <p>No se rechaza la hipótesis nula de que el modelo está bien especificado.</p>
@@ -1165,10 +1163,10 @@ RESET = 0.012072, df1 = 2, df2 = 552, p-value = 0.988</code></pre>
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <pre><code>       StudRes         Hat        CookD
-518  0.2187011 0.032266703 0.0003993814
-533 -3.7468704 0.008055180 0.0278459402
-542 -3.4439564 0.008737432 0.0256341372
-552 -0.3225551 0.029079267 0.0007802801</code></pre>
+505  0.1915271 0.033494744 0.0003183829
+520 -3.7396744 0.008271635 0.0284752514
+529 -3.4640045 0.009155150 0.0271633483
+538 -0.2905027 0.030237545 0.0006589612</code></pre>
 </div>
 </div>
 </div>
@@ -1184,20 +1182,20 @@ lm(formula = Talla ~ LRM_R + Edad + Sexo, data = datos, subset = {
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--9.4982 -2.3136 -0.0108  2.2634 10.2233 
+-13.226  -2.208   0.027   2.274  10.186 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   69.74806    2.99218  23.310  &lt; 2e-16 ***
-LRM_R          2.17604    0.06096  35.698  &lt; 2e-16 ***
-Edad          -0.11543    0.02210  -5.224 2.48e-07 ***
-SexoMasculino  4.04460    0.41435   9.761  &lt; 2e-16 ***
+(Intercept)   68.82332    3.12440  22.028  &lt; 2e-16 ***
+LRM_R          2.20499    0.06321  34.884  &lt; 2e-16 ***
+Edad          -0.11872    0.02306  -5.148  3.7e-07 ***
+SexoMasculino  3.82495    0.42647   8.969  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 3.478 on 551 degrees of freedom
-Multiple R-squared:  0.8653,    Adjusted R-squared:  0.8645 
-F-statistic:  1180 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 3.564 on 536 degrees of freedom
+Multiple R-squared:  0.8574,    Adjusted R-squared:  0.8566 
+F-statistic:  1074 on 3 and 536 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Las estimaciones de los coeficientes del modelo sin las obervaciones influyentes han cambiado un poco respecto al modelo original. El <span class="math inline">\(R^2\)</span> ajustado ha incrementado un poco también.</p>
@@ -1224,7 +1222,7 @@ Selection Algorithm: exhaustive
 1  ( 1 ) "*"    " "  " "           " "                 " "           " "      
 2  ( 1 ) "*"    " "  "*"           " "                 " "           " "      
 3  ( 1 ) "*"    "*"  "*"           " "                 " "           " "      
-4  ( 1 ) "*"    "*"  "*"           " "                 " "           "*"      
+4  ( 1 ) "*"    "*"  "*"           "*"                 " "           " "      
 5  ( 1 ) "*"    "*"  "*"           "*"                 " "           "*"      
 6  ( 1 ) "*"    "*"  "*"           "*"                 "*"           "*"      </code></pre>
 </div>
@@ -1232,16 +1230,16 @@ Selection Algorithm: exhaustive
 <p><span class="math inline">\(R^2\)</span>, <span class="math inline">\(R^2\)</span> ajustado, SCE, y BIC para cada mejor modelo del correspondiente tamaño:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7961311 0.8337231 0.8397734 0.8398928 0.8400479 0.8403034</code></pre>
+<pre><code>[1] 0.8177673 0.8498836 0.8568161 0.8569974 0.8571902 0.8574563</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7957644 0.8331239 0.8389057 0.8387347 0.8385991 0.8385644</code></pre>
+<pre><code>[1] 0.8174305 0.8493276 0.8560191 0.8559342 0.8558605 0.8558607</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 10266.259  8373.231  8068.558  8062.544  8054.733  8041.869</code></pre>
+<pre><code>[1] 8879.962 7314.976 6977.167 6968.333 6958.938 6945.970</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -874.7265 -982.1352 -996.4932 -990.5849 -984.8014 -979.3690</code></pre>
+<pre><code>[1]  -911.8475 -1010.8238 -1030.2001 -1024.5910 -1019.0264 -1013.7421</code></pre>
 </div>
 </div>
 <p>Usando el criterio BIC, el mejor modelo es el de 3 variables:</p>
@@ -1260,7 +1258,7 @@ Selection Algorithm: exhaustive
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>  (Intercept)        LRM_90          Edad SexoMasculino 
-   69.3329277     2.1236746    -0.1107071     5.1812086 </code></pre>
+   66.2016693     2.2163573    -0.1184789     4.8293028 </code></pre>
 </div>
 </div>
 <p>Esto sugiere usar el modelo <span class="math inline">\(Talla = 69.33 + 2.12 LRM\_90 - 0.11 Edad + 5.18 Sexo\)</span>,<br>
@@ -1269,7 +1267,7 @@ Selection Algorithm: exhaustive
 <p>El MSE para el modelo de 3 variables (<span class="math inline">\(LRT\_A, Edad, Sexo\)</span>) es:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 14.75788</code></pre>
+<pre><code>[1] 13.08059</code></pre>
 </div>
 </div>
 <p>Ahora se validarán los supuestos para el mejor modelo obtenido:</p>
@@ -1281,20 +1279,20 @@ lm(formula = Talla ~ LRM_90 + Edad + Sexo, data = datos)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--21.5663  -2.2713   0.1688   2.3794   9.0779 
+-12.6469  -2.3083   0.0517   2.3260   9.4260 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)    69.3329     3.3320  20.808  &lt; 2e-16 ***
-LRM_90          2.1237     0.0660  32.176  &lt; 2e-16 ***
-Edad           -0.1107     0.0242  -4.574 5.91e-06 ***
-SexoMasculino   5.1812     0.4307  12.030  &lt; 2e-16 ***
+(Intercept)   66.20167    3.18952  20.756  &lt; 2e-16 ***
+LRM_90         2.21636    0.06360  34.851  &lt; 2e-16 ***
+Edad          -0.11848    0.02319  -5.108 4.51e-07 ***
+SexoMasculino  4.82930    0.41132  11.741  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 3.816 on 554 degrees of freedom
-Multiple R-squared:  0.8398,    Adjusted R-squared:  0.8389 
-F-statistic: 967.9 on 3 and 554 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 3.598 on 539 degrees of freedom
+Multiple R-squared:  0.8568,    Adjusted R-squared:  0.856 
+F-statistic:  1075 on 3 and 539 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>El <span class="math inline">\(R^2\)</span> ajustado indica que aproximadamente un <span class="math inline">\(83.89\%\)</span> de la variabilidad de la talla es explicada por LRT_CM, la edad y el sexo.</p>
@@ -1312,7 +1310,7 @@ F-statistic: 967.9 on 3 and 554 DF,  p-value: &lt; 2.2e-16</code></pre>
     Durbin-Watson test
 
 data:  reg
-DW = 2.0319, p-value = 0.7179
+DW = 2.0296, p-value = 0.7428
 alternative hypothesis: true autocorrelation is not 0</code></pre>
 </div>
 </div>
@@ -1327,14 +1325,14 @@ alternative hypothesis: true autocorrelation is not 0</code></pre>
     Lilliefors (Kolmogorov-Smirnov) normality test
 
 data:  reg$residuals
-D = 0.037043, p-value = 0.06538</code></pre>
+D = 0.019781, p-value = 0.8725</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Anderson-Darling normality test
 
 data:  reg$residuals
-A = 0.6184, p-value = 0.1071</code></pre>
+A = 0.20655, p-value = 0.8687</code></pre>
 </div>
 </div>
 <p>El QQ-plot muestra que los residuales se ajustan aceptablemente a una distribución normal. Las pruebas de normalidad de Lilliefors y Anderson-Darling también apoyan este resultado.</p>
@@ -1352,7 +1350,7 @@ A = 0.6184, p-value = 0.1071</code></pre>
     studentized Breusch-Pagan test
 
 data:  reg
-BP = 5.2259, df = 3, p-value = 0.156</code></pre>
+BP = 6.2678, df = 3, p-value = 0.09928</code></pre>
 </div>
 </div>
 <p>No se rechaza la hipótesis nula de que los errores del modelo son homoscedasticos.</p>
@@ -1360,7 +1358,7 @@ BP = 5.2259, df = 3, p-value = 0.156</code></pre>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>  LRM_90     Edad     Sexo 
-1.730823 1.035056 1.776414 </code></pre>
+1.722901 1.039214 1.774241 </code></pre>
 </div>
 </div>
 <p>Dado que los VIFs son mucho menores a 5, esto indica que cada variable tiene una correlación moderada (leve) con las demás. Por lo que se puede concluir que los resultados del modelo posiblemente no estarán muy afectados por la multicolinealidad.</p>
@@ -1371,14 +1369,14 @@ BP = 5.2259, df = 3, p-value = 0.156</code></pre>
     RESET test
 
 data:  reg
-RESET = 4.1511, df1 = 4, df2 = 550, p-value = 0.00254</code></pre>
+RESET = 0.58122, df1 = 4, df2 = 535, p-value = 0.6764</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     RESET test
 
 data:  reg
-RESET = 6.8777, df1 = 2, df2 = 552, p-value = 0.001121</code></pre>
+RESET = 0.060873, df1 = 2, df2 = 537, p-value = 0.9409</code></pre>
 </div>
 </div>
 <p>En ambos casos, se rechaza la hipótesis nula de que el modelo está bien especificado.</p>
@@ -1405,10 +1403,12 @@ RESET = 6.8777, df1 = 2, df2 = 552, p-value = 0.001121</code></pre>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<pre><code>       StudRes        Hat        CookD
-80  -5.9106093 0.02989242 0.2535863431
-147 -3.8402724 0.01935197 0.0709954316
-552 -0.1399848 0.03225355 0.0001635637</code></pre>
+<pre><code>        StudRes         Hat        CookD
+319  2.11601917 0.020793022 2.361725e-02
+505 -0.79314248 0.030301485 4.917774e-03
+520 -3.56904969 0.008879093 2.792099e-02
+529 -3.15390454 0.009360814 2.311454e-02
+538  0.04476221 0.033442829 1.736374e-05</code></pre>
 </div>
 </div>
 </div>
@@ -1424,20 +1424,20 @@ lm(formula = Talla ~ LRM_90 + Edad + Sexo, data = datos, subset = {
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--11.0593  -2.3247   0.0333   2.3439   9.4841 
+-12.6630  -2.3161   0.0703   2.3319   9.3897 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   66.90479    3.19251  20.957  &lt; 2e-16 ***
-LRM_90         2.19871    0.06392  34.400  &lt; 2e-16 ***
-Edad          -0.12017    0.02297  -5.232 2.38e-07 ***
-SexoMasculino  5.07314    0.41048  12.359  &lt; 2e-16 ***
+(Intercept)   66.21875    3.19376  20.734  &lt; 2e-16 ***
+LRM_90         2.21167    0.06381  34.660  &lt; 2e-16 ***
+Edad          -0.11590    0.02321  -4.993 8.04e-07 ***
+SexoMasculino  4.83615    0.41177  11.745  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 3.616 on 551 degrees of freedom
-Multiple R-squared:  0.8561,    Adjusted R-squared:  0.8553 
-F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 3.594 on 536 degrees of freedom
+Multiple R-squared:  0.8563,    Adjusted R-squared:  0.8555 
+F-statistic:  1065 on 3 and 536 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Las estimaciones de los coeficientes del modelo sin las obervaciones influyentes han cambiado un poco respecto al modelo original. El <span class="math inline">\(R^2\)</span> ajustado ha incrementado un poco también.</p>
@@ -1449,27 +1449,27 @@ F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="wzcfgdjqph" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="wgmtnpgdml" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#wzcfgdjqph table {
+#wgmtnpgdml table {
   font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wzcfgdjqph thead, #wzcfgdjqph tbody, #wzcfgdjqph tfoot, #wzcfgdjqph tr, #wzcfgdjqph td, #wzcfgdjqph th {
+#wgmtnpgdml thead, #wgmtnpgdml tbody, #wgmtnpgdml tfoot, #wgmtnpgdml tr, #wgmtnpgdml td, #wgmtnpgdml th {
   border-style: none;
 }
 
-#wzcfgdjqph p {
+#wgmtnpgdml p {
   margin: 0;
   padding: 0;
 }
 
-#wzcfgdjqph .gt_table {
+#wgmtnpgdml .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1495,12 +1495,12 @@ F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#wzcfgdjqph .gt_caption {
+#wgmtnpgdml .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wzcfgdjqph .gt_title {
+#wgmtnpgdml .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1512,7 +1512,7 @@ F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-width: 0;
 }
 
-#wzcfgdjqph .gt_subtitle {
+#wgmtnpgdml .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1524,7 +1524,7 @@ F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-top-width: 0;
 }
 
-#wzcfgdjqph .gt_heading {
+#wgmtnpgdml .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -1536,13 +1536,13 @@ F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#wzcfgdjqph .gt_bottom_border {
+#wgmtnpgdml .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wzcfgdjqph .gt_col_headings {
+#wgmtnpgdml .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1557,7 +1557,7 @@ F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#wzcfgdjqph .gt_col_heading {
+#wgmtnpgdml .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1577,7 +1577,7 @@ F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
   overflow-x: hidden;
 }
 
-#wzcfgdjqph .gt_column_spanner_outer {
+#wgmtnpgdml .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1589,15 +1589,15 @@ F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 4px;
 }
 
-#wzcfgdjqph .gt_column_spanner_outer:first-child {
+#wgmtnpgdml .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wzcfgdjqph .gt_column_spanner_outer:last-child {
+#wgmtnpgdml .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wzcfgdjqph .gt_column_spanner {
+#wgmtnpgdml .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -1609,11 +1609,11 @@ F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
   width: 100%;
 }
 
-#wzcfgdjqph .gt_spanner_row {
+#wgmtnpgdml .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wzcfgdjqph .gt_group_heading {
+#wgmtnpgdml .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1639,7 +1639,7 @@ F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
   text-align: left;
 }
 
-#wzcfgdjqph .gt_empty_group_heading {
+#wgmtnpgdml .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1654,15 +1654,15 @@ F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
   vertical-align: middle;
 }
 
-#wzcfgdjqph .gt_from_md > :first-child {
+#wgmtnpgdml .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wzcfgdjqph .gt_from_md > :last-child {
+#wgmtnpgdml .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wzcfgdjqph .gt_row {
+#wgmtnpgdml .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -1681,7 +1681,7 @@ F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
   overflow-x: hidden;
 }
 
-#wzcfgdjqph .gt_stub {
+#wgmtnpgdml .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1694,7 +1694,7 @@ F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#wzcfgdjqph .gt_stub_row_group {
+#wgmtnpgdml .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1708,15 +1708,15 @@ F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
   vertical-align: top;
 }
 
-#wzcfgdjqph .gt_row_group_first td {
+#wgmtnpgdml .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wzcfgdjqph .gt_row_group_first th {
+#wgmtnpgdml .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wzcfgdjqph .gt_summary_row {
+#wgmtnpgdml .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1726,16 +1726,16 @@ F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#wzcfgdjqph .gt_first_summary_row {
+#wgmtnpgdml .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#wzcfgdjqph .gt_first_summary_row.thick {
+#wgmtnpgdml .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wzcfgdjqph .gt_last_summary_row {
+#wgmtnpgdml .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1745,7 +1745,7 @@ F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#wzcfgdjqph .gt_grand_summary_row {
+#wgmtnpgdml .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1755,7 +1755,7 @@ F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#wzcfgdjqph .gt_first_grand_summary_row {
+#wgmtnpgdml .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1765,7 +1765,7 @@ F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#wzcfgdjqph .gt_last_grand_summary_row_top {
+#wgmtnpgdml .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1775,11 +1775,11 @@ F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#wzcfgdjqph .gt_striped {
+#wgmtnpgdml .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wzcfgdjqph .gt_table_body {
+#wgmtnpgdml .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1788,7 +1788,7 @@ F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#wzcfgdjqph .gt_footnotes {
+#wgmtnpgdml .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1802,7 +1802,7 @@ F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#wzcfgdjqph .gt_footnote {
+#wgmtnpgdml .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1811,7 +1811,7 @@ F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#wzcfgdjqph .gt_sourcenotes {
+#wgmtnpgdml .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1825,7 +1825,7 @@ F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#wzcfgdjqph .gt_sourcenote {
+#wgmtnpgdml .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1833,72 +1833,72 @@ F-statistic:  1093 on 3 and 551 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#wzcfgdjqph .gt_left {
+#wgmtnpgdml .gt_left {
   text-align: left;
 }
 
-#wzcfgdjqph .gt_center {
+#wgmtnpgdml .gt_center {
   text-align: center;
 }
 
-#wzcfgdjqph .gt_right {
+#wgmtnpgdml .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wzcfgdjqph .gt_font_normal {
+#wgmtnpgdml .gt_font_normal {
   font-weight: normal;
 }
 
-#wzcfgdjqph .gt_font_bold {
+#wgmtnpgdml .gt_font_bold {
   font-weight: bold;
 }
 
-#wzcfgdjqph .gt_font_italic {
+#wgmtnpgdml .gt_font_italic {
   font-style: italic;
 }
 
-#wzcfgdjqph .gt_super {
+#wgmtnpgdml .gt_super {
   font-size: 65%;
 }
 
-#wzcfgdjqph .gt_footnote_marks {
+#wgmtnpgdml .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wzcfgdjqph .gt_asterisk {
+#wgmtnpgdml .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wzcfgdjqph .gt_indent_1 {
+#wgmtnpgdml .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wzcfgdjqph .gt_indent_2 {
+#wgmtnpgdml .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wzcfgdjqph .gt_indent_3 {
+#wgmtnpgdml .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wzcfgdjqph .gt_indent_4 {
+#wgmtnpgdml .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wzcfgdjqph .gt_indent_5 {
+#wgmtnpgdml .gt_indent_5 {
   text-indent: 25px;
 }
 
-#wzcfgdjqph .katex-display {
+#wgmtnpgdml .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#wzcfgdjqph div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#wgmtnpgdml div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 
@@ -1917,13 +1917,13 @@ tbody tr:last-child {
   <tbody class="gt_table_body">
     <tr><td headers="Modelo" class="gt_row gt_left">Normal</td>
 <td headers="Medida" class="gt_row gt_left">LRT_A</td>
-<td headers="MSE" class="gt_row gt_right">10.37418</td></tr>
+<td headers="MSE" class="gt_row gt_right">10.39225</td></tr>
     <tr><td headers="Modelo" class="gt_row gt_left">Normal</td>
 <td headers="Medida" class="gt_row gt_left">LRT_CM</td>
-<td headers="MSE" class="gt_row gt_right">11.95892</td></tr>
+<td headers="MSE" class="gt_row gt_right">11.78225</td></tr>
     <tr><td headers="Modelo" class="gt_row gt_left">Normal</td>
 <td headers="Medida" class="gt_row gt_left">LRM_R</td>
-<td headers="MSE" class="gt_row gt_right">12.93892</td></tr>
+<td headers="MSE" class="gt_row gt_right">12.99465</td></tr>
   </tbody>
   
   
@@ -1957,33 +1957,33 @@ tbody tr:last-child {
 <p><img src="modelos_files/figure-html/unnamed-chunk-94-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 8.92835</code></pre>
+<pre><code>[1] 11.5243</code></pre>
 </div>
 </div>
 <p>Los coeficientes del modelo resultante son:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>                 (Intercept)                        LRT_A 
-                56.786388450                  1.435775223 
+                 57.29164584                   1.47139307 
                       LRT_CM                       LRM_90 
-                 0.320749614                  0.000000000 
+                  0.33657697                   0.00000000 
                        LRM_R                         Edad 
-                 0.455791316                 -0.091366963 
+                  0.39443067                  -0.09754163 
                         Peso                SexoMasculino 
-                 0.014799327                  2.884543834 
+                  0.01611356                   2.94003896 
          EtniaBlanco-Mestizo                EtniaIndigena 
-                 0.000000000                  0.007371077 
+                  0.00000000                   0.14135913 
                    EtniaRrom ProgramaComunidad de Cuidado 
-                 0.000000000                  0.000000000 </code></pre>
+                  0.00000000                   0.00000000 </code></pre>
 </div>
 </div>
 <p>y los coeficientes distintos de cero:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>  (Intercept)         LRT_A        LRT_CM         LRM_R          Edad 
- 56.786388450   1.435775223   0.320749614   0.455791316  -0.091366963 
+  57.29164584    1.47139307    0.33657697    0.39443067   -0.09754163 
          Peso SexoMasculino EtniaIndigena 
-  0.014799327   2.884543834   0.007371077 </code></pre>
+   0.01611356    2.94003896    0.14135913 </code></pre>
 </div>
 </div>
 <p>Se observa que algunos coeficientes se hicieron cero, incluyendo el de LRM_90. Pero aún así el modelo todavía incluye LRT_A, LRT_CM y LRM_R al tiempo. Esto puede ser debido a que cada una de las mediciones está muy correlacionada con la talla y que además están muy correlacionadas entre ellas. Se observa que LRT_A tiene un coeficiente mucho mayor que LRT_CM y LRM_R haciendo ver que el modelo las trató de llevar a cero pero no por completo.</p>
@@ -1998,58 +1998,66 @@ tbody tr:last-child {
 <p><img src="modelos_files/figure-html/unnamed-chunk-97-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 10.30675</code></pre>
+<pre><code>[1] 11.76477</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 (Intercept)                       LRT_CM 
-                57.460225737                  1.197171464 
+                 55.67448255                   1.22970856 
                       LRM_90                        LRM_R 
-                 0.000000000                  1.012636633 
+                 -0.04521568                   1.02615376 
                         Edad                         Peso 
-                -0.094143416                  0.028501456 
+                 -0.11163896                   0.03635586 
                SexoMasculino          EtniaBlanco-Mestizo 
-                 3.459993000                  0.000000000 
+                  3.58099321                   2.23789428 
                EtniaIndigena                    EtniaRrom 
-                 0.019471935                  0.000000000 
+                  3.26643048                   2.74464572 
 ProgramaComunidad de Cuidado 
-                 0.004586937 </code></pre>
+                  0.34506102 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 (Intercept)                       LRT_CM 
-                57.460225737                  1.197171464 
-                       LRM_R                         Edad 
-                 1.012636633                 -0.094143416 
-                        Peso                SexoMasculino 
-                 0.028501456                  3.459993000 
-               EtniaIndigena ProgramaComunidad de Cuidado 
-                 0.019471935                  0.004586937 </code></pre>
+                 55.67448255                   1.22970856 
+                      LRM_90                        LRM_R 
+                 -0.04521568                   1.02615376 
+                        Edad                         Peso 
+                 -0.11163896                   0.03635586 
+               SexoMasculino          EtniaBlanco-Mestizo 
+                  3.58099321                   2.23789428 
+               EtniaIndigena                    EtniaRrom 
+                  3.26643048                   2.74464572 
+ProgramaComunidad de Cuidado 
+                  0.34506102 </code></pre>
 </div>
 </div>
 <p>El modelo sugiere incluir al tiempo LRT_CM y LRM_R. Para este modelo el MSE sobre el conjunto de test fue de <span class="math inline">\(10.30\)</span>.</p>
 <p>Se ajusta el valor de <span class="math inline">\(\lambda\)</span> con el fin de llevar a cero algunos coeficientes adicionales:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 10.37354</code></pre>
+<pre><code>[1] 11.66938</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 (Intercept)                       LRT_CM 
-                 56.95226580                   1.19883570 
+                 57.38062215                   1.23449408 
                       LRM_90                        LRM_R 
-                  0.00000000                   1.00392104 
+                  0.00000000                   0.96809366 
                         Edad                         Peso 
-                 -0.07806745                   0.02427024 
+                 -0.09233139                   0.02968841 
                SexoMasculino          EtniaBlanco-Mestizo 
-                  3.28261974                   0.00000000 
+                  3.43405025                   0.00000000 
                EtniaIndigena                    EtniaRrom 
-                  0.00000000                   0.00000000 
+                  0.07658140                   0.00000000 
 ProgramaComunidad de Cuidado 
-                  0.00000000 </code></pre>
+                  0.04219502 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  (Intercept)        LRT_CM         LRM_R          Edad          Peso 
-  56.95226580    1.19883570    1.00392104   -0.07806745    0.02427024 
-SexoMasculino 
-   3.28261974 </code></pre>
+<pre><code>                 (Intercept)                       LRT_CM 
+                 57.38062215                   1.23449408 
+                       LRM_R                         Edad 
+                  0.96809366                  -0.09233139 
+                        Peso                SexoMasculino 
+                  0.02968841                   3.43405025 
+               EtniaIndigena ProgramaComunidad de Cuidado 
+                  0.07658140                   0.04219502 </code></pre>
 </div>
 </div>
 <p>Se obtiene un modelo más sencillo con un MSE de <span class="math inline">\(10.37\)</span>.</p>
@@ -2071,23 +2079,25 @@ SexoMasculino
 <p><img src="modelos_files/figure-html/unnamed-chunk-101-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9.840965</code></pre>
+<pre><code>[1] 11.73922</code></pre>
 </div>
 </div>
 <p>Los coeficientes del modelo resultante son:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>        (Intercept)               LRT_A                Edad       SexoMasculino 
-       58.020781285         2.172573881        -0.094191092         2.847597629 
+         56.7407548           2.1889326          -0.1217495           3.0539430 
 EtniaBlanco-Mestizo       EtniaIndigena           EtniaRrom 
-        0.000000000         0.007760147         0.000000000 </code></pre>
+          2.4116803           3.3097938           3.9354965 </code></pre>
 </div>
 </div>
 <p>y los coeficientes distintos de cero:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>  (Intercept)         LRT_A          Edad SexoMasculino EtniaIndigena 
- 58.020781285   2.172573881  -0.094191092   2.847597629   0.007760147 </code></pre>
+<pre><code>        (Intercept)               LRT_A                Edad       SexoMasculino 
+         56.7407548           2.1889326          -0.1217495           3.0539430 
+EtniaBlanco-Mestizo       EtniaIndigena           EtniaRrom 
+          2.4116803           3.3097938           3.9354965 </code></pre>
 </div>
 </div>
 </section>
@@ -2106,25 +2116,25 @@ EtniaBlanco-Mestizo       EtniaIndigena           EtniaRrom
 <p><img src="modelos_files/figure-html/unnamed-chunk-106-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 12.85664</code></pre>
+<pre><code>[1] 14.70674</code></pre>
 </div>
 </div>
 <p>Los coeficientes del modelo resultante son:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>        (Intercept)              LRT_CM                Edad       SexoMasculino 
-         56.2516018           2.1545226          -0.1207096           4.1546479 
+         55.1931059           2.1618265          -0.1276708           4.1246462 
 EtniaBlanco-Mestizo       EtniaIndigena           EtniaRrom 
-          0.7472236           1.1284330           0.0000000 </code></pre>
+          2.0666234           2.7561268           1.0962121 </code></pre>
 </div>
 </div>
 <p>y los coeficientes distintos de cero:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>        (Intercept)              LRT_CM                Edad       SexoMasculino 
-         56.2516018           2.1545226          -0.1207096           4.1546479 
-EtniaBlanco-Mestizo       EtniaIndigena 
-          0.7472236           1.1284330 </code></pre>
+         55.1931059           2.1618265          -0.1276708           4.1246462 
+EtniaBlanco-Mestizo       EtniaIndigena           EtniaRrom 
+          2.0666234           2.7561268           1.0962121 </code></pre>
 </div>
 </div>
 </section>
@@ -2143,25 +2153,25 @@ EtniaBlanco-Mestizo       EtniaIndigena
 <p><img src="modelos_files/figure-html/unnamed-chunk-111-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 11.01789</code></pre>
+<pre><code>[1] 11.55844</code></pre>
 </div>
 </div>
 <p>Los coeficientes del modelo resultante son:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>        (Intercept)               LRM_R                Edad       SexoMasculino 
-         68.2658865           2.1913281          -0.1022782           3.6777167 
+         65.5147318           2.2166621          -0.1155642           3.7977231 
 EtniaBlanco-Mestizo       EtniaIndigena           EtniaRrom 
-          0.0000000           0.1207867           0.6724763 </code></pre>
+          2.5804444           3.5222019           5.3306652 </code></pre>
 </div>
 </div>
 <p>y los coeficientes distintos de cero:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>  (Intercept)         LRM_R          Edad SexoMasculino EtniaIndigena 
-   68.2658865     2.1913281    -0.1022782     3.6777167     0.1207867 
-    EtniaRrom 
-    0.6724763 </code></pre>
+<pre><code>        (Intercept)               LRM_R                Edad       SexoMasculino 
+         65.5147318           2.2166621          -0.1155642           3.7977231 
+EtniaBlanco-Mestizo       EtniaIndigena           EtniaRrom 
+          2.5804444           3.5222019           5.3306652 </code></pre>
 </div>
 </div>
 </section>
@@ -2180,25 +2190,25 @@ EtniaBlanco-Mestizo       EtniaIndigena           EtniaRrom
 <p><img src="modelos_files/figure-html/unnamed-chunk-116-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 13.63767</code></pre>
+<pre><code>[1] 10.8733</code></pre>
 </div>
 </div>
 <p>Los coeficientes del modelo resultante son:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>        (Intercept)              LRM_90                Edad       SexoMasculino 
-        68.88898450          2.10999429         -0.09549706          5.02553091 
+         65.5824897           2.2014519          -0.1013947           4.6558848 
 EtniaBlanco-Mestizo       EtniaIndigena           EtniaRrom 
-         0.02103842          0.00000000          0.47142856 </code></pre>
+          0.1271305           0.0000000           0.1392289 </code></pre>
 </div>
 </div>
 <p>y los coeficientes distintos de cero:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>        (Intercept)              LRM_90                Edad       SexoMasculino 
-        68.88898450          2.10999429         -0.09549706          5.02553091 
+         65.5824897           2.2014519          -0.1013947           4.6558848 
 EtniaBlanco-Mestizo           EtniaRrom 
-         0.02103842          0.47142856 </code></pre>
+          0.1271305           0.1392289 </code></pre>
 </div>
 </div>
 </section>
@@ -2219,65 +2229,65 @@ glm(formula = Talla ~ LRT_A + Edad + Etnia + Sexo, family = Gamma(),
 
 Coefficients:
                       Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)          1.046e-02  1.348e-04  77.625  &lt; 2e-16 ***
-LRT_A               -8.837e-05  2.226e-06 -39.702  &lt; 2e-16 ***
-Edad                 4.945e-06  8.674e-07   5.701 1.94e-08 ***
-EtniaBlanco-Mestizo -1.191e-04  5.947e-05  -2.004   0.0456 *  
-EtniaIndigena       -1.687e-04  7.976e-05  -2.115   0.0349 *  
-EtniaRrom           -1.750e-04  1.380e-04  -1.269   0.2051    
-SexoMasculino       -1.322e-04  1.635e-05  -8.090 3.81e-15 ***
+(Intercept)          1.044e-02  1.358e-04  76.905  &lt; 2e-16 ***
+LRT_A               -8.823e-05  2.245e-06 -39.291  &lt; 2e-16 ***
+Edad                 5.140e-06  8.817e-07   5.830 9.57e-09 ***
+EtniaBlanco-Mestizo -1.209e-04  5.954e-05  -2.031   0.0428 *  
+EtniaIndigena       -1.696e-04  7.985e-05  -2.123   0.0342 *  
+EtniaRrom           -1.767e-04  1.381e-04  -1.280   0.2012    
+SexoMasculino       -1.325e-04  1.650e-05  -8.032 6.14e-15 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-(Dispersion parameter for Gamma family taken to be 0.0004477566)
+(Dispersion parameter for Gamma family taken to be 0.0004486863)
 
-    Null deviance: 2.07361  on 557  degrees of freedom
-Residual deviance: 0.24769  on 551  degrees of freedom
-AIC: 2925
+    Null deviance: 2.00425  on 542  degrees of freedom
+Residual deviance: 0.24156  on 536  degrees of freedom
+AIC: 2849.2
 
 Number of Fisher Scoring iterations: 3</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>Start:  AIC=4099.02
+<pre><code>Start:  AIC=3986.45
 Talla ~ 1
 
         Df Deviance    AIC
-+ LRT_A  1  0.28728 3620.5
-+ Sexo   1  0.98418 3808.0
-&lt;none&gt;      2.07361 4099.0
-+ Etnia  3  2.05507 4100.0
-+ Edad   1  2.07358 4101.0
++ LRT_A  1  0.28112 3521.3
++ Sexo   1  0.96443 3706.6
+&lt;none&gt;      2.00425 3986.5
++ Etnia  3  1.98665 3987.7
++ Edad   1  2.00387 3988.3
 
-Step:  AIC=2997.77
+Step:  AIC=2921.58
 Talla ~ LRT_A
 
         Df Deviance    AIC
-+ Sexo   1  0.26383 2954.2
-+ Edad   1  0.27901 2983.7
-&lt;none&gt;      0.28728 2997.8
-+ Etnia  3  0.28578 3000.9
++ Sexo   1  0.25839 2879.7
++ Edad   1  0.27254 2907.0
+&lt;none&gt;      0.28112 2921.6
++ Etnia  3  0.27963 2924.7
 
-Step:  AIC=2952.27
+Step:  AIC=2877.81
 Talla ~ LRT_A + Sexo
 
         Df Deviance    AIC
-+ Edad   1  0.25000 2925.1
-&lt;none&gt;      0.26383 2952.3
-+ Etnia  3  0.26227 2955.0
++ Edad   1  0.24391 2849.4
+&lt;none&gt;      0.25839 2877.8
++ Etnia  3  0.25684 2880.5
 
-Step:  AIC=2924.23
+Step:  AIC=2848.47
 Talla ~ LRT_A + Sexo + Edad
 
         Df Deviance    AIC
-&lt;none&gt;      0.25000 2924.2
-+ Etnia  3  0.24769 2925.1</code></pre>
+&lt;none&gt;      0.24391 2848.5
++ Etnia  3  0.24156 2849.3</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 10.97288</code></pre>
+<pre><code>[1] 11.06637</code></pre>
 </div>
 </div>
 </section>
@@ -2292,65 +2302,65 @@ glm(formula = Talla ~ LRT_CM + Edad + Etnia + Sexo, family = Gamma(),
 
 Coefficients:
                       Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)          1.051e-02  1.484e-04  70.864  &lt; 2e-16 ***
-LRT_CM              -8.728e-05  2.426e-06 -35.972  &lt; 2e-16 ***
-Edad                 5.404e-06  9.290e-07   5.817 1.02e-08 ***
-EtniaBlanco-Mestizo -1.050e-04  6.381e-05  -1.645   0.1005    
-EtniaIndigena       -1.460e-04  8.558e-05  -1.706   0.0886 .  
-EtniaRrom           -6.082e-05  1.482e-04  -0.410   0.6816    
-SexoMasculino       -1.799e-04  1.688e-05 -10.662  &lt; 2e-16 ***
+(Intercept)          1.051e-02  1.484e-04  70.831  &lt; 2e-16 ***
+LRT_CM              -8.717e-05  2.422e-06 -35.988  &lt; 2e-16 ***
+Edad                 5.328e-06  9.379e-07   5.680 2.21e-08 ***
+EtniaBlanco-Mestizo -1.068e-04  6.342e-05  -1.685   0.0927 .  
+EtniaIndigena       -1.448e-04  8.505e-05  -1.703   0.0892 .  
+EtniaRrom           -6.135e-05  1.472e-04  -0.417   0.6771    
+SexoMasculino       -1.753e-04  1.697e-05 -10.328  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-(Dispersion parameter for Gamma family taken to be 0.0005156913)
+(Dispersion parameter for Gamma family taken to be 0.0005091626)
 
-    Null deviance: 2.07361  on 557  degrees of freedom
-Residual deviance: 0.28489  on 551  degrees of freedom
-AIC: 3003.1
+    Null deviance: 2.00425  on 542  degrees of freedom
+Residual deviance: 0.27374  on 536  degrees of freedom
+AIC: 2917.1
 
 Number of Fisher Scoring iterations: 3</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>Start:  AIC=4099.02
+<pre><code>Start:  AIC=3986.45
 Talla ~ 1
 
          Df Deviance    AIC
-+ LRT_CM  1  0.35344 3638.3
-+ Sexo    1  0.98418 3808.0
-&lt;none&gt;       2.07361 4099.0
-+ Etnia   3  2.05507 4100.0
-+ Edad    1  2.07358 4101.0
++ LRT_CM  1  0.33696 3536.5
++ Sexo    1  0.96443 3706.6
+&lt;none&gt;       2.00425 3986.5
++ Etnia   3  1.98665 3987.7
++ Edad    1  2.00387 3988.3
 
-Step:  AIC=3113.44
+Step:  AIC=3019.97
 Talla ~ LRT_CM
 
         Df Deviance    AIC
-+ Sexo   1  0.30348 3036.8
-+ Edad   1  0.34479 3101.8
-&lt;none&gt;      0.35344 3113.4
-+ Etnia  3  0.35247 3117.9
++ Sexo   1  0.29131 2948.6
++ Edad   1  0.32934 3009.7
+&lt;none&gt;      0.33696 3020.0
++ Etnia  3  0.33599 3024.4
 
-Step:  AIC=3030.4
+Step:  AIC=2942.91
 Talla ~ LRT_CM + Sexo
 
         Df Deviance    AIC
-+ Edad   1  0.28663 3001.5
-&lt;none&gt;      0.30348 3030.4
-+ Etnia  3  0.30238 3034.4
++ Edad   1  0.27549 2915.5
+&lt;none&gt;      0.29131 2942.9
++ Etnia  3  0.29019 2946.8
 
-Step:  AIC=3000.52
+Step:  AIC=2914.59
 Talla ~ LRT_CM + Sexo + Edad
 
         Df Deviance    AIC
-&lt;none&gt;      0.28663 3000.5
-+ Etnia  3  0.28490 3003.2</code></pre>
+&lt;none&gt;      0.27549 2914.6
++ Etnia  3  0.27374 2917.2</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 12.42458</code></pre>
+<pre><code>[1] 12.28992</code></pre>
 </div>
 </div>
 </section>
@@ -2365,65 +2375,65 @@ glm(formula = Talla ~ LRM_R + Edad + Etnia + Sexo, family = Gamma(),
 
 Coefficients:
                       Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)          1.008e-02  1.440e-04  69.958  &lt; 2e-16 ***
-LRM_R               -8.937e-05  2.591e-06 -34.489  &lt; 2e-16 ***
-Edad                 5.173e-06  9.586e-07   5.397 1.01e-07 ***
-EtniaBlanco-Mestizo -1.328e-04  6.574e-05  -2.020   0.0438 *  
-EtniaIndigena       -1.800e-04  8.814e-05  -2.042   0.0416 *  
-EtniaRrom           -2.386e-04  1.525e-04  -1.565   0.1182    
-SexoMasculino       -1.643e-04  1.777e-05  -9.245  &lt; 2e-16 ***
+(Intercept)          1.010e-02  1.459e-04  69.195  &lt; 2e-16 ***
+LRM_R               -8.954e-05  2.621e-06 -34.157  &lt; 2e-16 ***
+Edad                 4.943e-06  9.752e-07   5.068 5.53e-07 ***
+EtniaBlanco-Mestizo -1.320e-04  6.581e-05  -2.005   0.0454 *  
+EtniaIndigena       -1.788e-04  8.822e-05  -2.026   0.0432 *  
+EtniaRrom           -2.369e-04  1.526e-04  -1.553   0.1211    
+SexoMasculino       -1.624e-04  1.797e-05  -9.037  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-(Dispersion parameter for Gamma family taken to be 0.0005469017)
+(Dispersion parameter for Gamma family taken to be 0.0005478053)
 
-    Null deviance: 2.0736  on 557  degrees of freedom
-Residual deviance: 0.3026  on 551  degrees of freedom
-AIC: 3036.8
+    Null deviance: 2.00425  on 542  degrees of freedom
+Residual deviance: 0.29489  on 536  degrees of freedom
+AIC: 2957.5
 
 Number of Fisher Scoring iterations: 3</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>Start:  AIC=4099.02
+<pre><code>Start:  AIC=3986.45
 Talla ~ 1
 
-        Df Deviance  AIC
-+ LRM_R  1  0.35989 3640
-+ Sexo   1  0.98418 3808
-&lt;none&gt;      2.07361 4099
-+ Etnia  3  2.05507 4100
-+ Edad   1  2.07358 4101
+        Df Deviance    AIC
++ LRM_R  1  0.34839 3539.6
++ Sexo   1  0.96443 3706.6
+&lt;none&gt;      2.00425 3986.5
++ Etnia  3  1.98665 3987.7
++ Edad   1  2.00387 3988.3
 
-Step:  AIC=3123.53
+Step:  AIC=3038.09
 Talla ~ LRM_R
 
         Df Deviance    AIC
-+ Sexo   1  0.32061 3064.8
-+ Edad   1  0.35200 3113.3
-&lt;none&gt;      0.35989 3123.5
-+ Etnia  3  0.35782 3126.3
++ Sexo   1  0.31104 2982.0
++ Edad   1  0.34223 3030.5
+&lt;none&gt;      0.34839 3038.1
++ Etnia  3  0.34633 3040.9
 
-Step:  AIC=3061.04
+Step:  AIC=2978.5
 Talla ~ LRM_R + Sexo
 
         Df Deviance    AIC
-+ Edad   1  0.30556 3036.9
-&lt;none&gt;      0.32061 3061.0
-+ Etnia  3  0.31856 3063.5
++ Edad   1  0.29780 2957.4
+&lt;none&gt;      0.31104 2978.5
++ Etnia  3  0.30899 2980.9
 
-Step:  AIC=3036.2
+Step:  AIC=2956.89
 Talla ~ LRM_R + Sexo + Edad
 
         Df Deviance    AIC
-&lt;none&gt;      0.30556 3036.2
-+ Etnia  3  0.30260 3036.8</code></pre>
+&lt;none&gt;      0.29780 2956.9
++ Etnia  3  0.29489 2957.6</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 13.31019</code></pre>
+<pre><code>[1] 13.42149</code></pre>
 </div>
 </div>
 </section>
@@ -2438,65 +2448,65 @@ glm(formula = Talla ~ LRM_90 + Edad + Etnia + Sexo, family = Gamma(),
 
 Coefficients:
                       Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)          9.990e-03  1.553e-04  64.336  &lt; 2e-16 ***
-LRM_90              -8.519e-05  2.736e-06 -31.132  &lt; 2e-16 ***
-Edad                 4.535e-06  1.026e-06   4.420 1.19e-05 ***
-EtniaBlanco-Mestizo -8.538e-05  7.022e-05  -1.216    0.225    
-EtniaIndigena       -9.425e-05  9.422e-05  -1.000    0.318    
-EtniaRrom           -1.644e-04  1.630e-04  -1.008    0.314    
-SexoMasculino       -2.193e-04  1.815e-05 -12.086  &lt; 2e-16 ***
+(Intercept)          1.015e-02  1.488e-04  68.205  &lt; 2e-16 ***
+LRM_90              -8.948e-05  2.654e-06 -33.715  &lt; 2e-16 ***
+Edad                 4.913e-06  9.837e-07   4.995 7.99e-07 ***
+EtniaBlanco-Mestizo -9.842e-05  6.634e-05  -1.483    0.139    
+EtniaIndigena       -9.528e-05  8.898e-05  -1.071    0.285    
+EtniaRrom           -1.621e-04  1.539e-04  -1.053    0.293    
+SexoMasculino       -2.031e-04  1.737e-05 -11.692  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-(Dispersion parameter for Gamma family taken to be 0.0006248793)
+(Dispersion parameter for Gamma family taken to be 0.0005573112)
 
-    Null deviance: 2.07361  on 557  degrees of freedom
-Residual deviance: 0.34805  on 551  degrees of freedom
-AIC: 3114.9
+    Null deviance: 2.00425  on 542  degrees of freedom
+Residual deviance: 0.29974  on 536  degrees of freedom
+AIC: 2966.4
 
 Number of Fisher Scoring iterations: 3</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>Start:  AIC=4099.02
+<pre><code>Start:  AIC=3986.45
 Talla ~ 1
 
          Df Deviance    AIC
-+ LRM_90  1  0.44295 3662.4
-+ Sexo    1  0.98418 3808.0
-&lt;none&gt;       2.07361 4099.0
-+ Etnia   3  2.05507 4100.0
-+ Edad    1  2.07358 4101.0
++ LRM_90  1  0.38114 3548.4
++ Sexo    1  0.96443 3706.6
+&lt;none&gt;       2.00425 3986.5
++ Etnia   3  1.98665 3987.7
++ Edad    1  2.00387 3988.3
 
-Step:  AIC=3239.42
+Step:  AIC=3086.87
 Talla ~ LRM_90
 
         Df Deviance    AIC
-+ Sexo   1  0.36092 3137.5
-+ Edad   1  0.43988 3237.5
-&lt;none&gt;      0.44295 3239.4
-+ Etnia  3  0.44250 3244.8
++ Sexo   1  0.31443 2994.1
++ Edad   1  0.37671 3082.6
+&lt;none&gt;      0.38114 3086.9
++ Etnia  3  0.38057 3092.1
 
-Step:  AIC=3127.12
+Step:  AIC=2984.39
 Talla ~ LRM_90 + Sexo
 
         Df Deviance    AIC
-+ Edad   1  0.34918 3110.9
-&lt;none&gt;      0.36092 3127.1
-+ Etnia  3  0.36028 3132.1
++ Edad   1  0.30110 2963.4
+&lt;none&gt;      0.31443 2984.4
++ Etnia  3  0.31366 2989.1
 
-Step:  AIC=3110.67
+Step:  AIC=2962.86
 Talla ~ LRM_90 + Sexo + Edad
 
         Df Deviance    AIC
-&lt;none&gt;      0.34918 3110.7
-+ Etnia  3  0.34805 3114.9</code></pre>
+&lt;none&gt;      0.30110 2962.9
++ Etnia  3  0.29974 2966.4</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 15.64766</code></pre>
+<pre><code>[1] 13.47367</code></pre>
 </div>
 </div>
 

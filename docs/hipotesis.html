@@ -147,988 +147,115 @@ ul.task-list li input[type="checkbox"] {
 <h1>Hipótesis</h1>
 <section id="longitud-rodilla-talón" class="level2">
 <h2 class="anchored" data-anchor-id="longitud-rodilla-talón">Longitud rodilla-talón</h2>
-<p>Se quiere determinar si existe diferencia significativa entre las mediciones realizadas con cinta métrica y con antropómetro medidas en los mismos individuos:</p>
+<p>Se quiere determinar si existe una diferencia significativa entre las mediciones realizadas con cinta métrica y con antropómetro medidas en los mismos individuos:</p>
 <p><span class="math display">\[ \begin{cases}
-H_0: \, \, \, \theta_Y - \theta_X = 0 \\
-H_1: \, \, \,  \theta_Y - \theta_X \neq 0
+H_0: \, \, \, \mu_{CM} - \mu_{A} = 0 \\
+H_1: \, \, \,  \mu_{CM} - \mu_{A} \neq 0
 \end{cases}\]</span></p>
-<p>Donde <span class="math inline">\(\theta_Y\)</span> representa una medida de tendencia central de las mediciones realizadas con cinta métrica y <span class="math inline">\(\theta_X\)</span> representa dicha medida evaluada a las mediciones realizadas con antropómetro.</p>
+<p>Donde <span class="math inline">\(\mu_{CM}\)</span> representa la media de las mediciones realizadas con cinta métrica y <span class="math inline">\(\mu_{A}\)</span> representa la media de las mediciones realizadas con antropómetro.</p>
 <p>Inicialmente se hace una comparación gráfica de ambas técnicas a través de un box-plot:</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Según el gráfico de cajas (boxplot), parece que existe diferencia entre las mediciones de la longitud desde la rodilla hasta el talón realizadas con cinta métrica y con antropómetro. Sin embargo, es necesario hacer una prueba estadística más formal. Para esto, se calculan las diferencias entre las mediciones de ambos métodos y se verifica si esas diferencias siguen una distribución normal para determinar qué prueba estadística es adecuada para la comparación.</p>
-<div class="cell">
-<div class="cell-output-display">
+<p>Según el gráfico de cajas (boxplot), parece que existe diferencia entre las mediciones de la longitud desde la rodilla hasta el talón realizadas con cinta métrica y con antropómetro. Se evidencia que las mediciones realizadas con cinta métrica son en promedio superiores a las realizadas con antropómetro. Sin embargo, es necesario hacer una prueba estadística más formal. Para esto, se calculan las diferencias entre las mediciones de ambos métodos y se verifica si esas diferencias siguen una distribución normal para determinar qué prueba estadística es adecuada para la comparación.</p>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid" width="672"></p>
 </div>
-<p>Tenemos estos datos atípicos.</p>
-<div class="cell">
-<div class="cell-output-display">
-
-<div id="upbmmhpoyi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#upbmmhpoyi table {
-  font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#upbmmhpoyi thead, #upbmmhpoyi tbody, #upbmmhpoyi tfoot, #upbmmhpoyi tr, #upbmmhpoyi td, #upbmmhpoyi th {
-  border-style: none;
-}
-
-#upbmmhpoyi p {
-  margin: 0;
-  padding: 0;
-}
-
-#upbmmhpoyi .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 9px;
-  font-weight: 400;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: none;
-  border-top-width: 3px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#upbmmhpoyi .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#upbmmhpoyi .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#upbmmhpoyi .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#upbmmhpoyi .gt_heading {
-  background-color: #FFFFFF;
-  text-align: left;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#upbmmhpoyi .gt_bottom_border {
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#upbmmhpoyi .gt_col_headings {
-  border-top-style: none;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #000000;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#upbmmhpoyi .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#upbmmhpoyi .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#upbmmhpoyi .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#upbmmhpoyi .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#upbmmhpoyi .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #000000;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#upbmmhpoyi .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#upbmmhpoyi .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: none;
-  border-top-width: 2px;
-  border-top-color: #000000;
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#upbmmhpoyi .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: none;
-  border-top-width: 2px;
-  border-top-color: #000000;
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  border-bottom-color: #FFFFFF;
-  vertical-align: middle;
-}
-
-#upbmmhpoyi .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#upbmmhpoyi .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#upbmmhpoyi .gt_row {
-  padding-top: 3px;
-  padding-bottom: 3px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#upbmmhpoyi .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 0px;
-  border-right-color: #FFFFFF;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#upbmmhpoyi .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#upbmmhpoyi .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#upbmmhpoyi .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#upbmmhpoyi .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#upbmmhpoyi .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#upbmmhpoyi .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#upbmmhpoyi .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#upbmmhpoyi .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#upbmmhpoyi .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#upbmmhpoyi .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#upbmmhpoyi .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#upbmmhpoyi .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#upbmmhpoyi .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#upbmmhpoyi .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#upbmmhpoyi .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#upbmmhpoyi .gt_sourcenote {
-  font-size: 12px;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#upbmmhpoyi .gt_left {
-  text-align: left;
-}
-
-#upbmmhpoyi .gt_center {
-  text-align: center;
-}
-
-#upbmmhpoyi .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#upbmmhpoyi .gt_font_normal {
-  font-weight: normal;
-}
-
-#upbmmhpoyi .gt_font_bold {
-  font-weight: bold;
-}
-
-#upbmmhpoyi .gt_font_italic {
-  font-style: italic;
-}
-
-#upbmmhpoyi .gt_super {
-  font-size: 65%;
-}
-
-#upbmmhpoyi .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#upbmmhpoyi .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#upbmmhpoyi .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#upbmmhpoyi .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#upbmmhpoyi .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#upbmmhpoyi .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#upbmmhpoyi .gt_indent_5 {
-  text-indent: 25px;
-}
-
-#upbmmhpoyi .katex-display {
-  display: inline-flex !important;
-  margin-bottom: 0.75em !important;
-}
-
-#upbmmhpoyi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-  height: 0px !important;
-}
-
-tbody tr:last-child {
-  border-bottom: 2px solid #ffffff00;
-}
-</style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-  <thead>
-    <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Fecha">Fecha</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Localidad">Localidad</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Programa">Programa</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Unidad_atencion">Unidad_atencion</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Sexo">Sexo</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Edad">Edad</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Etnia">Etnia</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Peso">Peso</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Talla">Talla</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="LRT_CM">LRT_CM</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="LRT_A">LRT_A</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="LRM_90">LRM_90</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="LRM_R">LRM_R</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-03</td>
-<td headers="Localidad" class="gt_row gt_left">Ciudad Bolivar</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Tejedores de Sueños</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">63</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">101.80</td>
-<td headers="Talla" class="gt_row gt_right">177.00</td>
-<td headers="LRT_CM" class="gt_row gt_right">57.50</td>
-<td headers="LRT_A" class="gt_row gt_right">57.65</td>
-<td headers="LRM_90" class="gt_row gt_right">52.00</td>
-<td headers="LRM_R" class="gt_row gt_right">52.50</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-03</td>
-<td headers="Localidad" class="gt_row gt_left">Ciudad Bolivar</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Tejedores de Sueños</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">66</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">91.40</td>
-<td headers="Talla" class="gt_row gt_right">169.60</td>
-<td headers="LRT_CM" class="gt_row gt_right">54.20</td>
-<td headers="LRT_A" class="gt_row gt_right">51.00</td>
-<td headers="LRM_90" class="gt_row gt_right">46.10</td>
-<td headers="LRM_R" class="gt_row gt_right">45.00</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-10</td>
-<td headers="Localidad" class="gt_row gt_left">Suba</td>
-<td headers="Programa" class="gt_row gt_left">Comunidad de Cuidado</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Comunidad de Cuidado Santa Maria</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">80</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">90.80</td>
-<td headers="Talla" class="gt_row gt_right">173.50</td>
-<td headers="LRT_CM" class="gt_row gt_right">54.00</td>
-<td headers="LRT_A" class="gt_row gt_right">54.65</td>
-<td headers="LRM_90" class="gt_row gt_right">48.05</td>
-<td headers="LRM_R" class="gt_row gt_right">48.50</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-03</td>
-<td headers="Localidad" class="gt_row gt_left">Ciudad Bolivar</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Sierra Morena</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">72</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">82.40</td>
-<td headers="Talla" class="gt_row gt_right">165.60</td>
-<td headers="LRT_CM" class="gt_row gt_right">52.50</td>
-<td headers="LRT_A" class="gt_row gt_right">53.75</td>
-<td headers="LRM_90" class="gt_row gt_right">48.00</td>
-<td headers="LRM_R" class="gt_row gt_right">48.10</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-10</td>
-<td headers="Localidad" class="gt_row gt_left">Suba</td>
-<td headers="Programa" class="gt_row gt_left">Comunidad de Cuidado</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Comunidad de Cuidado Santa Maria</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">68</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">77.80</td>
-<td headers="Talla" class="gt_row gt_right">163.60</td>
-<td headers="LRT_CM" class="gt_row gt_right">49.00</td>
-<td headers="LRT_A" class="gt_row gt_right">49.70</td>
-<td headers="LRM_90" class="gt_row gt_right">44.50</td>
-<td headers="LRM_R" class="gt_row gt_right">44.50</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-03</td>
-<td headers="Localidad" class="gt_row gt_left">Ciudad Bolivar</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Tejedores de Sueños</td>
-<td headers="Sexo" class="gt_row gt_center">Femenino</td>
-<td headers="Edad" class="gt_row gt_right">66</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">73.60</td>
-<td headers="Talla" class="gt_row gt_right">151.00</td>
-<td headers="LRT_CM" class="gt_row gt_right">43.50</td>
-<td headers="LRT_A" class="gt_row gt_right">44.50</td>
-<td headers="LRM_90" class="gt_row gt_right">38.00</td>
-<td headers="LRM_R" class="gt_row gt_right">39.00</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-03</td>
-<td headers="Localidad" class="gt_row gt_left">Ciudad Bolivar</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Tejedores de Sueños</td>
-<td headers="Sexo" class="gt_row gt_center">Femenino</td>
-<td headers="Edad" class="gt_row gt_right">74</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">72.20</td>
-<td headers="Talla" class="gt_row gt_right">141.30</td>
-<td headers="LRT_CM" class="gt_row gt_right">46.35</td>
-<td headers="LRT_A" class="gt_row gt_right">43.15</td>
-<td headers="LRM_90" class="gt_row gt_right">41.00</td>
-<td headers="LRM_R" class="gt_row gt_right">38.40</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-15</td>
-<td headers="Localidad" class="gt_row gt_left">Engativa</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Los Cerezos</td>
-<td headers="Sexo" class="gt_row gt_center">Femenino</td>
-<td headers="Edad" class="gt_row gt_right">69</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">71.45</td>
-<td headers="Talla" class="gt_row gt_right">145.30</td>
-<td headers="LRT_CM" class="gt_row gt_right">46.60</td>
-<td headers="LRT_A" class="gt_row gt_right">43.50</td>
-<td headers="LRM_90" class="gt_row gt_right">40.50</td>
-<td headers="LRM_R" class="gt_row gt_right">39.65</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-08-29</td>
-<td headers="Localidad" class="gt_row gt_left">Suba</td>
-<td headers="Programa" class="gt_row gt_left">Comunidad de Cuidado</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Comunidad de Cuidado Gratitud</td>
-<td headers="Sexo" class="gt_row gt_center">Femenino</td>
-<td headers="Edad" class="gt_row gt_right">64</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">69.40</td>
-<td headers="Talla" class="gt_row gt_right">146.85</td>
-<td headers="LRT_CM" class="gt_row gt_right">47.00</td>
-<td headers="LRT_A" class="gt_row gt_right">43.80</td>
-<td headers="LRM_90" class="gt_row gt_right">39.55</td>
-<td headers="LRM_R" class="gt_row gt_right">36.85</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-10</td>
-<td headers="Localidad" class="gt_row gt_left">Suba</td>
-<td headers="Programa" class="gt_row gt_left">Comunidad de Cuidado</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Comunidad de Cuidado Santa Maria</td>
-<td headers="Sexo" class="gt_row gt_center">Femenino</td>
-<td headers="Edad" class="gt_row gt_right">69</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">69.20</td>
-<td headers="Talla" class="gt_row gt_right">150.00</td>
-<td headers="LRT_CM" class="gt_row gt_right">48.00</td>
-<td headers="LRT_A" class="gt_row gt_right">49.00</td>
-<td headers="LRM_90" class="gt_row gt_right">43.00</td>
-<td headers="LRM_R" class="gt_row gt_right">42.50</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-03</td>
-<td headers="Localidad" class="gt_row gt_left">Ciudad Bolivar</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Tejedores de Sueños</td>
-<td headers="Sexo" class="gt_row gt_center">Femenino</td>
-<td headers="Edad" class="gt_row gt_right">71</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">69.00</td>
-<td headers="Talla" class="gt_row gt_right">145.00</td>
-<td headers="LRT_CM" class="gt_row gt_right">44.00</td>
-<td headers="LRT_A" class="gt_row gt_right">44.60</td>
-<td headers="LRM_90" class="gt_row gt_right">41.00</td>
-<td headers="LRM_R" class="gt_row gt_right">41.00</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-03</td>
-<td headers="Localidad" class="gt_row gt_left">Ciudad Bolivar</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Tejedores de Sueños</td>
-<td headers="Sexo" class="gt_row gt_center">Femenino</td>
-<td headers="Edad" class="gt_row gt_right">63</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">68.00</td>
-<td headers="Talla" class="gt_row gt_right">156.00</td>
-<td headers="LRT_CM" class="gt_row gt_right">46.00</td>
-<td headers="LRT_A" class="gt_row gt_right">47.60</td>
-<td headers="LRM_90" class="gt_row gt_right">43.00</td>
-<td headers="LRM_R" class="gt_row gt_right">42.85</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-10</td>
-<td headers="Localidad" class="gt_row gt_left">Suba</td>
-<td headers="Programa" class="gt_row gt_left">Comunidad de Cuidado</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Comunidad de Cuidado Santa Maria</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">73</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">67.80</td>
-<td headers="Talla" class="gt_row gt_right">168.00</td>
-<td headers="LRT_CM" class="gt_row gt_right">51.50</td>
-<td headers="LRT_A" class="gt_row gt_right">53.70</td>
-<td headers="LRM_90" class="gt_row gt_right">45.50</td>
-<td headers="LRM_R" class="gt_row gt_right">47.50</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-03</td>
-<td headers="Localidad" class="gt_row gt_left">Ciudad Bolivar</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Tejedores de Sueños</td>
-<td headers="Sexo" class="gt_row gt_center">Femenino</td>
-<td headers="Edad" class="gt_row gt_right">74</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">66.60</td>
-<td headers="Talla" class="gt_row gt_right">152.00</td>
-<td headers="LRT_CM" class="gt_row gt_right">44.00</td>
-<td headers="LRT_A" class="gt_row gt_right">44.70</td>
-<td headers="LRM_90" class="gt_row gt_right">40.00</td>
-<td headers="LRM_R" class="gt_row gt_right">39.50</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-10</td>
-<td headers="Localidad" class="gt_row gt_left">Suba</td>
-<td headers="Programa" class="gt_row gt_left">Comunidad de Cuidado</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Comunidad de Cuidado Santa Maria</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">69</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">64.60</td>
-<td headers="Talla" class="gt_row gt_right">158.00</td>
-<td headers="LRT_CM" class="gt_row gt_right">48.50</td>
-<td headers="LRT_A" class="gt_row gt_right">49.00</td>
-<td headers="LRM_90" class="gt_row gt_right">43.50</td>
-<td headers="LRM_R" class="gt_row gt_right">43.80</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-10</td>
-<td headers="Localidad" class="gt_row gt_left">Suba</td>
-<td headers="Programa" class="gt_row gt_left">Comunidad de Cuidado</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Comunidad de Cuidado Santa Maria</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">71</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">63.20</td>
-<td headers="Talla" class="gt_row gt_right">170.50</td>
-<td headers="LRT_CM" class="gt_row gt_right">53.00</td>
-<td headers="LRT_A" class="gt_row gt_right">54.00</td>
-<td headers="LRM_90" class="gt_row gt_right">48.50</td>
-<td headers="LRM_R" class="gt_row gt_right">48.00</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-03</td>
-<td headers="Localidad" class="gt_row gt_left">Ciudad Bolivar</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Tejedores de Sueños</td>
-<td headers="Sexo" class="gt_row gt_center">Femenino</td>
-<td headers="Edad" class="gt_row gt_right">62</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">63.20</td>
-<td headers="Talla" class="gt_row gt_right">146.00</td>
-<td headers="LRT_CM" class="gt_row gt_right">44.00</td>
-<td headers="LRT_A" class="gt_row gt_right">45.00</td>
-<td headers="LRM_90" class="gt_row gt_right">39.00</td>
-<td headers="LRM_R" class="gt_row gt_right">39.00</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-09-11</td>
-<td headers="Localidad" class="gt_row gt_left">Usme</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de La Sabiduría San David</td>
-<td headers="Sexo" class="gt_row gt_center">Femenino</td>
-<td headers="Edad" class="gt_row gt_right">78</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">62.80</td>
-<td headers="Talla" class="gt_row gt_right">149.10</td>
-<td headers="LRT_CM" class="gt_row gt_right">47.40</td>
-<td headers="LRT_A" class="gt_row gt_right">44.30</td>
-<td headers="LRM_90" class="gt_row gt_right">42.30</td>
-<td headers="LRM_R" class="gt_row gt_right">41.00</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-10</td>
-<td headers="Localidad" class="gt_row gt_left">Suba</td>
-<td headers="Programa" class="gt_row gt_left">Comunidad de Cuidado</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Comunidad de Cuidado Santa Maria</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">69</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">59.20</td>
-<td headers="Talla" class="gt_row gt_right">158.00</td>
-<td headers="LRT_CM" class="gt_row gt_right">47.00</td>
-<td headers="LRT_A" class="gt_row gt_right">48.00</td>
-<td headers="LRM_90" class="gt_row gt_right">43.50</td>
-<td headers="LRM_R" class="gt_row gt_right">44.00</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-09-02</td>
-<td headers="Localidad" class="gt_row gt_left">Teusaquillo</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de La Sabiduría Tierra de Saberes</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">71</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">59.00</td>
-<td headers="Talla" class="gt_row gt_right">173.00</td>
-<td headers="LRT_CM" class="gt_row gt_right">54.30</td>
-<td headers="LRT_A" class="gt_row gt_right">54.35</td>
-<td headers="LRM_90" class="gt_row gt_right">48.25</td>
-<td headers="LRM_R" class="gt_row gt_right">48.60</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-09-06</td>
-<td headers="Localidad" class="gt_row gt_left">Engativa</td>
-<td headers="Programa" class="gt_row gt_left">Comunidad de Cuidado</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Comunidad de Cuidado Bosque Popular</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">65</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">58.80</td>
-<td headers="Talla" class="gt_row gt_right">164.60</td>
-<td headers="LRT_CM" class="gt_row gt_right">48.30</td>
-<td headers="LRT_A" class="gt_row gt_right">49.75</td>
-<td headers="LRM_90" class="gt_row gt_right">43.30</td>
-<td headers="LRM_R" class="gt_row gt_right">43.30</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-03</td>
-<td headers="Localidad" class="gt_row gt_left">Ciudad Bolivar</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Sierra Morena</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">70</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">58.65</td>
-<td headers="Talla" class="gt_row gt_right">154.80</td>
-<td headers="LRT_CM" class="gt_row gt_right">46.50</td>
-<td headers="LRT_A" class="gt_row gt_right">47.55</td>
-<td headers="LRM_90" class="gt_row gt_right">41.50</td>
-<td headers="LRM_R" class="gt_row gt_right">42.00</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-10</td>
-<td headers="Localidad" class="gt_row gt_left">Suba</td>
-<td headers="Programa" class="gt_row gt_left">Comunidad de Cuidado</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Comunidad de Cuidado Santa Maria</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">72</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">58.00</td>
-<td headers="Talla" class="gt_row gt_right">154.50</td>
-<td headers="LRT_CM" class="gt_row gt_right">45.10</td>
-<td headers="LRT_A" class="gt_row gt_right">48.00</td>
-<td headers="LRM_90" class="gt_row gt_right">41.00</td>
-<td headers="LRM_R" class="gt_row gt_right">42.00</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-10</td>
-<td headers="Localidad" class="gt_row gt_left">Suba</td>
-<td headers="Programa" class="gt_row gt_left">Comunidad de Cuidado</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Comunidad de Cuidado Santa Maria</td>
-<td headers="Sexo" class="gt_row gt_center">Femenino</td>
-<td headers="Edad" class="gt_row gt_right">79</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">57.80</td>
-<td headers="Talla" class="gt_row gt_right">143.00</td>
-<td headers="LRT_CM" class="gt_row gt_right">48.25</td>
-<td headers="LRT_A" class="gt_row gt_right">44.80</td>
-<td headers="LRM_90" class="gt_row gt_right">42.50</td>
-<td headers="LRM_R" class="gt_row gt_right">40.00</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-03</td>
-<td headers="Localidad" class="gt_row gt_left">Ciudad Bolivar</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Sierra Morena</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">72</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">57.40</td>
-<td headers="Talla" class="gt_row gt_right">165.00</td>
-<td headers="LRT_CM" class="gt_row gt_right">47.55</td>
-<td headers="LRT_A" class="gt_row gt_right">49.10</td>
-<td headers="LRM_90" class="gt_row gt_right">42.55</td>
-<td headers="LRM_R" class="gt_row gt_right">42.65</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-08-29</td>
-<td headers="Localidad" class="gt_row gt_left">Suba</td>
-<td headers="Programa" class="gt_row gt_left">Comunidad de Cuidado</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Comunidad de Cuidado Gratitud</td>
-<td headers="Sexo" class="gt_row gt_center">Femenino</td>
-<td headers="Edad" class="gt_row gt_right">72</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">54.60</td>
-<td headers="Talla" class="gt_row gt_right">144.40</td>
-<td headers="LRT_CM" class="gt_row gt_right">47.25</td>
-<td headers="LRT_A" class="gt_row gt_right">43.50</td>
-<td headers="LRM_90" class="gt_row gt_right">41.30</td>
-<td headers="LRM_R" class="gt_row gt_right">40.15</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-09-26</td>
-<td headers="Localidad" class="gt_row gt_left">Ciudad Bolivar</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Sierra Morena</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">79</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">51.10</td>
-<td headers="Talla" class="gt_row gt_right">155.00</td>
-<td headers="LRT_CM" class="gt_row gt_right">47.60</td>
-<td headers="LRT_A" class="gt_row gt_right">48.55</td>
-<td headers="LRM_90" class="gt_row gt_right">41.50</td>
-<td headers="LRM_R" class="gt_row gt_right">42.00</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-10</td>
-<td headers="Localidad" class="gt_row gt_left">Suba</td>
-<td headers="Programa" class="gt_row gt_left">Comunidad de Cuidado</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Comunidad de Cuidado Santa Maria</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">78</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">48.20</td>
-<td headers="Talla" class="gt_row gt_right">156.50</td>
-<td headers="LRT_CM" class="gt_row gt_right">47.00</td>
-<td headers="LRT_A" class="gt_row gt_right">47.20</td>
-<td headers="LRM_90" class="gt_row gt_right">42.00</td>
-<td headers="LRM_R" class="gt_row gt_right">43.00</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-03</td>
-<td headers="Localidad" class="gt_row gt_left">Ciudad Bolivar</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Tejedores de Sueños</td>
-<td headers="Sexo" class="gt_row gt_center">Femenino</td>
-<td headers="Edad" class="gt_row gt_right">68</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">45.00</td>
-<td headers="Talla" class="gt_row gt_right">154.50</td>
-<td headers="LRT_CM" class="gt_row gt_right">45.00</td>
-<td headers="LRT_A" class="gt_row gt_right">45.50</td>
-<td headers="LRM_90" class="gt_row gt_right">40.00</td>
-<td headers="LRM_R" class="gt_row gt_right">40.50</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-09-03</td>
-<td headers="Localidad" class="gt_row gt_left">Teusaquillo</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de La Sabiduría Tierra de Saberes</td>
-<td headers="Sexo" class="gt_row gt_center">Femenino</td>
-<td headers="Edad" class="gt_row gt_right">89</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">41.70</td>
-<td headers="Talla" class="gt_row gt_right">143.35</td>
-<td headers="LRT_CM" class="gt_row gt_right">46.15</td>
-<td headers="LRT_A" class="gt_row gt_right">39.95</td>
-<td headers="LRM_90" class="gt_row gt_right">40.10</td>
-<td headers="LRM_R" class="gt_row gt_right">39.90</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-03</td>
-<td headers="Localidad" class="gt_row gt_left">Ciudad Bolivar</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Tejedores de Sueños</td>
-<td headers="Sexo" class="gt_row gt_center">Femenino</td>
-<td headers="Edad" class="gt_row gt_right">75</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">37.60</td>
-<td headers="Talla" class="gt_row gt_right">144.00</td>
-<td headers="LRT_CM" class="gt_row gt_right">42.50</td>
-<td headers="LRT_A" class="gt_row gt_right">43.50</td>
-<td headers="LRM_90" class="gt_row gt_right">40.00</td>
-<td headers="LRM_R" class="gt_row gt_right">40.50</td></tr>
-  </tbody>
-  
-  
-</table>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-4-3.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
- -2.900   1.150   1.500   1.459   1.900   6.200 </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.75</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
+<p>A continuación se presentan los resultados de los test de Shapiro-Wilk y de Lilliefors para la diferencia de las mediciones LRT_CM y LRT_A:</p>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <pre><code>
     Shapiro-Wilk normality test
 
 data:  LRT_dif
-W = 0.90438, p-value &lt; 2.2e-16</code></pre>
+W = 0.89825, p-value &lt; 2.2e-16</code></pre>
 </div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <pre><code>
     Lilliefors (Kolmogorov-Smirnov) normality test
 
 data:  LRT_dif
-D = 0.11373, p-value &lt; 2.2e-16</code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+D = 0.1146, p-value &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<p>Los resultados de dos pruebas estadísticas, Shapiro-Wilk y Lilliefors, mostraron un valor menor a 0.05. Esto significa que, con un nivel de confianza del 95%, no podemos decir que las diferencias entre las mediciones de rodilla-talón tomadas con una cinta métrica y con un antropómetro sigan una distribución normal. Por lo tanto, para analizar las diferencias en los promedios, es necesario usar un tipo de prueba que no dependa de suposiciones sobre la distribución de los datos.</p>
+</div>
+<p>Los resultados de dos pruebas estadísticas, Shapiro-Wilk y Lilliefors, mostraron un p-valor menor a <span class="math inline">\(0.05\)</span>. Esto significa que, con un nivel de confianza del <span class="math inline">\(95\%\)</span>, no podemos concluir que las diferencias entre las mediciones de rodilla - talón tomadas con una cinta métrica y con un antropómetro sigan una distribución normal, y por lo tanto no es posible usar la prueba t para muestras pareadas. Por lo tanto, para analizar las diferencias en los promedios, es necesario usar un tipo de prueba que no dependa de suposiciones sobre la distribución de los datos.</p>
+<p>El siguiente paso es evaluar el sistema de hipótesis mediante una prueba no paramétrica: Test de Rangos con Signo de Wilcoxon. Las hipótesis en este caso no son las mismas expuestas anteriormente. El sistema de hipótesis en este caso es el siguiente:</p>
+<p><span class="math display">\[ \begin{cases}
+H_0: \textrm{La distribución de las diferencias es simétrica alrededor de 0}\\
+H_1: \textrm{La distribución de las diferencias no es simétrica alrededor de 0}
+\end{cases}\]</span></p>
+<p>La cuál es equivalente al siguiente sistema de hipótesis bajo <span class="math inline">\(H_0\)</span>:</p>
+<p><span class="math display">\[ \begin{cases}
+H_0: \textrm{La mediana de las diferencias es 0}\\
+H_1: \textrm{La mediana de las diferencias no es 0}
+\end{cases}\]</span></p>
+<p>A continuación se presenta el resultado del test:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    One-sample Sign-Test
+    Wilcoxon signed rank test with continuity correction
 
-data:  LRT_dif
-s = 535, p-value &lt; 2.2e-16
-alternative hypothesis: true median is not equal to 0
+data:  datos$LRT_CM and datos$LRT_A
+V = 144691, p-value = 1
+alternative hypothesis: true location shift is less than 0
 95 percent confidence interval:
- 1.40 1.55
+     -Inf 1.524925
 sample estimates:
-median of x 
-        1.5 
-
-Achieved and Interpolated Confidence Intervals: 
-
-                  Conf.Level L.E.pt U.E.pt
-Lower Achieved CI     0.9433    1.4   1.55
-Interpolated CI       0.9500    1.4   1.55
-Upper Achieved CI     0.9535    1.4   1.55</code></pre>
+(pseudo)median 
+      1.475033 </code></pre>
 </div>
 </div>
-<p>Al principio, se pensó en usar la prueba de Wilcoxon, que es una prueba estadística no paramétrica para evaluar el promedio de las diferencias. Sin embargo, esta prueba asume que la distribución de las diferencias entre las mediciones son simétricas alrededor de una media <span class="math inline">\(\theta\)</span> pero eso no ocurrió en nuestros datos, ya que el coeficiente de asimetría (D’Agostino) fue de -0.785, lo que indica asimetría ligera. Por eso, se decidió usar unala prueba del signo para muestras pareadas, que no necesita asumir normalidad ni simetría. Aunque esta prueba no da información sobre el promedio de las diferencias, sí permite evaluar la mediana de las diferencias.</p>
-<p>El resultado de la prueba del signo mostró un p-valor de <span class="math inline">\(2.2 \times 10^{-16}\)</span>, lo que indica que en este caso rechazamos la igualdad de medianas. Esto significa que las mediciones de la longitud rodilla-talón hechas con la cinta métrica no son equivalentes a las obtenidas con el antropómetro.</p>
+<p>El resultado del Test de Rangos con Signo de Wilcoxon mostró un p-valor de <span class="math inline">\(2.2 \times 10^{-16}\)</span>, lo que indica que en este caso con una confianza del <span class="math inline">\(95\%\)</span> se rechaza la hipótesis nula de que la distribición de las diferencias sea simétrica alrededor de 0. Se concluye que las mediciones de la longitud rodilla - talón hechas con la cinta métrica son significativamente diferentes a las obtenidas con el antropómetro.</p>
+<!-- ```{r} -->
+<!-- sina <- LRT_dif[-which(LRT_dif %in% boxplot_dif$out)] -->
+<!-- wilcox.test(sina, alternative = "two.sided", conf.int = TRUE) -->
+<!-- ``` -->
 <section id="análisis-por-separado" class="level3">
 <h3 class="anchored" data-anchor-id="análisis-por-separado">Análisis por separado</h3>
 <section id="por-sexo" class="level4">
 <h4 class="anchored" data-anchor-id="por-sexo">Por sexo</h4>
 <section id="masculino" class="level5">
 <h5 class="anchored" data-anchor-id="masculino">Masculino:</h5>
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <pre><code>
     Shapiro-Wilk normality test
 
 data:  LRT_dif
-W = 0.87196, p-value = 2.209e-14</code></pre>
+W = 0.86608, p-value = 1.295e-14</code></pre>
 </div>
-<div class="cell-output cell-output-stdout">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <pre><code>
     Lilliefors (Kolmogorov-Smirnov) normality test
 
 data:  LRT_dif
-D = 0.12779, p-value = 9.752e-12</code></pre>
+D = 0.12805, p-value = 1.301e-11</code></pre>
+</div>
 </div>
 </div>
 <p>Los resultados de dos pruebas estadísticas, Shapiro-Wilk y Lilliefors, mostraron un valor menor a 0.05. Esto significa que, con un nivel de confianza del 95%, no podemos decir que las diferencias entre las mediciones de rodilla-talón tomadas con una cinta métrica y con un antropómetro en los adultos mayores de sexo masculino sigan una distribución normal.</p>
@@ -1138,7 +265,7 @@ D = 0.12779, p-value = 9.752e-12</code></pre>
     One-sample Sign-Test
 
 data:  LRT_dif
-s = 260, p-value &lt; 2.2e-16
+s = 256, p-value &lt; 2.2e-16
 alternative hypothesis: true median is not equal to 0
 95 percent confidence interval:
  1.20 1.35
@@ -1149,9 +276,9 @@ median of x
 Achieved and Interpolated Confidence Intervals: 
 
                   Conf.Level L.E.pt U.E.pt
-Lower Achieved CI     0.9466    1.2   1.35
+Lower Achieved CI     0.9483    1.2   1.35
 Interpolated CI       0.9500    1.2   1.35
-Upper Achieved CI     0.9599    1.2   1.35</code></pre>
+Upper Achieved CI     0.9613    1.2   1.35</code></pre>
 </div>
 </div>
 <p>Nuevamente, las diferencias entre las mediciones no son simétricas ya que el coeficiente de asimetría fue de -1.69. Por eso, se decidió usar la prueba del signo para muestras pareadas para evaluar la mediana de las diferencias.</p>
@@ -1161,21 +288,21 @@ Upper Achieved CI     0.9599    1.2   1.35</code></pre>
 <h5 class="anchored" data-anchor-id="femenino">Femenino:</h5>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
 
 data:  LRT_dif
-W = 0.89827, p-value = 7.241e-13</code></pre>
+W = 0.90005, p-value = 1.923e-12</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Lilliefors (Kolmogorov-Smirnov) normality test
 
 data:  LRT_dif
-D = 0.12248, p-value = 4.681e-11</code></pre>
+D = 0.11747, p-value = 1.024e-09</code></pre>
 </div>
 </div>
 <p>Los resultados de dos pruebas estadísticas, Shapiro-Wilk y Lilliefors, mostraron un valor menor a 0.05. Esto significa que, con un nivel de confianza del 95%, no podemos decir que las diferencias entre las mediciones de rodilla-talón tomadas con una cinta métrica y con un antropómetro en las mujeres mayores sigan una distribución normal.</p>
@@ -1185,14 +312,14 @@ D = 0.12248, p-value = 4.681e-11</code></pre>
     m-out-of-n bootstrap symmetry test by Miao, Gel, and Gastwirth (2006)
 
 data:  LRT_dif
-Test statistic = -0.27835, p-value = 0.818
+Test statistic = -2.3739, p-value = 0.04
 alternative hypothesis: the distribution is asymmetric.
 sample estimates:
 bootstrap optimal m 
-                 54 </code></pre>
+                 66 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1677598</code></pre>
+<pre><code>[1] 0</code></pre>
 </div>
 </div>
 <p>Probrando la simetría de las diferencias, se obtuvo un valor p mayor que 0.05, por lo que no hay suficiente evidencia para rechazar la hipótesis de simetría, lo que sugiere que podemos aplicar una prueba no paramétrica como Wilcoxon.</p>
@@ -1202,7 +329,7 @@ bootstrap optimal m
     Wilcoxon signed rank test with continuity correction
 
 data:  LRT_dif
-V = 39946, p-value &lt; 2.2e-16
+V = 36889, p-value &lt; 2.2e-16
 alternative hypothesis: true location is not equal to 0</code></pre>
 </div>
 </div>
@@ -1215,27 +342,27 @@ alternative hypothesis: true location is not equal to 0</code></pre>
 <h5 class="anchored" data-anchor-id="centro-día">Centro día:</h5>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
 
 data:  LRT_dif
-W = 0.91908, p-value = 1.059e-13</code></pre>
+W = 0.933, p-value = 4.084e-12</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Lilliefors (Kolmogorov-Smirnov) normality test
 
 data:  LRT_dif
-D = 0.094499, p-value = 5.563e-09</code></pre>
+D = 0.091824, p-value = 2.969e-08</code></pre>
 </div>
 </div>
 <p>Los resultados de dos pruebas estadísticas, Shapiro-Wilk y Lilliefors, mostraron un valor menor a 0.05. Esto significa que, con un nivel de confianza del 95%, no podemos decir que las diferencias entre las mediciones de rodilla-talón tomadas con una cinta métrica y con un antropómetro en los adultos mayores del centro día sigan una distribución normal.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1970562</code></pre>
+<pre><code>[1] 4.440892e-16</code></pre>
 </div>
 </div>
 <p>Probrando la simetría de las diferencias, se obtuvo un valor p mayor que 0.05, por lo que no hay suficiente evidencia para rechazar la hipótesis de simetría, lo que sugiere que la distribución de las diferencias es lo suficientemente simétrica como para aplicar una prueba no paramétrica como Wilcoxon.</p>
@@ -1245,7 +372,7 @@ D = 0.094499, p-value = 5.563e-09</code></pre>
     Wilcoxon signed rank test with continuity correction
 
 data:  LRT_dif
-V = 76401, p-value &lt; 2.2e-16
+V = 72907, p-value &lt; 2.2e-16
 alternative hypothesis: true location is not equal to 0</code></pre>
 </div>
 </div>
@@ -1255,21 +382,21 @@ alternative hypothesis: true location is not equal to 0</code></pre>
 <h5 class="anchored" data-anchor-id="comunidad-de-cuidado">Comunidad de cuidado</h5>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
 
 data:  LRT_dif
-W = 0.86025, p-value = 3.071e-11</code></pre>
+W = 0.8272, p-value = 1.989e-12</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Lilliefors (Kolmogorov-Smirnov) normality test
 
 data:  LRT_dif
-D = 0.1644, p-value = 8.88e-12</code></pre>
+D = 0.17872, p-value = 1.606e-13</code></pre>
 </div>
 </div>
 <p>Los resultados de dos pruebas estadísticas, Shapiro-Wilk y Lilliefors, mostraron un valor menor a 0.05. Esto significa que, con un nivel de confianza del 95%, no podemos decir que las diferencias entre las mediciones de rodilla-talón tomadas con una cinta métrica y con un antropómetro en los adultos mayores de las comunidades de cuidado sigan una distribución normal.</p>
@@ -1279,20 +406,20 @@ D = 0.1644, p-value = 8.88e-12</code></pre>
     One-sample Sign-Test
 
 data:  LRT_dif
-s = 155, p-value &lt; 2.2e-16
+s = 149, p-value &lt; 2.2e-16
 alternative hypothesis: true median is not equal to 0
 95 percent confidence interval:
  1.45 1.65
 sample estimates:
 median of x 
-        1.6 
+       1.55 
 
 Achieved and Interpolated Confidence Intervals: 
 
                   Conf.Level L.E.pt U.E.pt
-Lower Achieved CI     0.9386   1.45   1.65
+Lower Achieved CI     0.9433   1.45   1.65
 Interpolated CI       0.9500   1.45   1.65
-Upper Achieved CI     0.9574   1.45   1.65</code></pre>
+Upper Achieved CI     0.9611   1.45   1.65</code></pre>
 </div>
 </div>
 <p>Nuevamente, la diferencia entre las mediciones no son simétricas ya que el coeficiente de asimetría fue de -1.64. Por eso, se decidió usar la prueba del signo para muestras pareadas para evaluar la mediana de las diferencias.</p>
@@ -1305,21 +432,21 @@ Upper Achieved CI     0.9574   1.45   1.65</code></pre>
 <h5 class="anchored" data-anchor-id="blanco-mestizo">Blanco-Mestizo</h5>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
 
 data:  LRT_dif
-W = 0.90463, p-value &lt; 2.2e-16</code></pre>
+W = 0.89793, p-value &lt; 2.2e-16</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Lilliefors (Kolmogorov-Smirnov) normality test
 
 data:  LRT_dif
-D = 0.11525, p-value &lt; 2.2e-16</code></pre>
+D = 0.11628, p-value &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Los resultados de dos pruebas estadísticas, Shapiro-Wilk y Lilliefors, mostraron un valor menor a 0.05. Esto significa que, con un nivel de confianza del 95%, no podemos decir que las diferencias entre las mediciones de rodilla-talón tomadas con una cinta métrica y con un antropómetro en los adultos mayores Blancos-Mestizos sigan una distribución normal.</p>
@@ -1329,10 +456,10 @@ D = 0.11525, p-value &lt; 2.2e-16</code></pre>
     One-sample Sign-Test
 
 data:  LRT_dif
-s = 523, p-value &lt; 2.2e-16
+s = 508, p-value &lt; 2.2e-16
 alternative hypothesis: true median is not equal to 0
 95 percent confidence interval:
- 1.429546 1.550000
+ 1.40 1.55
 sample estimates:
 median of x 
         1.5 
@@ -1340,9 +467,9 @@ median of x
 Achieved and Interpolated Confidence Intervals: 
 
                   Conf.Level L.E.pt U.E.pt
-Lower Achieved CI     0.9460 1.4500   1.55
-Interpolated CI       0.9500 1.4295   1.55
-Upper Achieved CI     0.9558 1.4000   1.55</code></pre>
+Lower Achieved CI     0.9439    1.4   1.55
+Interpolated CI       0.9500    1.4   1.55
+Upper Achieved CI     0.9542    1.4   1.55</code></pre>
 </div>
 </div>
 <p>Las diferencias entre las mediciones no son simétricas ya que el coeficiente de asimetría fue de -0.78. Por eso, se decidió usar la prueba del signo para muestras pareadas para evaluar la mediana de las diferencias.</p>
@@ -1352,7 +479,7 @@ Upper Achieved CI     0.9558 1.4000   1.55</code></pre>
 <h5 class="anchored" data-anchor-id="afrocolombiano-indigenas-rrom">Afrocolombiano, indigenas, Rrom</h5>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1419,7 +546,7 @@ Upper Achieved CI     0.9614 1.0500    1.7</code></pre>
 <p>Inicialmente se hace una comparación gráfica de ambas técnicas a través de un box-plot:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Según el boxplot, se puede observar que podría existir una leve diferencia entre las distribuciones de las mediciones de la longitud rodilla maléolo con la pierna a 90° y con la pierna completamente estirada. Sin embargo, es necesario realizar una prueba estadística formal. Inicalmente se calculan las diferencias entre ambos métodos y se les aplica un test de normalidad para elegir qué prueba utilizar para evaluar la hipótesis nula de que la medición longitud rodilla-maléolo con la pierna completamente estirada es igual a la medición de la longitud rodilla-maléolo con la pierna a <span class="math inline">\(90°\)</span>.</p>
@@ -1430,34 +557,34 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
 <p>donde <span class="math inline">\(\theta_X\)</span> es una medida de tendencia central de las mediciones realizadas con la pierna recta y <span class="math inline">\(\theta_Y\)</span> es la misma medida de tendencia central para las mediciones con la pierna a 90°.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Tenemos estos datos atípicos.</p>
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="xcrbugcngr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="rscjcgrowk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#xcrbugcngr table {
+#rscjcgrowk table {
   font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xcrbugcngr thead, #xcrbugcngr tbody, #xcrbugcngr tfoot, #xcrbugcngr tr, #xcrbugcngr td, #xcrbugcngr th {
+#rscjcgrowk thead, #rscjcgrowk tbody, #rscjcgrowk tfoot, #rscjcgrowk tr, #rscjcgrowk td, #rscjcgrowk th {
   border-style: none;
 }
 
-#xcrbugcngr p {
+#rscjcgrowk p {
   margin: 0;
   padding: 0;
 }
 
-#xcrbugcngr .gt_table {
+#rscjcgrowk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1483,12 +610,12 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-left-color: #D3D3D3;
 }
 
-#xcrbugcngr .gt_caption {
+#rscjcgrowk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xcrbugcngr .gt_title {
+#rscjcgrowk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1500,7 +627,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-bottom-width: 0;
 }
 
-#xcrbugcngr .gt_subtitle {
+#rscjcgrowk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1512,7 +639,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-top-width: 0;
 }
 
-#xcrbugcngr .gt_heading {
+#rscjcgrowk .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -1524,13 +651,13 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-right-color: #D3D3D3;
 }
 
-#xcrbugcngr .gt_bottom_border {
+#rscjcgrowk .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xcrbugcngr .gt_col_headings {
+#rscjcgrowk .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1545,7 +672,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-right-color: #D3D3D3;
 }
 
-#xcrbugcngr .gt_col_heading {
+#rscjcgrowk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1565,7 +692,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   overflow-x: hidden;
 }
 
-#xcrbugcngr .gt_column_spanner_outer {
+#rscjcgrowk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1577,15 +704,15 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   padding-right: 4px;
 }
 
-#xcrbugcngr .gt_column_spanner_outer:first-child {
+#rscjcgrowk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xcrbugcngr .gt_column_spanner_outer:last-child {
+#rscjcgrowk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xcrbugcngr .gt_column_spanner {
+#rscjcgrowk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -1597,11 +724,11 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   width: 100%;
 }
 
-#xcrbugcngr .gt_spanner_row {
+#rscjcgrowk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xcrbugcngr .gt_group_heading {
+#rscjcgrowk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1627,7 +754,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   text-align: left;
 }
 
-#xcrbugcngr .gt_empty_group_heading {
+#rscjcgrowk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1642,15 +769,15 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   vertical-align: middle;
 }
 
-#xcrbugcngr .gt_from_md > :first-child {
+#rscjcgrowk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xcrbugcngr .gt_from_md > :last-child {
+#rscjcgrowk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xcrbugcngr .gt_row {
+#rscjcgrowk .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -1669,7 +796,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   overflow-x: hidden;
 }
 
-#xcrbugcngr .gt_stub {
+#rscjcgrowk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1682,7 +809,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   padding-right: 5px;
 }
 
-#xcrbugcngr .gt_stub_row_group {
+#rscjcgrowk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1696,15 +823,15 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   vertical-align: top;
 }
 
-#xcrbugcngr .gt_row_group_first td {
+#rscjcgrowk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xcrbugcngr .gt_row_group_first th {
+#rscjcgrowk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xcrbugcngr .gt_summary_row {
+#rscjcgrowk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1714,16 +841,16 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   padding-right: 5px;
 }
 
-#xcrbugcngr .gt_first_summary_row {
+#rscjcgrowk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xcrbugcngr .gt_first_summary_row.thick {
+#rscjcgrowk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xcrbugcngr .gt_last_summary_row {
+#rscjcgrowk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1733,7 +860,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-bottom-color: #D3D3D3;
 }
 
-#xcrbugcngr .gt_grand_summary_row {
+#rscjcgrowk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1743,7 +870,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   padding-right: 5px;
 }
 
-#xcrbugcngr .gt_first_grand_summary_row {
+#rscjcgrowk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1753,7 +880,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-top-color: #D3D3D3;
 }
 
-#xcrbugcngr .gt_last_grand_summary_row_top {
+#rscjcgrowk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1763,11 +890,11 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-bottom-color: #D3D3D3;
 }
 
-#xcrbugcngr .gt_striped {
+#rscjcgrowk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xcrbugcngr .gt_table_body {
+#rscjcgrowk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1776,7 +903,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-bottom-color: #D3D3D3;
 }
 
-#xcrbugcngr .gt_footnotes {
+#rscjcgrowk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1790,7 +917,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-right-color: #D3D3D3;
 }
 
-#xcrbugcngr .gt_footnote {
+#rscjcgrowk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1799,7 +926,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   padding-right: 5px;
 }
 
-#xcrbugcngr .gt_sourcenotes {
+#rscjcgrowk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1813,7 +940,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-right-color: #D3D3D3;
 }
 
-#xcrbugcngr .gt_sourcenote {
+#rscjcgrowk .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1821,72 +948,72 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   padding-right: 5px;
 }
 
-#xcrbugcngr .gt_left {
+#rscjcgrowk .gt_left {
   text-align: left;
 }
 
-#xcrbugcngr .gt_center {
+#rscjcgrowk .gt_center {
   text-align: center;
 }
 
-#xcrbugcngr .gt_right {
+#rscjcgrowk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xcrbugcngr .gt_font_normal {
+#rscjcgrowk .gt_font_normal {
   font-weight: normal;
 }
 
-#xcrbugcngr .gt_font_bold {
+#rscjcgrowk .gt_font_bold {
   font-weight: bold;
 }
 
-#xcrbugcngr .gt_font_italic {
+#rscjcgrowk .gt_font_italic {
   font-style: italic;
 }
 
-#xcrbugcngr .gt_super {
+#rscjcgrowk .gt_super {
   font-size: 65%;
 }
 
-#xcrbugcngr .gt_footnote_marks {
+#rscjcgrowk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xcrbugcngr .gt_asterisk {
+#rscjcgrowk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xcrbugcngr .gt_indent_1 {
+#rscjcgrowk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xcrbugcngr .gt_indent_2 {
+#rscjcgrowk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xcrbugcngr .gt_indent_3 {
+#rscjcgrowk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xcrbugcngr .gt_indent_4 {
+#rscjcgrowk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xcrbugcngr .gt_indent_5 {
+#rscjcgrowk .gt_indent_5 {
   text-indent: 25px;
 }
 
-#xcrbugcngr .katex-display {
+#rscjcgrowk .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#xcrbugcngr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#rscjcgrowk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 
@@ -1925,14 +1052,14 @@ tbody tr:last-child {
     Shapiro-Wilk normality test
 
 data:  LRM_dif
-W = 0.87437, p-value &lt; 2.2e-16</code></pre>
+W = 0.99154, p-value = 0.003439</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Lilliefors (Kolmogorov-Smirnov) normality test
 
 data:  LRM_dif
-D = 0.085105, p-value = 2.399e-10</code></pre>
+D = 0.056984, p-value = 0.0002416</code></pre>
 </div>
 </div>
 <p>Dado que en ambos test, Shapiro-Wilk y Lilliefors, se obtuvo un p-valor menor a <span class="math inline">\(0.05\)</span>, entonces, con una significancia del <span class="math inline">\(5\%\)</span>, no hay evidencia estadística de que las diferencias entre las mediciones rodilla-talón con cinta métrica y con antropómetro sigan una distribució normal. Por lo tanto, se hace necesario realizar un test no paramétrico para media de las diferencias.</p>
@@ -1942,20 +1069,20 @@ D = 0.085105, p-value = 2.399e-10</code></pre>
     One-sample Sign-Test
 
 data:  LRM_dif
-s = 454, p-value &lt; 2.2e-16
+s = 439, p-value &lt; 2.2e-16
 alternative hypothesis: true median is not equal to 0
 95 percent confidence interval:
- 0.75 0.90
+ 0.7000000 0.8918847
 sample estimates:
 median of x 
-       0.85 
+        0.8 
 
 Achieved and Interpolated Confidence Intervals: 
 
                   Conf.Level L.E.pt U.E.pt
-Lower Achieved CI     0.9433   0.75    0.9
-Interpolated CI       0.9500   0.75    0.9
-Upper Achieved CI     0.9535   0.75    0.9</code></pre>
+Lower Achieved CI     0.9411    0.7 0.8500
+Interpolated CI       0.9500    0.7 0.8919
+Upper Achieved CI     0.9517    0.7 0.9000</code></pre>
 </div>
 </div>
 <p>Nuevamente, se consideró aplicar la prueba de Wilcoxon para evaluar la media de las diferencias, pero esta prueba no se aplicó ya que el coeficiente de asimetría obtenido fue de <span class="math inline">\(2.022\)</span>. Este valor indica una falta de simetría en las diferencias de las mediciones. Por esta razón, de nuevo se optó por utilizar la prueba del signo para muestras pareadas.</p>
@@ -1967,30 +1094,30 @@ Upper Achieved CI     0.9535   0.75    0.9</code></pre>
 <p>Como antes, se hizo un análisis visual a través de un box-plot, donde se observa que aparentemente no hay una diferencia entre la estimación de la talla con las fórmulas de Benjumea con cinta métrica y la talla real. Sin embargo, es necesario realizar una prueba estadística formal para concluir.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="672"></p>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Se calculan las diferencias entre la talla real y la estimación de la talla con las fórmulas de Benjumea con cinta métrica, luego, a estas diferencias se les aplica el test de Sahpiro-Wilk para normalidad y el test Lilliefors de normalidad, esto para decidir qué test utilizar para evaluar la media de las diferencias.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid" width="672"></p>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-36-2.png" class="img-fluid" width="672"></p>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-35-2.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
 
 data:  talla_dif
-W = 0.99626, p-value = 0.2142</code></pre>
+W = 0.99549, p-value = 0.1187</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Lilliefors (Kolmogorov-Smirnov) normality test
 
 data:  talla_dif
-D = 0.024627, p-value = 0.5671</code></pre>
+D = 0.025638, p-value = 0.5238</code></pre>
 </div>
 </div>
 <p>En ambos test, se obtiene un p-valor mayor a <span class="math inline">\(0.05\)</span>, por lo que se afirma, que con una significancia del <span class="math inline">\(5\%\)</span>, existe evidencia estadística de que las diferencias siguen una distribución normal, por lo tanto, para evaluar la media de las diferencias, se puede implementar una prueba <span class="math inline">\(t\)</span> para muestras pareadas.</p>
@@ -2000,60 +1127,60 @@ D = 0.024627, p-value = 0.5671</code></pre>
     One Sample t-test
 
 data:  talla_dif
-t = -9.2675, df = 556, p-value &lt; 2.2e-16
+t = -8.5884, df = 541, p-value &lt; 2.2e-16
 alternative hypothesis: true mean is not equal to 0
 95 percent confidence interval:
- -1.727021 -1.122969
+ -1.636747 -1.027395
 sample estimates:
 mean of x 
--1.424995 </code></pre>
+-1.332071 </code></pre>
 </div>
 </div>
 <p>Luego de aplicar la prueba <span class="math inline">\(t\)</span>, con una significancia del <span class="math inline">\(5\%\)</span>, existe evidencia estadística para rechazar la hipótesis nula ya que el p-valor es <span class="math inline">\(2.2 \times 10^{-16}\)</span>, por lo tanto, se concluye que la media de las diferencias entre la talla real y la estimación con las fórmulas de Benjumea con cinta métrica no es cero, luego, parece que las estimaciones no son cercanas a la talla real.</p>
 <p>El MSE del modelo de Benjumea sobre nuestros datos es el siguiente:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 15.176</code></pre>
+<pre><code>[1] 14.78904</code></pre>
 </div>
 </div>
 <section id="sin-los-outliers" class="level3">
 <h3 class="anchored" data-anchor-id="sin-los-outliers">Sin los outliers</h3>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid" width="672"></p>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-39-2.png" class="img-fluid" width="672"></p>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-38-2.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-39-3.png" class="img-fluid" width="672"></p>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-38-3.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
 
 data:  talla_dif1
-W = 0.9962, p-value = 0.2126</code></pre>
+W = 0.99636, p-value = 0.2631</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Lilliefors (Kolmogorov-Smirnov) normality test
 
 data:  talla_dif1
-D = 0.024302, p-value = 0.6001</code></pre>
+D = 0.024913, p-value = 0.5824</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     One Sample t-test
 
 data:  talla_dif1
-t = -9.2432, df = 548, p-value &lt; 2.2e-16
+t = -8.5339, df = 533, p-value &lt; 2.2e-16
 alternative hypothesis: true mean is not equal to 0
 95 percent confidence interval:
- -1.637236 -1.063330
+ -1.5424978 -0.9652385
 sample estimates:
 mean of x 
--1.350283 </code></pre>
+-1.253868 </code></pre>
 </div>
 </div>
 <p>También da que la diferencia no es cero.</p>
@@ -2065,30 +1192,30 @@ mean of x
 <p>Como antes, se hizo un análisis visual a través de un box-plot, donde se observa que aparentemente no hay una diferencia entre la estimación de la talla con las fórmulas de Benjumea con antropómetro y la talla real. Sin embargo, es necesario realizar una prueba estadística formal para concluir.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid" width="672"></p>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Se calculan las diferencias entre la talla real y la estimación de la talla con las fórmulas de Benjumea con antropómetro, luego, a estas diferencias se les aplica el test de Sahpiro-Wilk para normalidad y el test Lilliefors de normalidad, esto para decidir qué test utilizar para evaluar la media de las diferencias.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid" width="672"></p>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-42-2.png" class="img-fluid" width="672"></p>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-41-2.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
 
 data:  talla_dif
-W = 0.99668, p-value = 0.3088</code></pre>
+W = 0.99624, p-value = 0.2288</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Lilliefors (Kolmogorov-Smirnov) normality test
 
 data:  talla_dif
-D = 0.025041, p-value = 0.54</code></pre>
+D = 0.026057, p-value = 0.4972</code></pre>
 </div>
 </div>
 <p>En ambos test, se obtiene un p-valor mayor a <span class="math inline">\(0.05\)</span>, por lo que se afirma, que con una significancia del <span class="math inline">\(5\%\)</span>, existe evidencia estadística de que las diferencias siguen una distribución normal, por lo tanto, para evaluar la media de las diferencias, se puede implementar una prueba <span class="math inline">\(t\)</span> para muestras pareadas.</p>
@@ -2098,60 +1225,60 @@ D = 0.025041, p-value = 0.54</code></pre>
     One Sample t-test
 
 data:  talla_dif
-t = 7.1182, df = 556, p-value = 3.392e-12
+t = 7.2747, df = 541, p-value = 1.226e-12
 alternative hypothesis: true mean is not equal to 0
 95 percent confidence interval:
- 0.7485775 1.3191627
+ 0.7829203 1.3621421
 sample estimates:
 mean of x 
-  1.03387 </code></pre>
+ 1.072531 </code></pre>
 </div>
 </div>
 <p>Luego de aplicar la prueba <span class="math inline">\(t\)</span>, con una significancia del <span class="math inline">\(5\%\)</span>, existe evidencia estadística para rechazar la hipótesis nula ya que el p-valor es <span class="math inline">\(4.103 \times 10^{-12}\)</span>, por lo tanto, se concluye que la media de las diferencias entre la talla real y la estimación con las fórmulas de Benjumea con antropómetro no es cero, luego, parece que las estimaciones no son cercanas a la talla real.</p>
 <p>El MSE del modelo de Benjumea sobre nuestros datos es el siguiente:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 12.79804</code></pre>
+<pre><code>[1] 12.90973</code></pre>
 </div>
 </div>
 <section id="sin-los-outliers-1" class="level3">
 <h3 class="anchored" data-anchor-id="sin-los-outliers-1">Sin los outliers</h3>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-45-1.png" class="img-fluid" width="672"></p>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-45-2.png" class="img-fluid" width="672"></p>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-44-2.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-45-3.png" class="img-fluid" width="672"></p>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-44-3.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
 
 data:  talla_dif1
-W = 0.99621, p-value = 0.2126</code></pre>
+W = 0.99617, p-value = 0.223</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Lilliefors (Kolmogorov-Smirnov) normality test
 
 data:  talla_dif1
-D = 0.024767, p-value = 0.5667</code></pre>
+D = 0.025589, p-value = 0.536</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     One Sample t-test
 
 data:  talla_dif1
-t = 7.9431, df = 550, p-value = 1.119e-14
+t = 8.1267, df = 535, p-value = 3.076e-15
 alternative hypothesis: true mean is not equal to 0
 95 percent confidence interval:
- 0.8340581 1.3821008
+ 0.8714519 1.4270483
 sample estimates:
 mean of x 
- 1.108079 </code></pre>
+  1.14925 </code></pre>
 </div>
 </div>
 <p>También da que la diferencia no es cero.</p>
@@ -2163,30 +1290,30 @@ mean of x
 <p>Como antes, se hizo un análisis visual a través de un box-plot, donde se observa que aparentemente no hay una diferencia entre la estimación de la talla con las fórmulas de Arango y Zamora con la pierna a <span class="math inline">\(90°\)</span> y la talla real. Sin embargo, es necesario realizar una prueba estadística formal para concluir.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid" width="672"></p>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-46-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Se calculan las diferencias entre la talla real y la estimación de la talla con las fórmulas de Arango y Zamora con la pierna a <span class="math inline">\(90°\)</span>, luego, a estas diferencias se les aplica el test de Sahpiro-Wilk para normalidad y el test Lilliefors de normalidad, esto para decidir qué test utilizar para evaluar la media de las diferencias.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-48-1.png" class="img-fluid" width="672"></p>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-48-2.png" class="img-fluid" width="672"></p>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-47-2.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
 
 data:  talla_dif
-W = 0.99569, p-value = 0.1279</code></pre>
+W = 0.99579, p-value = 0.1536</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Lilliefors (Kolmogorov-Smirnov) normality test
 
 data:  talla_dif
-D = 0.026005, p-value = 0.4767</code></pre>
+D = 0.026225, p-value = 0.4852</code></pre>
 </div>
 </div>
 <p>En ambos test, se obtiene un p-valor mayor a <span class="math inline">\(0.05\)</span>, por lo que se afirma, que con una significancia del <span class="math inline">\(5\%\)</span>, existe evidencia estadística de que las diferencias siguen una distribución normal, por lo tanto, para evaluar la media de las diferencias, se puede implementar una prueba <span class="math inline">\(t\)</span> para muestras pareadas.</p>
@@ -2196,60 +1323,60 @@ D = 0.026005, p-value = 0.4767</code></pre>
     One Sample t-test
 
 data:  talla_dif
-t = 3.9629, df = 557, p-value = 8.369e-05
+t = 4.6027, df = 542, p-value = 5.201e-06
 alternative hypothesis: true mean is not equal to 0
 95 percent confidence interval:
- 0.3767971 1.1174247
+ 0.4969359 1.2369195
 sample estimates:
 mean of x 
-0.7471109 </code></pre>
+0.8669277 </code></pre>
 </div>
 </div>
 <p>Luego de aplicar la prueba <span class="math inline">\(t\)</span>, con una significancia del <span class="math inline">\(5\%\)</span>, existe evidencia estadística para rechazar la hipótesis nula ya que el p-valor es <span class="math inline">\(9.685 \times 10^{-12}\)</span>, por lo tanto, se concluye que la media de las diferencias entre la talla real y la estimación con las fórmulas de Arango y Zamora con la pierna a <span class="math inline">\(90°\)</span> no es cero, luego, parece que las estimaciones no son cercanas a la talla real.</p>
 <p>El MSE del modelo de Arango y Zamora sobre nuestros datos es el siguiente:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 20.35563</code></pre>
+<pre><code>[1] 19.98007</code></pre>
 </div>
 </div>
 <section id="sin-los-outliers-2" class="level3">
 <h3 class="anchored" data-anchor-id="sin-los-outliers-2">Sin los outliers</h3>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-51-1.png" class="img-fluid" width="672"></p>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-51-2.png" class="img-fluid" width="672"></p>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-50-2.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-51-3.png" class="img-fluid" width="672"></p>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-50-3.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
 
 data:  talla_dif1
-W = 0.99728, p-value = 0.4991</code></pre>
+W = 0.99684, p-value = 0.3815</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Lilliefors (Kolmogorov-Smirnov) normality test
 
 data:  talla_dif1
-D = 0.029807, p-value = 0.2727</code></pre>
+D = 0.030474, p-value = 0.2624</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     One Sample t-test
 
 data:  talla_dif1
-t = 4.5435, df = 552, p-value = 6.799e-06
+t = 5.3945, df = 536, p-value = 1.033e-07
 alternative hypothesis: true mean is not equal to 0
 95 percent confidence interval:
- 0.4687419 1.1826908
+ 0.6173709 1.3244975
 sample estimates:
 mean of x 
-0.8257164 </code></pre>
+0.9709342 </code></pre>
 </div>
 </div>
 <p>También da que la diferencia no es cero.</p>
@@ -2261,30 +1388,30 @@ mean of x
 <p>Como antes, se hizo un análisis visual a través de un box-plot, donde se observa que aparentemente no hay una diferencia entre la estimación de la talla con las fórmulas de Arango y Zamora con la pierna estirada y la talla real. Sin embargo, es necesario realizar una prueba estadística formal para concluir.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-53-1.png" class="img-fluid" width="672"></p>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-52-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Se calculan las diferencias entre la talla real y la estimación de la talla con las fórmulas de Arango y Zamora con la pierna a estirada, luego, a estas diferencias se les aplica el test de Sahpiro-Wilk para normalidad y el test Lilliefors de normalidad, esto para decidir qué test utilizar para evaluar la media de las diferencias.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-54-1.png" class="img-fluid" width="672"></p>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-53-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-54-2.png" class="img-fluid" width="672"></p>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-53-2.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
 
 data:  talla_dif
-W = 0.99477, p-value = 0.05418</code></pre>
+W = 0.99453, p-value = 0.04962</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Lilliefors (Kolmogorov-Smirnov) normality test
 
 data:  talla_dif
-D = 0.023066, p-value = 0.6685</code></pre>
+D = 0.023373, p-value = 0.6691</code></pre>
 </div>
 </div>
 <p>En ambos test, se obtiene un p-valor mayor a <span class="math inline">\(0.05\)</span>, por lo que se afirma, que con una significancia del <span class="math inline">\(5\%\)</span>, existe evidencia estadística de que las diferencias siguen una distribución normal, por lo tanto, para evaluar la media de las diferencias, se puede implementar una prueba <span class="math inline">\(t\)</span> para muestras pareadas.</p>
@@ -2294,20 +1421,20 @@ D = 0.023066, p-value = 0.6685</code></pre>
     One Sample t-test
 
 data:  talla_dif
-t = 9.234, df = 557, p-value &lt; 2.2e-16
+t = 9.261, df = 542, p-value &lt; 2.2e-16
 alternative hypothesis: true mean is not equal to 0
 95 percent confidence interval:
- 1.342498 2.067959
+ 1.370670 2.108677
 sample estimates:
 mean of x 
- 1.705228 </code></pre>
+ 1.739674 </code></pre>
 </div>
 </div>
 <p>Luego de aplicar la prueba <span class="math inline">\(t\)</span>, con una significancia del <span class="math inline">\(5\%\)</span>, existe evidencia estadística para rechazar la hipótesis nula ya que el p-valor es <span class="math inline">\(2.2 \times 10^{-16}\)</span>, por lo tanto, se concluye que la media de las diferencias entre la talla real y la estimación con las fórmulas de Arango y Zamora con la pierna estirada no es cero, luego, parece que las estimaciones no son cercanas a la talla real.</p>
 <p>El MSE del modelo de Arango y Zamora sobre nuestros datos es el siguiente:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 21.90273</code></pre>
+<pre><code>[1] 22.15239</code></pre>
 </div>
 </div>
 
