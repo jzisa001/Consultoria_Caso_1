@@ -112,7 +112,7 @@ H_1: \textrm{La mediana de las diferencias no es 0}
 A continuación se presenta el resultado del test:
 
 ```{r}
-wilcox.test(datos$LRT_CM, datos$LRT_A, paired = TRUE, alternative = "less", conf.int = TRUE)
+wilcox.test(datos$LRT_CM, datos$LRT_A, paired = TRUE, alternative = "two.sided", conf.int = TRUE)
 ```
 
 El resultado del Test de Rangos con Signo de Wilcoxon mostró un p-valor de $2.2 \times 10^{-16}$, lo que indica que en este caso con una confianza del $95\%$ se rechaza la hipótesis nula de que la distribición de las diferencias sea simétrica alrededor de 0. Se concluye que las mediciones de la longitud rodilla - talón hechas con la cinta métrica son significativamente diferentes a las obtenidas con el antropómetro.
