@@ -499,7 +499,7 @@ El resultado de la prueba del signo arrojó un p-valor de $2.2 \times 10^{-16}$,
 
 ### Análisis discriminando por sexo
 
-##### Masculino:
+#### Masculino:
 
 Inicialmente se hace una comparación gráfica de ambas técnicas a través de un box-plot:
 

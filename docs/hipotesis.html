@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -45,7 +45,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "Ninguna coincidencia",
     "search-matching-documents-text": "coincidencias",
@@ -54,13 +60,42 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": ""
+    "search-submit-button-title": "",
+    "search-label": "Search"
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -69,34 +104,34 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-            <div id="quarto-search" class="" title="true"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html" rel="" target="">
- <span class="menu-text">Inicio</span></a>
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Inicio</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./descriptivo.html" rel="" target="">
- <span class="menu-text">Análisis descriptivo</span></a>
+    <a class="nav-link" href="./descriptivo.html"> 
+<span class="menu-text">Análisis descriptivo</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./hipotesis.html" rel="" target="" aria-current="page">
- <span class="menu-text">Evaluación de hipótesis</span></a>
+    <a class="nav-link active" href="./hipotesis.html" aria-current="page"> 
+<span class="menu-text">Evaluación de hipótesis</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./modelos.html" rel="" target="">
- <span class="menu-text">Modelos</span></a>
+    <a class="nav-link" href="./modelos.html"> 
+<span class="menu-text">Modelos</span></a>
   </li>  
 </ul>
+          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -120,7 +155,13 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#por-etnia" id="toc-por-etnia" class="nav-link" data-scroll-target="#por-etnia">Por etnia</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#longitud-rodilla-maléolo" id="toc-longitud-rodilla-maléolo" class="nav-link" data-scroll-target="#longitud-rodilla-maléolo">Longitud rodilla-maléolo</a></li>
+  <li><a href="#longitud-rodilla-maléolo" id="toc-longitud-rodilla-maléolo" class="nav-link" data-scroll-target="#longitud-rodilla-maléolo">Longitud rodilla-maléolo</a>
+  <ul class="collapse">
+  <li><a href="#análisis-discriminando-por-sexo" id="toc-análisis-discriminando-por-sexo" class="nav-link" data-scroll-target="#análisis-discriminando-por-sexo">Análisis discriminando por sexo</a>
+  <ul class="collapse">
+  <li><a href="#femenino-1" id="toc-femenino-1" class="nav-link" data-scroll-target="#femenino-1">Femenino:</a></li>
+  </ul></li>
+  </ul></li>
   <li><a href="#talla-real-y-estimación-benjumea-lrt-con-cinta-métrica" id="toc-talla-real-y-estimación-benjumea-lrt-con-cinta-métrica" class="nav-link" data-scroll-target="#talla-real-y-estimación-benjumea-lrt-con-cinta-métrica">Talla real y estimación Benjumea (LRT) con cinta métrica</a>
   <ul class="collapse">
   <li><a href="#sin-los-outliers" id="toc-sin-los-outliers" class="nav-link" data-scroll-target="#sin-los-outliers">Sin los outliers</a></li>
@@ -143,6 +184,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+
 <section id="hipótesis" class="level1">
 <h1>Hipótesis</h1>
 <section id="longitud-rodilla-talón" class="level2">
@@ -156,34 +198,44 @@ H_1: \, \, \,  \mu_{CM} - \mu_{A} \neq 0
 <p>Inicialmente se hace una comparación gráfica de ambas técnicas a través de un box-plot:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Según el gráfico de cajas (boxplot), parece que existe diferencia entre las mediciones de la longitud desde la rodilla hasta el talón realizadas con cinta métrica y con antropómetro. Se evidencia que las mediciones realizadas con cinta métrica son en promedio superiores a las realizadas con antropómetro. Sin embargo, es necesario hacer una prueba estadística más formal. Para esto, se calculan las diferencias entre las mediciones de ambos métodos y se verifica si esas diferencias siguen una distribución normal para determinar qué prueba estadística es adecuada para la comparación.</p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="3">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-4-3.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
 <p>A continuación se presentan los resultados de los test de Shapiro-Wilk y de Lilliefors para la diferencia de las mediciones LRT_CM y LRT_A:</p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
     Shapiro-Wilk normality test
 
 data:  LRT_dif
 W = 0.89825, p-value &lt; 2.2e-16</code></pre>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
     Lilliefors (Kolmogorov-Smirnov) normality test
 
@@ -230,26 +282,32 @@ sample estimates:
 <h4 class="anchored" data-anchor-id="por-sexo">Por sexo</h4>
 <section id="masculino" class="level5">
 <h5 class="anchored" data-anchor-id="masculino">Masculino:</h5>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
     Shapiro-Wilk normality test
 
 data:  LRT_dif
 W = 0.86608, p-value = 1.295e-14</code></pre>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <pre><code>
     Lilliefors (Kolmogorov-Smirnov) normality test
 
@@ -288,7 +346,11 @@ Upper Achieved CI     0.9613    1.2   1.35</code></pre>
 <h5 class="anchored" data-anchor-id="femenino">Femenino:</h5>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -312,11 +374,11 @@ D = 0.11747, p-value = 1.024e-09</code></pre>
     m-out-of-n bootstrap symmetry test by Miao, Gel, and Gastwirth (2006)
 
 data:  LRT_dif
-Test statistic = -2.3739, p-value = 0.044
+Test statistic = -2.3739, p-value = 0.038
 alternative hypothesis: the distribution is asymmetric.
 sample estimates:
 bootstrap optimal m 
-                 33 </code></pre>
+                106 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
@@ -342,7 +404,11 @@ alternative hypothesis: true location is not equal to 0</code></pre>
 <h5 class="anchored" data-anchor-id="centro-día">Centro día:</h5>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -382,7 +448,11 @@ alternative hypothesis: true location is not equal to 0</code></pre>
 <h5 class="anchored" data-anchor-id="comunidad-de-cuidado">Comunidad de cuidado</h5>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -432,7 +502,11 @@ Upper Achieved CI     0.9611   1.45   1.65</code></pre>
 <h5 class="anchored" data-anchor-id="blanco-mestizo">Blanco-Mestizo</h5>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -479,7 +553,11 @@ Upper Achieved CI     0.9542    1.4   1.55</code></pre>
 <h5 class="anchored" data-anchor-id="afrocolombiano-indigenas-rrom">Afrocolombiano, indigenas, Rrom</h5>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -546,7 +624,11 @@ Upper Achieved CI     0.9614 1.0500    1.7</code></pre>
 <p>Inicialmente se hace una comparación gráfica de ambas técnicas a través de un box-plot:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Según el boxplot, se puede observar que podría existir una leve diferencia entre las distribuciones de las mediciones de la longitud rodilla maléolo con la pierna a 90° y con la pierna completamente estirada. Sin embargo, es necesario realizar una prueba estadística formal. Inicalmente se calculan las diferencias entre ambos métodos y se les aplica un test de normalidad para elegir qué prueba utilizar para evaluar la hipótesis nula de que la medición longitud rodilla-maléolo con la pierna completamente estirada es igual a la medición de la longitud rodilla-maléolo con la pierna a <span class="math inline">\(90°\)</span>.</p>
@@ -557,34 +639,37 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
 <p>donde <span class="math inline">\(\theta_X\)</span> es una medida de tendencia central de las mediciones realizadas con la pierna recta y <span class="math inline">\(\theta_Y\)</span> es la misma medida de tendencia central para las mediciones con la pierna a 90°.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Tenemos estos datos atípicos.</p>
 <div class="cell">
 <div class="cell-output-display">
-
-<div id="aotakalixb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="lobcyxvvaj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#aotakalixb table {
+#lobcyxvvaj table {
   font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#aotakalixb thead, #aotakalixb tbody, #aotakalixb tfoot, #aotakalixb tr, #aotakalixb td, #aotakalixb th {
+#lobcyxvvaj thead, #lobcyxvvaj tbody, #lobcyxvvaj tfoot, #lobcyxvvaj tr, #lobcyxvvaj td, #lobcyxvvaj th {
   border-style: none;
 }
 
-#aotakalixb p {
+#lobcyxvvaj p {
   margin: 0;
   padding: 0;
 }
 
-#aotakalixb .gt_table {
+#lobcyxvvaj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -610,12 +695,12 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-left-color: #D3D3D3;
 }
 
-#aotakalixb .gt_caption {
+#lobcyxvvaj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#aotakalixb .gt_title {
+#lobcyxvvaj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -627,7 +712,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-bottom-width: 0;
 }
 
-#aotakalixb .gt_subtitle {
+#lobcyxvvaj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -639,7 +724,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-top-width: 0;
 }
 
-#aotakalixb .gt_heading {
+#lobcyxvvaj .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -651,13 +736,13 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-right-color: #D3D3D3;
 }
 
-#aotakalixb .gt_bottom_border {
+#lobcyxvvaj .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#aotakalixb .gt_col_headings {
+#lobcyxvvaj .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -672,7 +757,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-right-color: #D3D3D3;
 }
 
-#aotakalixb .gt_col_heading {
+#lobcyxvvaj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -692,7 +777,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   overflow-x: hidden;
 }
 
-#aotakalixb .gt_column_spanner_outer {
+#lobcyxvvaj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -704,15 +789,15 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   padding-right: 4px;
 }
 
-#aotakalixb .gt_column_spanner_outer:first-child {
+#lobcyxvvaj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#aotakalixb .gt_column_spanner_outer:last-child {
+#lobcyxvvaj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#aotakalixb .gt_column_spanner {
+#lobcyxvvaj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -724,11 +809,11 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   width: 100%;
 }
 
-#aotakalixb .gt_spanner_row {
+#lobcyxvvaj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#aotakalixb .gt_group_heading {
+#lobcyxvvaj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -754,7 +839,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   text-align: left;
 }
 
-#aotakalixb .gt_empty_group_heading {
+#lobcyxvvaj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -769,15 +854,15 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   vertical-align: middle;
 }
 
-#aotakalixb .gt_from_md > :first-child {
+#lobcyxvvaj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#aotakalixb .gt_from_md > :last-child {
+#lobcyxvvaj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#aotakalixb .gt_row {
+#lobcyxvvaj .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -796,7 +881,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   overflow-x: hidden;
 }
 
-#aotakalixb .gt_stub {
+#lobcyxvvaj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -809,7 +894,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   padding-right: 5px;
 }
 
-#aotakalixb .gt_stub_row_group {
+#lobcyxvvaj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -823,15 +908,15 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   vertical-align: top;
 }
 
-#aotakalixb .gt_row_group_first td {
+#lobcyxvvaj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#aotakalixb .gt_row_group_first th {
+#lobcyxvvaj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#aotakalixb .gt_summary_row {
+#lobcyxvvaj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -841,16 +926,16 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   padding-right: 5px;
 }
 
-#aotakalixb .gt_first_summary_row {
+#lobcyxvvaj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#aotakalixb .gt_first_summary_row.thick {
+#lobcyxvvaj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#aotakalixb .gt_last_summary_row {
+#lobcyxvvaj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -860,7 +945,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-bottom-color: #D3D3D3;
 }
 
-#aotakalixb .gt_grand_summary_row {
+#lobcyxvvaj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -870,7 +955,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   padding-right: 5px;
 }
 
-#aotakalixb .gt_first_grand_summary_row {
+#lobcyxvvaj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -880,7 +965,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-top-color: #D3D3D3;
 }
 
-#aotakalixb .gt_last_grand_summary_row_top {
+#lobcyxvvaj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -890,11 +975,11 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-bottom-color: #D3D3D3;
 }
 
-#aotakalixb .gt_striped {
+#lobcyxvvaj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#aotakalixb .gt_table_body {
+#lobcyxvvaj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -903,7 +988,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-bottom-color: #D3D3D3;
 }
 
-#aotakalixb .gt_footnotes {
+#lobcyxvvaj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -917,7 +1002,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-right-color: #D3D3D3;
 }
 
-#aotakalixb .gt_footnote {
+#lobcyxvvaj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -926,7 +1011,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   padding-right: 5px;
 }
 
-#aotakalixb .gt_sourcenotes {
+#lobcyxvvaj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -940,7 +1025,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-right-color: #D3D3D3;
 }
 
-#aotakalixb .gt_sourcenote {
+#lobcyxvvaj .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -948,72 +1033,72 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   padding-right: 5px;
 }
 
-#aotakalixb .gt_left {
+#lobcyxvvaj .gt_left {
   text-align: left;
 }
 
-#aotakalixb .gt_center {
+#lobcyxvvaj .gt_center {
   text-align: center;
 }
 
-#aotakalixb .gt_right {
+#lobcyxvvaj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#aotakalixb .gt_font_normal {
+#lobcyxvvaj .gt_font_normal {
   font-weight: normal;
 }
 
-#aotakalixb .gt_font_bold {
+#lobcyxvvaj .gt_font_bold {
   font-weight: bold;
 }
 
-#aotakalixb .gt_font_italic {
+#lobcyxvvaj .gt_font_italic {
   font-style: italic;
 }
 
-#aotakalixb .gt_super {
+#lobcyxvvaj .gt_super {
   font-size: 65%;
 }
 
-#aotakalixb .gt_footnote_marks {
+#lobcyxvvaj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#aotakalixb .gt_asterisk {
+#lobcyxvvaj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#aotakalixb .gt_indent_1 {
+#lobcyxvvaj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#aotakalixb .gt_indent_2 {
+#lobcyxvvaj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#aotakalixb .gt_indent_3 {
+#lobcyxvvaj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#aotakalixb .gt_indent_4 {
+#lobcyxvvaj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#aotakalixb .gt_indent_5 {
+#lobcyxvvaj .gt_indent_5 {
   text-indent: 25px;
 }
 
-#aotakalixb .katex-display {
+#lobcyxvvaj .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#aotakalixb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#lobcyxvvaj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 
@@ -1021,28 +1106,29 @@ tbody tr:last-child {
   border-bottom: 2px solid #ffffff00;
 }
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-  <thead>
-    <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Fecha">Fecha</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Localidad">Localidad</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Programa">Programa</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Unidad_atencion">Unidad_atencion</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Sexo">Sexo</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Edad">Edad</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Etnia">Etnia</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Peso">Peso</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Talla">Talla</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="LRT_CM">LRT_CM</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="LRT_A">LRT_A</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="LRM_90">LRM_90</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="LRM_R">LRM_R</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body"></tbody>
-  
-  
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="Fecha" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Fecha</th>
+<th id="Localidad" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Localidad</th>
+<th id="Programa" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Programa</th>
+<th id="Unidad_atencion" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Unidad_atencion</th>
+<th id="Sexo" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Sexo</th>
+<th id="Edad" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Edad</th>
+<th id="Etnia" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Etnia</th>
+<th id="Peso" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Peso</th>
+<th id="Talla" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Talla</th>
+<th id="LRT_CM" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">LRT_CM</th>
+<th id="LRT_A" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">LRT_A</th>
+<th id="LRM_90" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">LRM_90</th>
+<th id="LRM_R" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">LRM_R</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1087,6 +1173,143 @@ Upper Achieved CI     0.9517    0.7 0.9000</code></pre>
 </div>
 <p>Nuevamente, se consideró aplicar la prueba de Wilcoxon para evaluar la media de las diferencias, pero esta prueba no se aplicó ya que el coeficiente de asimetría obtenido fue de <span class="math inline">\(2.022\)</span>. Este valor indica una falta de simetría en las diferencias de las mediciones. Por esta razón, de nuevo se optó por utilizar la prueba del signo para muestras pareadas.</p>
 <p>El resultado de la prueba del signo arrojó un p-valor de <span class="math inline">\(2.2 \times 10^{-16}\)</span>, indicando evidencia estadística suficiente para rechazar la hipótesis nula de que la mediana de las diferencias es igual a cero. Por lo tanto, se concluye que las mediciones de la longitud rodilla-maléolo realizadas con la pierna completamente estirada no son equivalentes a las obtenidas con la pierna a <span class="math inline">\(90°\)</span>.</p>
+<section id="análisis-discriminando-por-sexo" class="level3">
+<h3 class="anchored" data-anchor-id="análisis-discriminando-por-sexo">Análisis discriminando por sexo</h3>
+<section id="masculino-1" class="level5">
+<h5 class="anchored" data-anchor-id="masculino-1">Masculino:</h5>
+<p>Inicialmente se hace una comparación gráfica de ambas técnicas a través de un box-plot:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Según el boxplot, se puede observar que podría existir una leve diferencia entre las distribuciones de las mediciones de la longitud rodilla maléolo con la pierna a 90° y con la pierna completamente estirada en los adultos mayores de sexo masculino.</p>
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<p>De acuerdo al histograma, la mediana de las diferencias entre las mediciones de la longitud rodilla maléolo con la pierna a 90° y con la pierna completamente estirada es de 0.5 cm. Además, pareciera que hay simetría en la distribución de las diferencias, por lo que puede haber normalidad.</p>
+<p><strong>Pruebas de normalidad</strong></p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  LRM_dif
+W = 0.99387, p-value = 0.3401</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Lilliefors (Kolmogorov-Smirnov) normality test
+
+data:  LRM_dif
+D = 0.054061, p-value = 0.05353</code></pre>
+</div>
+</div>
+<p>Dado que en ambos test, Shapiro-Wilk y Lilliefors, se obtuvo un p-valor mayor a <span class="math inline">\(0.05\)</span>, entonces, con una significancia del <span class="math inline">\(5\%\)</span>, hay evidencia estadística de que las diferencias entre las mediciones rodilla-maleolo con la pierna a 90° y con la pierna estirada siguen una distribució normal. Por lo tanto, se hace necesario realizar una prueba t para la media de las diferencias.</p>
+<p><strong>Prueba t</strong></p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  LRM_dif
+t = 9.6943, df = 270, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 0.3918397 0.5915551
+sample estimates:
+mean of x 
+0.4916974 </code></pre>
+</div>
+</div>
+<p>El resultado de la prueba t mostró un p-valor de <span class="math inline">\(2.2 \times 10^{-16}\)</span>, por lo que se rechaza la hipótesis de igualdad de medias. Esto significa que las mediciones de la longitud rodilla-maleolo hechas con la pierna a 90° no son equivalentes a las obtenidas con la pierna estirada, en los adultos mayores de sexo masculino.</p>
+</section>
+<section id="femenino-1" class="level4">
+<h4 class="anchored" data-anchor-id="femenino-1">Femenino:</h4>
+<p>Inicialmente se hace una comparación gráfica de ambas técnicas a través de un box-plot:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Según el boxplot, se puede observar que podría existir una diferencia entre las distribuciones de las mediciones de la longitud rodilla maléolo con la pierna a 90° y con la pierna completamente estirada en los adultos mayores de sexo femenino. En este grupo de mujeres se observa que las medianas entre las medidas es más distante que en el grupo de hombres.</p>
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<p>De acuerdo al histograma, la mediana de las diferencias entre las mediciones de la longitud rodilla maléolo con la pierna a 90° y con la pierna completamente estirada es de 1 cm.</p>
+<p><strong>Pruebas de normalidad</strong></p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  LRM_dif
+W = 0.98409, p-value = 0.004025</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Lilliefors (Kolmogorov-Smirnov) normality test
+
+data:  LRM_dif
+D = 0.057802, p-value = 0.0284</code></pre>
+</div>
+</div>
+<p>Dado que en ambos test, Shapiro-Wilk y Lilliefors, se obtuvo un p-valor menor a <span class="math inline">\(0.05\)</span>, entonces, con una significancia del <span class="math inline">\(5\%\)</span>, no hay evidencia estadística de que las diferencias entre las mediciones rodilla-maleolo con la pierna a 90° y con la pierna estirada siguen una distribució normal. Por lo tanto, se hace necesario realizar una prueba no parametrica para la media/mediana de las diferencias.</p>
+<p><strong>Simetría de las diferencias</strong></p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.002062019</code></pre>
+</div>
+</div>
+<p>Dado que el p-valor es menor a 0.05, se rechaza la hipotesis nula de que la distribución de las diferencias entre las mediciones rodilla-maleolo con la pierna a 90° y con la pierna estirada sea simetrica. Por lo tanto, se realiza el test del signo para muestras pareadas:</p>
+<p><strong>Test del signo</strong></p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One-sample Sign-Test
+
+data:  LRM_dif
+s = 240, p-value &lt; 2.2e-16
+alternative hypothesis: true median is not equal to 0
+95 percent confidence interval:
+ 0.9 1.1
+sample estimates:
+median of x 
+          1 
+
+Achieved and Interpolated Confidence Intervals: 
+
+                  Conf.Level L.E.pt U.E.pt
+Lower Achieved CI     0.9400    0.9    1.1
+Interpolated CI       0.9500    0.9    1.1
+Upper Achieved CI     0.9548    0.9    1.1</code></pre>
+</div>
+</div>
+<p>El resultado de la prueba del signo arrojó un p-valor de <span class="math inline">\(2.2 \times 10^{-16}\)</span>, indicando evidencia estadística suficiente para rechazar la hipótesis nula de que la mediana de las diferencias es igual a cero. Por lo tanto, se concluye que las mediciones de la longitud rodilla-maléolo realizadas con la pierna completamente estirada no son equivalentes a las obtenidas con la pierna a <span class="math inline">\(90°\)</span> en el grupo de las adultas mayores.</p>
+</section>
+</section>
 </section>
 <section id="talla-real-y-estimación-benjumea-lrt-con-cinta-métrica" class="level2">
 <h2 class="anchored" data-anchor-id="talla-real-y-estimación-benjumea-lrt-con-cinta-métrica">Talla real y estimación Benjumea (LRT) con cinta métrica</h2>
@@ -1094,16 +1317,28 @@ Upper Achieved CI     0.9517    0.7 0.9000</code></pre>
 <p>Como antes, se hizo un análisis visual a través de un box-plot, donde se observa que aparentemente no hay una diferencia entre la estimación de la talla con las fórmulas de Benjumea con cinta métrica y la talla real. Sin embargo, es necesario realizar una prueba estadística formal para concluir.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Se calculan las diferencias entre la talla real y la estimación de la talla con las fórmulas de Benjumea con cinta métrica, luego, a estas diferencias se les aplica el test de Sahpiro-Wilk para normalidad y el test Lilliefors de normalidad, esto para decidir qué test utilizar para evaluar la media de las diferencias.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-35-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-44-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1147,13 +1382,25 @@ mean of x
 <h3 class="anchored" data-anchor-id="sin-los-outliers">Sin los outliers</h3>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-38-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-47-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-38-3.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-47-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1192,16 +1439,28 @@ mean of x
 <p>Como antes, se hizo un análisis visual a través de un box-plot, donde se observa que aparentemente no hay una diferencia entre la estimación de la talla con las fórmulas de Benjumea con antropómetro y la talla real. Sin embargo, es necesario realizar una prueba estadística formal para concluir.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-49-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Se calculan las diferencias entre la talla real y la estimación de la talla con las fórmulas de Benjumea con antropómetro, luego, a estas diferencias se les aplica el test de Sahpiro-Wilk para normalidad y el test Lilliefors de normalidad, esto para decidir qué test utilizar para evaluar la media de las diferencias.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-41-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-50-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1245,13 +1504,25 @@ mean of x
 <h3 class="anchored" data-anchor-id="sin-los-outliers-1">Sin los outliers</h3>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-53-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-44-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-53-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-44-3.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-53-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1290,16 +1561,28 @@ mean of x
 <p>Como antes, se hizo un análisis visual a través de un box-plot, donde se observa que aparentemente no hay una diferencia entre la estimación de la talla con las fórmulas de Arango y Zamora con la pierna a <span class="math inline">\(90°\)</span> y la talla real. Sin embargo, es necesario realizar una prueba estadística formal para concluir.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-46-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-55-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Se calculan las diferencias entre la talla real y la estimación de la talla con las fórmulas de Arango y Zamora con la pierna a <span class="math inline">\(90°\)</span>, luego, a estas diferencias se les aplica el test de Sahpiro-Wilk para normalidad y el test Lilliefors de normalidad, esto para decidir qué test utilizar para evaluar la media de las diferencias.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-56-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-47-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-56-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1343,13 +1626,25 @@ mean of x
 <h3 class="anchored" data-anchor-id="sin-los-outliers-2">Sin los outliers</h3>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-59-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-50-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-59-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-50-3.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-59-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1388,16 +1683,28 @@ mean of x
 <p>Como antes, se hizo un análisis visual a través de un box-plot, donde se observa que aparentemente no hay una diferencia entre la estimación de la talla con las fórmulas de Arango y Zamora con la pierna estirada y la talla real. Sin embargo, es necesario realizar una prueba estadística formal para concluir.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-52-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-61-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Se calculan las diferencias entre la talla real y la estimación de la talla con las fórmulas de Arango y Zamora con la pierna a estirada, luego, a estas diferencias se les aplica el test de Sahpiro-Wilk para normalidad y el test Lilliefors de normalidad, esto para decidir qué test utilizar para evaluar la media de las diferencias.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-53-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-62-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-53-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-62-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1478,18 +1785,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1521,11 +1817,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1535,8 +1870,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1548,7 +1892,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1592,6 +2059,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1617,6 +2085,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1677,6 +2171,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 
