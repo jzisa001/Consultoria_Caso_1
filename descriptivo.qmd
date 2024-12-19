@@ -11,8 +11,7 @@ Se excluyeron del análisis 16 individuos:
 
 - Una persona con una edad reportada de 59 años.
 - 15 personas, cuya diferencia en longitud rodilla - talón con antropómetro y cinta métrica o en longitud rodilla - 
-maleolo con la pierna a 90° y pierna estirada fue superior a 3cm. Se consideró que fueron mediciones incorrectas debido
-a errores humanos.
+maleolo con la pierna a 90° y pierna estirada fue superior a 3cm. Se consideró que fueron mediciones incorrectas debido a errores humanos.
 
 ```{r}
 # Librerias 

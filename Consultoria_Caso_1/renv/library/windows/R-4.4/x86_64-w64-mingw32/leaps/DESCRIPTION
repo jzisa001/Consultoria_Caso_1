@@ -1,0 +1,23 @@
+Package: leaps
+Title: Regression Subset Selection
+Version: 3.2
+Author: Thomas Lumley based on Fortran code by Alan Miller
+Description: Regression subset selection, including exhaustive search.
+Depends:
+Suggests: biglm
+License: GPL (>= 2)
+Maintainer: Thomas Lumley <t.lumley@auckland.ac.nz>
+NeedsCompilation: yes
+Packaged: 2024-06-10 04:09:20 UTC; tlum005
+Repository: RSPM
+Date/Publication: 2024-06-10 05:10:02 UTC
+Encoding: UTF-8
+Built: R 4.4.0; x86_64-w64-mingw32; 2024-06-11 04:27:44 UTC; windows
+Archs: x64
+RemoteType: standard
+RemotePkgRef: leaps
+RemoteRef: leaps
+RemoteRepos: https://packagemanager.posit.co/cran/latest
+RemoteReposName: CRAN
+RemotePkgPlatform: x86_64-w64-mingw32
+RemoteSha: 3.2

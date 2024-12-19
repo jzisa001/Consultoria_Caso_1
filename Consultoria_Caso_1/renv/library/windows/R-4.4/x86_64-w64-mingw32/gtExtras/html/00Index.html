@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head><title>R: Extending 'gt' for Beautiful HTML Tables</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+<h1> Extending 'gt' for Beautiful HTML Tables
+<img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
+</h1>
+<hr/>
+<div style="text-align: center;">
+<a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
+<a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
+</div><h2>Documentation for package &lsquo;gtExtras&rsquo; version 0.5.0</h2>
+
+<ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
+<li><a href="../NEWS">Package NEWS</a>.</li>
+</ul>
+
+<h2>Help Pages</h2>
+
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="add_badge_color.html">add_badge_color</a></td>
+<td>Add badge color</td></tr>
+<tr><td style="width: 25%;"><a href="add_pcttile_plot.html">add_pcttile_plot</a></td>
+<td>Create a dot plot from 0 to 100</td></tr>
+<tr><td style="width: 25%;"><a href="add_point_plot.html">add_point_plot</a></td>
+<td>Create a dot plot from any range - add_point_plot</td></tr>
+<tr><td style="width: 25%;"><a href="add_text_img.html">add_text_img</a></td>
+<td>Add text and an image to the left or right of it</td></tr>
+<tr><td style="width: 25%;"><a href="create_sum_table.html">create_sum_table</a></td>
+<td>Create a summary table from a dataframe</td></tr>
+<tr><td style="width: 25%;"><a href="fa_icon_repeat.html">fa_icon_repeat</a></td>
+<td>Repeat '{fontawesome}' icons and convert to HTML</td></tr>
+<tr><td style="width: 25%;"><a href="fmt_pad_num.html">fmt_pad_num</a></td>
+<td>Format numeric columns to align at decimal point without trailing zeroes</td></tr>
+<tr><td style="width: 25%;"><a href="fmt_pct_extra.html">fmt_pct_extra</a></td>
+<td>Convert to percent and show less than 1% as &lt;1% in grey</td></tr>
+<tr><td style="width: 25%;"><a href="fmt_symbol_first.html">fmt_symbol_first</a></td>
+<td>Aligning first-row text only</td></tr>
+<tr><td style="width: 25%;"><a href="generate_df.html">generate_df</a></td>
+<td>Generate pseudorandom dataframes with specific parameters</td></tr>
+<tr><td style="width: 25%;"><a href="get_row_index.html">get_row_index</a></td>
+<td>Get underlying row index for gt tables</td></tr>
+<tr><td style="width: 25%;"><a href="gtsave_extra.html">gtsave_extra</a></td>
+<td>Use webshot2 to save a gt table as a PNG</td></tr>
+<tr><td style="width: 25%;"><a href="gt_add_divider.html">gt_add_divider</a></td>
+<td>Add a dividing border to an existing 'gt' table.</td></tr>
+<tr><td style="width: 25%;"><a href="gt_alert_icon.html">gt_alert_icon</a></td>
+<td>Insert an alert icon to a specific column</td></tr>
+<tr><td style="width: 25%;"><a href="gt_badge.html">gt_badge</a></td>
+<td>Add a 'badge' based on values and palette</td></tr>
+<tr><td style="width: 25%;"><a href="gt_color_box.html">gt_color_box</a></td>
+<td>Add a small color box relative to the cell value.</td></tr>
+<tr><td style="width: 25%;"><a href="gt_color_rows.html">gt_color_rows</a></td>
+<td>Add scaled colors according to numeric values or categories/factors</td></tr>
+<tr><td style="width: 25%;"><a href="gt_double_table.html">gt_double_table</a></td>
+<td>Take data, a gt-generating function, and create a list of two tables</td></tr>
+<tr><td style="width: 25%;"><a href="gt_duplicate_column.html">gt_duplicate_column</a></td>
+<td>Duplicate an existing column in a gt table</td></tr>
+<tr><td style="width: 25%;"><a href="gt_fa_column.html">gt_fa_column</a></td>
+<td>Add '{fontawesome}' icons inside a '{gt}' column.</td></tr>
+<tr><td style="width: 25%;"><a href="gt_fa_rank_change.html">gt_fa_rank_change</a></td>
+<td>Add rank change indicators to a gt table</td></tr>
+<tr><td style="width: 25%;"><a href="gt_fa_rating.html">gt_fa_rating</a></td>
+<td>Add rating "stars" to a gt column</td></tr>
+<tr><td style="width: 25%;"><a href="gt_fa_repeats.html">gt_fa_repeats</a></td>
+<td>Repeat '{fontawesome}' icons based on an integer.</td></tr>
+<tr><td style="width: 25%;"><a href="gt_highlight_cols.html">gt_highlight_cols</a></td>
+<td>Add color highlighting to a specific column(s)</td></tr>
+<tr><td style="width: 25%;"><a href="gt_highlight_rows.html">gt_highlight_rows</a></td>
+<td>Add color highlighting to a specific row</td></tr>
+<tr><td style="width: 25%;"><a href="gt_hulk_col_numeric.html">gt_hulk_col_numeric</a></td>
+<td>Apply 'hulk' palette to specific columns in a gt table.</td></tr>
+<tr><td style="width: 25%;"><a href="gt_hyperlink.html">gt_hyperlink</a></td>
+<td>Add a basic hyperlink in a gt table</td></tr>
+<tr><td style="width: 25%;"><a href="gt_img_border.html">gt_img_border</a></td>
+<td>Create an identifier line border at the bottom of an image</td></tr>
+<tr><td style="width: 25%;"><a href="gt_img_circle.html">gt_img_circle</a></td>
+<td>Create circular border around an image</td></tr>
+<tr><td style="width: 25%;"><a href="gt_img_multi_rows.html">gt_img_multi_rows</a></td>
+<td>Add multiple local or web images into rows of a 'gt' table</td></tr>
+<tr><td style="width: 25%;"><a href="gt_img_rows.html">gt_img_rows</a></td>
+<td>Add local or web images into rows of a 'gt' table</td></tr>
+<tr><td style="width: 25%;"><a href="gt_index.html">gt_index</a></td>
+<td>Return the underlying data, arranged by the internal index</td></tr>
+<tr><td style="width: 25%;"><a href="gt_label_details.html">gt_label_details</a></td>
+<td>Add a simple table with column names and matching labels</td></tr>
+<tr><td style="width: 25%;"><a href="gt_merge_stack.html">gt_merge_stack</a></td>
+<td>Merge and stack text from two columns in 'gt'</td></tr>
+<tr><td style="width: 25%;"><a href="gt_merge_stack_color.html">gt_merge_stack_color</a></td>
+<td>Merge and stack text with background coloring from two columns in 'gt'</td></tr>
+<tr><td style="width: 25%;"><a href="gt_plt_bar.html">gt_plt_bar</a></td>
+<td>Add bar plots into rows of a 'gt' table</td></tr>
+<tr><td style="width: 25%;"><a href="gt_plt_bar_pct.html">gt_plt_bar_pct</a></td>
+<td>Add HTML-based bar plots into rows of a 'gt' table</td></tr>
+<tr><td style="width: 25%;"><a href="gt_plt_bar_stack.html">gt_plt_bar_stack</a></td>
+<td>Add a percent stacked barchart in place of existing data.</td></tr>
+<tr><td style="width: 25%;"><a href="gt_plt_bullet.html">gt_plt_bullet</a></td>
+<td>Create an inline 'bullet chart' in a gt table</td></tr>
+<tr><td style="width: 25%;"><a href="gt_plt_conf_int.html">gt_plt_conf_int</a></td>
+<td>Plot a confidence interval around a point</td></tr>
+<tr><td style="width: 25%;"><a href="gt_plt_dist.html">gt_plt_dist</a></td>
+<td>Add distribution plots into rows of a 'gt' table</td></tr>
+<tr><td style="width: 25%;"><a href="gt_plt_dot.html">gt_plt_dot</a></td>
+<td>Add a color dot and thin bar chart to a table</td></tr>
+<tr><td style="width: 25%;"><a href="gt_plt_dumbbell.html">gt_plt_dumbbell</a></td>
+<td>Add a dumbbell plot in place of two columns</td></tr>
+<tr><td style="width: 25%;"><a href="gt_plt_percentile.html">gt_plt_percentile</a></td>
+<td>Create a dot plot for percentiles</td></tr>
+<tr><td style="width: 25%;"><a href="gt_plt_point.html">gt_plt_point</a></td>
+<td>Create a point plot in place of each value.</td></tr>
+<tr><td style="width: 25%;"><a href="gt_plt_sparkline.html">gt_plt_sparkline</a></td>
+<td>Add sparklines into rows of a 'gt' table</td></tr>
+<tr><td style="width: 25%;"><a href="gt_plt_summary.html">gt_plt_summary</a></td>
+<td>Create a summary table from a dataframe</td></tr>
+<tr><td style="width: 25%;"><a href="gt_plt_winloss.html">gt_plt_winloss</a></td>
+<td>Add win loss point plot into rows of a 'gt' table</td></tr>
+<tr><td style="width: 25%;"><a href="gt_reprex_image.html">gt_reprex_image</a></td>
+<td>Render 'gt' Table to Temporary png File</td></tr>
+<tr><td style="width: 25%;"><a href="gt_theme_538.html">gt_theme_538</a></td>
+<td>Apply FiveThirtyEight theme to a gt table</td></tr>
+<tr><td style="width: 25%;"><a href="gt_theme_dark.html">gt_theme_dark</a></td>
+<td>Apply dark theme to a 'gt' table</td></tr>
+<tr><td style="width: 25%;"><a href="gt_theme_dot_matrix.html">gt_theme_dot_matrix</a></td>
+<td>Apply dot matrix theme to a gt table</td></tr>
+<tr><td style="width: 25%;"><a href="gt_theme_espn.html">gt_theme_espn</a></td>
+<td>Apply ESPN theme to a gt table</td></tr>
+<tr><td style="width: 25%;"><a href="gt_theme_excel.html">gt_theme_excel</a></td>
+<td>Apply Excel-style theme to an existing gt table</td></tr>
+<tr><td style="width: 25%;"><a href="gt_theme_guardian.html">gt_theme_guardian</a></td>
+<td>Apply Guardian theme to a 'gt' table</td></tr>
+<tr><td style="width: 25%;"><a href="gt_theme_nytimes.html">gt_theme_nytimes</a></td>
+<td>Apply NY Times theme to a 'gt' table</td></tr>
+<tr><td style="width: 25%;"><a href="gt_theme_pff.html">gt_theme_pff</a></td>
+<td>Apply a table theme like PFF</td></tr>
+<tr><td style="width: 25%;"><a href="gt_two_column_layout.html">gt_two_column_layout</a></td>
+<td>Create a two-column layout from a list of two gt tables</td></tr>
+<tr><td style="width: 25%;"><a href="img_header.html">img_header</a></td>
+<td>Add images as the column label for a table</td></tr>
+<tr><td style="width: 25%;"><a href="last_row_id.html">last_row_id</a></td>
+<td>Get last row id/index even by group</td></tr>
+<tr><td style="width: 25%;"><a href="n_decimals.html">n_decimals</a></td>
+<td>Count number of decimals</td></tr>
+<tr><td style="width: 25%;"><a href="pad_fn.html">pad_fn</a></td>
+<td>Pad a vector of numbers to align on the decimal point.</td></tr>
+<tr><td style="width: 25%;"><a href="plot_data.html">plot_data</a></td>
+<td>Create inline plots for a summary table</td></tr>
+<tr><td style="width: 25%;"><a href="tab_style_by_grp.html">tab_style_by_grp</a></td>
+<td>Add table styling to specific rows by group</td></tr>
+<tr><td style="width: 25%;"><a href="with_tooltip.html">with_tooltip</a></td>
+<td>A helper to add basic tooltip inside a gt table</td></tr>
+</table>
+</div></body></html>
