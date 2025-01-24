@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -45,13 +45,7 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
+  "limit": 20,
   "language": {
     "search-no-results-text": "Ninguna coincidencia",
     "search-matching-documents-text": "coincidencias",
@@ -60,42 +54,14 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "",
     "search-label": "Search"
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -104,34 +70,34 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Inicio</span></a>
+    <a class="nav-link" href="./index.html" rel="" target="">
+ <span class="menu-text">Inicio</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./descriptivo.html"> 
-<span class="menu-text">Análisis descriptivo</span></a>
+    <a class="nav-link" href="./descriptivo.html" rel="" target="">
+ <span class="menu-text">Análisis descriptivo</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./hipotesis.html"> 
-<span class="menu-text">Evaluación de hipótesis</span></a>
+    <a class="nav-link" href="./hipotesis.html" rel="" target="">
+ <span class="menu-text">Evaluación de hipótesis</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./modelos.html" aria-current="page"> 
-<span class="menu-text">Modelos</span></a>
+    <a class="nav-link active" href="./modelos.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Modelos</span></a>
   </li>  
 </ul>
-          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
+          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -178,7 +144,6 @@ window.Quarto = {
     </div>
 <!-- main -->
 <main class="content column-page-left" id="quarto-document-content">
-
 
 
 
@@ -261,28 +226,16 @@ Selection Algorithm: exhaustive
 <pre><code>[1] 3</code></pre>
 </div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Usando el <span class="math inline">\(R^2\)</span> ajustado, se sugiere un modelo con 5 variables:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Los coeficientes del mejor modelo usando el criterio de BIC son:</p>
@@ -323,11 +276,7 @@ Selection Algorithm: exhaustive
 <p>El MSE se minimiza usando un modelo de 3 variables:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Se busca nuevamente el mejor modelo de tres variables usando todos los datos:</p>
@@ -371,11 +320,7 @@ F-statistic:  1400 on 3 and 539 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><strong><em>Linealidad:</em></strong> Con el fin de verificar que la relación entre la talla y las variables LRT_A (discriminando por sexo) y la edad es lineal, se visualiza el gráfico de los residuos vs los valores predichos del modelo <span class="math inline">\(\left(\hat{e},\hat{y} \right)\)</span>:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>El gráfico no muestra ningún patrón marcado, la ubicación de los puntos parece ser aleatoria alrededor de cero, indicando también homoscedasticidad en los residuales y posible independencia de los mismos. El gráfico muestra algunos valores atípicos que valdría la pena explorar.</p>
@@ -394,11 +339,7 @@ alternative hypothesis: true autocorrelation is greater than 0</code></pre>
 <p><strong><em>Normalidad de los errores:</em></strong> Se realiza el gráfico QQ-plot para comparar la distribución de los residuales del modelo con la distribución teórica de una normal. También se hace el test de normalidad de Lilliefors y Anderson-Darling:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -419,11 +360,7 @@ A = 0.41295, p-value = 0.337</code></pre>
 <p><strong><em>Homoscedasticidad:</em></strong> Aunque no se vio un patron que indicara heteroscedasticidad en el gráfico de los residuales vs los valores predichos, a continuación se muestra el gráfico de los residuales estandarizados vs los valores predichos con el fin de mejorar la interpretabilidad de la homoscedasticidad y tener una visión más clara de las observaciones atípicas e influyentes:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>No se observan patrones que indiquen hereroscedasticidad en los residuos (forma de cono o embudo). Se siguien observando algunas observaciones atípicas y/o influyentes.</p>
@@ -465,34 +402,28 @@ RESET = 0.98691, df1 = 2, df2 = 537, p-value = 0.3734</code></pre>
 </div>
 <p>No se rechaza la hipótesis nula de que el modelo está bien especificado.</p>
 <p><strong><em>Obervaciones atípicas y de alto apalancamiento:</em></strong></p>
-<div>
-
-</div>
-<div class="cell quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-20-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
 <p>Usando los residuales estudentizados, se observan <span class="math inline">\(5\)</span> datos atípicos.</p>
-<div>
-
-</div>
-<div class="cell quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-21-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="quarto-layout-row">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <pre><code>       StudRes        Hat       CookD
 41  -2.9464281 0.01514476 0.032906079
 505 -0.6485772 0.03066342 0.003330247
@@ -581,18 +512,10 @@ Selection Algorithm: exhaustive
 <pre><code>[1] 3</code></pre>
 </div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-25-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-25-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Los coeficientes del mejor modelo usando el criterio de BIC son:</p>
@@ -646,11 +569,7 @@ F-statistic:  1400 on 3 and 539 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><strong><em>Linealidad:</em></strong> Con el fin de verificar que la relación entre la talla y las variables LRT_A (discriminando por sexo) y la edad es lineal, se visualiza el gráfico de los residuos vs los valores predichos del modelo <span class="math inline">\(\left(\hat{e},\hat{y} \right)\)</span>:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>El gráfico no muestra ningún patrón marcado, la ubicación de los puntos parece ser aleatoria alrededor de cero, indicando también homoscedasticidad en los residuales y posible independencia de los mismos. El gráfico muestra algunos valores atípicos que valdría la pena explorar.</p>
@@ -669,11 +588,7 @@ alternative hypothesis: true autocorrelation is greater than 0</code></pre>
 <p><strong><em>Normalidad de los errores:</em></strong> Se realiza el gráfico QQ-plot para comparar la distribución de los residuales del modelo con la distribución teórica de una normal. También se hace el test de normalidad de Lilliefors y Anderson-Darling:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -694,11 +609,7 @@ A = 0.41295, p-value = 0.337</code></pre>
 <p><strong><em>Homoscedasticidad:</em></strong> Aunque no se vio un patron que indicara heteroscedasticidad en el gráfico de los residuales vs los valores predichos, a continuación se muestra el gráfico de los residuales estandarizados vs los valores predichos con el fin de mejorar la interpretabilidad de la homoscedasticidad y tener una visión más clara de las observaciones atípicas e influyentes:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>No se observan patrones que indiquen hereroscedasticidad en los residuos (forma de cono o embudo). Se siguien observando algunas observaciones atípicas y/o influyentes.</p>
@@ -740,34 +651,28 @@ RESET = 0.98691, df1 = 2, df2 = 537, p-value = 0.3734</code></pre>
 </div>
 <p>No se rechaza la hipótesis nula de que el modelo está bien especificado.</p>
 <p><strong><em>Observaciones atípicas y de alto apalancamiento:</em></strong></p>
-<div>
-
-</div>
-<div class="cell quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-37-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
 <p>Usando los residuales estudentizados, se observan <span class="math inline">\(5\)</span> datos atípicos.</p>
-<div>
-
-</div>
-<div class="cell quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-38-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="quarto-layout-row">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <pre><code>       StudRes        Hat       CookD
 41  -2.9464281 0.01514476 0.032906079
 505 -0.6485772 0.03066342 0.003330247
@@ -854,18 +759,10 @@ Selection Algorithm: exhaustive
 <pre><code>[1] 3</code></pre>
 </div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-42-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-42-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Los coeficientes del mejor modelo usando el criterio de BIC son:</p>
@@ -919,11 +816,7 @@ F-statistic:  1206 on 3 and 539 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre><code>[1] -2.221117e-17</code></pre>
 </div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>El gráfico no muestra ningún patrón marcado, la ubicación de los puntos parece ser aleatoria alrededor de cero, indicando también homoscedasticidad en los residuales y posible independencia de los mismos. El gráfico muestra 3 valores atípicos que valdría la pena explorar.</p>
@@ -942,11 +835,7 @@ alternative hypothesis: true autocorrelation is greater than 0</code></pre>
 <p><strong><em>Normalidad de los errores:</em></strong> Se realiza el gráfico QQ-plot para comparar la distribución de los residuales del modelo con la distribución teórica de una normal. También se hace el test de normalidad de Lilliefors y Anderson-Darling:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-49-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-49-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -967,11 +856,7 @@ A = 0.35371, p-value = 0.4625</code></pre>
 <p><strong><em>Homoscedasticidad:</em></strong> Aunque no se vio un patron que indicara heteroscedasticidad en el gráfico de los residuales vs los valores predichos, a continuación se muestra el gráfico de los residuales estandarizados vs los valores predichos con el fin de mejorar la interpretabilidad de la homoscedasticidad y tener una visión más clara de las observaciones atípicas e influyentes:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>No se observan patrones que indiquen hereroscedasticidad en los residuos (forma de cono o embudo). Se siguien observando algunas observaciones atípicas y/o influyentes.</p>
@@ -1013,34 +898,28 @@ RESET = 0.52406, df1 = 2, df2 = 537, p-value = 0.5924</code></pre>
 </div>
 <p>No se rechaza la hipótesis nula de que el modelo está bien especificado.</p>
 <p><strong><em>Observaciones atípicas y de alto apalancamiento:</em></strong></p>
-<div>
-
-</div>
-<div class="cell quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-54-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-54-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
 <p>Usando los residuales estudentizados, se observan <span class="math inline">\(5\)</span> datos atípicos.</p>
-<div>
-
-</div>
-<div class="cell quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-55-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-55-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="quarto-layout-row">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <pre><code>       StudRes         Hat       CookD
 41  -3.0080070 0.016908956 0.038333988
 346 -3.0192135 0.006311404 0.014259783
@@ -1129,18 +1008,10 @@ Selection Algorithm: exhaustive
 <pre><code>[1] 3</code></pre>
 </div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-59-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-59-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-59-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-59-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Los coeficientes del mejor modelo usando el criterio de BIC son:</p>
@@ -1188,11 +1059,7 @@ F-statistic:  1087 on 3 and 539 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><strong><em>Linealidad:</em></strong> Con el fin de verificar que la relación entre la talla y las variables LRM_R (discriminando por sexo) y la edad es lineal, se visualiza el gráfico de los residuos vs los valores predichos del modelo <span class="math inline">\(\left(\hat{e},\hat{y} \right)\)</span>:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-64-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-64-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>El gráfico no muestra ningún patrón marcado, la ubicación de los puntos parece ser aleatoria alrededor de cero, indicando también homoscedasticidad en los residuales y posible independencia de los mismos. El gráfico muestra algunos valores atípicos que valdría la pena explorar.</p>
@@ -1211,11 +1078,7 @@ alternative hypothesis: true autocorrelation is not 0</code></pre>
 <p><strong><em>Normalidad de los errores:</em></strong> Se realiza el gráfico QQ-plot para comparar la distribución de los residuales del modelo con la distribución teórica de una normal. También se hace el test de normalidad de Lilliefors y Anderson-Darling:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-66-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-66-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1236,11 +1099,7 @@ A = 0.30194, p-value = 0.5759</code></pre>
 <p><strong><em>Homoscedasticidad:</em></strong> Aunque no se vio un patron que indicara heteroscedasticidad en el gráfico de los residuales vs los valores predichos, a continuación se muestra el gráfico de los residuales estandarizados vs los valores predichos con el fin de mejorar la interpretabilidad de la homoscedasticidad y tener una visión más clara de las observaciones atípicas e influyentes:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-67-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-67-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>No se observan patrones que indiquen hereroscedasticidad en los residuos (forma de cono o embudo). Se siguien observando algunas observaciones atípicas y/o influyentes.</p>
@@ -1282,34 +1141,28 @@ RESET = 0.045213, df1 = 2, df2 = 537, p-value = 0.9558</code></pre>
 </div>
 <p>No se rechaza la hipótesis nula de que el modelo está bien especificado.</p>
 <p><strong><em>Observaciones atípicas y de alto apalancamiento:</em></strong></p>
-<div>
-
-</div>
-<div class="cell quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-71-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-71-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
 <p>Usando los residuales estudentizados, se observan <span class="math inline">\(5\)</span> datos atípicos.</p>
-<div>
-
-</div>
-<div class="cell quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-72-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-72-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="quarto-layout-row">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <pre><code>       StudRes         Hat        CookD
 505  0.1915271 0.033494744 0.0003183829
 520 -3.7396744 0.008271635 0.0284752514
@@ -1396,18 +1249,10 @@ Selection Algorithm: exhaustive
 <pre><code>[1] 3</code></pre>
 </div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-76-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-76-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-76-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-76-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Los coeficientes del mejor modelo usando el criterio de BIC son:</p>
@@ -1455,11 +1300,7 @@ F-statistic:  1075 on 3 and 539 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><strong><em>Linealidad:</em></strong> Con el fin de verificar que la relación entre la talla y las variables LRT_CM (discriminando por sexo) y la edad es lineal, se visualiza el gráfico de los residuos vs los valores predichos del modelo <span class="math inline">\(\left(\hat{e},\hat{y} \right)\)</span>:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-81-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-81-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>El gráfico no muestra ningún patrón marcado, la ubicación de los puntos parece ser aleatoria alrededor de cero, indicando también homoscedasticidad en los residuales y posible independencia de los mismos. El gráfico muestra algunos valores atípicos que valdría la pena explorar.</p>
@@ -1478,11 +1319,7 @@ alternative hypothesis: true autocorrelation is not 0</code></pre>
 <p><strong><em>Normalidad de los errores:</em></strong> Se realiza el gráfico QQ-plot para comparar la distribución de los residuales del modelo con la distribución teórica de una normal. También se hace el test de normalidad de Lilliefors y Anderson-Darling:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-83-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-83-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1503,11 +1340,7 @@ A = 0.20655, p-value = 0.8687</code></pre>
 <p><strong><em>Homoscedasticidad:</em></strong> Aunque no se vio un patron que indicara heteroscedasticidad en el gráfico de los residuales vs los valores predichos, a continuación se muestra el gráfico de los residuales estandarizados vs los valores predichos con el fin de mejorar la interpretabilidad de la homoscedasticidad y tener una visión más clara de las observaciones atípicas e influyentes:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-84-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-84-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>No se observan patrones que indiquen hereroscedasticidad en los residuos (forma de cono o embudo). Se siguien observando algunas observaciones atípicas y/o influyentes.</p>
@@ -1549,34 +1382,28 @@ RESET = 0.060873, df1 = 2, df2 = 537, p-value = 0.9409</code></pre>
 </div>
 <p>En ambos casos, se rechaza la hipótesis nula de que el modelo está bien especificado.</p>
 <p><strong><em>Observaciones atípicas y de alto apalancamiento:</em></strong></p>
-<div>
-
-</div>
-<div class="cell quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-88-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-88-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
 <p>Usando los residuales estudentizados, se observan <span class="math inline">\(5\)</span> datos atípicos.</p>
-<div>
-
-</div>
-<div class="cell quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-89-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="modelos_files/figure-html/unnamed-chunk-89-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="quarto-layout-row">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <pre><code>        StudRes         Hat        CookD
 319  2.11601917 0.020793022 2.361725e-02
 505 -0.79314248 0.030301485 4.917774e-03
@@ -1622,6 +1449,7 @@ F-statistic:  1065 on 3 and 536 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>La tabla de los errores cuadráticos medios para la regresión lineal simple es la siguiente:</p>
 <div class="cell">
 <div class="cell-output-display">
+
 <div id="wgmtnpgdml" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
@@ -2079,34 +1907,28 @@ tbody tr:last-child {
   border-bottom: 2px solid #ffffff00;
 }
 </style>
-
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="header gt_col_headings">
-<th id="Modelo" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Modelo</th>
-<th id="Medida" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Medida</th>
-<th id="MSE" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">MSE</th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="odd">
-<td class="gt_row gt_left" headers="Modelo">Normal</td>
-<td class="gt_row gt_left" headers="Medida">LRT_A</td>
-<td class="gt_row gt_right" headers="MSE">10.39225</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="Modelo">Normal</td>
-<td class="gt_row gt_left" headers="Medida">LRT_CM</td>
-<td class="gt_row gt_right" headers="MSE">11.78225</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="Modelo">Normal</td>
-<td class="gt_row gt_left" headers="Medida">LRM_R</td>
-<td class="gt_row gt_right" headers="MSE">12.99465</td>
-</tr>
-</tbody>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Modelo">Modelo</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Medida">Medida</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="MSE">MSE</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Modelo" class="gt_row gt_left">Normal</td>
+<td headers="Medida" class="gt_row gt_left">LRT_A</td>
+<td headers="MSE" class="gt_row gt_right">10.39225</td></tr>
+    <tr><td headers="Modelo" class="gt_row gt_left">Normal</td>
+<td headers="Medida" class="gt_row gt_left">LRT_CM</td>
+<td headers="MSE" class="gt_row gt_right">11.78225</td></tr>
+    <tr><td headers="Modelo" class="gt_row gt_left">Normal</td>
+<td headers="Medida" class="gt_row gt_left">LRM_R</td>
+<td headers="MSE" class="gt_row gt_right">12.99465</td></tr>
+  </tbody>
+  
+  
 </table>
-
 </div>
 </div>
 </div>
@@ -2127,21 +1949,13 @@ tbody tr:last-child {
 <p>Algunos coeficientes se hacen cero:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-93-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-93-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Se hace <strong><em>k-fold cross validation</em></strong> con <span class="math inline">\(k = 10\)</span> y se promedia el MSE:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-94-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-94-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 11.5243</code></pre>
@@ -2182,11 +1996,7 @@ tbody tr:last-child {
 <p>Se ajusta el modelo Lasso con las tres mediciones LRT_CM, LRM_90 y LRM_R.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-97-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-97-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 11.76477</code></pre>
@@ -2261,21 +2071,13 @@ ProgramaComunidad de Cuidado
 <p>Algunos coeficientes se hacen cero:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-100-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-100-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Se hace <strong><em>k-fold cross validation</em></strong> con <span class="math inline">\(k = 10\)</span> y se promedia el MSE:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-101-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-101-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 11.73922</code></pre>
@@ -2306,21 +2108,13 @@ EtniaBlanco-Mestizo       EtniaIndigena           EtniaRrom
 <p>Algunos coeficientes se hacen cero:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-105-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-105-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Se hace <strong><em>k-fold cross validation</em></strong> con <span class="math inline">\(k = 10\)</span> y se promedia el MSE:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-106-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-106-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 14.70674</code></pre>
@@ -2351,21 +2145,13 @@ EtniaBlanco-Mestizo       EtniaIndigena           EtniaRrom
 <p>Algunos coeficientes se hacen cero:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-110-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-110-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Se hace <strong><em>k-fold cross validation</em></strong> con <span class="math inline">\(k = 10\)</span> y se promedia el MSE:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-111-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-111-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 11.55844</code></pre>
@@ -2396,21 +2182,13 @@ EtniaBlanco-Mestizo       EtniaIndigena           EtniaRrom
 <p>Algunos coeficientes se hacen cero:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-115-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-115-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Se hace <strong><em>k-fold cross validation</em></strong> con <span class="math inline">\(k = 10\)</span> y se promedia el MSE:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-116-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-116-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10.8733</code></pre>
@@ -2774,7 +2552,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const onCopySuccess = function(e) {
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -2806,50 +2595,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
   });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+  function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
+      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -2859,17 +2609,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start',
+      placement: 'bottom-start'
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -2881,130 +2622,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
+      return note.innerHTML;
     });
   }
       let selectedAnnoteEl;
@@ -3048,7 +2666,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
-            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -3074,32 +2691,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -3160,7 +2751,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-
 
 
 

@@ -26,6 +26,8 @@ library(glmtoolbox)
 library(MASS)
 library(rsample)
 library(lawstat)
+
+library(symmetry)
 ```
 
 ```{r}
@@ -56,11 +58,11 @@ datos <- datos |> as.data.frame()
 Se quiere determinar si existe una diferencia significativa entre las mediciones realizadas con cinta métrica y con antropómetro medidas en los mismos individuos: 
 
 $$ \begin{cases}
-H_0: \, \, \, \mu_{CM} - \mu_{A} = 0 \\
-H_1: \, \, \,  \mu_{CM} - \mu_{A} \neq 0
+H_0: \, \, \, \mu_{(CM - A)} = 0 \\
+H_1: \, \, \,  \mu_{(CM-A)} \neq 0
 \end{cases}$$
 
-Donde $\mu_{CM}$ representa la media de las mediciones realizadas con cinta métrica y $\mu_{A}$ representa la media de las mediciones realizadas con antropómetro. 
+Donde $CM-A$ representa las diferencias entre las mediciones realizadas con cinta métrica y las mediciones realizadas con antropómetro, y $\mu_{(CM - A)}$ represneta la media de esas diferencias. 
 
 Inicialmente se hace una comparación gráfica de ambas técnicas a través de un box-plot:
 
@@ -70,7 +72,45 @@ boxplot(data.frame(datos$LRT_CM, datos$LRT_A), ylab = 'Longitud Rodilla - Talón
 axis(1, at = c(1, 2), labels = c("Cinta Métrica", "Antropómetro"))
 ```
 
-Según el gráfico de cajas (boxplot), parece que existe diferencia entre las mediciones de la longitud desde la rodilla hasta el talón realizadas con cinta métrica y con antropómetro. Se evidencia que las mediciones realizadas con cinta métrica son en promedio superiores a las realizadas con antropómetro. Sin embargo, es necesario hacer una prueba estadística más formal. Para esto, se calculan las diferencias entre las mediciones de ambos métodos y se verifica si esas diferencias siguen una distribución normal para determinar qué prueba estadística es adecuada para la comparación. 
+Según el gráfico de cajas (box-plot), parece que existe diferencia entre las mediciones de la longitud desde la rodilla hasta el talón realizadas con cinta métrica y con antropómetro. Se evidencia que las mediciones realizadas con cinta métrica son en promedio superiores a las realizadas con antropómetro. Sin embargo, es necesario hacer una prueba estadística más formal. Para esto, se realizará el siguiente procedimiento:
+
+1.    **Cálculo de diferencias:** Después de la transformación, se calculan las diferencias entre los valores LRT_CM y LRT_A.
+
+2.    **Evaluación de normalidad:** Se realiza un test de normalidad sobre estas diferencias. Si las diferencias pasan esta prueba, se aplica directamente la prueba $t$ para verificar si la media de las diferencias es igual a cero. Explícitamente el sistema de hipótesis de la prueba $t$ de muestras pareadas (para media de las diferencias), es:
+
+$$ \begin{cases}
+H_0: \textrm{La media de las diferencias es 0}\\
+H_1: \textrm{La media de las diferencias NO es 0}
+\end{cases}$$
+
+Es decir, que si NO se rechaza la hipótesis nula ($H_0$), las mediciones de LRT con cinta métrica serían equivalentes a las mediciones de LRT con antropómetro. En caso de rechazarse, se debe seguir con el paso 3.
+
+3.    **Revisión de simetría:** Si no pasan el test de normalidad, se evalúa si las diferencias son simétricas utilizando el test MIRA de asimetría. Si las diferencias resultan ser simétricas, entonces se utiliza el test de Wilcoxon para verificar si la media es igual a cero. Explícitamente el sistema de hipótesis de la prueba de simetría $MIRA$ es:
+
+$$ \begin{cases}
+H_0: \textrm{Los datos son simétricos}\\
+H_1: \textrm{Los datos NO son simétricos}
+\end{cases}$$
+
+Entonces, si NO se rechaza la hipótesis nula, las diferencias resultarían ser simétricas y por lo tanto se aplica el test de Wilcoxon cuyo sistema de hipótesis es
+
+$$ \begin{cases}
+H_0: \textrm{La media de las diferencias es 0}\\
+H_1: \textrm{La media de las diferencias NO es 0}
+\end{cases}$$
+
+Si NO se rechaza la hipótesis nula del test de Wilcoxon, entonces, si bien las diferencias no son de distribución normal, las mediciones de LRT con cinta métrica serían equivalentes a las mediciones de LRT con antropómetro. Si se rechaza la hipótesis nula de la prueba MIRA de asimetría, entonces no se puede aplicar el test de Wilcoxon, y por lanto se debe realizar el paso 4.
+
+4.    **Realizar una transformación**: Si las diferencias no son simétricas, puede realizarse una transformación (aplicar logaritmo natural o raíz cuadrada) a las mediciones originales (LRT_A y LRT_CM). Luego, se repiten los pasos 1, 2 y 3 usando los datos transformados. Si al final, con esta transformación, no se cumplen los requisitos para aplicar la prueba $t$ o la de Wilcoxon, entonces, se continúa con el paso 5.
+
+5.    **Última opción:** Si las diferencias no son simétricas, finalmente se recurre al test del signo como última opción. Explícitamente, el sistema de hipótesis de la prueba del signo es:
+
+$$ \begin{cases}
+H_0: \textrm{La mediana de las diferencias es 0}\\
+H_1: \textrm{La mediana de las diferencias no es 0}
+\end{cases}$$
+
+Cumpliendo con el procedimiento descrito, primero se calculan las diferencias entre las mediciones de ambos métodos y se verifica si esas diferencias siguen una distribución normal para determinar qué prueba estadística es adecuada para la comparación. 
 
 ```{r}
 #| layout-ncol: 3
@@ -85,48 +125,88 @@ qqnorm(LRT_dif, main = "Q-Q plot de las diferencias")
 qqline(LRT_dif, col = "red")
 ```
 
-A continuación se presentan los resultados de los test de Shapiro-Wilk y de Lilliefors para la diferencia de las mediciones LRT_CM y LRT_A:
+A continuación se presentan los resultados del test de normalidad de Lilliefors para la diferencia de las mediciones LRT_CM y LRT_A:
 
 ```{r}
-#| layout-ncol: 2
-shapiro.test(LRT_dif) 
 lillie.test(LRT_dif) 
 ```
 
-Los resultados de dos pruebas estadísticas, Shapiro-Wilk y Lilliefors, mostraron un p-valor menor a $0.05$. Esto significa que, con un nivel de confianza del $95\%$, no podemos concluir que las diferencias entre las mediciones de rodilla - talón tomadas con una cinta métrica y con un antropómetro sigan una distribución normal, y por lo tanto no es posible usar la prueba t para muestras pareadas. Por lo tanto, para analizar las diferencias en los promedios, es necesario usar un tipo de prueba que no dependa de suposiciones sobre la distribución de los datos.
+Los resultados muestran un p-valor menor a $0.05$ (*resultado p-value < 2.2e-16*). Esto significa que, con un nivel de confianza del $95\%$, no podemos concluir que las diferencias entre las mediciones de rodilla - talón tomadas con una cinta métrica y con un antropómetro sigan una distribución normal, y por lo tanto no es posible usar la prueba t para muestras pareadas. Entonces, se debe realizar la prueba de asimetría.
 
-El siguiente paso es evaluar el sistema de hipótesis mediante una prueba no paramétrica: Test de Rangos con Signo de Wilcoxon. Las hipótesis en este caso no son las mismas expuestas anteriormente. El sistema de hipótesis en este caso es el siguiente:
-
-$$ \begin{cases}
-H_0: \textrm{La distribución de las diferencias es simétrica alrededor de 0}\\
-H_1: \textrm{La distribución de las diferencias no es simétrica alrededor de 0}
-\end{cases}$$
-
-La cuál es equivalente al siguiente sistema de hipótesis bajo $H_0$:
-
-$$ \begin{cases}
-H_0: \textrm{La mediana de las diferencias es 0}\\
-H_1: \textrm{La mediana de las diferencias no es 0}
-\end{cases}$$
-
-A continuación se presenta el resultado del test:
 
 ```{r}
-wilcox.test(datos$LRT_CM, datos$LRT_A, paired = TRUE, alternative = "two.sided", conf.int = TRUE)
+set.seed(123)
+symmetry_test(LRT_dif, "MI", mu = mean(LRT_dif))
 ```
 
-El resultado del Test de Rangos con Signo de Wilcoxon mostró un p-valor de $2.2 \times 10^{-16}$, lo que indica que en este caso con una confianza del $95\%$ se rechaza la hipótesis nula de que la distribición de las diferencias sea simétrica alrededor de 0. Se concluye que las mediciones de la longitud rodilla - talón hechas con la cinta métrica son significativamente diferentes a las obtenidas con el antropómetro.
+Parece que las diferencias entre los valores no son simétricas (*resultado p-value = 0.003*). Esto significa que no se puede usar directamente el test de Wilcoxon. Dado que otra alternativa, el test del signo, es menos potente que el test de Wilcoxon, se intenta transformar los datos para que cumplan con el requisito de simetría y así poder aplicar Wilcoxon.
 
-<!-- ```{r} -->
-<!-- sina <- LRT_dif[-which(LRT_dif %in% boxplot_dif$out)] -->
-<!-- wilcox.test(sina, alternative = "two.sided", conf.int = TRUE) -->
-<!-- ``` -->
+De modo, que ahora, el procedimiento que se realiza a continuación es el siguiente:
+
+1.    **Transformación inicial:** Primero, se aplica el logaritmo natural a los datos originales (LRT_A y LRT_CM).
+
+2.    **Cálculo de diferencias:** Después de la transformación, se calculan las diferencias entre los valores.
+
+3.    **Evaluación de normalidad:** Se realiza un test de normalidad sobre estas diferencias. Si las diferencias pasan esta prueba, se aplica directamente la prueba $t$ para verificar si la media de las diferencias es igual a cero.
+
+4.    **Revisión de simetría:** Si no pasan el test de normalidad, se evalúa si las diferencias son simétricas utilizando el test MIRA de asimetría. Si las diferencias resultan ser simétricas, entonces se utiliza el test de Wilcoxon para verificar si la media es igual a cero. 
+
+5.    **Última opción:** Si las diferencias no son simétricas incluso después de la transformación con logaritmo natural, finalmente se recurre al test del signo como última opción.
+
+En resumen, este proceso busca ajustar los datos para que cumplan con los requisitos de pruebas estadísticas más precisas, garantizando resultados confiables. Sin embargo, si los datos no logran cumplir con los criterios necesarios, se utiliza un método alternativo, aunque menos potente.
+
+Como se explicó previamente, el primer paso consiste en transformar los datos originales usando el logaritmo natural.
+
+```{r}
+lLRT_A <- log(datos$LRT_A)
+lLRT_CM <- log(datos$LRT_CM)
+```
+
+Después de esta transformación, se calculan las diferencias entre los valores transformados. Al observar el histograma de estas diferencias, se nota que la asimetría se ha reducido un poco. Sin embargo, visualmente parece que la media de las diferencias no es igual a cero. Para confirmar esto, seguimos el procedimiento previamente mencionado.
+
+```{r}
+#| layout-ncol: 2
+lLRT_dif <- lLRT_CM - lLRT_A
+
+hist(lLRT_dif, freq = FALSE, main = 'Histograma de las la diferencias LRT_CM - LRT_A', ylab = 'Densidad', xlab = 'Diferencia (cm)')
+lines(density(lLRT_dif), col = "red")
+abline(v = mean(lLRT_dif, na.rm = TRUE), col = "red", lty = 2)
+boxplot_dif <- boxplot(lLRT_dif, main = "Boxplot de las diferencias LRT_CM - LRT_A")
+```
+
+Primero, se aplica el test de normalidad de Lilliefors. Este test evalúa si las diferencias siguen una distribución normal. En este caso, el p-valor obtenido es menor a 0.05 (*resultado p-value = 1.683e-10*), lo que indica que las diferencias no siguen una distribución normal. Por lo tanto, no se puede utilizar la prueba t para verificar si la media de las diferencias es igual a cero.
+
+```{r}
+lillie.test(lLRT_dif) 
+```
+
+A continuación, se realiza la prueba MIRA de simetría, que nos ayuda a decidir entre utilizar el test de Wilcoxon o el test del signo. Gracias a la transformación, las diferencias ahora pasan el test de simetría (*resultado p-value = 0.234*). Esto significa que las diferencias tienen una distribución simétrica, lo que permite aplicar el test de Wilcoxon.
+
+```{r}
+set.seed(123)
+symmetry_test(lLRT_dif, "MI", mu = mean(lLRT_dif))
+```
+
+Finalmente, se realiza la prueba de Wilcoxon para determinar si la media de las diferencias es igual a cero, lo que equivaldría a decir que las mediciones con cinta métrica (LRT_CM) son iguales a las realizadas con el antropómetro (LRT_A).
+
+El test de Wilcoxon arroja un p-valor menor a 0.05 (*resultado p-value < 2.2e-16*). Esto significa que, con un 95% de confianza, hay evidencia estadística para afirmar que la media de las diferencias no es igual a cero. En otras palabras, las mediciones realizadas con cinta métrica **NO SON EQUIVALENTES** a las realizadas con el antropómetro.
+
+```{r}
+wilcox.test(lLRT_CM, lLRT_A, paired = TRUE, alternative = "two.sided", conf.int = TRUE)
+```
+
 
 ### Análisis por separado
 
 #### Por sexo
 
+Se realiza un análisis separado por sexo debido a que, generalmente, las características anatómicas hacen que la talla promedio sea mayor en hombres que en mujeres. Por esta razón, se decide llevar a cabo un análisis de las pruebas de hipótesis diferenciando por sexo.
+
+Este análisis tiene un propósito exclusivamente exploratorio: se busca determinar si los resultados obtenidos al analizar ambos sexos por separado difieren de aquellos obtenidos al analizar los datos combinados.
+
 ##### Masculino:
+
+A continuación se muestra el histograma de la diferencia de las mediciones LRT (cinta métrica menos antropómetro) del sexo masculino, además se muestra el box-plot de estas diferencias. Gráficamene, se observa que las diferencias no parecen estar alrededor de cero.
 
 ```{r}
 #| layout-ncol: 2
@@ -136,285 +216,215 @@ LRT_dif <- hombres$LRT_CM - hombres$LRT_A
 hist(LRT_dif, freq = FALSE, main = 'Diferencia de mediciones LRT (hombres)', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
 lines(density(LRT_dif), col = "red")
 abline(v = median(LRT_dif, na.rm = TRUE), col = "red", lty = 2)
-boxplot(LRT_dif)
+boxplot_dif <- boxplot(LRT_dif)
+```
+
+Se aplica la prueba de normalidad de Lilliefors sobre las diferencias, y se obtiene *p-value = 1.301e-11*, como es menor a 0.05, se concluye que las diferencias no parecen seguir una distribución normal. Por lo que, siguiendo con el procedimiento descrito al inicio, se debe realizar la prueba de simetría.
+
+```{r}
+lillie.test(LRT_dif)
+```
+
+La prueba de simetría MIRA, muestra que las diferencias no son simétricas, por lo que se decide realizar la transformación (aplicar logaritmo natural a LRT_A y LRT_CM) y repetir el procedimiento.
+
+```{r}
+set.seed(123)
+symmetry_test(LRT_dif, "MI", mu = mean(LRT_dif))
+```
+
+Luego de aplicar la transformación, se calculan las diferencias. Se observa en el histograma y el box-plot que se logró corregir un poco la asimetría.
+
+```{r}
+lLRT_A <- log(hombres$LRT_A)
+lLRT_CM <- log(hombres$LRT_CM)
 ```
 
 ```{r}
 #| layout-ncol: 2
-shapiro.test(LRT_dif) 
-lillie.test(LRT_dif)
+lLRT_dif <- lLRT_CM - lLRT_A
+
+hist(lLRT_dif, freq = FALSE, main = 'Histograma de las la diferencias LRT_CM - LRT_A', ylab = 'Densidad', xlab = 'Diferencia (cm)')
+lines(density(lLRT_dif), col = "red")
+abline(v = mean(lLRT_dif, na.rm = TRUE), col = "red", lty = 2)
+boxplot_dif <- boxplot(lLRT_dif, main = "Boxplot de las diferencias LRT_CM - LRT_A")
 ```
 
-Los resultados de dos pruebas estadísticas, Shapiro-Wilk y Lilliefors, mostraron un valor menor a 0.05. Esto significa que, con un nivel de confianza del 95%, no podemos decir que las diferencias entre las mediciones de rodilla-talón tomadas con una cinta métrica y con un antropómetro en los adultos mayores de sexo masculino sigan una distribución normal. 
+La prueba de Lilliefors sobre las diferencias de los datos transformados, muestran que nuevamente las diferencias no presentan normalidad, por lo que se aplica de nuevo el test de simetría MIRA.
 
 ```{r}
-#| eval: false
-#| echo: false
-# Test Wilcoxon
-
-## Requiere simetria en los datos, por lo que se realiza un test de simetria basado en momentos
-
-asimetria <- moments::skewness(LRT_dif)
-
-t_test <- asimetria / sqrt(6 / length(LRT_dif))  # Estadístico t
-p_value <- 2 * (1 - pt(abs(t_test), df = length(LRT_dif) - 1))
-p_value # parece que no hay simetria, entonces no se puede aplicar Wilcoxon 
-
-# wilcox.test(LRT_dif, mu = 0, alternative = "two.sided") # usando las diferencias
-# wilcox.test(datos$LRT_CM, datos$LRT_A, mu = 0, alternative = "two.sided", paired = TRUE) # usando directamente los datos
-
+lillie.test(lLRT_dif) 
 ```
+
+Esta vez, las diferencias sí presentan simetría, entonces se decide aplicar la prueba de Wilcoxon.
 
 ```{r}
-# Prueba del signo para muestras pareadas
-SIGN.test(LRT_dif, md = 0, alternative = "two.sided")
+set.seed(123)
+symmetry_test(lLRT_dif, "MI", mu = mean(lLRT_dif))
 ```
 
-Nuevamente, las diferencias entre las mediciones no son simétricas ya que el coeficiente de asimetría fue de -1.69. Por eso, se decidió usar la prueba del signo para muestras pareadas para evaluar la mediana de las diferencias.
+La prueba de Wilcoxon, dice que con un 95% de confianza, al obtener un *p-value < 2.2e-16*, parece que las diferencias no parecen tener media cero, es decir, las mediciones de LRT con cinta métrica **NO SON EQUIVALENTES** a las obtenidas con antropómetro en la muestra con sexo masculino.
 
-El resultado de la prueba del signo mostró un p-valor de $2.2 \times 10^{-16}$, así que nuevamente se rechazó la hipótesis de igualdad de medianas. Esto significa que las mediciones de la longitud rodilla-talón hechas con la cinta métrica no son equivalentes a las obtenidas con el antropómetro, en los adultos mayores de sexo masculino.
+```{r}
+wilcox.test(lLRT_CM, lLRT_A, paired = TRUE, alternative = "two.sided", conf.int = TRUE)
+```
+
 
 ##### Femenino:
 
+A continuación se muestra el histograma de la diferencia de las mediciones LRT (cinta métrica menos antropómetro) del sexo femenino, además se muestra el box-plot de estas diferencias. Gráficamene, se observa que las diferencias no parecen estar alrededor de cero.
+
 ```{r}
+#| layout-ncol: 2
 # Diferencias CM y A
 mujeres <- datos[datos$Sexo == "Femenino",]
 LRT_dif <- mujeres$LRT_CM - mujeres$LRT_A
 
 # Como se ve graficamente, parece que no hay normalidad
-par(mfrow=c(1,2))
 hist(LRT_dif, freq = FALSE, main = 'Diferencia de mediciones LRT (mujeres)', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
 lines(density(LRT_dif), col = "red")
 abline(v = median(LRT_dif, na.rm = TRUE), col = "red", lty = 2)
-boxplot(LRT_dif) # hay muchos outliers
-
-# Pruebas de normalidad
-## Test Shapiro-Wilk
-shapiro.test(LRT_dif) # No se tiene normalidad en la edad según el test de Shapiro-Wilks
-
-## Test lilliefors
-lillie.test(LRT_dif) # No se tiene normalidad en la edad según el test de Lilliefors
+boxplot_dif <- boxplot(LRT_dif) # hay muchos outliers
 
 ```
 
-Los resultados de dos pruebas estadísticas, Shapiro-Wilk y Lilliefors, mostraron un valor menor a 0.05. Esto significa que, con un nivel de confianza del 95%, no podemos decir que las diferencias entre las mediciones de rodilla-talón tomadas con una cinta métrica y con un antropómetro en las mujeres mayores sigan una distribución normal. 
+Se aplica la prueba de normalidad de Lilliefors sobre las diferencias, y se obtiene *p-value = 1.024e-09*, como es menor a 0.05, se concluye que las diferencias no parecen seguir una distribución normal. Por lo que, siguiendo con el procedimiento descrito al inicio, se debe realizar la prueba de simetría.
 
 ```{r}
-# Test Wilcoxon
-
-## Requiere simetria en los datos, por lo que se realiza un test de simetria basado en momentos
-
-asimetria <- moments::skewness(LRT_dif)
-
-symmetry.test(LRT_dif)
-
-t_test <- asimetria / sqrt(6 / length(LRT_dif))  # Estadístico t
-p_value <- 2 * (1 - pt(abs(t_test), df = length(LRT_dif) - 1))
-p_value # parece que hay simetria, entonces se aplica Wilcoxon 
+lillie.test(LRT_dif)
 ```
 
-Probrando la simetría de las diferencias, se obtuvo un valor p mayor que 0.05, por lo que no hay suficiente evidencia para rechazar la hipótesis de simetría, lo que sugiere que podemos aplicar una prueba no paramétrica como Wilcoxon.
+La prueba de simetría MIRA, muestra que las diferencias son simétricas, por lo que puede aplicarse la prueba Wilcoxon de una vez.
 
 ```{r}
-
-wilcox.test(LRT_dif, mu = 0, alternative = "two.sided") # usando las diferencias
-#wilcox.test(datos$LRT_CM, datos$LRT_A, mu = 0, alternative = "two.sided", paired = TRUE) # usando directamente los datos
-```
-El resultado de la prueba de Wilcoxon mostró un p-valor de $2.2 \times 10^{-16}$, lo que indica que rechazamos la hipótesis de igualdad de medias. Esto significa que las mediciones de la longitud rodilla-talón hechas con la cinta métrica no son equivalentes a las obtenidas con el antropómetro, en las mujeres mayores.
-
-#### Por programa
-
-##### Centro día:
-```{r}
-# Diferencias CM y A
-cd <- datos[datos$Programa == "Centro Día Casa de la Sabiduría",]
-LRT_dif <- cd$LRT_CM - cd$LRT_A
-
-# Como se ve graficamente, parece que no hay normalidad
-par(mfrow=c(1,2))
-hist(LRT_dif, freq = FALSE, main = 'Histograma de las la diferencia de mediciones LRT', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
-lines(density(LRT_dif), col = "red")
-abline(v = median(LRT_dif, na.rm = TRUE), col = "red", lty = 2)
-boxplot(LRT_dif) # hay muchos outliers
-
-# Pruebas de normalidad
-## Test Shapiro-Wilk
-shapiro.test(LRT_dif) # No se tiene normalidad en la edad según el test de Shapiro-Wilks
-
-## Test lilliefors
-lillie.test(LRT_dif) # No se tiene normalidad en la edad según el test de Lilliefors
+set.seed(123)
+symmetry_test(LRT_dif, "MI", mu = mean(LRT_dif))
 ```
 
-Los resultados de dos pruebas estadísticas, Shapiro-Wilk y Lilliefors, mostraron un valor menor a 0.05. Esto significa que, con un nivel de confianza del 95%, no podemos decir que las diferencias entre las mediciones de rodilla-talón tomadas con una cinta métrica y con un antropómetro en los adultos mayores del centro día sigan una distribución normal. 
+La prueba de Wilcoxon, dice que con un 95% de confianza, al obtener un *p-value < 2.2e-16*, parece que las diferencias no parecen tener media cero, es decir, las mediciones de LRT con cinta métrica **NO SON EQUIVALENTES** a las obtenidas con antropómetro en la muestra con sexo femenino.
 
 ```{r}
-# Test Wilcoxon
-
-## Requiere simetria en los datos, por lo que se realiza un test de simetria basado en momentos
-
-asimetria <- moments::skewness(LRT_dif)
-
-t_test <- asimetria / sqrt(6 / length(LRT_dif))  # Estadístico t
-p_value <- 2 * (1 - pt(abs(t_test), df = length(LRT_dif) - 1))
-p_value # parece que hay simetria, entonces se aplica Wilcoxon 
+wilcox.test(mujeres$LRT_CM, mujeres$LRT_A, paired = TRUE, alternative = "two.sided", conf.int = TRUE)
 ```
-
-Probrando la simetría de las diferencias, se obtuvo un valor p mayor que 0.05, por lo que no hay suficiente evidencia para rechazar la hipótesis de simetría, lo que sugiere que la distribución de las diferencias es lo suficientemente simétrica como para aplicar una prueba no paramétrica como Wilcoxon.
-
-```{r}
-
-wilcox.test(LRT_dif, mu = 0, alternative = "two.sided") # usando las diferencias
-#wilcox.test(datos$LRT_CM, datos$LRT_A, mu = 0, alternative = "two.sided", paired = TRUE) # usando directamente los datos
-```
-
-El resultado de la prueba del signo mostró un p-valor de $2.2 \times 10^{-16}$, lo que indica que en este caso rechazamos la igualdad de medianas. Esto significa que las mediciones de la longitud rodilla-talón hechas con la cinta métrica no son equivalentes a las obtenidas con el antropómetro en los adultos mayores del centro día.
-
-##### Comunidad de cuidado
-```{r}
-# Diferencias CM y A
-cc <- datos[datos$Programa == "Comunidad de Cuidado",]
-LRT_dif <- cc$LRT_CM - cc$LRT_A
-
-par(mfrow=c(1,2))
-hist(LRT_dif, freq = FALSE, main = 'Histograma de las la diferencia de mediciones LRT', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
-lines(density(LRT_dif), col = "red")
-abline(v = median(LRT_dif, na.rm = TRUE), col = "red", lty = 2)
-boxplot(LRT_dif) # hay muchos outliers
-
-# Pruebas de normalidad
-## Test Shapiro-Wilk
-shapiro.test(LRT_dif) # No se tiene normalidad en la edad según el test de Shapiro-Wilks
-
-## Test lilliefors
-lillie.test(LRT_dif) # No se tiene normalidad en la edad según el test de Lilliefors
-```
-
-Los resultados de dos pruebas estadísticas, Shapiro-Wilk y Lilliefors, mostraron un valor menor a 0.05. Esto significa que, con un nivel de confianza del 95%, no podemos decir que las diferencias entre las mediciones de rodilla-talón tomadas con una cinta métrica y con un antropómetro en los adultos mayores de las comunidades de cuidado sigan una distribución normal. 
-
-```{r}
-#| eval: false
-#| echo: false
-# Test Wilcoxon
-
-## Requiere simetria en los datos, por lo que se realiza un test de simetria basado en momentos
-
-asimetria <- moments::skewness(LRT_dif)
-
-t_test <- asimetria / sqrt(6 / length(LRT_dif))  # Estadístico t
-p_value <- 2 * (1 - pt(abs(t_test), df = length(LRT_dif) - 1))
-p_value # parece que no hay simetria, entonces no se aplica Wilcoxon 
-```
-
-```{r}
-# Prueba del signo para muestras pareadas
-SIGN.test(LRT_dif, md = 0, alternative = "two.sided")
-```
-
-Nuevamente, la diferencia entre las mediciones no son simétricas ya que el coeficiente de asimetría fue de -1.64. Por eso, se decidió usar la prueba del signo para muestras pareadas para evaluar la mediana de las diferencias.
-
-El resultado de la prueba del signo mostró un p-valor de $2.2 \times 10^{-16}$, lo que indica que en este caso rechazamos la igualdad de medianas. Esto significa que las mediciones de la longitud rodilla-talón hechas con la cinta métrica no son equivalentes a las obtenidas con el antropómetro en los adultos mayores de las comunidades de cuidado.
 
 #### Por etnia
 
+Se realiza un análisis separado por etnia debido a que, se cree que, las características anatómicas hacen que la talla promedio sea mayor en ciertas etnias. Por esta razón, se decide llevar a cabo un análisis de las pruebas de hipótesis diferenciando por etnia.
+
+Este análisis tiene un propósito exclusivamente exploratorio: se busca determinar si los resultados obtenidos al analizar las etnias por separado difieren de aquellos obtenidos al analizar los datos combinados. Sin embargo, dado que únicamente 15 de los 543 individuos con los que se realiza el análisis tienen una etnia distinta a Blanco-Mestizo, se realiza el análisis para el grupo Blanco-Mestizo y para otro grupo que reune las otras etnias.
+
 ##### Blanco-Mestizo
+
+A continuación se muestra el histograma de la diferencia de las mediciones LRT (cinta métrica menos antropómetro) de la etnia Blanco-Mestizo, además se muestra el box-plot de estas diferencias. Gráficamene, se observa que las diferencias no parecen estar alrededor de cero.
+
 ```{r}
+#| layout-ncol: 2
 # Diferencias CM y A 
 bm <- datos[datos$Etnia=="Blanco-Mestizo",]
 LRT_dif <- bm$LRT_CM - bm$LRT_A
 
 # Como se ve graficamente, parece que no hay normalidad
-par(mfrow=c(1,2))
 hist(LRT_dif, freq = FALSE, main = 'Histograma de las la diferencia de mediciones LRT', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
 lines(density(LRT_dif), col = "red")
 abline(v = median(LRT_dif, na.rm = TRUE), col = "red", lty = 2)
-boxplot(LRT_dif) # hay muchos outliers
+boxplot_dif <- boxplot(LRT_dif) # hay muchos outliers
 
-# Pruebas de normalidad
-## Test Shapiro-Wilk
-shapiro.test(LRT_dif) # No se tiene normalidad en la edad según el test de Shapiro-Wilks
-
-## Test lilliefors
-lillie.test(LRT_dif) # No se tiene normalidad en la edad según el test de Lilliefors
 ```
 
-Los resultados de dos pruebas estadísticas, Shapiro-Wilk y Lilliefors, mostraron un valor menor a 0.05. Esto significa que, con un nivel de confianza del 95%, no podemos decir que las diferencias entre las mediciones de rodilla-talón tomadas con una cinta métrica y con un antropómetro en los adultos mayores Blancos-Mestizos sigan una distribución normal. 
+Se aplica la prueba de normalidad de Lilliefors sobre las diferencias, y se obtiene *p-value < 2.2e-16*, como es menor a 0.05, se concluye que las diferencias no parecen seguir una distribución normal. Por lo que, siguiendo con el procedimiento descrito al inicio, se debe realizar la prueba de simetría.
 
 ```{r}
-#| eval: false
-#| echo: false
-# Test Wilcoxon
+lillie.test(LRT_dif)
+```
 
-## Requiere simetria en los datos, por lo que se realiza un test de simetria basado en momentos
+La prueba de simetría MIRA, muestra que las diferencias no son simétricas (*p-value = 0.003*), por lo que se decide realizar la transformación (aplicar logaritmo natural a LRT_A y LRT_CM) y repetir el procedimiento.
 
-asimetria <- moments::skewness(LRT_dif)
+```{r}
+set.seed(123)
+symmetry_test(LRT_dif, "MI", mu = mean(LRT_dif))
+```
 
-t_test <- asimetria / sqrt(6 / length(LRT_dif))  # Estadístico t
-p_value <- 2 * (1 - pt(abs(t_test), df = length(LRT_dif) - 1))
-p_value # parece que no hay simetria, entonces no se aplica Wilcoxon 
+Luego de aplicar la transformación, se calculan las diferencias. Se observa en el histograma y el box-plot que se logró corregir un poco la asimetría.
+
+```{r}
+lLRT_A <- log(bm$LRT_A)
+lLRT_CM <- log(bm$LRT_CM)
 ```
 
 ```{r}
-# Prueba del signo para muestras pareadas
-SIGN.test(LRT_dif, md = 0, alternative = "two.sided")
+#| layout-ncol: 2
+lLRT_dif <- lLRT_CM - lLRT_A
+
+hist(lLRT_dif, freq = FALSE, main = 'Histograma de las la diferencias LRT_CM - LRT_A', ylab = 'Densidad', xlab = 'Diferencia (cm)')
+lines(density(lLRT_dif), col = "red")
+abline(v = mean(lLRT_dif, na.rm = TRUE), col = "red", lty = 2)
+boxplot_dif <- boxplot(lLRT_dif, main = "Boxplot de las diferencias LRT_CM - LRT_A")
 ```
 
-Las diferencias entre las mediciones no son simétricas ya que el coeficiente de asimetría fue de -0.78. Por eso, se decidió usar la prueba del signo para muestras pareadas para evaluar la mediana de las diferencias.
+La prueba de Lilliefors sobre las diferencias de los datos transformados, muestran que nuevamente las diferencias no presentan normalidad (*p-value = 8e-10*), por lo que se aplica de nuevo el test de simetría MIRA.
 
-El resultado de la prueba del signo mostró un p-valor de $2.2 \times 10^{-16}$, lo que indica que en este caso rechazamos la igualdad de medianas. Esto significa que las mediciones de la longitud rodilla-talón hechas con la cinta métrica no son equivalentes a las obtenidas con el antropómetro en los adultos mayores Blancos-Mestizos.
+```{r}
+lillie.test(lLRT_dif) 
+```
+
+Esta vez, las diferencias sí presentan simetría (*p-value = 0.127*), entonces se decide aplicar la prueba de Wilcoxon.
+
+```{r}
+set.seed(123)
+symmetry_test(lLRT_dif, "MI", mu = mean(lLRT_dif))
+```
+
+La prueba de Wilcoxon, dice que con un 95% de confianza, al obtener un *p-value < 2.2e-16*, parece que las diferencias no parecen tener media cero, es decir, las mediciones de LRT con cinta métrica **NO SON EQUIVALENTES** a las obtenidas con antropómetro en la muestra con etnia Blanco-Mestizo.
+
+```{r}
+wilcox.test(lLRT_CM, lLRT_A, paired = TRUE, alternative = "two.sided", conf.int = TRUE)
+```
 
 ##### Afrocolombiano, indigenas, Rrom 
 
+A continuación se muestra el histograma de la diferencia de las mediciones LRT (cinta métrica menos antropómetro) de las otras etnias distintas a Blanco-Mestizo, además se muestra el box-plot de estas diferencias. Gráficamene, se observa que las diferencias no parecen estar alrededor de cero.
+
+Es importante tener en cuenta que dado que solo hay 15 individuos en este grupo, las pruebas tienden a ser más sensibles, por lo que los resultados pueden no ser muy confiables.
+
 ```{r}
+#| layout-ncol: 2
 # Diferencias CM y A 
 nobm <- datos[datos$Etnia!="Blanco-Mestizo",]
 LRT_dif <- nobm$LRT_CM - nobm$LRT_A
 #length(LRT_dif)
 
 # Como se ve graficamente, parece que no hay normalidad
-par(mfrow=c(1,2))
 hist(LRT_dif, freq = FALSE, main = 'Histograma de las la diferencia de mediciones LRT', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
 lines(density(LRT_dif), col = "red")
 abline(v = median(LRT_dif, na.rm = TRUE), col = "red", lty = 2)
-boxplot(LRT_dif) # No hay outliers
-# Pruebas de normalidad
-## Test Shapiro-Wilk
-shapiro.test(LRT_dif) # Se tiene normalidad según el test de Shapiro-Wilks
-
-## Test lilliefors
-lillie.test(LRT_dif) # Se tiene normalidad según el test de Lilliefors
+boxplot_dif <- boxplot(LRT_dif) # No hay outliers
 ```
 
-Uno de los resultados de las pruebas estadísticas, Shapiro-Wilk y Lilliefors, mostró un valor menor a 0.05 y la otra un valor mayor. Dado que de estas etnias solo hay 12 adultos mayores, las pruebas son más sensibles y pueden dar resultados menos confiables. Por esa razón, se va a evaluar la simetría de las diferencias para no realizar la prueba que asume normalidad.
+Se aplica la prueba de normalidad de Lilliefors sobre las diferencias, y se obtiene *p-value = 0.02858*, como es menor a 0.05, se concluye que las diferencias no parecen seguir una distribución normal. Por lo que, siguiendo con el procedimiento descrito al inicio, se debe realizar la prueba de simetría.
 
 ```{r}
-# Test Wilcoxon
-
-## Requiere simetria en los datos, por lo que se realiza un test de simetria basado en momentos
-
-asimetria <- moments::skewness(LRT_dif)
-
-t_test <- asimetria / sqrt(6 / length(LRT_dif))  # Estadístico t
-p_value <- 2 * (1 - pt(abs(t_test), df = length(LRT_dif) - 1))
-p_value # parece que hay simetria, entonces se aplica Wilcoxon 
-
+lillie.test(LRT_dif)
 ```
 
-Probrando la simetría de las diferencias, se obtuvo un valor p mayor que 0.05, por lo que no hay suficiente evidencia para rechazar la hipótesis de simetría, lo que sugiere que la distribución de las diferencias es lo suficientemente simétrica como para aplicar una prueba no paramétrica como Wilcoxon.
+La prueba de simetría MIRA, muestra que las diferencias sí son simétricas (*p-value = 0.25*), por lo que se decide aplicar el test de Wilcoxon.
 
 ```{r}
-
-wilcox.test(LRT_dif, mu = 0, alternative = "two.sided") # usando las diferencias
-#wilcox.test(datos$LRT_CM, datos$LRT_A, mu = 0, alternative = "two.sided", paired = TRUE) # usando directamente los datos
+set.seed(123)
+symmetry_test(LRT_dif, "MI", mu = mean(LRT_dif))
 ```
 
-El resultado de la prueba de Wilcoxon mostró un p-valor menor a 0.5, lo que indica que hay suficiente evidencia estadística para rechazar la idea de que la mediana de las diferencias es igual a cero. Sin embargo, la prueba no puede calcular el p-valor exacto debido a la presencia de valores repetidos en las diferencias, por lo que se va a realizar el test del signo.
+La prueba de Wilcoxon, dice que con un 95% de confianza, al obtener un *p-value = 0.002516*, parece que las diferencias no parecen tener media cero, es decir, las mediciones de LRT con cinta métrica **NO SON EQUIVALENTES** a las obtenidas con antropómetro en la muestra con etnia distinta a Blanco-Mestizo.
+
 ```{r}
-# Prueba del signo para muestras pareadas
-SIGN.test(LRT_dif, md = 0, alternative = "two.sided")
+wilcox.test(nobm$LRT_CM, nobm$LRT_A, paired = TRUE, alternative = "two.sided", conf.int = TRUE)
 ```
 
-El resultado de la prueba del signo mostró un p-valor menor a 0.5, lo que indica que hay suficiente evidencia estadística para rechazar la idea de que la mediana de las diferencias es igual a cero. Esto significa que las mediciones de la longitud rodilla-talón hechas con la cinta métrica no son equivalentes a las obtenidas con el antropómetro, en los adultos mayores afrocolombiano, indigenas o Rrom.
+### Conclusión LRT
 
+::: {.callout-note}
+
+Los resultados al realizar el análisis por separado, no cambió. De modo que se concluye que las mediciones de LRT con cinta métrica **NO SON EQUIVALENTES** a las obtenidas con antropómetro.
+
+:::
 
 ## Longitud rodilla-maléolo
 
@@ -446,495 +456,286 @@ par(mfrow=c(1,2))
 hist(LRM_dif, freq = FALSE, main = 'Histograma de las la diferencia de mediciones LRT', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
 lines(density(LRM_dif), col = "red")
 abline(v = median(LRM_dif, na.rm = TRUE), col = "red", lty = 2)
-boxplot(LRM_dif) # hay muchos outliers
+boxplot_dif <- boxplot(LRM_dif) # hay muchos outliers
 ```
 
 Tenemos estos datos atípicos.
 
 ```{r}
-atipicos <- datos[which(LRT_dif %in% boxplot_dif$out),]
+atipicos <- datos[which(LRM_dif %in% boxplot_dif$out),]
 
 atipicos <- atipicos |> as.data.frame()
 atipicos |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
 ```
 
-```{r}
-# Pruebas de normalidad
-## Test Shapiro-Wilk
-shapiro.test(LRM_dif) # No se tiene normalidad en la edad según el test de Shapiro-Wilks
-
-## Test lilliefors
-lillie.test(LRM_dif) # No se tiene normalidad en la edad según el test de Lilliefors
-```
-
-Dado que en ambos test, Shapiro-Wilk y Lilliefors, se obtuvo un p-valor menor a $0.05$, entonces, con una significancia del $5\%$, no hay evidencia estadística de que las diferencias entre las mediciones rodilla-talón con cinta métrica y con antropómetro sigan una distribució normal. Por lo tanto, se hace necesario realizar un test no paramétrico para media de las diferencias.
+Cumpliendo con el procedimiento descrito, primero se calculan las diferencias entre las mediciones de ambos métodos y se verifica si esas diferencias siguen una distribución normal para determinar qué prueba estadística es adecuada para la comparación. 
 
 ```{r}
-#| eval: false
-#| echo: false
-# Test Wilcoxon
+#| layout-ncol: 3
+LRM_dif <- datos$LRM_90 - datos$LRM_R
 
-## Requiere simetria en los datos, por lo que se realiza un test de simetria basado en momentos
-
-asimetria <- moments::skewness(LRM_dif)
-
-t_test <- asimetria / sqrt(6 / length(LRM_dif))  # Estadístico t
-p_value <- 2 * (1 - pt(abs(t_test), df = length(LRM_dif) - 1))
-p_value # parece que no hay simetria, entonces no se puede aplicar Wilcoxon 
-
-# wilcox.test(LRM_dif, mu = 0, alternative = "two.sided") # usando las diferencias
-# wilcox.test(datos$LRM_90, datos$LRM_R, mu = 0, alternative = "two.sided", paired = TRUE) # usando directamente los datos
-```
-
-```{r}
-# Prueba del signo para muestras pareadas
-## Es menos potente que Wilcoxon pero funciona aunque no haya normalidad ni simetria, permite dar conclusiones sobre la mediana (si no hay simetria)
-
-SIGN.test(LRM_dif, md = 0, alternative = "two.sided")
-```
-
-Nuevamente, se consideró aplicar la prueba de Wilcoxon para evaluar la media de las diferencias, pero esta prueba no se aplicó ya que el coeficiente de asimetría obtenido fue de $2.022$. Este valor indica una falta de simetría en las diferencias de las mediciones. Por esta razón, de nuevo se optó por utilizar la prueba del signo para muestras pareadas.
-
-El resultado de la prueba del signo arrojó un p-valor de $2.2 \times 10^{-16}$, indicando evidencia estadística suficiente para rechazar la hipótesis nula de que la mediana de las diferencias es igual a cero. Por lo tanto, se concluye que las mediciones de la longitud rodilla-maléolo realizadas con la pierna completamente estirada no son equivalentes a las obtenidas con la pierna a $90°$.
-
-### Análisis discriminando por sexo
-
-#### Masculino:
-
-Inicialmente se hace una comparación gráfica de ambas técnicas a través de un box-plot:
-
-```{r}
-hombres <- datos[datos$Sexo == "Masculino",]
-# Comparar LRM 90 y R
-boxplot(data.frame(hombres$LRM_90, hombres$LRM_R), ylab = 'Longitud Rodilla-Maleolo (cm)', xaxt = "n")
-axis(1, at = c(1, 2),
-     labels = c("Pierna a 90°", "Pierna recta"))
-```
-
-Según el boxplot, se puede observar que podría existir una leve diferencia entre las distribuciones de las mediciones de la longitud rodilla maléolo con la pierna a 90° y con la pierna completamente estirada en los adultos mayores de sexo masculino.
-
-```{r}
-#| layout-ncol: 2
-# Diferencias 90 y R
-LRM_dif <- hombres$LRM_90 - hombres$LRM_R
-# Como se ve graficamente, parece que hay normalidad
-par(mfrow=c(1,2))
-hist(LRM_dif, freq = FALSE, main = 'Histograma de las la diferencia de mediciones LRT', ylab = 'Densidad', xlab = 'Diferencia (cm)')
+hist(LRM_dif, freq = FALSE, main = 'Histograma de las la diferencias LRM_90 - LRT_A', ylab = 'Densidad', xlab = 'Diferencia (cm)')
 lines(density(LRM_dif), col = "red")
-abline(v = median(LRM_dif, na.rm = TRUE), col = "red", lty = 2)
-boxplot(LRM_dif) # hay muchos outliers
-```
-De acuerdo al histograma, la mediana de las diferencias entre las mediciones de la longitud rodilla maléolo con la pierna a 90° y con la pierna completamente estirada es de 0.5 cm. Además, pareciera que hay simetría en la distribución de las diferencias, por lo que puede haber normalidad.
+abline(v = mean(LRM_dif, na.rm = TRUE), col = "red", lty = 2)
+boxplot_dif <- boxplot(LRM_dif, main = "Boxplot de las diferencias LRM_90 - LRT_A")
 
-**Pruebas de normalidad**
-```{r}
-# Pruebas de normalidad
-## Test Shapiro-Wilk
-shapiro.test(LRM_dif) # No se tiene normalidad en la edad según el test de Shapiro-Wilks
-
-## Test lilliefors
-lillie.test(LRM_dif) # No se tiene normalidad en la edad según el test de Lilliefors
+qqnorm(LRM_dif, main = "Q-Q plot de las diferencias")
+qqline(LRM_dif, col = "red")
 ```
 
-Dado que en ambos test, Shapiro-Wilk y Lilliefors, se obtuvo un p-valor mayor a $0.05$, entonces, con una significancia del $5\%$, hay evidencia estadística de que las diferencias entre las mediciones rodilla-maleolo con la pierna a 90° y con la pierna estirada siguen una distribució normal. Por lo tanto, se hace necesario realizar una prueba t para la media de las diferencias.
-
-**Prueba t**
-```{r}
-# Prueba t para muestras pareadas
-t.test(LRM_dif, alternative = "two.sided", mu = 0)
-```
-
-El resultado de la prueba t mostró un p-valor de $2.2 \times 10^{-16}$, por lo que se rechaza la hipótesis de igualdad de medias. Esto significa que las mediciones de la longitud rodilla-maleolo hechas con la pierna a 90° no son equivalentes a las obtenidas con la pierna estirada, en los adultos mayores de sexo masculino.
-
-#### Femenino: 
-Inicialmente se hace una comparación gráfica de ambas técnicas a través de un box-plot:
+A continuación se presentan los resultados del test de normalidad de Lilliefors para la diferencia de las mediciones LRM_90 y LRT_A:
 
 ```{r}
-mujeres <- datos[datos$Sexo == "Femenino",]
-# Comparar LRM 90 y R
-boxplot(data.frame(mujeres$LRM_90, mujeres$LRM_R), ylab = 'Longitud Rodilla-Maleolo (cm)', xaxt = "n")
-axis(1, at = c(1, 2),
-     labels = c("Pierna a 90°", "Pierna recta"))
-```
-
-Según el boxplot, se puede observar que podría existir una diferencia entre las distribuciones de las mediciones de la longitud rodilla maléolo con la pierna a 90° y con la pierna completamente estirada en los adultos mayores de sexo femenino. En este grupo de mujeres se observa que las medianas entre las medidas es más distante que en el grupo de hombres.  
-
-```{r}
-#| layout-ncol: 2
-# Diferencias 90 y R
-LRM_dif <- mujeres$LRM_90 - mujeres$LRM_R
-# Como se ve graficamente, parece que no hay normalidad
-par(mfrow=c(1,2))
-hist(LRM_dif, freq = FALSE, main = 'Histograma de las la diferencia de mediciones LRT', ylab = 'Densidad', xlab = 'Diferencia (cm)')
-lines(density(LRM_dif), col = "red")
-abline(v = median(LRM_dif, na.rm = TRUE), col = "red", lty = 2)
-boxplot(LRM_dif) 
-```
-De acuerdo al histograma, la mediana de las diferencias entre las mediciones de la longitud rodilla maléolo con la pierna a 90° y con la pierna completamente estirada es de 1 cm. 
-
-**Pruebas de normalidad**
-```{r}
-# Pruebas de normalidad
-## Test Shapiro-Wilk
-shapiro.test(LRM_dif) 
-
-## Test lilliefors
 lillie.test(LRM_dif) 
 ```
 
-Dado que en ambos test, Shapiro-Wilk y Lilliefors, se obtuvo un p-valor menor a $0.05$, entonces, con una significancia del $5\%$, no hay evidencia estadística de que las diferencias entre las mediciones rodilla-maleolo con la pierna a 90° y con la pierna estirada siguen una distribució normal. Por lo tanto, se hace necesario realizar una prueba no parametrica para la media/mediana de las diferencias.
+Los resultados muestran un p-valor menor a $0.05$ (*resultado p-value < 2.2e-16*). Esto significa que, con un nivel de confianza del $95\%$, no podemos concluir que las diferencias entre las mediciones de rodilla - talón tomadas con una cinta métrica y con un antropómetro sigan una distribución normal, y por lo tanto no es posible usar la prueba t para muestras pareadas. Entonces, se debe realizar la prueba de asimetría.
 
-**Simetría de las diferencias**
+
 ```{r}
-
-asimetria <- moments::skewness(LRM_dif)
-
-t_test <- asimetria / sqrt(6 / length(LRM_dif))  # Estadístico t
-p_value <- 2 * (1 - pt(abs(t_test), df = length(LRM_dif) - 1))
-p_value # parece que no hay simetria, entonces no se puede aplicar Wilcoxon 
-
+set.seed(123)
+symmetry_test(LRM_dif, "MI", mu = mean(LRM_dif))
 ```
 
-Dado que el p-valor es menor a 0.05, se rechaza la hipotesis nula de que la distribución de las diferencias entre las mediciones rodilla-maleolo con la pierna a 90° y con la pierna estirada sea simetrica. Por lo tanto, se realiza el test del signo para muestras pareadas:
+Parece que las diferencias entre los valores no son simétricas (*resultado p-value = 0.003*). Esto significa que no se puede usar directamente el test de Wilcoxon. Dado que otra alternativa, el test del signo, es menos potente que el test de Wilcoxon, se intenta transformar los datos para que cumplan con el requisito de simetría y así poder aplicar Wilcoxon.
 
-**Test del signo**
+De modo, que ahora, el procedimiento que se realiza a continuación es el siguiente:
+
+1.    **Transformación inicial:** Primero, se aplica el logaritmo natural a los datos originales (LRT_A y LRM_90).
+
+2.    **Cálculo de diferencias:** Después de la transformación, se calculan las diferencias entre los valores.
+
+3.    **Evaluación de normalidad:** Se realiza un test de normalidad sobre estas diferencias. Si las diferencias pasan esta prueba, se aplica directamente la prueba $t$ para verificar si la media de las diferencias es igual a cero.
+
+4.    **Revisión de simetría:** Si no pasan el test de normalidad, se evalúa si las diferencias son simétricas utilizando el test MIRA de asimetría. Si las diferencias resultan ser simétricas, entonces se utiliza el test de Wilcoxon para verificar si la media es igual a cero. 
+
+5.    **Última opción:** Si las diferencias no son simétricas incluso después de la transformación con logaritmo natural, finalmente se recurre al test del signo como última opción.
+
+En resumen, este proceso busca ajustar los datos para que cumplan con los requisitos de pruebas estadísticas más precisas, garantizando resultados confiables. Sin embargo, si los datos no logran cumplir con los criterios necesarios, se utiliza un método alternativo, aunque menos potente.
+
+Como se explicó previamente, el primer paso consiste en transformar los datos originales usando el logaritmo natural.
+
 ```{r}
-# Prueba del signo para muestras pareadas
-## Es menos potente que Wilcoxon pero funciona aunque no haya normalidad ni simetria, permite dar conclusiones sobre la mediana (si no hay simetria)
-
-SIGN.test(LRM_dif, md = 0, alternative = "two.sided")
+lLRM_R <- log(datos$LRM_R)
+lLRM_90 <- log(datos$LRM_90)
 ```
 
-El resultado de la prueba del signo arrojó un p-valor de $2.2 \times 10^{-16}$, indicando evidencia estadística suficiente para rechazar la hipótesis nula de que la mediana de las diferencias es igual a cero. Por lo tanto, se concluye que las mediciones de la longitud rodilla-maléolo realizadas con la pierna completamente estirada no son equivalentes a las obtenidas con la pierna a $90°$ en el grupo de las adultas mayores.
-
-## Talla real y estimación Benjumea (LRT) con cinta métrica
-
-Primero se realiza el cálculo de la estimación de la talla utilizando las fórmulas de Benjumea que tienen en cuenta las variables Sexo, Edad, Etnia y longitud rodilla-talón con cinta métrica. Hay que tener en cuenta que en la muestra hay un individuo cuya Etnia es "Rrom", para este individuo no existe una fórmula de Benjumea para estimar su talla, por lo que no se tuvo en cuenta para la evaluación de la hipótesis de que la media de la diferencia entre la estimación de la talla por medio de las fórmulas de Benjumea y la talla real es cero.
+Después de esta transformación, se calculan las diferencias entre los valores transformados. Al observar el histograma de estas diferencias, se nota que la asimetría se ha reducido un poco. Sin embargo, visualmente parece que la media de las diferencias no es igual a cero. Para confirmar esto, seguimos el procedimiento previamente mencionado.
 
 ```{r}
-# Estimaciones de la talla utilizando las fórmulas de Benjumea
-datos$benjumea_cm <- ifelse(
-  datos$Sexo == "Masculino" & datos$Etnia == "Blanco-Mestizo",
-  75.514 + 1.883 * datos$LRT_CM - 0.108 * datos$Edad,
-  ifelse(
-    datos$Sexo == "Femenino" & datos$Etnia == "Blanco-Mestizo",
-    86.497 + 1.553 * datos$LRT_CM - 0.119 * datos$Edad,
-    ifelse(
-      datos$Sexo == "Masculino" & datos$Etnia == "Indigena",
-      82.695 + 1.745 * datos$LRT_CM - 0.121 * datos$Edad,
-      ifelse(
-        datos$Sexo == "Femenino" & datos$Etnia == "Indigena",
-        90.281 + 1.436 * datos$LRT_CM - 0.102 * datos$Edad,
-        ifelse(
-          datos$Sexo == "Masculino" & datos$Etnia == "Afrocolombiano",
-          79.298 + 1.855 * datos$LRT_CM - 0.141 * datos$Edad,
-          ifelse(
-            datos$Sexo == "Femenino" & datos$Etnia == "Afrocolombiano",
-            76.233 + 1.767 * datos$LRT_CM - 0.098 * datos$Edad,
-            NA # solo hay un NA que es el Rrom
-          )
-        )
-      )
-    )
-  )
-)
+#| layout-ncol: 2
+lLRM_dif <- lLRM_90 - lLRM_R
+
+hist(lLRM_dif, freq = FALSE, main = 'Histograma de las la diferencias LRM_90 - LRM_R', ylab = 'Densidad', xlab = 'Diferencia (cm)')
+lines(density(lLRM_dif), col = "red")
+abline(v = mean(lLRM_dif, na.rm = TRUE), col = "red", lty = 2)
+boxplot_dif <- boxplot(lLRM_dif, main = "Boxplot de las diferencias LRM_90 - LRM_R")
 ```
 
-Como antes, se hizo un análisis visual a través de un box-plot, donde se observa que aparentemente no hay una diferencia entre la estimación de la talla con las fórmulas de Benjumea con cinta métrica y la talla real. Sin embargo, es necesario realizar una prueba estadística formal para concluir.
+Primero, se aplica el test de normalidad de Lilliefors. Este test evalúa si las diferencias siguen una distribución normal. En este caso, el p-valor obtenido es menor a 0.05 (*resultado p-value = 1.683e-10*), lo que indica que las diferencias no siguen una distribución normal. Por lo tanto, no se puede utilizar la prueba t para verificar si la media de las diferencias es igual a cero.
 
 ```{r}
-# Comparar benjumea y talla real
-boxplot(data.frame(datos$Talla, datos$benjumea_cm))
+lillie.test(lLRM_dif) 
 ```
 
-Se calculan las diferencias entre la talla real y la estimación de la talla con las fórmulas de Benjumea con cinta métrica, luego, a estas diferencias se les aplica el test de Sahpiro-Wilk para normalidad y el test Lilliefors de normalidad, esto para decidir qué test utilizar para evaluar la media de las diferencias.
+A continuación, se realiza la prueba MIRA de simetría, que nos ayuda a decidir entre utilizar el test de Wilcoxon o el test del signo. Aún con la transformación, las diferencias siguen sin pasar el test de simetría (*resultado p-value = 0.035*). Esto significa que las diferencias NO tienen una distribución simétrica, entonces, no se puede aplicar el test de Wilcoxon.
 
 ```{r}
-# Diferencias benjumea y talla real
-talla_dif <- datos$Talla - datos$benjumea_cm
-talla_dif <- talla_dif[!is.na(talla_dif)]
+set.seed(123)
+symmetry_test(lLRM_dif, "MI", mu = mean(lLRM_dif))
+```
+
+Finalmente, como última opción se realiza la prueba del signo para determinar si la mediana de las diferencias es igual a cero, lo que equivaldría a decir que las mediciones con la pierna estirdada (LRM_R) son iguales a las realizadas con la pierna a 90° (LRM_90).
+
+El test del signo arroja un p-valor menor a 0.05 (*resultado p-value < 2.2e-16*). Esto significa que, con un 95% de confianza, hay evidencia estadística para afirmar que la mediana de las diferencias no es igual a cero. En otras palabras, las mediciones LRM realizadas con la pierna completamente estirada **NO SON EQUIVALENTES** a las realizadas con la pierna a 90°.
+
+```{r}
+SIGN.test(lLRM_90, lLRM_R, paired = TRUE, alternative = "two.sided", conf.int = TRUE)
+```
+
+
+### Análisis por separado
+
+#### Por sexo
+
+Se realiza un análisis separado por sexo debido a que, generalmente, las características anatómicas hacen que la talla promedio sea mayor en hombres que en mujeres. Por esta razón, se decide llevar a cabo un análisis de las pruebas de hipótesis diferenciando por sexo.
+
+Este análisis tiene un propósito exclusivamente exploratorio: se busca determinar si los resultados obtenidos al analizar ambos sexos por separado difieren de aquellos obtenidos al analizar los datos combinados.
+
+##### Masculino:
+
+A continuación se muestra el histograma de la diferencia de las mediciones LRM (pierna a 90° menos pierna completamente estirada) del sexo masculino, además se muestra el box-plot de estas diferencias. Gráficamene, se observa que las diferencias no parecen estar alrededor de cero.
+
+```{r}
+#| layout-ncol: 2
+hombres <- datos[datos$Sexo == "Masculino",]
+LRM_dif <- hombres$LRM_90 - hombres$LRM_R
+
+hist(LRM_dif, freq = FALSE, main = 'Diferencia de mediciones LRT (hombres)', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
+lines(density(LRM_dif), col = "red")
+abline(v = median(LRM_dif, na.rm = TRUE), col = "red", lty = 2)
+boxplot_dif <- boxplot(LRM_dif)
+```
+
+Se aplica la prueba de normalidad de Lilliefors sobre las diferencias, y se obtiene *p-value = 0.05353*, como es mayor a 0.05, se concluye que las diferencias parecen seguir una distribución normal. Por lo que puede aplicarse la prueba $t$ de muestras pareadas.
+
+```{r}
+lillie.test(LRM_dif)
+```
+
+La prueba $t$, dice que con un 95% de confianza, al obtener un *p-value < 2.2e-16*, parece que las diferencias no parecen tener media cero, es decir, las mediciones de LRM con la pierna a 90° **NO SON EQUIVALENTES** a las obtenidas con la pierna completamente estirada en la muestra con sexo masculino.
+
+```{r}
+t.test(hombres$LRM_R, hombres$LRM_90, paired = TRUE)
+```
+
+
+##### Femenino:
+
+A continuación se muestra el histograma de la diferencia de las mediciones LRM (pierna a 90° menos pierna completamente estirada) del sexo femenino, además se muestra el box-plot de estas diferencias. Gráficamene, se observa que las diferencias no parecen estar alrededor de cero.
+
+```{r}
+#| layout-ncol: 2
+# Diferencias CM y A
+mujeres <- datos[datos$Sexo == "Femenino",]
+LRM_dif <- mujeres$LRM_90 - mujeres$LRM_R
 
 # Como se ve graficamente, parece que no hay normalidad
-hist(talla_dif)
-boxplot(talla_dif) # hay muchos outliers
+hist(LRM_dif, freq = FALSE, main = 'Diferencia de mediciones LRT (mujeres)', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
+lines(density(LRM_dif), col = "red")
+abline(v = median(LRM_dif, na.rm = TRUE), col = "red", lty = 2)
+boxplot_dif <- boxplot(LRM_dif) # hay muchos outliers
 
-# Pruebas de normalidad
-## Test Shapiro-Wilk
-shapiro.test(talla_dif) # Sí se tiene normalidad según el test de Shapiro-Wilks
-
-## Test lilliefors
-lillie.test(talla_dif) # Sí se tiene normalidad según el test de Lilliefors
 ```
 
-En ambos test, se obtiene un p-valor mayor a $0.05$, por lo que se afirma, que con una significancia del $5\%$, existe evidencia estadística de que las diferencias siguen una distribución normal, por lo tanto, para evaluar la media de las diferencias, se puede implementar una prueba $t$ para muestras pareadas.
+Se aplica la prueba de normalidad de Lilliefors sobre las diferencias, y se obtiene *p-value = 0.0284*, como es menor a 0.05, se concluye que las diferencias no parecen seguir una distribución normal. Por lo que, siguiendo con el procedimiento descrito al inicio, se debe realizar la prueba de simetría.
 
 ```{r}
-# t.test(datos$Talla, datos$benjumea, alternative = "two.sided", mu = 0, paired = TRUE, na.action = na.omit)
-
-t.test(talla_dif, alternative = "two.sided", mu = 0)
+lillie.test(LRM_dif)
 ```
 
-Luego de aplicar la prueba $t$, con una significancia del $5\%$, existe evidencia estadística para rechazar la hipótesis nula ya que el p-valor es $2.2 \times 10^{-16}$, por lo tanto, se concluye que la media de las diferencias entre la talla real y la estimación con las fórmulas de Benjumea con cinta métrica no es cero, luego, parece que las estimaciones no son cercanas a la talla real.
-
-El MSE del modelo de Benjumea sobre nuestros datos es el siguiente:
+La prueba de simetría MIRA, muestra que las diferencias son simétricas (*p-value = 0.135*), por lo que se decide realizar la prueba de Wilcoxon.
 
 ```{r}
-mean((datos$Talla - datos$benjumea_cm)^2, na.rm = TRUE)
+set.seed(123)
+symmetry_test(LRM_dif, "MI", mu = mean(LRM_dif))
 ```
 
-### Sin los outliers
+La prueba de Wilcoxon, dice que con un 95% de confianza, al obtener un *p-value < 2.2e-16*, parece que las diferencias no parecen tener media cero, es decir, las mediciones de LRM con la pierna a 90° **NO SON EQUIVALENTES** a las obtenidas con la piernaa completamente estirada en la muestra con sexo femenino.
 
 ```{r}
-box_talla_dif <- boxplot(talla_dif) # hay muchos outliers
-outliers <- box_talla_dif$out
+wilcox.test(mujeres$LRM_90, mujeres$LRM_R, paired = TRUE, alternative = "two.sided", conf.int = TRUE)
+```
 
-talla_dif1 <- talla_dif[!(talla_dif %in% outliers)]
+#### Por etnia
 
+Se realiza un análisis separado por etnia debido a que, se cree que, las características anatómicas hacen que la talla promedio sea mayor en ciertas etnias. Por esta razón, se decide llevar a cabo un análisis de las pruebas de hipótesis diferenciando por etnia.
+
+Este análisis tiene un propósito exclusivamente exploratorio: se busca determinar si los resultados obtenidos al analizar las etnias por separado difieren de aquellos obtenidos al analizar los datos combinados. Sin embargo, dado que únicamente 15 de los 543 individuos con los que se realiza el análisis tienen una etnia distinta a Blanco-Mestizo, se realiza el análisis para el grupo Blanco-Mestizo y para otro grupo que reune las otras etnias.
+
+##### Blanco-Mestizo
+
+A continuación se muestra el histograma de la diferencia de las mediciones LRM (pierna a 90° menos pierna estirada) de la étnia Blanco-Mestizo, además se muestra el box-plot de estas diferencias. Gráficamene, se observa que las diferencias no parecen estar alrededor de cero.
+
+```{r}
+#| layout-ncol: 2
+# Diferencias CM y A 
+bm <- datos[datos$Etnia=="Blanco-Mestizo",]
+LRM_dif <- bm$LRM_90 - bm$LRM_R
 
 # Como se ve graficamente, parece que no hay normalidad
-hist(talla_dif1)
-boxplot(talla_dif1) # hay muchos outliers
+hist(LRM_dif, freq = FALSE, main = 'Histograma de las la diferencia de mediciones LRT', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
+lines(density(LRM_dif), col = "red")
+abline(v = median(LRM_dif, na.rm = TRUE), col = "red", lty = 2)
+boxplot_dif <- boxplot(LRM_dif) # hay muchos outliers
 
-# Pruebas de normalidad
-## Test Shapiro-Wilk
-shapiro.test(talla_dif1) # Sí se tiene normalidad según el test de Shapiro-Wilks
-
-## Test lilliefors
-lillie.test(talla_dif1)
-
-# Prueba t para muestras pareadas
-t.test(talla_dif1, alternative = "two.sided", mu = 0)
 ```
 
-También da que la diferencia no es cero.
-
-## Talla real y estimación Benjumea (LRT) con antropómetro
-
-Primero se realiza el cálculo de la estimación de la talla utilizando las fórmulas de Benjumea que tienen en cuenta las variables Sexo, Edad, Etnia y longitud rodilla-talón con antropómetro. Hay que tener en cuenta que en la muestra hay un individuo cuya Etnia es "Rrom", para este individuo no existe una fórmula de Benjumea para estimar su talla, por lo que no se tuvo en cuenta para la evaluación de la hipótesis de que la media de la diferencia entre la estimación de la talla por medio de las fórmulas de Benjumea y la talla real es cero.
+Se aplica la prueba de normalidad de Lilliefors sobre las diferencias, y se obtiene *p-value = 0.0004169*, como es menor a 0.05, se concluye que las diferencias no parecen seguir una distribución normal. Por lo que, siguiendo con el procedimiento descrito al inicio, se debe realizar la prueba de simetría. 
 
 ```{r}
-# Estimaciones de la talla utilizando las fórmulas de Benjumea
-datos$benjumea_a <- ifelse(
-  datos$Sexo == "Masculino" & datos$Etnia == "Blanco-Mestizo",
-  75.514 + 1.883 * datos$LRT_A - 0.108 * datos$Edad,
-  ifelse(
-    datos$Sexo == "Femenino" & datos$Etnia == "Blanco-Mestizo",
-    86.497 + 1.553 * datos$LRT_A - 0.119 * datos$Edad,
-    ifelse(
-      datos$Sexo == "Masculino" & datos$Etnia == "Indigena",
-      82.695 + 1.745 * datos$LRT_A - 0.121 * datos$Edad,
-      ifelse(
-        datos$Sexo == "Femenino" & datos$Etnia == "Indigena",
-        90.281 + 1.436 * datos$LRT_A - 0.102 * datos$Edad,
-        ifelse(
-          datos$Sexo == "Masculino" & datos$Etnia == "Afrocolombiano",
-          79.298 + 1.855 * datos$LRT_A - 0.141 * datos$Edad,
-          ifelse(
-            datos$Sexo == "Femenino" & datos$Etnia == "Afrocolombiano",
-            76.233 + 1.767 * datos$LRT_A - 0.098 * datos$Edad,
-            NA # solo hay un NA que es el Rrom
-          )
-        )
-      )
-    )
-  )
-)
+lillie.test(LRM_dif)
 ```
 
-Como antes, se hizo un análisis visual a través de un box-plot, donde se observa que aparentemente no hay una diferencia entre la estimación de la talla con las fórmulas de Benjumea con antropómetro y la talla real. Sin embargo, es necesario realizar una prueba estadística formal para concluir.
+La prueba de simetría MIRA, muestra que las diferencias no son simétricas (*p-value = 0.015*), por lo que se decide realizar la transformación (aplicar logaritmo natural a LRM_90 y LRM_R) y repetir el procedimiento.
 
 ```{r}
-# Comparar benjumea y talla real
-boxplot(data.frame(datos$Talla, datos$benjumea_a))
+set.seed(123)
+symmetry_test(LRM_dif, "MI", mu = mean(LRM_dif))
 ```
 
-Se calculan las diferencias entre la talla real y la estimación de la talla con las fórmulas de Benjumea con antropómetro, luego, a estas diferencias se les aplica el test de Sahpiro-Wilk para normalidad y el test Lilliefors de normalidad, esto para decidir qué test utilizar para evaluar la media de las diferencias.
+Luego de aplicar la transformación, se calculan las diferencias. Se observa en el histograma y el box-plot que se logró corregir un poco la asimetría.
 
 ```{r}
-# Diferencias benjumea y talla real
-talla_dif <- datos$Talla - datos$benjumea_a
-talla_dif <- talla_dif[!is.na(talla_dif)]
+lLRM_R <- log(bm$LRM_R)
+lLRM_90 <- log(bm$LRM_90)
+```
+
+```{r}
+#| layout-ncol: 2
+lLRM_dif <- lLRM_90 - lLRM_R
+
+hist(lLRM_dif, freq = FALSE, main = 'Histograma de las la diferencias LRM_90 - LRM_R', ylab = 'Densidad', xlab = 'Diferencia (cm)')
+lines(density(lLRM_dif), col = "red")
+abline(v = mean(lLRM_dif, na.rm = TRUE), col = "red", lty = 2)
+boxplot_dif <- boxplot(lLRM_dif, main = "Boxplot de las diferencias LRM_90 - LRM_R")
+```
+
+La prueba de Lilliefors sobre las diferencias de los datos transformados, muestran que nuevamente las diferencias no presentan normalidad (*p-value = 0.03736*), por lo que se aplica de nuevo el test de simetría MIRA.
+
+```{r}
+lillie.test(lLRM_dif) 
+```
+
+Nuevamente, las diferencias no presentan simetría (*p-value = 0.028*), entonces se decide aplicar la prueba del signo.
+
+```{r}
+set.seed(123)
+symmetry_test(lLRM_dif, "MI", mu = mean(lLRM_dif))
+```
+
+La prueba del signo, dice que con un 95% de confianza, al obtener un *p-value < 2.2e-16*, parece que las diferencias no parecen tener media cero, es decir, las mediciones de LRM con la pierna a 90° **NO SON EQUIVALENTES** a las obtenidas con la pierna completamente esirada en la muestra con etnia Blanco-Mestizo.
+
+```{r}
+SIGN.test(lLRM_90, lLRM_R, paired = TRUE, alternative = "two.sided", conf.int = TRUE)
+```
+
+##### Afrocolombiano, indigenas, Rrom 
+
+A continuación se muestra el histograma de la diferencia de las mediciones LRM (pierna a 90° menos pierna estirada) de las otras etnias distintas a Blanco-Mestizo, además se muestra el box-plot de estas diferencias. Gráficamene, se observa que las diferencias no parecen estar alrededor de cero.
+
+Es importante tener en cuenta que dado que solo hay 15 individuos en este grupo, las pruebas tienden a ser más sensibles, por lo que los resultados pueden no ser muy confiables.
+
+```{r}
+#| layout-ncol: 2
+# Diferencias CM y A 
+nobm <- datos[datos$Etnia!="Blanco-Mestizo",]
+LRM_dif <- nobm$LRM_90 - nobm$LRM_R
+#length(LRM_dif)
 
 # Como se ve graficamente, parece que no hay normalidad
-hist(talla_dif)
-boxplot(talla_dif) # hay muchos outliers
-
-# Pruebas de normalidad
-## Test Shapiro-Wilk
-shapiro.test(talla_dif) # Sí se tiene normalidad según el test de Shapiro-Wilks
-
-## Test lilliefors
-lillie.test(talla_dif) # Sí se tiene normalidad según el test de Lilliefors
+hist(LRM_dif, freq = FALSE, main = 'Histograma de las la diferencia de mediciones LRT', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
+lines(density(LRM_dif), col = "red")
+abline(v = median(LRM_dif, na.rm = TRUE), col = "red", lty = 2)
+boxplot_dif <- boxplot(LRM_dif) # No hay outliers
 ```
 
-En ambos test, se obtiene un p-valor mayor a $0.05$, por lo que se afirma, que con una significancia del $5\%$, existe evidencia estadística de que las diferencias siguen una distribución normal, por lo tanto, para evaluar la media de las diferencias, se puede implementar una prueba $t$ para muestras pareadas.
+Se aplica la prueba de normalidad de Lilliefors sobre las diferencias, y se obtiene *p-value = 0.5996*, como es mayor a 0.05, se puede aplicar la prueba $t$.
 
 ```{r}
-# t.test(datos$Talla, datos$benjumea, alternative = "two.sided", mu = 0, paired = TRUE, na.action = na.omit)
-
-t.test(talla_dif, alternative = "two.sided", mu = 0)
+lillie.test(LRM_dif)
 ```
 
-Luego de aplicar la prueba $t$, con una significancia del $5\%$, existe evidencia estadística para rechazar la hipótesis nula ya que el p-valor es $4.103 \times 10^{-12}$, por lo tanto, se concluye que la media de las diferencias entre la talla real y la estimación con las fórmulas de Benjumea con antropómetro no es cero, luego, parece que las estimaciones no son cercanas a la talla real.
-
-El MSE del modelo de Benjumea sobre nuestros datos es el siguiente:
+La prueba de $t$, dice que con un 95% de confianza, al obtener un *p-value = 0.001057*, parece que las diferencias no parecen tener media cero, es decir, las mediciones de LRM con pierna a 90° **NO SON EQUIVALENTES** a las obtenidas con la pierna estirada en la muestra con etnia distinta a Blanco-Mestizo.
 
 ```{r}
-mean((datos$Talla - datos$benjumea_a)^2, na.rm = TRUE)
+t.test(nobm$LRM_90, nobm$LRM_R, paired = TRUE)
 ```
 
-### Sin los outliers
+### Conclusión LRM
 
-```{r}
-box_talla_dif <- boxplot(talla_dif) # hay muchos outliers
-outliers <- box_talla_dif$out
+::: {.callout-note}
 
-talla_dif1 <- talla_dif[!(talla_dif %in% outliers)]
+Los resultados al realizar el análisis por separado, no cambió. De modo que se concluye que las mediciones de LRM con pierna a 90° **NO SON EQUIVALENTES** a las obtenidas con la pierna completamente estirada.
 
-
-# Como se ve graficamente, parece que no hay normalidad
-hist(talla_dif1)
-boxplot(talla_dif1) # hay muchos outliers
-
-# Pruebas de normalidad
-## Test Shapiro-Wilk
-shapiro.test(talla_dif1) # Sí se tiene normalidad según el test de Shapiro-Wilks
-
-## Test lilliefors
-lillie.test(talla_dif1)
-
-# Prueba t para muestras pareadas
-t.test(talla_dif1, alternative = "two.sided", mu = 0)
-```
-
-También da que la diferencia no es cero.
-
-## Talla real y estimación Arango Zamor (LRM) a $90°$
-
-Primero se realiza el cálculo de la estimación de la talla utilizando las fórmulas de Arango y Zamora que tienen en cuenta las variables Sexo, Edad y longitud rodilla-maléolo a $90°$.
-
-```{r}
-# Estimaciones de la talla utilizando las fórmulas de Benjumea
-datos$arango_90 <- ifelse(
-  datos$Sexo == "Masculino",
-  119.6 + 1.121*datos$LRM_90 - 0.117*datos$Edad, 107.7 + 1.263*datos$LRM_90 - 0.159*datos$Edad)
-```
-
-Como antes, se hizo un análisis visual a través de un box-plot, donde se observa que aparentemente no hay una diferencia entre la estimación de la talla con las fórmulas de Arango y Zamora con la pierna a $90°$ y la talla real. Sin embargo, es necesario realizar una prueba estadística formal para concluir.
-
-```{r}
-# Comparar benjumea y talla real
-boxplot(data.frame(datos$Talla, datos$arango_90))
-```
-
-Se calculan las diferencias entre la talla real y la estimación de la talla con las fórmulas de Arango y Zamora con la pierna a $90°$, luego, a estas diferencias se les aplica el test de Sahpiro-Wilk para normalidad y el test Lilliefors de normalidad, esto para decidir qué test utilizar para evaluar la media de las diferencias.
-
-```{r}
-# Diferencias benjumea y talla real
-talla_dif <- datos$Talla - datos$arango_90
-
-# Como se ve graficamente, parece que no hay normalidad
-hist(talla_dif)
-boxplot(talla_dif) # hay muchos outliers
-
-# Pruebas de normalidad
-## Test Shapiro-Wilk
-shapiro.test(talla_dif) # Sí se tiene normalidad según el test de Shapiro-Wilks
-
-## Test lilliefors
-lillie.test(talla_dif) # Sí se tiene normalidad según el test de Lilliefors
-```
-
-En ambos test, se obtiene un p-valor mayor a $0.05$, por lo que se afirma, que con una significancia del $5\%$, existe evidencia estadística de que las diferencias siguen una distribución normal, por lo tanto, para evaluar la media de las diferencias, se puede implementar una prueba $t$ para muestras pareadas.
-
-```{r}
-# t.test(datos$Talla, datos$benjumea, alternative = "two.sided", mu = 0, paired = TRUE, na.action = na.omit)
-
-t.test(talla_dif, alternative = "two.sided", mu = 0)
-```
-
-Luego de aplicar la prueba $t$, con una significancia del $5\%$, existe evidencia estadística para rechazar la hipótesis nula ya que el p-valor es $9.685 \times 10^{-12}$, por lo tanto, se concluye que la media de las diferencias entre la talla real y la estimación con las fórmulas de Arango y Zamora con la pierna a $90°$ no es cero, luego, parece que las estimaciones no son cercanas a la talla real.
-
-El MSE del modelo de Arango y Zamora sobre nuestros datos es el siguiente:
-
-```{r}
-mean((datos$Talla - datos$arango_90)^2, na.rm = TRUE)
-```
-
-### Sin los outliers
-
-```{r}
-box_talla_dif <- boxplot(talla_dif) # hay muchos outliers
-outliers <- box_talla_dif$out
-
-talla_dif1 <- talla_dif[!(talla_dif %in% outliers)]
-
-
-# Como se ve graficamente, parece que no hay normalidad
-hist(talla_dif1)
-boxplot(talla_dif1) # hay muchos outliers
-
-# Pruebas de normalidad
-## Test Shapiro-Wilk
-shapiro.test(talla_dif1) # Sí se tiene normalidad según el test de Shapiro-Wilks
-
-## Test lilliefors
-lillie.test(talla_dif1)
-
-# Prueba t para muestras pareadas
-t.test(talla_dif1, alternative = "two.sided", mu = 0)
-```
-
-También da que la diferencia no es cero.
-
-## Talla real y estimación Arango Zamor (LRM) con la pierna estirada
-
-Primero se realiza el cálculo de la estimación de la talla utilizando las fórmulas de Arango y Zamora que tienen en cuenta las variables Sexo, Edad y longitud rodilla-maléolo con la pierna estirada.
-
-```{r}
-# Estimaciones de la talla utilizando las fórmulas de Benjumea
-datos$arango_r <- ifelse(
-  datos$Sexo == "Masculino",
-  119.6 + 1.121*datos$LRM_R - 0.117*datos$Edad, 107.7 + 1.263*datos$LRM_R - 0.159*datos$Edad)
-```
-
-Como antes, se hizo un análisis visual a través de un box-plot, donde se observa que aparentemente no hay una diferencia entre la estimación de la talla con las fórmulas de Arango y Zamora con la pierna estirada y la talla real. Sin embargo, es necesario realizar una prueba estadística formal para concluir.
-
-```{r}
-# Comparar benjumea y talla real
-boxplot(data.frame(datos$Talla, datos$arango_r))
-```
-
-Se calculan las diferencias entre la talla real y la estimación de la talla con las fórmulas de Arango y Zamora con la pierna a estirada, luego, a estas diferencias se les aplica el test de Sahpiro-Wilk para normalidad y el test Lilliefors de normalidad, esto para decidir qué test utilizar para evaluar la media de las diferencias.
-
-```{r}
-# Diferencias benjumea y talla real
-talla_dif <- datos$Talla - datos$arango_r
-
-# Como se ve graficamente, parece que no hay normalidad
-hist(talla_dif)
-boxplot(talla_dif) # hay muchos outliers
-
-# Pruebas de normalidad
-## Test Shapiro-Wilk
-shapiro.test(talla_dif) # Sí se tiene normalidad según el test de Shapiro-Wilks
-
-## Test lilliefors
-lillie.test(talla_dif) # Sí se tiene normalidad según el test de Lilliefors
-```
-
-En ambos test, se obtiene un p-valor mayor a $0.05$, por lo que se afirma, que con una significancia del $5\%$, existe evidencia estadística de que las diferencias siguen una distribución normal, por lo tanto, para evaluar la media de las diferencias, se puede implementar una prueba $t$ para muestras pareadas.
-
-```{r}
-# t.test(datos$Talla, datos$benjumea, alternative = "two.sided", mu = 0, paired = TRUE, na.action = na.omit)
-
-t.test(talla_dif, alternative = "two.sided", mu = 0)
-```
-
-Luego de aplicar la prueba $t$, con una significancia del $5\%$, existe evidencia estadística para rechazar la hipótesis nula ya que el p-valor es $2.2 \times 10^{-16}$, por lo tanto, se concluye que la media de las diferencias entre la talla real y la estimación con las fórmulas de Arango y Zamora con la pierna estirada no es cero, luego, parece que las estimaciones no son cercanas a la talla real.
-
-El MSE del modelo de Arango y Zamora sobre nuestros datos es el siguiente:
-
-```{r}
-mean((datos$Talla - datos$arango_r)^2, na.rm = TRUE)
-```
+:::

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -45,13 +45,7 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
+  "limit": 20,
   "language": {
     "search-no-results-text": "Ninguna coincidencia",
     "search-matching-documents-text": "coincidencias",
@@ -60,42 +54,14 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "",
     "search-label": "Search"
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -104,34 +70,34 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Inicio</span></a>
+    <a class="nav-link" href="./index.html" rel="" target="">
+ <span class="menu-text">Inicio</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./descriptivo.html"> 
-<span class="menu-text">Análisis descriptivo</span></a>
+    <a class="nav-link" href="./descriptivo.html" rel="" target="">
+ <span class="menu-text">Análisis descriptivo</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./hipotesis.html" aria-current="page"> 
-<span class="menu-text">Evaluación de hipótesis</span></a>
+    <a class="nav-link active" href="./hipotesis.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Evaluación de hipótesis</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./modelos.html"> 
-<span class="menu-text">Modelos</span></a>
+    <a class="nav-link" href="./modelos.html" rel="" target="">
+ <span class="menu-text">Modelos</span></a>
   </li>  
 </ul>
-          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
+          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -151,31 +117,19 @@ window.Quarto = {
   <li><a href="#análisis-por-separado" id="toc-análisis-por-separado" class="nav-link" data-scroll-target="#análisis-por-separado">Análisis por separado</a>
   <ul class="collapse">
   <li><a href="#por-sexo" id="toc-por-sexo" class="nav-link" data-scroll-target="#por-sexo">Por sexo</a></li>
-  <li><a href="#por-programa" id="toc-por-programa" class="nav-link" data-scroll-target="#por-programa">Por programa</a></li>
   <li><a href="#por-etnia" id="toc-por-etnia" class="nav-link" data-scroll-target="#por-etnia">Por etnia</a></li>
   </ul></li>
+  <li><a href="#conclusión-lrt" id="toc-conclusión-lrt" class="nav-link" data-scroll-target="#conclusión-lrt">Conclusión LRT</a></li>
   </ul></li>
   <li><a href="#longitud-rodilla-maléolo" id="toc-longitud-rodilla-maléolo" class="nav-link" data-scroll-target="#longitud-rodilla-maléolo">Longitud rodilla-maléolo</a>
   <ul class="collapse">
-  <li><a href="#análisis-discriminando-por-sexo" id="toc-análisis-discriminando-por-sexo" class="nav-link" data-scroll-target="#análisis-discriminando-por-sexo">Análisis discriminando por sexo</a>
+  <li><a href="#análisis-por-separado-1" id="toc-análisis-por-separado-1" class="nav-link" data-scroll-target="#análisis-por-separado-1">Análisis por separado</a>
   <ul class="collapse">
-  <li><a href="#masculino-1" id="toc-masculino-1" class="nav-link" data-scroll-target="#masculino-1">Masculino:</a></li>
-  <li><a href="#femenino-1" id="toc-femenino-1" class="nav-link" data-scroll-target="#femenino-1">Femenino:</a></li>
+  <li><a href="#por-sexo-1" id="toc-por-sexo-1" class="nav-link" data-scroll-target="#por-sexo-1">Por sexo</a></li>
+  <li><a href="#por-etnia-1" id="toc-por-etnia-1" class="nav-link" data-scroll-target="#por-etnia-1">Por etnia</a></li>
   </ul></li>
+  <li><a href="#conclusión-lrm" id="toc-conclusión-lrm" class="nav-link" data-scroll-target="#conclusión-lrm">Conclusión LRM</a></li>
   </ul></li>
-  <li><a href="#talla-real-y-estimación-benjumea-lrt-con-cinta-métrica" id="toc-talla-real-y-estimación-benjumea-lrt-con-cinta-métrica" class="nav-link" data-scroll-target="#talla-real-y-estimación-benjumea-lrt-con-cinta-métrica">Talla real y estimación Benjumea (LRT) con cinta métrica</a>
-  <ul class="collapse">
-  <li><a href="#sin-los-outliers" id="toc-sin-los-outliers" class="nav-link" data-scroll-target="#sin-los-outliers">Sin los outliers</a></li>
-  </ul></li>
-  <li><a href="#talla-real-y-estimación-benjumea-lrt-con-antropómetro" id="toc-talla-real-y-estimación-benjumea-lrt-con-antropómetro" class="nav-link" data-scroll-target="#talla-real-y-estimación-benjumea-lrt-con-antropómetro">Talla real y estimación Benjumea (LRT) con antropómetro</a>
-  <ul class="collapse">
-  <li><a href="#sin-los-outliers-1" id="toc-sin-los-outliers-1" class="nav-link" data-scroll-target="#sin-los-outliers-1">Sin los outliers</a></li>
-  </ul></li>
-  <li><a href="#talla-real-y-estimación-arango-zamor-lrm-a-90" id="toc-talla-real-y-estimación-arango-zamor-lrm-a-90" class="nav-link" data-scroll-target="#talla-real-y-estimación-arango-zamor-lrm-a-90">Talla real y estimación Arango Zamor (LRM) a <span class="math inline">\(90°\)</span></a>
-  <ul class="collapse">
-  <li><a href="#sin-los-outliers-2" id="toc-sin-los-outliers-2" class="nav-link" data-scroll-target="#sin-los-outliers-2">Sin los outliers</a></li>
-  </ul></li>
-  <li><a href="#talla-real-y-estimación-arango-zamor-lrm-con-la-pierna-estirada" id="toc-talla-real-y-estimación-arango-zamor-lrm-con-la-pierna-estirada" class="nav-link" data-scroll-target="#talla-real-y-estimación-arango-zamor-lrm-con-la-pierna-estirada">Talla real y estimación Arango Zamor (LRM) con la pierna estirada</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -185,58 +139,70 @@ window.Quarto = {
 
 
 
-
 <section id="hipótesis" class="level1">
 <h1>Hipótesis</h1>
 <section id="longitud-rodilla-talón" class="level2">
 <h2 class="anchored" data-anchor-id="longitud-rodilla-talón">Longitud rodilla-talón</h2>
 <p>Se quiere determinar si existe una diferencia significativa entre las mediciones realizadas con cinta métrica y con antropómetro medidas en los mismos individuos:</p>
 <p><span class="math display">\[ \begin{cases}
-H_0: \, \, \, \mu_{CM} - \mu_{A} = 0 \\
-H_1: \, \, \,  \mu_{CM} - \mu_{A} \neq 0
+H_0: \, \, \, \mu_{(CM - A)} = 0 \\
+H_1: \, \, \,  \mu_{(CM-A)} \neq 0
 \end{cases}\]</span></p>
-<p>Donde <span class="math inline">\(\mu_{CM}\)</span> representa la media de las mediciones realizadas con cinta métrica y <span class="math inline">\(\mu_{A}\)</span> representa la media de las mediciones realizadas con antropómetro.</p>
+<p>Donde <span class="math inline">\(CM-A\)</span> representa las diferencias entre las mediciones realizadas con cinta métrica y las mediciones realizadas con antropómetro, y <span class="math inline">\(\mu_{(CM - A)}\)</span> represneta la media de esas diferencias.</p>
 <p>Inicialmente se hace una comparación gráfica de ambas técnicas a través de un box-plot:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-</div>
-<p>Según el gráfico de cajas (boxplot), parece que existe diferencia entre las mediciones de la longitud desde la rodilla hasta el talón realizadas con cinta métrica y con antropómetro. Se evidencia que las mediciones realizadas con cinta métrica son en promedio superiores a las realizadas con antropómetro. Sin embargo, es necesario hacer una prueba estadística más formal. Para esto, se calculan las diferencias entre las mediciones de ambos métodos y se verifica si esas diferencias siguen una distribución normal para determinar qué prueba estadística es adecuada para la comparación.</p>
-<div>
-
-</div>
-<div class="cell quarto-layout-panel" data-layout-ncol="3">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p>Según el gráfico de cajas (box-plot), parece que existe diferencia entre las mediciones de la longitud desde la rodilla hasta el talón realizadas con cinta métrica y con antropómetro. Se evidencia que las mediciones realizadas con cinta métrica son en promedio superiores a las realizadas con antropómetro. Sin embargo, es necesario hacer una prueba estadística más formal. Para esto, se realizará el siguiente procedimiento:</p>
+<ol type="1">
+<li><p><strong>Cálculo de diferencias:</strong> Después de la transformación, se calculan las diferencias entre los valores LRT_CM y LRT_A.</p></li>
+<li><p><strong>Evaluación de normalidad:</strong> Se realiza un test de normalidad sobre estas diferencias. Si las diferencias pasan esta prueba, se aplica directamente la prueba <span class="math inline">\(t\)</span> para verificar si la media de las diferencias es igual a cero. Explícitamente el sistema de hipótesis de la prueba <span class="math inline">\(t\)</span> de muestras pareadas (para media de las diferencias), es:</p></li>
+</ol>
+<p><span class="math display">\[ \begin{cases}
+H_0: \textrm{La media de las diferencias es 0}\\
+H_1: \textrm{La media de las diferencias NO es 0}
+\end{cases}\]</span></p>
+<p>Es decir, que si NO se rechaza la hipótesis nula (<span class="math inline">\(H_0\)</span>), las mediciones de LRT con cinta métrica serían equivalentes a las mediciones de LRT con antropómetro. En caso de rechazarse, se debe seguir con el paso 3.</p>
+<ol start="3" type="1">
+<li><strong>Revisión de simetría:</strong> Si no pasan el test de normalidad, se evalúa si las diferencias son simétricas utilizando el test MIRA de asimetría. Si las diferencias resultan ser simétricas, entonces se utiliza el test de Wilcoxon para verificar si la media es igual a cero. Explícitamente el sistema de hipótesis de la prueba de simetría <span class="math inline">\(MIRA\)</span> es:</li>
+</ol>
+<p><span class="math display">\[ \begin{cases}
+H_0: \textrm{Los datos son simétricos}\\
+H_1: \textrm{Los datos NO son simétricos}
+\end{cases}\]</span></p>
+<p>Entonces, si NO se rechaza la hipótesis nula, las diferencias resultarían ser simétricas y por lo tanto se aplica el test de Wilcoxon cuyo sistema de hipótesis es</p>
+<p><span class="math display">\[ \begin{cases}
+H_0: \textrm{La media de las diferencias es 0}\\
+H_1: \textrm{La media de las diferencias NO es 0}
+\end{cases}\]</span></p>
+<p>Si NO se rechaza la hipótesis nula del test de Wilcoxon, entonces, si bien las diferencias no son de distribución normal, las mediciones de LRT con cinta métrica serían equivalentes a las mediciones de LRT con antropómetro. Si se rechaza la hipótesis nula de la prueba MIRA de asimetría, entonces no se puede aplicar el test de Wilcoxon, y por lanto se debe realizar el paso 4.</p>
+<ol start="4" type="1">
+<li><p><strong>Realizar una transformación</strong>: Si las diferencias no son simétricas, puede realizarse una transformación (aplicar logaritmo natural o raíz cuadrada) a las mediciones originales (LRT_A y LRT_CM). Luego, se repiten los pasos 1, 2 y 3 usando los datos transformados. Si al final, con esta transformación, no se cumplen los requisitos para aplicar la prueba <span class="math inline">\(t\)</span> o la de Wilcoxon, entonces, se continúa con el paso 5.</p></li>
+<li><p><strong>Última opción:</strong> Si las diferencias no son simétricas, finalmente se recurre al test del signo como última opción. Explícitamente, el sistema de hipótesis de la prueba del signo es:</p></li>
+</ol>
+<p><span class="math display">\[ \begin{cases}
+H_0: \textrm{La mediana de las diferencias es 0}\\
+H_1: \textrm{La mediana de las diferencias no es 0}
+\end{cases}\]</span></p>
+<p>Cumpliendo con el procedimiento descrito, primero se calculan las diferencias entre las mediciones de ambos métodos y se verifica si esas diferencias siguen una distribución normal para determinar qué prueba estadística es adecuada para la comparación.</p>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid" width="672"></p>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-4-3.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
-<p>A continuación se presentan los resultados de los test de Shapiro-Wilk y de Lilliefors para la diferencia de las mediciones LRT_CM y LRT_A:</p>
-<div>
-
-</div>
-<div class="cell quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<pre><code>
-    Shapiro-Wilk normality test
-
-data:  LRT_dif
-W = 0.89825, p-value &lt; 2.2e-16</code></pre>
-</div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<p>A continuación se presentan los resultados del test de normalidad de Lilliefors para la diferencia de las mediciones LRT_CM y LRT_A:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
 <pre><code>
     Lilliefors (Kolmogorov-Smirnov) normality test
 
@@ -244,71 +210,99 @@ data:  LRT_dif
 D = 0.1146, p-value &lt; 2.2e-16</code></pre>
 </div>
 </div>
+<p>Los resultados muestran un p-valor menor a <span class="math inline">\(0.05\)</span> (<em>resultado p-value &lt; 2.2e-16</em>). Esto significa que, con un nivel de confianza del <span class="math inline">\(95\%\)</span>, no podemos concluir que las diferencias entre las mediciones de rodilla - talón tomadas con una cinta métrica y con un antropómetro sigan una distribución normal, y por lo tanto no es posible usar la prueba t para muestras pareadas. Entonces, se debe realizar la prueba de asimetría.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Symmetry test
+    Null hypothesis: Data is symmetric around 1.42357274401473
+
+data:  LRT_dif
+MI = -3.1113, B = 1000, p-value = 0.003</code></pre>
 </div>
-<p>Los resultados de dos pruebas estadísticas, Shapiro-Wilk y Lilliefors, mostraron un p-valor menor a <span class="math inline">\(0.05\)</span>. Esto significa que, con un nivel de confianza del <span class="math inline">\(95\%\)</span>, no podemos concluir que las diferencias entre las mediciones de rodilla - talón tomadas con una cinta métrica y con un antropómetro sigan una distribución normal, y por lo tanto no es posible usar la prueba t para muestras pareadas. Por lo tanto, para analizar las diferencias en los promedios, es necesario usar un tipo de prueba que no dependa de suposiciones sobre la distribución de los datos.</p>
-<p>El siguiente paso es evaluar el sistema de hipótesis mediante una prueba no paramétrica: Test de Rangos con Signo de Wilcoxon. Las hipótesis en este caso no son las mismas expuestas anteriormente. El sistema de hipótesis en este caso es el siguiente:</p>
-<p><span class="math display">\[ \begin{cases}
-H_0: \textrm{La distribución de las diferencias es simétrica alrededor de 0}\\
-H_1: \textrm{La distribución de las diferencias no es simétrica alrededor de 0}
-\end{cases}\]</span></p>
-<p>La cuál es equivalente al siguiente sistema de hipótesis bajo <span class="math inline">\(H_0\)</span>:</p>
-<p><span class="math display">\[ \begin{cases}
-H_0: \textrm{La mediana de las diferencias es 0}\\
-H_1: \textrm{La mediana de las diferencias no es 0}
-\end{cases}\]</span></p>
-<p>A continuación se presenta el resultado del test:</p>
+</div>
+<p>Parece que las diferencias entre los valores no son simétricas (<em>resultado p-value = 0.003</em>). Esto significa que no se puede usar directamente el test de Wilcoxon. Dado que otra alternativa, el test del signo, es menos potente que el test de Wilcoxon, se intenta transformar los datos para que cumplan con el requisito de simetría y así poder aplicar Wilcoxon.</p>
+<p>De modo, que ahora, el procedimiento que se realiza a continuación es el siguiente:</p>
+<ol type="1">
+<li><p><strong>Transformación inicial:</strong> Primero, se aplica el logaritmo natural a los datos originales (LRT_A y LRT_CM).</p></li>
+<li><p><strong>Cálculo de diferencias:</strong> Después de la transformación, se calculan las diferencias entre los valores.</p></li>
+<li><p><strong>Evaluación de normalidad:</strong> Se realiza un test de normalidad sobre estas diferencias. Si las diferencias pasan esta prueba, se aplica directamente la prueba <span class="math inline">\(t\)</span> para verificar si la media de las diferencias es igual a cero.</p></li>
+<li><p><strong>Revisión de simetría:</strong> Si no pasan el test de normalidad, se evalúa si las diferencias son simétricas utilizando el test MIRA de asimetría. Si las diferencias resultan ser simétricas, entonces se utiliza el test de Wilcoxon para verificar si la media es igual a cero.</p></li>
+<li><p><strong>Última opción:</strong> Si las diferencias no son simétricas incluso después de la transformación con logaritmo natural, finalmente se recurre al test del signo como última opción.</p></li>
+</ol>
+<p>En resumen, este proceso busca ajustar los datos para que cumplan con los requisitos de pruebas estadísticas más precisas, garantizando resultados confiables. Sin embargo, si los datos no logran cumplir con los criterios necesarios, se utiliza un método alternativo, aunque menos potente.</p>
+<p>Como se explicó previamente, el primer paso consiste en transformar los datos originales usando el logaritmo natural.</p>
+<p>Después de esta transformación, se calculan las diferencias entre los valores transformados. Al observar el histograma de estas diferencias, se nota que la asimetría se ha reducido un poco. Sin embargo, visualmente parece que la media de las diferencias no es igual a cero. Para confirmar esto, seguimos el procedimiento previamente mencionado.</p>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<p>Primero, se aplica el test de normalidad de Lilliefors. Este test evalúa si las diferencias siguen una distribución normal. En este caso, el p-valor obtenido es menor a 0.05 (<em>resultado p-value = 1.683e-10</em>), lo que indica que las diferencias no siguen una distribución normal. Por lo tanto, no se puede utilizar la prueba t para verificar si la media de las diferencias es igual a cero.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Lilliefors (Kolmogorov-Smirnov) normality test
+
+data:  lLRT_dif
+D = 0.086854, p-value = 1.683e-10</code></pre>
+</div>
+</div>
+<p>A continuación, se realiza la prueba MIRA de simetría, que nos ayuda a decidir entre utilizar el test de Wilcoxon o el test del signo. Gracias a la transformación, las diferencias ahora pasan el test de simetría (<em>resultado p-value = 0.234</em>). Esto significa que las diferencias tienen una distribución simétrica, lo que permite aplicar el test de Wilcoxon.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Symmetry test
+    Null hypothesis: Data is symmetric around 0.0298703213502291
+
+data:  lLRT_dif
+MI = -1.1297, B = 1000, p-value = 0.234</code></pre>
+</div>
+</div>
+<p>Finalmente, se realiza la prueba de Wilcoxon para determinar si la media de las diferencias es igual a cero, lo que equivaldría a decir que las mediciones con cinta métrica (LRT_CM) son iguales a las realizadas con el antropómetro (LRT_A).</p>
+<p>El test de Wilcoxon arroja un p-valor menor a 0.05 (<em>resultado p-value &lt; 2.2e-16</em>). Esto significa que, con un 95% de confianza, hay evidencia estadística para afirmar que la media de las diferencias no es igual a cero. En otras palabras, las mediciones realizadas con cinta métrica <strong>NO SON EQUIVALENTES</strong> a las realizadas con el antropómetro.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Wilcoxon signed rank test with continuity correction
 
-data:  datos$LRT_CM and datos$LRT_A
-V = 144691, p-value &lt; 2.2e-16
+data:  lLRT_CM and lLRT_A
+V = 144597, p-value &lt; 2.2e-16
 alternative hypothesis: true location shift is not equal to 0
 95 percent confidence interval:
- 1.425063 1.525013
+ 0.02960577 0.03191015
 sample estimates:
 (pseudo)median 
-      1.475033 </code></pre>
+    0.03074324 </code></pre>
 </div>
 </div>
-<p>El resultado del Test de Rangos con Signo de Wilcoxon mostró un p-valor de <span class="math inline">\(2.2 \times 10^{-16}\)</span>, lo que indica que en este caso con una confianza del <span class="math inline">\(95\%\)</span> se rechaza la hipótesis nula de que la distribición de las diferencias sea simétrica alrededor de 0. Se concluye que las mediciones de la longitud rodilla - talón hechas con la cinta métrica son significativamente diferentes a las obtenidas con el antropómetro.</p>
-<!-- ```{r} -->
-<!-- sina <- LRT_dif[-which(LRT_dif %in% boxplot_dif$out)] -->
-<!-- wilcox.test(sina, alternative = "two.sided", conf.int = TRUE) -->
-<!-- ``` -->
 <section id="análisis-por-separado" class="level3">
 <h3 class="anchored" data-anchor-id="análisis-por-separado">Análisis por separado</h3>
 <section id="por-sexo" class="level4">
 <h4 class="anchored" data-anchor-id="por-sexo">Por sexo</h4>
+<p>Se realiza un análisis separado por sexo debido a que, generalmente, las características anatómicas hacen que la talla promedio sea mayor en hombres que en mujeres. Por esta razón, se decide llevar a cabo un análisis de las pruebas de hipótesis diferenciando por sexo.</p>
+<p>Este análisis tiene un propósito exclusivamente exploratorio: se busca determinar si los resultados obtenidos al analizar ambos sexos por separado difieren de aquellos obtenidos al analizar los datos combinados.</p>
 <section id="masculino" class="level5">
 <h5 class="anchored" data-anchor-id="masculino">Masculino:</h5>
-<div>
-
+<p>A continuación se muestra el histograma de la diferencia de las mediciones LRT (cinta métrica menos antropómetro) del sexo masculino, además se muestra el box-plot de estas diferencias. Gráficamene, se observa que las diferencias no parecen estar alrededor de cero.</p>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid" width="672"></p>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
-<div>
-
-</div>
-<div class="cell quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<pre><code>
-    Shapiro-Wilk normality test
-
-data:  LRT_dif
-W = 0.86608, p-value = 1.295e-14</code></pre>
-</div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<p>Se aplica la prueba de normalidad de Lilliefors sobre las diferencias, y se obtiene <em>p-value = 1.301e-11</em>, como es menor a 0.05, se concluye que las diferencias no parecen seguir una distribución normal. Por lo que, siguiendo con el procedimiento descrito al inicio, se debe realizar la prueba de simetría.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
 <pre><code>
     Lilliefors (Kolmogorov-Smirnov) normality test
 
@@ -316,50 +310,81 @@ data:  LRT_dif
 D = 0.12805, p-value = 1.301e-11</code></pre>
 </div>
 </div>
-</div>
-<p>Los resultados de dos pruebas estadísticas, Shapiro-Wilk y Lilliefors, mostraron un valor menor a 0.05. Esto significa que, con un nivel de confianza del 95%, no podemos decir que las diferencias entre las mediciones de rodilla-talón tomadas con una cinta métrica y con un antropómetro en los adultos mayores de sexo masculino sigan una distribución normal.</p>
+<p>La prueba de simetría MIRA, muestra que las diferencias no son simétricas, por lo que se decide realizar la transformación (aplicar logaritmo natural a LRT_A y LRT_CM) y repetir el procedimiento.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    One-sample Sign-Test
+    Symmetry test
+    Null hypothesis: Data is symmetric around 1.21180811808118
 
 data:  LRT_dif
-s = 256, p-value &lt; 2.2e-16
-alternative hypothesis: true median is not equal to 0
+MI = -2.5266, B = 1000, p-value = 0.013</code></pre>
+</div>
+</div>
+<p>Luego de aplicar la transformación, se calculan las diferencias. Se observa en el histograma y el box-plot que se logró corregir un poco la asimetría.</p>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-16-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<p>La prueba de Lilliefors sobre las diferencias de los datos transformados, muestran que nuevamente las diferencias no presentan normalidad, por lo que se aplica de nuevo el test de simetría MIRA.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Lilliefors (Kolmogorov-Smirnov) normality test
+
+data:  lLRT_dif
+D = 0.12771, p-value = 1.513e-11</code></pre>
+</div>
+</div>
+<p>Esta vez, las diferencias sí presentan simetría, entonces se decide aplicar la prueba de Wilcoxon.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Symmetry test
+    Null hypothesis: Data is symmetric around 0.0239790446800956
+
+data:  lLRT_dif
+MI = -1.8983, B = 1000, p-value = 0.062</code></pre>
+</div>
+</div>
+<p>La prueba de Wilcoxon, dice que con un 95% de confianza, al obtener un <em>p-value &lt; 2.2e-16</em>, parece que las diferencias no parecen tener media cero, es decir, las mediciones de LRT con cinta métrica <strong>NO SON EQUIVALENTES</strong> a las obtenidas con antropómetro en la muestra con sexo masculino.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon signed rank test with continuity correction
+
+data:  lLRT_CM and lLRT_A
+V = 35452, p-value &lt; 2.2e-16
+alternative hypothesis: true location shift is not equal to 0
 95 percent confidence interval:
- 1.20 1.35
+ 0.02388739 0.02663020
 sample estimates:
-median of x 
-        1.3 
-
-Achieved and Interpolated Confidence Intervals: 
-
-                  Conf.Level L.E.pt U.E.pt
-Lower Achieved CI     0.9483    1.2   1.35
-Interpolated CI       0.9500    1.2   1.35
-Upper Achieved CI     0.9613    1.2   1.35</code></pre>
+(pseudo)median 
+    0.02525077 </code></pre>
 </div>
 </div>
-<p>Nuevamente, las diferencias entre las mediciones no son simétricas ya que el coeficiente de asimetría fue de -1.69. Por eso, se decidió usar la prueba del signo para muestras pareadas para evaluar la mediana de las diferencias.</p>
-<p>El resultado de la prueba del signo mostró un p-valor de <span class="math inline">\(2.2 \times 10^{-16}\)</span>, así que nuevamente se rechazó la hipótesis de igualdad de medianas. Esto significa que las mediciones de la longitud rodilla-talón hechas con la cinta métrica no son equivalentes a las obtenidas con el antropómetro, en los adultos mayores de sexo masculino.</p>
 </section>
 <section id="femenino" class="level5">
 <h5 class="anchored" data-anchor-id="femenino">Femenino:</h5>
+<p>A continuación se muestra el histograma de la diferencia de las mediciones LRT (cinta métrica menos antropómetro) del sexo femenino, además se muestra el box-plot de estas diferencias. Gráficamene, se observa que las diferencias no parecen estar alrededor de cero.</p>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-20-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<p>Se aplica la prueba de normalidad de Lilliefors sobre las diferencias, y se obtiene <em>p-value = 1.024e-09</em>, como es menor a 0.05, se concluye que las diferencias no parecen seguir una distribución normal. Por lo que, siguiendo con el procedimiento descrito al inicio, se debe realizar la prueba de simetría.</p>
 <div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Shapiro-Wilk normality test
-
-data:  LRT_dif
-W = 0.90005, p-value = 1.923e-12</code></pre>
-</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Lilliefors (Kolmogorov-Smirnov) normality test
@@ -368,154 +393,54 @@ data:  LRT_dif
 D = 0.11747, p-value = 1.024e-09</code></pre>
 </div>
 </div>
-<p>Los resultados de dos pruebas estadísticas, Shapiro-Wilk y Lilliefors, mostraron un valor menor a 0.05. Esto significa que, con un nivel de confianza del 95%, no podemos decir que las diferencias entre las mediciones de rodilla-talón tomadas con una cinta métrica y con un antropómetro en las mujeres mayores sigan una distribución normal.</p>
+<p>La prueba de simetría MIRA, muestra que las diferencias son simétricas, por lo que puede aplicarse la prueba Wilcoxon de una vez.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    m-out-of-n bootstrap symmetry test by Miao, Gel, and Gastwirth (2006)
+    Symmetry test
+    Null hypothesis: Data is symmetric around 1.63455882352941
 
 data:  LRT_dif
-Test statistic = -2.3739, p-value = 0.032
-alternative hypothesis: the distribution is asymmetric.
-sample estimates:
-bootstrap optimal m 
-                 52 </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0</code></pre>
+MI = -2.0377, B = 1000, p-value = 0.06</code></pre>
 </div>
 </div>
-<p>Probrando la simetría de las diferencias, se obtuvo un valor p mayor que 0.05, por lo que no hay suficiente evidencia para rechazar la hipótesis de simetría, lo que sugiere que podemos aplicar una prueba no paramétrica como Wilcoxon.</p>
+<p>La prueba de Wilcoxon, dice que con un 95% de confianza, al obtener un <em>p-value &lt; 2.2e-16</em>, parece que las diferencias no parecen tener media cero, es decir, las mediciones de LRT con cinta métrica <strong>NO SON EQUIVALENTES</strong> a las obtenidas con antropómetro en la muestra con sexo femenino.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Wilcoxon signed rank test with continuity correction
 
-data:  LRT_dif
+data:  mujeres$LRT_CM and mujeres$LRT_A
 V = 36889, p-value &lt; 2.2e-16
-alternative hypothesis: true location is not equal to 0</code></pre>
-</div>
-</div>
-<p>El resultado de la prueba de Wilcoxon mostró un p-valor de <span class="math inline">\(2.2 \times 10^{-16}\)</span>, lo que indica que rechazamos la hipótesis de igualdad de medias. Esto significa que las mediciones de la longitud rodilla-talón hechas con la cinta métrica no son equivalentes a las obtenidas con el antropómetro, en las mujeres mayores.</p>
-</section>
-</section>
-<section id="por-programa" class="level4">
-<h4 class="anchored" data-anchor-id="por-programa">Por programa</h4>
-<section id="centro-día" class="level5">
-<h5 class="anchored" data-anchor-id="centro-día">Centro día:</h5>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Shapiro-Wilk normality test
-
-data:  LRT_dif
-W = 0.933, p-value = 4.084e-12</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Lilliefors (Kolmogorov-Smirnov) normality test
-
-data:  LRT_dif
-D = 0.091824, p-value = 2.969e-08</code></pre>
-</div>
-</div>
-<p>Los resultados de dos pruebas estadísticas, Shapiro-Wilk y Lilliefors, mostraron un valor menor a 0.05. Esto significa que, con un nivel de confianza del 95%, no podemos decir que las diferencias entre las mediciones de rodilla-talón tomadas con una cinta métrica y con un antropómetro en los adultos mayores del centro día sigan una distribución normal.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4.440892e-16</code></pre>
-</div>
-</div>
-<p>Probrando la simetría de las diferencias, se obtuvo un valor p mayor que 0.05, por lo que no hay suficiente evidencia para rechazar la hipótesis de simetría, lo que sugiere que la distribución de las diferencias es lo suficientemente simétrica como para aplicar una prueba no paramétrica como Wilcoxon.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Wilcoxon signed rank test with continuity correction
-
-data:  LRT_dif
-V = 72907, p-value &lt; 2.2e-16
-alternative hypothesis: true location is not equal to 0</code></pre>
-</div>
-</div>
-<p>El resultado de la prueba del signo mostró un p-valor de <span class="math inline">\(2.2 \times 10^{-16}\)</span>, lo que indica que en este caso rechazamos la igualdad de medianas. Esto significa que las mediciones de la longitud rodilla-talón hechas con la cinta métrica no son equivalentes a las obtenidas con el antropómetro en los adultos mayores del centro día.</p>
-</section>
-<section id="comunidad-de-cuidado" class="level5">
-<h5 class="anchored" data-anchor-id="comunidad-de-cuidado">Comunidad de cuidado</h5>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Shapiro-Wilk normality test
-
-data:  LRT_dif
-W = 0.8272, p-value = 1.989e-12</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Lilliefors (Kolmogorov-Smirnov) normality test
-
-data:  LRT_dif
-D = 0.17872, p-value = 1.606e-13</code></pre>
-</div>
-</div>
-<p>Los resultados de dos pruebas estadísticas, Shapiro-Wilk y Lilliefors, mostraron un valor menor a 0.05. Esto significa que, con un nivel de confianza del 95%, no podemos decir que las diferencias entre las mediciones de rodilla-talón tomadas con una cinta métrica y con un antropómetro en los adultos mayores de las comunidades de cuidado sigan una distribución normal.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    One-sample Sign-Test
-
-data:  LRT_dif
-s = 149, p-value &lt; 2.2e-16
-alternative hypothesis: true median is not equal to 0
+alternative hypothesis: true location shift is not equal to 0
 95 percent confidence interval:
- 1.45 1.65
+ 1.600065 1.749996
 sample estimates:
-median of x 
-       1.55 
-
-Achieved and Interpolated Confidence Intervals: 
-
-                  Conf.Level L.E.pt U.E.pt
-Lower Achieved CI     0.9433   1.45   1.65
-Interpolated CI       0.9500   1.45   1.65
-Upper Achieved CI     0.9611   1.45   1.65</code></pre>
+(pseudo)median 
+      1.675005 </code></pre>
 </div>
 </div>
-<p>Nuevamente, la diferencia entre las mediciones no son simétricas ya que el coeficiente de asimetría fue de -1.64. Por eso, se decidió usar la prueba del signo para muestras pareadas para evaluar la mediana de las diferencias.</p>
-<p>El resultado de la prueba del signo mostró un p-valor de <span class="math inline">\(2.2 \times 10^{-16}\)</span>, lo que indica que en este caso rechazamos la igualdad de medianas. Esto significa que las mediciones de la longitud rodilla-talón hechas con la cinta métrica no son equivalentes a las obtenidas con el antropómetro en los adultos mayores de las comunidades de cuidado.</p>
 </section>
 </section>
 <section id="por-etnia" class="level4">
 <h4 class="anchored" data-anchor-id="por-etnia">Por etnia</h4>
+<p>Se realiza un análisis separado por etnia debido a que, se cree que, las características anatómicas hacen que la talla promedio sea mayor en ciertas etnias. Por esta razón, se decide llevar a cabo un análisis de las pruebas de hipótesis diferenciando por etnia.</p>
+<p>Este análisis tiene un propósito exclusivamente exploratorio: se busca determinar si los resultados obtenidos al analizar las etnias por separado difieren de aquellos obtenidos al analizar los datos combinados. Sin embargo, dado que únicamente 15 de los 543 individuos con los que se realiza el análisis tienen una etnia distinta a Blanco-Mestizo, se realiza el análisis para el grupo Blanco-Mestizo y para otro grupo que reune las otras etnias.</p>
 <section id="blanco-mestizo" class="level5">
 <h5 class="anchored" data-anchor-id="blanco-mestizo">Blanco-Mestizo</h5>
+<p>A continuación se muestra el histograma de la diferencia de las mediciones LRT (cinta métrica menos antropómetro) de la etnia Blanco-Mestizo, además se muestra el box-plot de estas diferencias. Gráficamene, se observa que las diferencias no parecen estar alrededor de cero.</p>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-24-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<p>Se aplica la prueba de normalidad de Lilliefors sobre las diferencias, y se obtiene <em>p-value &lt; 2.2e-16</em>, como es menor a 0.05, se concluye que las diferencias no parecen seguir una distribución normal. Por lo que, siguiendo con el procedimiento descrito al inicio, se debe realizar la prueba de simetría.</p>
 <div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Shapiro-Wilk normality test
-
-data:  LRT_dif
-W = 0.89793, p-value &lt; 2.2e-16</code></pre>
-</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Lilliefors (Kolmogorov-Smirnov) normality test
@@ -524,49 +449,82 @@ data:  LRT_dif
 D = 0.11628, p-value &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<p>Los resultados de dos pruebas estadísticas, Shapiro-Wilk y Lilliefors, mostraron un valor menor a 0.05. Esto significa que, con un nivel de confianza del 95%, no podemos decir que las diferencias entre las mediciones de rodilla-talón tomadas con una cinta métrica y con un antropómetro en los adultos mayores Blancos-Mestizos sigan una distribución normal.</p>
+<p>La prueba de simetría MIRA, muestra que las diferencias no son simétricas (<em>p-value = 0.003</em>), por lo que se decide realizar la transformación (aplicar logaritmo natural a LRT_A y LRT_CM) y repetir el procedimiento.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    One-sample Sign-Test
+    Symmetry test
+    Null hypothesis: Data is symmetric around 1.4241054613936
 
 data:  LRT_dif
-s = 508, p-value &lt; 2.2e-16
-alternative hypothesis: true median is not equal to 0
+MI = -3.0445, B = 1000, p-value = 0.003</code></pre>
+</div>
+</div>
+<p>Luego de aplicar la transformación, se calculan las diferencias. Se observa en el histograma y el box-plot que se logró corregir un poco la asimetría.</p>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-28-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<p>La prueba de Lilliefors sobre las diferencias de los datos transformados, muestran que nuevamente las diferencias no presentan normalidad (<em>p-value = 8e-10</em>), por lo que se aplica de nuevo el test de simetría MIRA.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Lilliefors (Kolmogorov-Smirnov) normality test
+
+data:  lLRT_dif
+D = 0.085082, p-value = 8e-10</code></pre>
+</div>
+</div>
+<p>Esta vez, las diferencias sí presentan simetría (<em>p-value = 0.127</em>), entonces se decide aplicar la prueba de Wilcoxon.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Symmetry test
+    Null hypothesis: Data is symmetric around 0.0299199911217839
+
+data:  lLRT_dif
+MI = -1.4559, B = 1000, p-value = 0.127</code></pre>
+</div>
+</div>
+<p>La prueba de Wilcoxon, dice que con un 95% de confianza, al obtener un <em>p-value &lt; 2.2e-16</em>, parece que las diferencias no parecen tener media cero, es decir, las mediciones de LRT con cinta métrica <strong>NO SON EQUIVALENTES</strong> a las obtenidas con antropómetro en la muestra con etnia Blanco-Mestizo.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon signed rank test with continuity correction
+
+data:  lLRT_CM and lLRT_A
+V = 138219, p-value &lt; 2.2e-16
+alternative hypothesis: true location shift is not equal to 0
 95 percent confidence interval:
- 1.40 1.55
+ 0.02967430 0.03202752
 sample estimates:
-median of x 
-        1.5 
-
-Achieved and Interpolated Confidence Intervals: 
-
-                  Conf.Level L.E.pt U.E.pt
-Lower Achieved CI     0.9439    1.4   1.55
-Interpolated CI       0.9500    1.4   1.55
-Upper Achieved CI     0.9542    1.4   1.55</code></pre>
+(pseudo)median 
+    0.03083636 </code></pre>
 </div>
 </div>
-<p>Las diferencias entre las mediciones no son simétricas ya que el coeficiente de asimetría fue de -0.78. Por eso, se decidió usar la prueba del signo para muestras pareadas para evaluar la mediana de las diferencias.</p>
-<p>El resultado de la prueba del signo mostró un p-valor de <span class="math inline">\(2.2 \times 10^{-16}\)</span>, lo que indica que en este caso rechazamos la igualdad de medianas. Esto significa que las mediciones de la longitud rodilla-talón hechas con la cinta métrica no son equivalentes a las obtenidas con el antropómetro en los adultos mayores Blancos-Mestizos.</p>
 </section>
 <section id="afrocolombiano-indigenas-rrom" class="level5">
 <h5 class="anchored" data-anchor-id="afrocolombiano-indigenas-rrom">Afrocolombiano, indigenas, Rrom</h5>
+<p>A continuación se muestra el histograma de la diferencia de las mediciones LRT (cinta métrica menos antropómetro) de las otras etnias distintas a Blanco-Mestizo, además se muestra el box-plot de estas diferencias. Gráficamene, se observa que las diferencias no parecen estar alrededor de cero.</p>
+<p>Es importante tener en cuenta que dado que solo hay 15 individuos en este grupo, las pruebas tienden a ser más sensibles, por lo que los resultados pueden no ser muy confiables.</p>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-32-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<p>Se aplica la prueba de normalidad de Lilliefors sobre las diferencias, y se obtiene <em>p-value = 0.02858</em>, como es menor a 0.05, se concluye que las diferencias no parecen seguir una distribución normal. Por lo que, siguiendo con el procedimiento descrito al inicio, se debe realizar la prueba de simetría.</p>
 <div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Shapiro-Wilk normality test
-
-data:  LRT_dif
-W = 0.89611, p-value = 0.1413</code></pre>
-</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Lilliefors (Kolmogorov-Smirnov) normality test
@@ -575,49 +533,51 @@ data:  LRT_dif
 D = 0.25624, p-value = 0.02858</code></pre>
 </div>
 </div>
-<p>Uno de los resultados de las pruebas estadísticas, Shapiro-Wilk y Lilliefors, mostró un valor menor a 0.05 y la otra un valor mayor. Dado que de estas etnias solo hay 12 adultos mayores, las pruebas son más sensibles y pueden dar resultados menos confiables. Por esa razón, se va a evaluar la simetría de las diferencias para no realizar la prueba que asume normalidad.</p>
+<p>La prueba de simetría MIRA, muestra que las diferencias sí son simétricas (<em>p-value = 0.25</em>), por lo que se decide aplicar el test de Wilcoxon.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1925247</code></pre>
+<pre><code>
+    Symmetry test
+    Null hypothesis: Data is symmetric around 1.4
+
+data:  LRT_dif
+MI = 1.1489, B = 1000, p-value = 0.25</code></pre>
 </div>
 </div>
-<p>Probrando la simetría de las diferencias, se obtuvo un valor p mayor que 0.05, por lo que no hay suficiente evidencia para rechazar la hipótesis de simetría, lo que sugiere que la distribución de las diferencias es lo suficientemente simétrica como para aplicar una prueba no paramétrica como Wilcoxon.</p>
+<p>La prueba de Wilcoxon, dice que con un 95% de confianza, al obtener un <em>p-value = 0.002516</em>, parece que las diferencias no parecen tener media cero, es decir, las mediciones de LRT con cinta métrica <strong>NO SON EQUIVALENTES</strong> a las obtenidas con antropómetro en la muestra con etnia distinta a Blanco-Mestizo.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Wilcoxon signed rank test with continuity correction
 
-data:  LRT_dif
+data:  nobm$LRT_CM and nobm$LRT_A
 V = 78, p-value = 0.002516
-alternative hypothesis: true location is not equal to 0</code></pre>
-</div>
-</div>
-<p>El resultado de la prueba de Wilcoxon mostró un p-valor menor a 0.5, lo que indica que hay suficiente evidencia estadística para rechazar la idea de que la mediana de las diferencias es igual a cero. Sin embargo, la prueba no puede calcular el p-valor exacto debido a la presencia de valores repetidos en las diferencias, por lo que se va a realizar el test del signo.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    One-sample Sign-Test
-
-data:  LRT_dif
-s = 12, p-value = 0.0004883
-alternative hypothesis: true median is not equal to 0
+alternative hypothesis: true location shift is not equal to 0
 95 percent confidence interval:
- 1.060636 1.700000
+ 1.100007 1.724937
 sample estimates:
-median of x 
-      1.275 
-
-Achieved and Interpolated Confidence Intervals: 
-
-                  Conf.Level L.E.pt U.E.pt
-Lower Achieved CI     0.8540 1.1500    1.7
-Interpolated CI       0.9500 1.0606    1.7
-Upper Achieved CI     0.9614 1.0500    1.7</code></pre>
+(pseudo)median 
+       1.37495 </code></pre>
 </div>
 </div>
-<p>El resultado de la prueba del signo mostró un p-valor menor a 0.5, lo que indica que hay suficiente evidencia estadística para rechazar la idea de que la mediana de las diferencias es igual a cero. Esto significa que las mediciones de la longitud rodilla-talón hechas con la cinta métrica no son equivalentes a las obtenidas con el antropómetro, en los adultos mayores afrocolombiano, indigenas o Rrom.</p>
 </section>
 </section>
+</section>
+<section id="conclusión-lrt" class="level3">
+<h3 class="anchored" data-anchor-id="conclusión-lrt">Conclusión LRT</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Los resultados al realizar el análisis por separado, no cambió. De modo que se concluye que las mediciones de LRT con cinta métrica <strong>NO SON EQUIVALENTES</strong> a las obtenidas con antropómetro.</p>
+</div>
+</div>
 </section>
 </section>
 <section id="longitud-rodilla-maléolo" class="level2">
@@ -625,11 +585,7 @@ Upper Achieved CI     0.9614 1.0500    1.7</code></pre>
 <p>Inicialmente se hace una comparación gráfica de ambas técnicas a través de un box-plot:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Según el boxplot, se puede observar que podría existir una leve diferencia entre las distribuciones de las mediciones de la longitud rodilla maléolo con la pierna a 90° y con la pierna completamente estirada. Sin embargo, es necesario realizar una prueba estadística formal. Inicalmente se calculan las diferencias entre ambos métodos y se les aplica un test de normalidad para elegir qué prueba utilizar para evaluar la hipótesis nula de que la medición longitud rodilla-maléolo con la pierna completamente estirada es igual a la medición de la longitud rodilla-maléolo con la pierna a <span class="math inline">\(90°\)</span>.</p>
@@ -640,37 +596,34 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
 <p>donde <span class="math inline">\(\theta_X\)</span> es una medida de tendencia central de las mediciones realizadas con la pierna recta y <span class="math inline">\(\theta_Y\)</span> es la misma medida de tendencia central para las mediciones con la pierna a 90°.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Tenemos estos datos atípicos.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="jvwutxuobq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+
+<div id="bdjygtozge" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#jvwutxuobq table {
+#bdjygtozge table {
   font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#jvwutxuobq thead, #jvwutxuobq tbody, #jvwutxuobq tfoot, #jvwutxuobq tr, #jvwutxuobq td, #jvwutxuobq th {
+#bdjygtozge thead, #bdjygtozge tbody, #bdjygtozge tfoot, #bdjygtozge tr, #bdjygtozge td, #bdjygtozge th {
   border-style: none;
 }
 
-#jvwutxuobq p {
+#bdjygtozge p {
   margin: 0;
   padding: 0;
 }
 
-#jvwutxuobq .gt_table {
+#bdjygtozge .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -696,12 +649,12 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-left-color: #D3D3D3;
 }
 
-#jvwutxuobq .gt_caption {
+#bdjygtozge .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#jvwutxuobq .gt_title {
+#bdjygtozge .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -713,7 +666,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-bottom-width: 0;
 }
 
-#jvwutxuobq .gt_subtitle {
+#bdjygtozge .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -725,7 +678,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-top-width: 0;
 }
 
-#jvwutxuobq .gt_heading {
+#bdjygtozge .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -737,13 +690,13 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-right-color: #D3D3D3;
 }
 
-#jvwutxuobq .gt_bottom_border {
+#bdjygtozge .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jvwutxuobq .gt_col_headings {
+#bdjygtozge .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -758,7 +711,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-right-color: #D3D3D3;
 }
 
-#jvwutxuobq .gt_col_heading {
+#bdjygtozge .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -778,7 +731,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   overflow-x: hidden;
 }
 
-#jvwutxuobq .gt_column_spanner_outer {
+#bdjygtozge .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -790,15 +743,15 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   padding-right: 4px;
 }
 
-#jvwutxuobq .gt_column_spanner_outer:first-child {
+#bdjygtozge .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jvwutxuobq .gt_column_spanner_outer:last-child {
+#bdjygtozge .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jvwutxuobq .gt_column_spanner {
+#bdjygtozge .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -810,11 +763,11 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   width: 100%;
 }
 
-#jvwutxuobq .gt_spanner_row {
+#bdjygtozge .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#jvwutxuobq .gt_group_heading {
+#bdjygtozge .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -840,7 +793,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   text-align: left;
 }
 
-#jvwutxuobq .gt_empty_group_heading {
+#bdjygtozge .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -855,15 +808,15 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   vertical-align: middle;
 }
 
-#jvwutxuobq .gt_from_md > :first-child {
+#bdjygtozge .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jvwutxuobq .gt_from_md > :last-child {
+#bdjygtozge .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jvwutxuobq .gt_row {
+#bdjygtozge .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -882,7 +835,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   overflow-x: hidden;
 }
 
-#jvwutxuobq .gt_stub {
+#bdjygtozge .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -895,7 +848,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   padding-right: 5px;
 }
 
-#jvwutxuobq .gt_stub_row_group {
+#bdjygtozge .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -909,15 +862,15 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   vertical-align: top;
 }
 
-#jvwutxuobq .gt_row_group_first td {
+#bdjygtozge .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jvwutxuobq .gt_row_group_first th {
+#bdjygtozge .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#jvwutxuobq .gt_summary_row {
+#bdjygtozge .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -927,16 +880,16 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   padding-right: 5px;
 }
 
-#jvwutxuobq .gt_first_summary_row {
+#bdjygtozge .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#jvwutxuobq .gt_first_summary_row.thick {
+#bdjygtozge .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jvwutxuobq .gt_last_summary_row {
+#bdjygtozge .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -946,7 +899,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-bottom-color: #D3D3D3;
 }
 
-#jvwutxuobq .gt_grand_summary_row {
+#bdjygtozge .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -956,7 +909,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   padding-right: 5px;
 }
 
-#jvwutxuobq .gt_first_grand_summary_row {
+#bdjygtozge .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -966,7 +919,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-top-color: #D3D3D3;
 }
 
-#jvwutxuobq .gt_last_grand_summary_row_top {
+#bdjygtozge .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -976,11 +929,11 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-bottom-color: #D3D3D3;
 }
 
-#jvwutxuobq .gt_striped {
+#bdjygtozge .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jvwutxuobq .gt_table_body {
+#bdjygtozge .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -989,7 +942,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-bottom-color: #D3D3D3;
 }
 
-#jvwutxuobq .gt_footnotes {
+#bdjygtozge .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1003,7 +956,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-right-color: #D3D3D3;
 }
 
-#jvwutxuobq .gt_footnote {
+#bdjygtozge .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1012,7 +965,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   padding-right: 5px;
 }
 
-#jvwutxuobq .gt_sourcenotes {
+#bdjygtozge .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1026,7 +979,7 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   border-right-color: #D3D3D3;
 }
 
-#jvwutxuobq .gt_sourcenote {
+#bdjygtozge .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1034,72 +987,72 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
   padding-right: 5px;
 }
 
-#jvwutxuobq .gt_left {
+#bdjygtozge .gt_left {
   text-align: left;
 }
 
-#jvwutxuobq .gt_center {
+#bdjygtozge .gt_center {
   text-align: center;
 }
 
-#jvwutxuobq .gt_right {
+#bdjygtozge .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jvwutxuobq .gt_font_normal {
+#bdjygtozge .gt_font_normal {
   font-weight: normal;
 }
 
-#jvwutxuobq .gt_font_bold {
+#bdjygtozge .gt_font_bold {
   font-weight: bold;
 }
 
-#jvwutxuobq .gt_font_italic {
+#bdjygtozge .gt_font_italic {
   font-style: italic;
 }
 
-#jvwutxuobq .gt_super {
+#bdjygtozge .gt_super {
   font-size: 65%;
 }
 
-#jvwutxuobq .gt_footnote_marks {
+#bdjygtozge .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#jvwutxuobq .gt_asterisk {
+#bdjygtozge .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jvwutxuobq .gt_indent_1 {
+#bdjygtozge .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jvwutxuobq .gt_indent_2 {
+#bdjygtozge .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jvwutxuobq .gt_indent_3 {
+#bdjygtozge .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jvwutxuobq .gt_indent_4 {
+#bdjygtozge .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jvwutxuobq .gt_indent_5 {
+#bdjygtozge .gt_indent_5 {
   text-indent: 25px;
 }
 
-#jvwutxuobq .katex-display {
+#bdjygtozge .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#jvwutxuobq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#bdjygtozge div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 
@@ -1107,40 +1060,152 @@ tbody tr:last-child {
   border-bottom: 2px solid #ffffff00;
 }
 </style>
-
-<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="header gt_col_headings">
-<th id="Fecha" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Fecha</th>
-<th id="Localidad" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Localidad</th>
-<th id="Programa" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Programa</th>
-<th id="Unidad_atencion" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Unidad_atencion</th>
-<th id="Sexo" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Sexo</th>
-<th id="Edad" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Edad</th>
-<th id="Etnia" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Etnia</th>
-<th id="Peso" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Peso</th>
-<th id="Talla" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Talla</th>
-<th id="LRT_CM" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">LRT_CM</th>
-<th id="LRT_A" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">LRT_A</th>
-<th id="LRM_90" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">LRM_90</th>
-<th id="LRM_R" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">LRM_R</th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-</tbody>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Fecha">Fecha</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Localidad">Localidad</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Programa">Programa</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Unidad_atencion">Unidad_atencion</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Sexo">Sexo</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Edad">Edad</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Etnia">Etnia</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Peso">Peso</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Talla">Talla</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="LRT_CM">LRT_CM</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="LRT_A">LRT_A</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="LRM_90">LRM_90</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="LRM_R">LRM_R</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Fecha" class="gt_row gt_right">2024-09-06</td>
+<td headers="Localidad" class="gt_row gt_left">Engativa</td>
+<td headers="Programa" class="gt_row gt_left">Comunidad de Cuidado</td>
+<td headers="Unidad_atencion" class="gt_row gt_left">Comunidad de Cuidado Bosque Popular</td>
+<td headers="Sexo" class="gt_row gt_center">Masculino</td>
+<td headers="Edad" class="gt_row gt_right">72</td>
+<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
+<td headers="Peso" class="gt_row gt_right">68.2</td>
+<td headers="Talla" class="gt_row gt_right">165.15</td>
+<td headers="LRT_CM" class="gt_row gt_right">52.20</td>
+<td headers="LRT_A" class="gt_row gt_right">51.25</td>
+<td headers="LRM_90" class="gt_row gt_right">46.35</td>
+<td headers="LRM_R" class="gt_row gt_right">43.50</td></tr>
+    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-10</td>
+<td headers="Localidad" class="gt_row gt_left">Suba</td>
+<td headers="Programa" class="gt_row gt_left">Comunidad de Cuidado</td>
+<td headers="Unidad_atencion" class="gt_row gt_left">Comunidad de Cuidado Santa Maria</td>
+<td headers="Sexo" class="gt_row gt_center">Masculino</td>
+<td headers="Edad" class="gt_row gt_right">73</td>
+<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
+<td headers="Peso" class="gt_row gt_right">67.8</td>
+<td headers="Talla" class="gt_row gt_right">168.00</td>
+<td headers="LRT_CM" class="gt_row gt_right">51.50</td>
+<td headers="LRT_A" class="gt_row gt_right">53.70</td>
+<td headers="LRM_90" class="gt_row gt_right">45.50</td>
+<td headers="LRM_R" class="gt_row gt_right">47.50</td></tr>
+    <tr><td headers="Fecha" class="gt_row gt_right">2024-09-16</td>
+<td headers="Localidad" class="gt_row gt_left">Usme</td>
+<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
+<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de La Sabiduría San David</td>
+<td headers="Sexo" class="gt_row gt_center">Femenino</td>
+<td headers="Edad" class="gt_row gt_right">74</td>
+<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
+<td headers="Peso" class="gt_row gt_right">67.6</td>
+<td headers="Talla" class="gt_row gt_right">147.10</td>
+<td headers="LRT_CM" class="gt_row gt_right">46.30</td>
+<td headers="LRT_A" class="gt_row gt_right">45.00</td>
+<td headers="LRM_90" class="gt_row gt_right">41.55</td>
+<td headers="LRM_R" class="gt_row gt_right">42.95</td></tr>
+    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-17</td>
+<td headers="Localidad" class="gt_row gt_left">Engativa</td>
+<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
+<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Los Cerezos</td>
+<td headers="Sexo" class="gt_row gt_center">Masculino</td>
+<td headers="Edad" class="gt_row gt_right">71</td>
+<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
+<td headers="Peso" class="gt_row gt_right">67.6</td>
+<td headers="Talla" class="gt_row gt_right">166.25</td>
+<td headers="LRT_CM" class="gt_row gt_right">51.25</td>
+<td headers="LRT_A" class="gt_row gt_right">49.65</td>
+<td headers="LRM_90" class="gt_row gt_right">45.25</td>
+<td headers="LRM_R" class="gt_row gt_right">46.60</td></tr>
+    <tr><td headers="Fecha" class="gt_row gt_right">2024-09-09</td>
+<td headers="Localidad" class="gt_row gt_left">Engativa</td>
+<td headers="Programa" class="gt_row gt_left">Comunidad de Cuidado</td>
+<td headers="Unidad_atencion" class="gt_row gt_left">Comunidad de Cuidado Bosque Popular</td>
+<td headers="Sexo" class="gt_row gt_center">Masculino</td>
+<td headers="Edad" class="gt_row gt_right">85</td>
+<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
+<td headers="Peso" class="gt_row gt_right">65.4</td>
+<td headers="Talla" class="gt_row gt_right">164.35</td>
+<td headers="LRT_CM" class="gt_row gt_right">51.60</td>
+<td headers="LRT_A" class="gt_row gt_right">50.90</td>
+<td headers="LRM_90" class="gt_row gt_right">44.30</td>
+<td headers="LRM_R" class="gt_row gt_right">45.80</td></tr>
+    <tr><td headers="Fecha" class="gt_row gt_right">2024-09-09</td>
+<td headers="Localidad" class="gt_row gt_left">Engativa</td>
+<td headers="Programa" class="gt_row gt_left">Comunidad de Cuidado</td>
+<td headers="Unidad_atencion" class="gt_row gt_left">Comunidad de Cuidado Bosque Popular</td>
+<td headers="Sexo" class="gt_row gt_center">Masculino</td>
+<td headers="Edad" class="gt_row gt_right">84</td>
+<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
+<td headers="Peso" class="gt_row gt_right">56.2</td>
+<td headers="Talla" class="gt_row gt_right">162.55</td>
+<td headers="LRT_CM" class="gt_row gt_right">50.65</td>
+<td headers="LRT_A" class="gt_row gt_right">49.70</td>
+<td headers="LRM_90" class="gt_row gt_right">44.35</td>
+<td headers="LRM_R" class="gt_row gt_right">45.85</td></tr>
+    <tr><td headers="Fecha" class="gt_row gt_right">2024-09-26</td>
+<td headers="Localidad" class="gt_row gt_left">Ciudad Bolivar</td>
+<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
+<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Sierra Morena</td>
+<td headers="Sexo" class="gt_row gt_center">Femenino</td>
+<td headers="Edad" class="gt_row gt_right">68</td>
+<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
+<td headers="Peso" class="gt_row gt_right">55.0</td>
+<td headers="Talla" class="gt_row gt_right">145.35</td>
+<td headers="LRT_CM" class="gt_row gt_right">44.60</td>
+<td headers="LRT_A" class="gt_row gt_right">43.15</td>
+<td headers="LRM_90" class="gt_row gt_right">38.40</td>
+<td headers="LRM_R" class="gt_row gt_right">40.50</td></tr>
+    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-09</td>
+<td headers="Localidad" class="gt_row gt_left">Teusaquillo</td>
+<td headers="Programa" class="gt_row gt_left">Comunidad de Cuidado</td>
+<td headers="Unidad_atencion" class="gt_row gt_left">Comunidad de Cuidado Libertad</td>
+<td headers="Sexo" class="gt_row gt_center">Masculino</td>
+<td headers="Edad" class="gt_row gt_right">74</td>
+<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
+<td headers="Peso" class="gt_row gt_right">54.8</td>
+<td headers="Talla" class="gt_row gt_right">154.30</td>
+<td headers="LRT_CM" class="gt_row gt_right">46.55</td>
+<td headers="LRT_A" class="gt_row gt_right">44.90</td>
+<td headers="LRM_90" class="gt_row gt_right">39.55</td>
+<td headers="LRM_R" class="gt_row gt_right">40.95</td></tr>
+  </tbody>
+  
+  
 </table>
-
 </div>
 </div>
 </div>
+<p>Cumpliendo con el procedimiento descrito, primero se calculan las diferencias entre las mediciones de ambos métodos y se verifica si esas diferencias siguen una distribución normal para determinar qué prueba estadística es adecuada para la comparación.</p>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-39-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-39-3.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<p>A continuación se presentan los resultados del test de normalidad de Lilliefors para la diferencia de las mediciones LRM_90 y LRT_A:</p>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Shapiro-Wilk normality test
-
-data:  LRM_dif
-W = 0.99154, p-value = 0.003439</code></pre>
-</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Lilliefors (Kolmogorov-Smirnov) normality test
@@ -1149,66 +1214,105 @@ data:  LRM_dif
 D = 0.056984, p-value = 0.0002416</code></pre>
 </div>
 </div>
-<p>Dado que en ambos test, Shapiro-Wilk y Lilliefors, se obtuvo un p-valor menor a <span class="math inline">\(0.05\)</span>, entonces, con una significancia del <span class="math inline">\(5\%\)</span>, no hay evidencia estadística de que las diferencias entre las mediciones rodilla-talón con cinta métrica y con antropómetro sigan una distribució normal. Por lo tanto, se hace necesario realizar un test no paramétrico para media de las diferencias.</p>
+<p>Los resultados muestran un p-valor menor a <span class="math inline">\(0.05\)</span> (<em>resultado p-value &lt; 2.2e-16</em>). Esto significa que, con un nivel de confianza del <span class="math inline">\(95\%\)</span>, no podemos concluir que las diferencias entre las mediciones de rodilla - talón tomadas con una cinta métrica y con un antropómetro sigan una distribución normal, y por lo tanto no es posible usar la prueba t para muestras pareadas. Entonces, se debe realizar la prueba de asimetría.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    One-sample Sign-Test
+    Symmetry test
+    Null hypothesis: Data is symmetric around 0.718600368324125
 
 data:  LRM_dif
-s = 439, p-value &lt; 2.2e-16
-alternative hypothesis: true median is not equal to 0
+MI = -3.1208, B = 1000, p-value = 0.016</code></pre>
+</div>
+</div>
+<p>Parece que las diferencias entre los valores no son simétricas (<em>resultado p-value = 0.003</em>). Esto significa que no se puede usar directamente el test de Wilcoxon. Dado que otra alternativa, el test del signo, es menos potente que el test de Wilcoxon, se intenta transformar los datos para que cumplan con el requisito de simetría y así poder aplicar Wilcoxon.</p>
+<p>De modo, que ahora, el procedimiento que se realiza a continuación es el siguiente:</p>
+<ol type="1">
+<li><p><strong>Transformación inicial:</strong> Primero, se aplica el logaritmo natural a los datos originales (LRT_A y LRM_90).</p></li>
+<li><p><strong>Cálculo de diferencias:</strong> Después de la transformación, se calculan las diferencias entre los valores.</p></li>
+<li><p><strong>Evaluación de normalidad:</strong> Se realiza un test de normalidad sobre estas diferencias. Si las diferencias pasan esta prueba, se aplica directamente la prueba <span class="math inline">\(t\)</span> para verificar si la media de las diferencias es igual a cero.</p></li>
+<li><p><strong>Revisión de simetría:</strong> Si no pasan el test de normalidad, se evalúa si las diferencias son simétricas utilizando el test MIRA de asimetría. Si las diferencias resultan ser simétricas, entonces se utiliza el test de Wilcoxon para verificar si la media es igual a cero.</p></li>
+<li><p><strong>Última opción:</strong> Si las diferencias no son simétricas incluso después de la transformación con logaritmo natural, finalmente se recurre al test del signo como última opción.</p></li>
+</ol>
+<p>En resumen, este proceso busca ajustar los datos para que cumplan con los requisitos de pruebas estadísticas más precisas, garantizando resultados confiables. Sin embargo, si los datos no logran cumplir con los criterios necesarios, se utiliza un método alternativo, aunque menos potente.</p>
+<p>Como se explicó previamente, el primer paso consiste en transformar los datos originales usando el logaritmo natural.</p>
+<p>Después de esta transformación, se calculan las diferencias entre los valores transformados. Al observar el histograma de estas diferencias, se nota que la asimetría se ha reducido un poco. Sin embargo, visualmente parece que la media de las diferencias no es igual a cero. Para confirmar esto, seguimos el procedimiento previamente mencionado.</p>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-43-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<p>Primero, se aplica el test de normalidad de Lilliefors. Este test evalúa si las diferencias siguen una distribución normal. En este caso, el p-valor obtenido es menor a 0.05 (<em>resultado p-value = 1.683e-10</em>), lo que indica que las diferencias no siguen una distribución normal. Por lo tanto, no se puede utilizar la prueba t para verificar si la media de las diferencias es igual a cero.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Lilliefors (Kolmogorov-Smirnov) normality test
+
+data:  lLRM_dif
+D = 0.040588, p-value = 0.03283</code></pre>
+</div>
+</div>
+<p>A continuación, se realiza la prueba MIRA de simetría, que nos ayuda a decidir entre utilizar el test de Wilcoxon o el test del signo. Aún con la transformación, las diferencias siguen sin pasar el test de simetría (<em>resultado p-value = 0.035</em>). Esto significa que las diferencias NO tienen una distribución simétrica, entonces, no se puede aplicar el test de Wilcoxon.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Symmetry test
+    Null hypothesis: Data is symmetric around 0.0170979053745359
+
+data:  lLRM_dif
+MI = -2.6237, B = 1000, p-value = 0.035</code></pre>
+</div>
+</div>
+<p>Finalmente, como última opción se realiza la prueba del signo para determinar si la mediana de las diferencias es igual a cero, lo que equivaldría a decir que las mediciones con la pierna estirdada (LRM_R) son iguales a las realizadas con la pierna a 90° (LRM_90).</p>
+<p>El test del signo arroja un p-valor menor a 0.05 (<em>resultado p-value &lt; 2.2e-16</em>). Esto significa que, con un 95% de confianza, hay evidencia estadística para afirmar que la mediana de las diferencias no es igual a cero. En otras palabras, las mediciones LRM realizadas con la pierna completamente estirada <strong>NO SON EQUIVALENTES</strong> a las realizadas con la pierna a 90°.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Dependent-samples Sign-Test
+
+data:  lLRM_90 and lLRM_R
+S = 439, p-value &lt; 2.2e-16
+alternative hypothesis: true median difference is not equal to 0
 95 percent confidence interval:
- 0.7000000 0.8918847
+ 0.01621036 0.02034229
 sample estimates:
-median of x 
-        0.8 
+median of x-y 
+    0.0186716 
 
 Achieved and Interpolated Confidence Intervals: 
 
                   Conf.Level L.E.pt U.E.pt
-Lower Achieved CI     0.9411    0.7 0.8500
-Interpolated CI       0.9500    0.7 0.8919
-Upper Achieved CI     0.9517    0.7 0.9000</code></pre>
+Lower Achieved CI     0.9411 0.0162 0.0203
+Interpolated CI       0.9500 0.0162 0.0203
+Upper Achieved CI     0.9517 0.0162 0.0204</code></pre>
 </div>
 </div>
-<p>Nuevamente, se consideró aplicar la prueba de Wilcoxon para evaluar la media de las diferencias, pero esta prueba no se aplicó ya que el coeficiente de asimetría obtenido fue de <span class="math inline">\(2.022\)</span>. Este valor indica una falta de simetría en las diferencias de las mediciones. Por esta razón, de nuevo se optó por utilizar la prueba del signo para muestras pareadas.</p>
-<p>El resultado de la prueba del signo arrojó un p-valor de <span class="math inline">\(2.2 \times 10^{-16}\)</span>, indicando evidencia estadística suficiente para rechazar la hipótesis nula de que la mediana de las diferencias es igual a cero. Por lo tanto, se concluye que las mediciones de la longitud rodilla-maléolo realizadas con la pierna completamente estirada no son equivalentes a las obtenidas con la pierna a <span class="math inline">\(90°\)</span>.</p>
-<section id="análisis-discriminando-por-sexo" class="level3">
-<h3 class="anchored" data-anchor-id="análisis-discriminando-por-sexo">Análisis discriminando por sexo</h3>
-<section id="masculino-1" class="level4">
-<h4 class="anchored" data-anchor-id="masculino-1">Masculino:</h4>
-<p>Inicialmente se hace una comparación gráfica de ambas técnicas a través de un box-plot:</p>
+<section id="análisis-por-separado-1" class="level3">
+<h3 class="anchored" data-anchor-id="análisis-por-separado-1">Análisis por separado</h3>
+<section id="por-sexo-1" class="level4">
+<h4 class="anchored" data-anchor-id="por-sexo-1">Por sexo</h4>
+<p>Se realiza un análisis separado por sexo debido a que, generalmente, las características anatómicas hacen que la talla promedio sea mayor en hombres que en mujeres. Por esta razón, se decide llevar a cabo un análisis de las pruebas de hipótesis diferenciando por sexo.</p>
+<p>Este análisis tiene un propósito exclusivamente exploratorio: se busca determinar si los resultados obtenidos al analizar ambos sexos por separado difieren de aquellos obtenidos al analizar los datos combinados.</p>
+<section id="masculino-1" class="level5">
+<h5 class="anchored" data-anchor-id="masculino-1">Masculino:</h5>
+<p>A continuación se muestra el histograma de la diferencia de las mediciones LRM (pierna a 90° menos pierna completamente estirada) del sexo masculino, además se muestra el box-plot de estas diferencias. Gráficamene, se observa que las diferencias no parecen estar alrededor de cero.</p>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-47-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<p>Se aplica la prueba de normalidad de Lilliefors sobre las diferencias, y se obtiene <em>p-value = 0.05353</em>, como es mayor a 0.05, se concluye que las diferencias parecen seguir una distribución normal. Por lo que puede aplicarse la prueba <span class="math inline">\(t\)</span> de muestras pareadas.</p>
 <div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Según el boxplot, se puede observar que podría existir una leve diferencia entre las distribuciones de las mediciones de la longitud rodilla maléolo con la pierna a 90° y con la pierna completamente estirada en los adultos mayores de sexo masculino.</p>
-<div>
-
-</div>
-<div class="cell quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</div>
-<p>De acuerdo al histograma, la mediana de las diferencias entre las mediciones de la longitud rodilla maléolo con la pierna a 90° y con la pierna completamente estirada es de 0.5 cm. Además, pareciera que hay simetría en la distribución de las diferencias, por lo que puede haber normalidad.</p>
-<p><strong>Pruebas de normalidad</strong></p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Shapiro-Wilk normality test
-
-data:  LRM_dif
-W = 0.99387, p-value = 0.3401</code></pre>
-</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Lilliefors (Kolmogorov-Smirnov) normality test
@@ -1217,58 +1321,38 @@ data:  LRM_dif
 D = 0.054061, p-value = 0.05353</code></pre>
 </div>
 </div>
-<p>Dado que en ambos test, Shapiro-Wilk y Lilliefors, se obtuvo un p-valor mayor a <span class="math inline">\(0.05\)</span>, entonces, con una significancia del <span class="math inline">\(5\%\)</span>, hay evidencia estadística de que las diferencias entre las mediciones rodilla-maleolo con la pierna a 90° y con la pierna estirada siguen una distribució normal. Por lo tanto, se hace necesario realizar una prueba t para la media de las diferencias.</p>
-<p><strong>Prueba t</strong></p>
+<p>La prueba <span class="math inline">\(t\)</span>, dice que con un 95% de confianza, al obtener un <em>p-value &lt; 2.2e-16</em>, parece que las diferencias no parecen tener media cero, es decir, las mediciones de LRM con la pierna a 90° <strong>NO SON EQUIVALENTES</strong> a las obtenidas con la pierna completamente estirada en la muestra con sexo masculino.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    One Sample t-test
+    Paired t-test
 
-data:  LRM_dif
-t = 9.6943, df = 270, p-value &lt; 2.2e-16
-alternative hypothesis: true mean is not equal to 0
+data:  hombres$LRM_R and hombres$LRM_90
+t = -9.6943, df = 270, p-value &lt; 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
 95 percent confidence interval:
- 0.3918397 0.5915551
+ -0.5915551 -0.3918397
 sample estimates:
-mean of x 
-0.4916974 </code></pre>
+mean difference 
+     -0.4916974 </code></pre>
 </div>
 </div>
-<p>El resultado de la prueba t mostró un p-valor de <span class="math inline">\(2.2 \times 10^{-16}\)</span>, por lo que se rechaza la hipótesis de igualdad de medias. Esto significa que las mediciones de la longitud rodilla-maleolo hechas con la pierna a 90° no son equivalentes a las obtenidas con la pierna estirada, en los adultos mayores de sexo masculino.</p>
 </section>
-<section id="femenino-1" class="level4">
-<h4 class="anchored" data-anchor-id="femenino-1">Femenino:</h4>
-<p>Inicialmente se hace una comparación gráfica de ambas técnicas a través de un box-plot:</p>
+<section id="femenino-1" class="level5">
+<h5 class="anchored" data-anchor-id="femenino-1">Femenino:</h5>
+<p>A continuación se muestra el histograma de la diferencia de las mediciones LRM (pierna a 90° menos pierna completamente estirada) del sexo femenino, además se muestra el box-plot de estas diferencias. Gráficamene, se observa que las diferencias no parecen estar alrededor de cero.</p>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-50-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<p>Se aplica la prueba de normalidad de Lilliefors sobre las diferencias, y se obtiene <em>p-value = 0.0284</em>, como es menor a 0.05, se concluye que las diferencias no parecen seguir una distribución normal. Por lo que, siguiendo con el procedimiento descrito al inicio, se debe realizar la prueba de simetría.</p>
 <div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Según el boxplot, se puede observar que podría existir una diferencia entre las distribuciones de las mediciones de la longitud rodilla maléolo con la pierna a 90° y con la pierna completamente estirada en los adultos mayores de sexo femenino. En este grupo de mujeres se observa que las medianas entre las medidas es más distante que en el grupo de hombres.</p>
-<div>
-
-</div>
-<div class="cell quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</div>
-<p>De acuerdo al histograma, la mediana de las diferencias entre las mediciones de la longitud rodilla maléolo con la pierna a 90° y con la pierna completamente estirada es de 1 cm.</p>
-<p><strong>Pruebas de normalidad</strong></p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Shapiro-Wilk normality test
-
-data:  LRM_dif
-W = 0.98409, p-value = 0.004025</code></pre>
-</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Lilliefors (Kolmogorov-Smirnov) normality test
@@ -1277,476 +1361,190 @@ data:  LRM_dif
 D = 0.057802, p-value = 0.0284</code></pre>
 </div>
 </div>
-<p>Dado que en ambos test, Shapiro-Wilk y Lilliefors, se obtuvo un p-valor menor a <span class="math inline">\(0.05\)</span>, entonces, con una significancia del <span class="math inline">\(5\%\)</span>, no hay evidencia estadística de que las diferencias entre las mediciones rodilla-maleolo con la pierna a 90° y con la pierna estirada siguen una distribució normal. Por lo tanto, se hace necesario realizar una prueba no parametrica para la media/mediana de las diferencias.</p>
-<p><strong>Simetría de las diferencias</strong></p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.002062019</code></pre>
-</div>
-</div>
-<p>Dado que el p-valor es menor a 0.05, se rechaza la hipotesis nula de que la distribución de las diferencias entre las mediciones rodilla-maleolo con la pierna a 90° y con la pierna estirada sea simetrica. Por lo tanto, se realiza el test del signo para muestras pareadas:</p>
-<p><strong>Test del signo</strong></p>
+<p>La prueba de simetría MIRA, muestra que las diferencias son simétricas (<em>p-value = 0.135</em>), por lo que se decide realizar la prueba de Wilcoxon.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    One-sample Sign-Test
+    Symmetry test
+    Null hypothesis: Data is symmetric around 0.944669117647059
 
 data:  LRM_dif
-s = 240, p-value &lt; 2.2e-16
-alternative hypothesis: true median is not equal to 0
+MI = -1.5371, B = 1000, p-value = 0.135</code></pre>
+</div>
+</div>
+<p>La prueba de Wilcoxon, dice que con un 95% de confianza, al obtener un <em>p-value &lt; 2.2e-16</em>, parece que las diferencias no parecen tener media cero, es decir, las mediciones de LRM con la pierna a 90° <strong>NO SON EQUIVALENTES</strong> a las obtenidas con la piernaa completamente estirada en la muestra con sexo femenino.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon signed rank test with continuity correction
+
+data:  mujeres$LRM_90 and mujeres$LRM_R
+V = 33690, p-value &lt; 2.2e-16
+alternative hypothesis: true location shift is not equal to 0
 95 percent confidence interval:
- 0.9 1.1
+ 0.9249844 1.0750506
 sample estimates:
-median of x 
-          1 
+(pseudo)median 
+      0.999928 </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="por-etnia-1" class="level4">
+<h4 class="anchored" data-anchor-id="por-etnia-1">Por etnia</h4>
+<p>Se realiza un análisis separado por etnia debido a que, se cree que, las características anatómicas hacen que la talla promedio sea mayor en ciertas etnias. Por esta razón, se decide llevar a cabo un análisis de las pruebas de hipótesis diferenciando por etnia.</p>
+<p>Este análisis tiene un propósito exclusivamente exploratorio: se busca determinar si los resultados obtenidos al analizar las etnias por separado difieren de aquellos obtenidos al analizar los datos combinados. Sin embargo, dado que únicamente 15 de los 543 individuos con los que se realiza el análisis tienen una etnia distinta a Blanco-Mestizo, se realiza el análisis para el grupo Blanco-Mestizo y para otro grupo que reune las otras etnias.</p>
+<section id="blanco-mestizo-1" class="level5">
+<h5 class="anchored" data-anchor-id="blanco-mestizo-1">Blanco-Mestizo</h5>
+<p>A continuación se muestra el histograma de la diferencia de las mediciones LRM (pierna a 90° menos pierna estirada) de la étnia Blanco-Mestizo, además se muestra el box-plot de estas diferencias. Gráficamene, se observa que las diferencias no parecen estar alrededor de cero.</p>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-54-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-54-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<p>Se aplica la prueba de normalidad de Lilliefors sobre las diferencias, y se obtiene <em>p-value = 0.0004169</em>, como es menor a 0.05, se concluye que las diferencias no parecen seguir una distribución normal. Por lo que, siguiendo con el procedimiento descrito al inicio, se debe realizar la prueba de simetría.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Lilliefors (Kolmogorov-Smirnov) normality test
+
+data:  LRM_dif
+D = 0.056061, p-value = 0.0004169</code></pre>
+</div>
+</div>
+<p>La prueba de simetría MIRA, muestra que las diferencias no son simétricas (<em>p-value = 0.015</em>), por lo que se decide realizar la transformación (aplicar logaritmo natural a LRM_90 y LRM_R) y repetir el procedimiento.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Symmetry test
+    Null hypothesis: Data is symmetric around 0.717514124293785
+
+data:  LRM_dif
+MI = -3.1342, B = 1000, p-value = 0.015</code></pre>
+</div>
+</div>
+<p>Luego de aplicar la transformación, se calculan las diferencias. Se observa en el histograma y el box-plot que se logró corregir un poco la asimetría.</p>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-58-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-58-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<p>La prueba de Lilliefors sobre las diferencias de los datos transformados, muestran que nuevamente las diferencias no presentan normalidad (<em>p-value = 0.03736</em>), por lo que se aplica de nuevo el test de simetría MIRA.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Lilliefors (Kolmogorov-Smirnov) normality test
+
+data:  lLRM_dif
+D = 0.040481, p-value = 0.03736</code></pre>
+</div>
+</div>
+<p>Nuevamente, las diferencias no presentan simetría (<em>p-value = 0.028</em>), entonces se decide aplicar la prueba del signo.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Symmetry test
+    Null hypothesis: Data is symmetric around 0.0170929218434517
+
+data:  lLRM_dif
+MI = -2.5887, B = 1000, p-value = 0.028</code></pre>
+</div>
+</div>
+<p>La prueba del signo, dice que con un 95% de confianza, al obtener un <em>p-value &lt; 2.2e-16</em>, parece que las diferencias no parecen tener media cero, es decir, las mediciones de LRM con la pierna a 90° <strong>NO SON EQUIVALENTES</strong> a las obtenidas con la pierna completamente esirada en la muestra con etnia Blanco-Mestizo.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Dependent-samples Sign-Test
+
+data:  lLRM_90 and lLRM_R
+S = 428, p-value &lt; 2.2e-16
+alternative hypothesis: true median difference is not equal to 0
+95 percent confidence interval:
+ 0.01618556 0.02038661
+sample estimates:
+median of x-y 
+    0.0186716 
 
 Achieved and Interpolated Confidence Intervals: 
 
                   Conf.Level L.E.pt U.E.pt
-Lower Achieved CI     0.9400    0.9    1.1
-Interpolated CI       0.9500    0.9    1.1
-Upper Achieved CI     0.9548    0.9    1.1</code></pre>
+Lower Achieved CI     0.9439 0.0162 0.0204
+Interpolated CI       0.9500 0.0162 0.0204
+Upper Achieved CI     0.9542 0.0162 0.0204</code></pre>
 </div>
 </div>
-<p>El resultado de la prueba del signo arrojó un p-valor de <span class="math inline">\(2.2 \times 10^{-16}\)</span>, indicando evidencia estadística suficiente para rechazar la hipótesis nula de que la mediana de las diferencias es igual a cero. Por lo tanto, se concluye que las mediciones de la longitud rodilla-maléolo realizadas con la pierna completamente estirada no son equivalentes a las obtenidas con la pierna a <span class="math inline">\(90°\)</span> en el grupo de las adultas mayores.</p>
 </section>
-</section>
-</section>
-<section id="talla-real-y-estimación-benjumea-lrt-con-cinta-métrica" class="level2">
-<h2 class="anchored" data-anchor-id="talla-real-y-estimación-benjumea-lrt-con-cinta-métrica">Talla real y estimación Benjumea (LRT) con cinta métrica</h2>
-<p>Primero se realiza el cálculo de la estimación de la talla utilizando las fórmulas de Benjumea que tienen en cuenta las variables Sexo, Edad, Etnia y longitud rodilla-talón con cinta métrica. Hay que tener en cuenta que en la muestra hay un individuo cuya Etnia es “Rrom”, para este individuo no existe una fórmula de Benjumea para estimar su talla, por lo que no se tuvo en cuenta para la evaluación de la hipótesis de que la media de la diferencia entre la estimación de la talla por medio de las fórmulas de Benjumea y la talla real es cero.</p>
-<p>Como antes, se hizo un análisis visual a través de un box-plot, donde se observa que aparentemente no hay una diferencia entre la estimación de la talla con las fórmulas de Benjumea con cinta métrica y la talla real. Sin embargo, es necesario realizar una prueba estadística formal para concluir.</p>
+<section id="afrocolombiano-indigenas-rrom-1" class="level5">
+<h5 class="anchored" data-anchor-id="afrocolombiano-indigenas-rrom-1">Afrocolombiano, indigenas, Rrom</h5>
+<p>A continuación se muestra el histograma de la diferencia de las mediciones LRM (pierna a 90° menos pierna estirada) de las otras etnias distintas a Blanco-Mestizo, además se muestra el box-plot de estas diferencias. Gráficamene, se observa que las diferencias no parecen estar alrededor de cero.</p>
+<p>Es importante tener en cuenta que dado que solo hay 15 individuos en este grupo, las pruebas tienden a ser más sensibles, por lo que los resultados pueden no ser muy confiables.</p>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-62-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-62-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<p>Se aplica la prueba de normalidad de Lilliefors sobre las diferencias, y se obtiene <em>p-value = 0.5996</em>, como es mayor a 0.05, se puede aplicar la prueba <span class="math inline">\(t\)</span>.</p>
 <div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Se calculan las diferencias entre la talla real y la estimación de la talla con las fórmulas de Benjumea con cinta métrica, luego, a estas diferencias se les aplica el test de Sahpiro-Wilk para normalidad y el test Lilliefors de normalidad, esto para decidir qué test utilizar para evaluar la media de las diferencias.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-44-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Shapiro-Wilk normality test
-
-data:  talla_dif
-W = 0.99549, p-value = 0.1187</code></pre>
-</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Lilliefors (Kolmogorov-Smirnov) normality test
 
-data:  talla_dif
-D = 0.025638, p-value = 0.5238</code></pre>
+data:  LRM_dif
+D = 0.15413, p-value = 0.5996</code></pre>
 </div>
 </div>
-<p>En ambos test, se obtiene un p-valor mayor a <span class="math inline">\(0.05\)</span>, por lo que se afirma, que con una significancia del <span class="math inline">\(5\%\)</span>, existe evidencia estadística de que las diferencias siguen una distribución normal, por lo tanto, para evaluar la media de las diferencias, se puede implementar una prueba <span class="math inline">\(t\)</span> para muestras pareadas.</p>
+<p>La prueba de <span class="math inline">\(t\)</span>, dice que con un 95% de confianza, al obtener un <em>p-value = 0.001057</em>, parece que las diferencias no parecen tener media cero, es decir, las mediciones de LRM con pierna a 90° <strong>NO SON EQUIVALENTES</strong> a las obtenidas con la pierna estirada en la muestra con etnia distinta a Blanco-Mestizo.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    One Sample t-test
+    Paired t-test
 
-data:  talla_dif
-t = -8.5884, df = 541, p-value &lt; 2.2e-16
-alternative hypothesis: true mean is not equal to 0
+data:  nobm$LRM_90 and nobm$LRM_R
+t = 4.4032, df = 11, p-value = 0.001057
+alternative hypothesis: true mean difference is not equal to 0
 95 percent confidence interval:
- -1.636747 -1.027395
+ 0.3834445 1.1498888
 sample estimates:
-mean of x 
--1.332071 </code></pre>
+mean difference 
+      0.7666667 </code></pre>
 </div>
 </div>
-<p>Luego de aplicar la prueba <span class="math inline">\(t\)</span>, con una significancia del <span class="math inline">\(5\%\)</span>, existe evidencia estadística para rechazar la hipótesis nula ya que el p-valor es <span class="math inline">\(2.2 \times 10^{-16}\)</span>, por lo tanto, se concluye que la media de las diferencias entre la talla real y la estimación con las fórmulas de Benjumea con cinta métrica no es cero, luego, parece que las estimaciones no son cercanas a la talla real.</p>
-<p>El MSE del modelo de Benjumea sobre nuestros datos es el siguiente:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 14.78904</code></pre>
-</div>
-</div>
-<section id="sin-los-outliers" class="level3">
-<h3 class="anchored" data-anchor-id="sin-los-outliers">Sin los outliers</h3>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-47-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-47-3.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Shapiro-Wilk normality test
-
-data:  talla_dif1
-W = 0.99636, p-value = 0.2631</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Lilliefors (Kolmogorov-Smirnov) normality test
-
-data:  talla_dif1
-D = 0.024913, p-value = 0.5824</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    One Sample t-test
-
-data:  talla_dif1
-t = -8.5339, df = 533, p-value &lt; 2.2e-16
-alternative hypothesis: true mean is not equal to 0
-95 percent confidence interval:
- -1.5424978 -0.9652385
-sample estimates:
-mean of x 
--1.253868 </code></pre>
-</div>
-</div>
-<p>También da que la diferencia no es cero.</p>
 </section>
 </section>
-<section id="talla-real-y-estimación-benjumea-lrt-con-antropómetro" class="level2">
-<h2 class="anchored" data-anchor-id="talla-real-y-estimación-benjumea-lrt-con-antropómetro">Talla real y estimación Benjumea (LRT) con antropómetro</h2>
-<p>Primero se realiza el cálculo de la estimación de la talla utilizando las fórmulas de Benjumea que tienen en cuenta las variables Sexo, Edad, Etnia y longitud rodilla-talón con antropómetro. Hay que tener en cuenta que en la muestra hay un individuo cuya Etnia es “Rrom”, para este individuo no existe una fórmula de Benjumea para estimar su talla, por lo que no se tuvo en cuenta para la evaluación de la hipótesis de que la media de la diferencia entre la estimación de la talla por medio de las fórmulas de Benjumea y la talla real es cero.</p>
-<p>Como antes, se hizo un análisis visual a través de un box-plot, donde se observa que aparentemente no hay una diferencia entre la estimación de la talla con las fórmulas de Benjumea con antropómetro y la talla real. Sin embargo, es necesario realizar una prueba estadística formal para concluir.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-49-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Se calculan las diferencias entre la talla real y la estimación de la talla con las fórmulas de Benjumea con antropómetro, luego, a estas diferencias se les aplica el test de Sahpiro-Wilk para normalidad y el test Lilliefors de normalidad, esto para decidir qué test utilizar para evaluar la media de las diferencias.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-50-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Shapiro-Wilk normality test
-
-data:  talla_dif
-W = 0.99624, p-value = 0.2288</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Lilliefors (Kolmogorov-Smirnov) normality test
-
-data:  talla_dif
-D = 0.026057, p-value = 0.4972</code></pre>
-</div>
-</div>
-<p>En ambos test, se obtiene un p-valor mayor a <span class="math inline">\(0.05\)</span>, por lo que se afirma, que con una significancia del <span class="math inline">\(5\%\)</span>, existe evidencia estadística de que las diferencias siguen una distribución normal, por lo tanto, para evaluar la media de las diferencias, se puede implementar una prueba <span class="math inline">\(t\)</span> para muestras pareadas.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    One Sample t-test
-
-data:  talla_dif
-t = 7.2747, df = 541, p-value = 1.226e-12
-alternative hypothesis: true mean is not equal to 0
-95 percent confidence interval:
- 0.7829203 1.3621421
-sample estimates:
-mean of x 
- 1.072531 </code></pre>
-</div>
-</div>
-<p>Luego de aplicar la prueba <span class="math inline">\(t\)</span>, con una significancia del <span class="math inline">\(5\%\)</span>, existe evidencia estadística para rechazar la hipótesis nula ya que el p-valor es <span class="math inline">\(4.103 \times 10^{-12}\)</span>, por lo tanto, se concluye que la media de las diferencias entre la talla real y la estimación con las fórmulas de Benjumea con antropómetro no es cero, luego, parece que las estimaciones no son cercanas a la talla real.</p>
-<p>El MSE del modelo de Benjumea sobre nuestros datos es el siguiente:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 12.90973</code></pre>
-</div>
-</div>
-<section id="sin-los-outliers-1" class="level3">
-<h3 class="anchored" data-anchor-id="sin-los-outliers-1">Sin los outliers</h3>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-53-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-53-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-53-3.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Shapiro-Wilk normality test
-
-data:  talla_dif1
-W = 0.99617, p-value = 0.223</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Lilliefors (Kolmogorov-Smirnov) normality test
-
-data:  talla_dif1
-D = 0.025589, p-value = 0.536</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    One Sample t-test
-
-data:  talla_dif1
-t = 8.1267, df = 535, p-value = 3.076e-15
-alternative hypothesis: true mean is not equal to 0
-95 percent confidence interval:
- 0.8714519 1.4270483
-sample estimates:
-mean of x 
-  1.14925 </code></pre>
-</div>
-</div>
-<p>También da que la diferencia no es cero.</p>
 </section>
+<section id="conclusión-lrm" class="level3">
+<h3 class="anchored" data-anchor-id="conclusión-lrm">Conclusión LRM</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Los resultados al realizar el análisis por separado, no cambió. De modo que se concluye que las mediciones de LRM con pierna a 90° <strong>NO SON EQUIVALENTES</strong> a las obtenidas con la pierna completamente estirada.</p>
+</div>
+</div>
+
+
 </section>
-<section id="talla-real-y-estimación-arango-zamor-lrm-a-90" class="level2">
-<h2 class="anchored" data-anchor-id="talla-real-y-estimación-arango-zamor-lrm-a-90">Talla real y estimación Arango Zamor (LRM) a <span class="math inline">\(90°\)</span></h2>
-<p>Primero se realiza el cálculo de la estimación de la talla utilizando las fórmulas de Arango y Zamora que tienen en cuenta las variables Sexo, Edad y longitud rodilla-maléolo a <span class="math inline">\(90°\)</span>.</p>
-<p>Como antes, se hizo un análisis visual a través de un box-plot, donde se observa que aparentemente no hay una diferencia entre la estimación de la talla con las fórmulas de Arango y Zamora con la pierna a <span class="math inline">\(90°\)</span> y la talla real. Sin embargo, es necesario realizar una prueba estadística formal para concluir.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-55-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Se calculan las diferencias entre la talla real y la estimación de la talla con las fórmulas de Arango y Zamora con la pierna a <span class="math inline">\(90°\)</span>, luego, a estas diferencias se les aplica el test de Sahpiro-Wilk para normalidad y el test Lilliefors de normalidad, esto para decidir qué test utilizar para evaluar la media de las diferencias.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-56-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-56-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Shapiro-Wilk normality test
-
-data:  talla_dif
-W = 0.99579, p-value = 0.1536</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Lilliefors (Kolmogorov-Smirnov) normality test
-
-data:  talla_dif
-D = 0.026225, p-value = 0.4852</code></pre>
-</div>
-</div>
-<p>En ambos test, se obtiene un p-valor mayor a <span class="math inline">\(0.05\)</span>, por lo que se afirma, que con una significancia del <span class="math inline">\(5\%\)</span>, existe evidencia estadística de que las diferencias siguen una distribución normal, por lo tanto, para evaluar la media de las diferencias, se puede implementar una prueba <span class="math inline">\(t\)</span> para muestras pareadas.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    One Sample t-test
-
-data:  talla_dif
-t = 4.6027, df = 542, p-value = 5.201e-06
-alternative hypothesis: true mean is not equal to 0
-95 percent confidence interval:
- 0.4969359 1.2369195
-sample estimates:
-mean of x 
-0.8669277 </code></pre>
-</div>
-</div>
-<p>Luego de aplicar la prueba <span class="math inline">\(t\)</span>, con una significancia del <span class="math inline">\(5\%\)</span>, existe evidencia estadística para rechazar la hipótesis nula ya que el p-valor es <span class="math inline">\(9.685 \times 10^{-12}\)</span>, por lo tanto, se concluye que la media de las diferencias entre la talla real y la estimación con las fórmulas de Arango y Zamora con la pierna a <span class="math inline">\(90°\)</span> no es cero, luego, parece que las estimaciones no son cercanas a la talla real.</p>
-<p>El MSE del modelo de Arango y Zamora sobre nuestros datos es el siguiente:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 19.98007</code></pre>
-</div>
-</div>
-<section id="sin-los-outliers-2" class="level3">
-<h3 class="anchored" data-anchor-id="sin-los-outliers-2">Sin los outliers</h3>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-59-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-59-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-59-3.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Shapiro-Wilk normality test
-
-data:  talla_dif1
-W = 0.99684, p-value = 0.3815</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Lilliefors (Kolmogorov-Smirnov) normality test
-
-data:  talla_dif1
-D = 0.030474, p-value = 0.2624</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    One Sample t-test
-
-data:  talla_dif1
-t = 5.3945, df = 536, p-value = 1.033e-07
-alternative hypothesis: true mean is not equal to 0
-95 percent confidence interval:
- 0.6173709 1.3244975
-sample estimates:
-mean of x 
-0.9709342 </code></pre>
-</div>
-</div>
-<p>También da que la diferencia no es cero.</p>
-</section>
-</section>
-<section id="talla-real-y-estimación-arango-zamor-lrm-con-la-pierna-estirada" class="level2">
-<h2 class="anchored" data-anchor-id="talla-real-y-estimación-arango-zamor-lrm-con-la-pierna-estirada">Talla real y estimación Arango Zamor (LRM) con la pierna estirada</h2>
-<p>Primero se realiza el cálculo de la estimación de la talla utilizando las fórmulas de Arango y Zamora que tienen en cuenta las variables Sexo, Edad y longitud rodilla-maléolo con la pierna estirada.</p>
-<p>Como antes, se hizo un análisis visual a través de un box-plot, donde se observa que aparentemente no hay una diferencia entre la estimación de la talla con las fórmulas de Arango y Zamora con la pierna estirada y la talla real. Sin embargo, es necesario realizar una prueba estadística formal para concluir.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-61-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Se calculan las diferencias entre la talla real y la estimación de la talla con las fórmulas de Arango y Zamora con la pierna a estirada, luego, a estas diferencias se les aplica el test de Sahpiro-Wilk para normalidad y el test Lilliefors de normalidad, esto para decidir qué test utilizar para evaluar la media de las diferencias.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-62-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-62-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Shapiro-Wilk normality test
-
-data:  talla_dif
-W = 0.99453, p-value = 0.04962</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Lilliefors (Kolmogorov-Smirnov) normality test
-
-data:  talla_dif
-D = 0.023373, p-value = 0.6691</code></pre>
-</div>
-</div>
-<p>En ambos test, se obtiene un p-valor mayor a <span class="math inline">\(0.05\)</span>, por lo que se afirma, que con una significancia del <span class="math inline">\(5\%\)</span>, existe evidencia estadística de que las diferencias siguen una distribución normal, por lo tanto, para evaluar la media de las diferencias, se puede implementar una prueba <span class="math inline">\(t\)</span> para muestras pareadas.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    One Sample t-test
-
-data:  talla_dif
-t = 9.261, df = 542, p-value &lt; 2.2e-16
-alternative hypothesis: true mean is not equal to 0
-95 percent confidence interval:
- 1.370670 2.108677
-sample estimates:
-mean of x 
- 1.739674 </code></pre>
-</div>
-</div>
-<p>Luego de aplicar la prueba <span class="math inline">\(t\)</span>, con una significancia del <span class="math inline">\(5\%\)</span>, existe evidencia estadística para rechazar la hipótesis nula ya que el p-valor es <span class="math inline">\(2.2 \times 10^{-16}\)</span>, por lo tanto, se concluye que la media de las diferencias entre la talla real y la estimación con las fórmulas de Arango y Zamora con la pierna estirada no es cero, luego, parece que las estimaciones no son cercanas a la talla real.</p>
-<p>El MSE del modelo de Arango y Zamora sobre nuestros datos es el siguiente:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 22.15239</code></pre>
-</div>
-</div>
-
-
 </section>
 </section>
 
@@ -1786,7 +1584,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const onCopySuccess = function(e) {
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1818,50 +1627,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
   });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+  function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
+      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1871,17 +1641,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start',
+      placement: 'bottom-start'
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1893,130 +1654,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
+      return note.innerHTML;
     });
   }
       let selectedAnnoteEl;
@@ -2060,7 +1698,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
-            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -2086,32 +1723,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -2172,7 +1783,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-
 
 
 
