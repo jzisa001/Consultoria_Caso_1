@@ -171,7 +171,7 @@ lLRT_dif <- lLRT_CM - lLRT_A
 hist(lLRT_dif, freq = FALSE, main = 'Histograma de las la diferencias LRT_CM - LRT_A', ylab = 'Densidad', xlab = 'Diferencia (cm)')
 lines(density(lLRT_dif), col = "red")
 abline(v = mean(lLRT_dif, na.rm = TRUE), col = "red", lty = 2)
-boxplot_dif <- boxplot(lLRT_dif, main = "Boxplot de las diferencias LRT_CM - LRT_A")
+boxplot_dif <- boxplot(lLRT_dif, main = "Boxplot de las diferencias ln(LRT_CM) - ln(LRT_A)")
 ```
 
 Primero, se aplica el test de normalidad de Lilliefors. Este test evalúa si las diferencias siguen una distribución normal. En este caso, el p-valor obtenido es menor a 0.05 (*resultado p-value = 1.683e-10*), lo que indica que las diferencias no siguen una distribución normal. Por lo tanto, no se puede utilizar la prueba t para verificar si la media de las diferencias es igual a cero.
@@ -216,7 +216,7 @@ LRT_dif <- hombres$LRT_CM - hombres$LRT_A
 hist(LRT_dif, freq = FALSE, main = 'Diferencia de mediciones LRT (hombres)', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
 lines(density(LRT_dif), col = "red")
 abline(v = median(LRT_dif, na.rm = TRUE), col = "red", lty = 2)
-boxplot_dif <- boxplot(LRT_dif)
+boxplot_dif <- boxplot(LRT_dif, main = "Boxplot de las diferencias LRT sexo masculino")
 ```
 
 Se aplica la prueba de normalidad de Lilliefors sobre las diferencias, y se obtiene *p-value = 1.301e-11*, como es menor a 0.05, se concluye que las diferencias no parecen seguir una distribución normal. Por lo que, siguiendo con el procedimiento descrito al inicio, se debe realizar la prueba de simetría.
@@ -246,7 +246,7 @@ lLRT_dif <- lLRT_CM - lLRT_A
 hist(lLRT_dif, freq = FALSE, main = 'Histograma de las la diferencias LRT_CM - LRT_A', ylab = 'Densidad', xlab = 'Diferencia (cm)')
 lines(density(lLRT_dif), col = "red")
 abline(v = mean(lLRT_dif, na.rm = TRUE), col = "red", lty = 2)
-boxplot_dif <- boxplot(lLRT_dif, main = "Boxplot de las diferencias LRT_CM - LRT_A")
+boxplot_dif <- boxplot(lLRT_dif, main = "Boxplot de las diferencias ln(LRT) sexo masculino")
 ```
 
 La prueba de Lilliefors sobre las diferencias de los datos transformados, muestran que nuevamente las diferencias no presentan normalidad, por lo que se aplica de nuevo el test de simetría MIRA.
@@ -283,7 +283,7 @@ LRT_dif <- mujeres$LRT_CM - mujeres$LRT_A
 hist(LRT_dif, freq = FALSE, main = 'Diferencia de mediciones LRT (mujeres)', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
 lines(density(LRT_dif), col = "red")
 abline(v = median(LRT_dif, na.rm = TRUE), col = "red", lty = 2)
-boxplot_dif <- boxplot(LRT_dif) # hay muchos outliers
+boxplot_dif <- boxplot(LRT_dif, main = "Boxplot diferencia LRT sexo femenino") # hay muchos outliers
 
 ```
 
@@ -326,7 +326,7 @@ LRT_dif <- bm$LRT_CM - bm$LRT_A
 hist(LRT_dif, freq = FALSE, main = 'Histograma de las la diferencia de mediciones LRT', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
 lines(density(LRT_dif), col = "red")
 abline(v = median(LRT_dif, na.rm = TRUE), col = "red", lty = 2)
-boxplot_dif <- boxplot(LRT_dif) # hay muchos outliers
+boxplot_dif <- boxplot(LRT_dif, main = "Boxplot diferencias LRT etnia Blanco-Mestizo") # hay muchos outliers
 
 ```
 
@@ -357,7 +357,7 @@ lLRT_dif <- lLRT_CM - lLRT_A
 hist(lLRT_dif, freq = FALSE, main = 'Histograma de las la diferencias LRT_CM - LRT_A', ylab = 'Densidad', xlab = 'Diferencia (cm)')
 lines(density(lLRT_dif), col = "red")
 abline(v = mean(lLRT_dif, na.rm = TRUE), col = "red", lty = 2)
-boxplot_dif <- boxplot(lLRT_dif, main = "Boxplot de las diferencias LRT_CM - LRT_A")
+boxplot_dif <- boxplot(lLRT_dif, main = "Boxplot de las diferencias ln(LRT) etnia Blanco-Mestizo")
 ```
 
 La prueba de Lilliefors sobre las diferencias de los datos transformados, muestran que nuevamente las diferencias no presentan normalidad (*p-value = 8e-10*), por lo que se aplica de nuevo el test de simetría MIRA.
@@ -396,7 +396,7 @@ LRT_dif <- nobm$LRT_CM - nobm$LRT_A
 hist(LRT_dif, freq = FALSE, main = 'Histograma de las la diferencia de mediciones LRT', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
 lines(density(LRT_dif), col = "red")
 abline(v = median(LRT_dif, na.rm = TRUE), col = "red", lty = 2)
-boxplot_dif <- boxplot(LRT_dif) # No hay outliers
+boxplot_dif <- boxplot(LRT_dif, main = "Boxplot diferencias LRT etnia NO Blanco-Mestizo") # No hay outliers
 ```
 
 Se aplica la prueba de normalidad de Lilliefors sobre las diferencias, y se obtiene *p-value = 0.02858*, como es menor a 0.05, se concluye que las diferencias no parecen seguir una distribución normal. Por lo que, siguiendo con el procedimiento descrito al inicio, se debe realizar la prueba de simetría.
@@ -433,7 +433,7 @@ Inicialmente se hace una comparación gráfica de ambas técnicas a través de u
 
 ```{r}
 # Comparar LRM 90 y R
-boxplot(data.frame(datos$LRM_90, datos$LRM_R), ylab = 'Longitud Rodilla-Maleolo (cm)', xaxt = "n")
+boxplot(data.frame(datos$LRM_90, datos$LRM_R), ylab = 'Longitud Rodilla-Maleolo (cm)', xaxt = "n", main = "Boxplot Longitud rodilla-maléolo por tipo de medición")
 axis(1, at = c(1, 2),
      labels = c("Pierna a 90°", "Pierna recta"))
 ```
@@ -452,11 +452,10 @@ donde $\theta_X$ es una medida de tendencia central de las mediciones realizadas
 LRM_dif <- datos$LRM_90 - datos$LRM_R
 
 # Como se ve graficamente, parece que no hay normalidad
-par(mfrow=c(1,2))
-hist(LRM_dif, freq = FALSE, main = 'Histograma de las la diferencia de mediciones LRT', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
+hist(LRM_dif, freq = FALSE, main = 'Histograma de las diferencias de mediciones LRM', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
 lines(density(LRM_dif), col = "red")
 abline(v = median(LRM_dif, na.rm = TRUE), col = "red", lty = 2)
-boxplot_dif <- boxplot(LRM_dif) # hay muchos outliers
+boxplot_dif <- boxplot(LRM_dif, main = "Boxplot de las diferencias LRM") # hay muchos outliers
 ```
 
 Tenemos estos datos atípicos.
@@ -529,7 +528,7 @@ lLRM_dif <- lLRM_90 - lLRM_R
 hist(lLRM_dif, freq = FALSE, main = 'Histograma de las la diferencias LRM_90 - LRM_R', ylab = 'Densidad', xlab = 'Diferencia (cm)')
 lines(density(lLRM_dif), col = "red")
 abline(v = mean(lLRM_dif, na.rm = TRUE), col = "red", lty = 2)
-boxplot_dif <- boxplot(lLRM_dif, main = "Boxplot de las diferencias LRM_90 - LRM_R")
+boxplot_dif <- boxplot(lLRM_dif, main = "Boxplot de las diferencias ln(LRM)")
 ```
 
 Primero, se aplica el test de normalidad de Lilliefors. Este test evalúa si las diferencias siguen una distribución normal. En este caso, el p-valor obtenido es menor a 0.05 (*resultado p-value = 1.683e-10*), lo que indica que las diferencias no siguen una distribución normal. Por lo tanto, no se puede utilizar la prueba t para verificar si la media de las diferencias es igual a cero.
@@ -574,7 +573,7 @@ LRM_dif <- hombres$LRM_90 - hombres$LRM_R
 hist(LRM_dif, freq = FALSE, main = 'Diferencia de mediciones LRT (hombres)', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
 lines(density(LRM_dif), col = "red")
 abline(v = median(LRM_dif, na.rm = TRUE), col = "red", lty = 2)
-boxplot_dif <- boxplot(LRM_dif)
+boxplot_dif <- boxplot(LRM_dif, main = "Boxplot diferencias LRM sexo masculino")
 ```
 
 Se aplica la prueba de normalidad de Lilliefors sobre las diferencias, y se obtiene *p-value = 0.05353*, como es mayor a 0.05, se concluye que las diferencias parecen seguir una distribución normal. Por lo que puede aplicarse la prueba $t$ de muestras pareadas.
@@ -604,7 +603,7 @@ LRM_dif <- mujeres$LRM_90 - mujeres$LRM_R
 hist(LRM_dif, freq = FALSE, main = 'Diferencia de mediciones LRT (mujeres)', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
 lines(density(LRM_dif), col = "red")
 abline(v = median(LRM_dif, na.rm = TRUE), col = "red", lty = 2)
-boxplot_dif <- boxplot(LRM_dif) # hay muchos outliers
+boxplot_dif <- boxplot(LRM_dif, main = "Boxplot diferencia LRM sexo femenino") # hay muchos outliers
 
 ```
 
@@ -647,7 +646,7 @@ LRM_dif <- bm$LRM_90 - bm$LRM_R
 hist(LRM_dif, freq = FALSE, main = 'Histograma de las la diferencia de mediciones LRT', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
 lines(density(LRM_dif), col = "red")
 abline(v = median(LRM_dif, na.rm = TRUE), col = "red", lty = 2)
-boxplot_dif <- boxplot(LRM_dif) # hay muchos outliers
+boxplot_dif <- boxplot(LRM_dif, main = "Boxplot diferencias LRM etnia Blanco-Mestizo") # hay muchos outliers
 
 ```
 
@@ -678,7 +677,7 @@ lLRM_dif <- lLRM_90 - lLRM_R
 hist(lLRM_dif, freq = FALSE, main = 'Histograma de las la diferencias LRM_90 - LRM_R', ylab = 'Densidad', xlab = 'Diferencia (cm)')
 lines(density(lLRM_dif), col = "red")
 abline(v = mean(lLRM_dif, na.rm = TRUE), col = "red", lty = 2)
-boxplot_dif <- boxplot(lLRM_dif, main = "Boxplot de las diferencias LRM_90 - LRM_R")
+boxplot_dif <- boxplot(lLRM_dif, main = "Boxplot de las diferencias ln(LRM) etnia Blanco-Mestizo")
 ```
 
 La prueba de Lilliefors sobre las diferencias de los datos transformados, muestran que nuevamente las diferencias no presentan normalidad (*p-value = 0.03736*), por lo que se aplica de nuevo el test de simetría MIRA.
@@ -717,7 +716,7 @@ LRM_dif <- nobm$LRM_90 - nobm$LRM_R
 hist(LRM_dif, freq = FALSE, main = 'Histograma de las la diferencia de mediciones LRT', ylab = 'Densidad', xlab = 'Diferenencia (cm)')
 lines(density(LRM_dif), col = "red")
 abline(v = median(LRM_dif, na.rm = TRUE), col = "red", lty = 2)
-boxplot_dif <- boxplot(LRM_dif) # No hay outliers
+boxplot_dif <- boxplot(LRM_dif, main = "Boxplot diferencias LRM etnia No Blanco-Mestizo") # No hay outliers
 ```
 
 Se aplica la prueba de normalidad de Lilliefors sobre las diferencias, y se obtiene *p-value = 0.5996*, como es mayor a 0.05, se puede aplicar la prueba $t$.
