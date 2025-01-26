@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -45,7 +45,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "Ninguna coincidencia",
     "search-matching-documents-text": "coincidencias",
@@ -54,14 +60,42 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "",
     "search-label": "Search"
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -70,34 +104,34 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html" rel="" target="">
- <span class="menu-text">Inicio</span></a>
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Inicio</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./descriptivo.html" rel="" target="">
- <span class="menu-text">Análisis descriptivo</span></a>
+    <a class="nav-link" href="./descriptivo.html"> 
+<span class="menu-text">Análisis descriptivo</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./hipotesis.html" rel="" target="" aria-current="page">
- <span class="menu-text">Evaluación de hipótesis</span></a>
+    <a class="nav-link active" href="./hipotesis.html" aria-current="page"> 
+<span class="menu-text">Evaluación de hipótesis</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./modelos.html" rel="" target="">
- <span class="menu-text">Modelos</span></a>
+    <a class="nav-link" href="./modelos.html"> 
+<span class="menu-text">Modelos</span></a>
   </li>  
 </ul>
+          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -139,6 +173,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+
 <section id="hipótesis" class="level1">
 <h1>Hipótesis</h1>
 <section id="longitud-rodilla-talón" class="level2">
@@ -152,7 +187,11 @@ H_1: \, \, \,  \mu_{(CM-A)} \neq 0
 <p>Inicialmente se hace una comparación gráfica de ambas técnicas a través de un box-plot:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Según el gráfico de cajas (box-plot), parece que existe diferencia entre las mediciones de la longitud desde la rodilla hasta el talón realizadas con cinta métrica y con antropómetro. Se evidencia que las mediciones realizadas con cinta métrica son en promedio superiores a las realizadas con antropómetro. Sin embargo, es necesario hacer una prueba estadística más formal. Para esto, se realizará el siguiente procedimiento:</p>
@@ -187,15 +226,18 @@ H_0: \textrm{La mediana de las diferencias es 0}\\
 H_1: \textrm{La mediana de las diferencias no es 0}
 \end{cases}\]</span></p>
 <p>Cumpliendo con el procedimiento descrito, primero se calculan las diferencias entre las mediciones de ambos métodos y se verifica si esas diferencias siguen una distribución normal para determinar qué prueba estadística es adecuada para la comparación.</p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="3">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-4-3.png" class="img-fluid" width="672"></p>
 </div>
 </div>
@@ -233,12 +275,15 @@ MI = -3.1113, B = 1000, p-value = 0.003</code></pre>
 <p>En resumen, este proceso busca ajustar los datos para que cumplan con los requisitos de pruebas estadísticas más precisas, garantizando resultados confiables. Sin embargo, si los datos no logran cumplir con los criterios necesarios, se utiliza un método alternativo, aunque menos potente.</p>
 <p>Como se explicó previamente, el primer paso consiste en transformar los datos originales usando el logaritmo natural.</p>
 <p>Después de esta transformación, se calculan las diferencias entre los valores transformados. Al observar el histograma de estas diferencias, se nota que la asimetría se ha reducido un poco. Sin embargo, visualmente parece que la media de las diferencias no es igual a cero. Para confirmar esto, seguimos el procedimiento previamente mencionado.</p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
@@ -290,12 +335,15 @@ sample estimates:
 <section id="masculino" class="level5">
 <h5 class="anchored" data-anchor-id="masculino">Masculino:</h5>
 <p>A continuación se muestra el histograma de la diferencia de las mediciones LRT (cinta métrica menos antropómetro) del sexo masculino, además se muestra el box-plot de estas diferencias. Gráficamene, se observa que las diferencias no parecen estar alrededor de cero.</p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
@@ -322,12 +370,15 @@ MI = -2.5266, B = 1000, p-value = 0.013</code></pre>
 </div>
 </div>
 <p>Luego de aplicar la transformación, se calculan las diferencias. Se observa en el histograma y el box-plot que se logró corregir un poco la asimetría.</p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-16-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
@@ -373,12 +424,15 @@ sample estimates:
 <section id="femenino" class="level5">
 <h5 class="anchored" data-anchor-id="femenino">Femenino:</h5>
 <p>A continuación se muestra el histograma de la diferencia de las mediciones LRT (cinta métrica menos antropómetro) del sexo femenino, además se muestra el box-plot de estas diferencias. Gráficamene, se observa que las diferencias no parecen estar alrededor de cero.</p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-20-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
@@ -429,12 +483,15 @@ sample estimates:
 <section id="blanco-mestizo" class="level5">
 <h5 class="anchored" data-anchor-id="blanco-mestizo">Blanco-Mestizo</h5>
 <p>A continuación se muestra el histograma de la diferencia de las mediciones LRT (cinta métrica menos antropómetro) de la etnia Blanco-Mestizo, además se muestra el box-plot de estas diferencias. Gráficamene, se observa que las diferencias no parecen estar alrededor de cero.</p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-24-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
@@ -461,12 +518,15 @@ MI = -3.0445, B = 1000, p-value = 0.003</code></pre>
 </div>
 </div>
 <p>Luego de aplicar la transformación, se calculan las diferencias. Se observa en el histograma y el box-plot que se logró corregir un poco la asimetría.</p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-28-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
@@ -513,12 +573,15 @@ sample estimates:
 <h5 class="anchored" data-anchor-id="afrocolombiano-indigenas-rrom">Afrocolombiano, indigenas, Rrom</h5>
 <p>A continuación se muestra el histograma de la diferencia de las mediciones LRT (cinta métrica menos antropómetro) de las otras etnias distintas a Blanco-Mestizo, además se muestra el box-plot de estas diferencias. Gráficamene, se observa que las diferencias no parecen estar alrededor de cero.</p>
 <p>Es importante tener en cuenta que dado que solo hay 15 individuos en este grupo, las pruebas tienden a ser más sensibles, por lo que los resultados pueden no ser muy confiables.</p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-32-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
@@ -585,7 +648,11 @@ Note
 <p>Inicialmente se hace una comparación gráfica de ambas técnicas a través de un box-plot:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Según el boxplot, se puede observar que podría existir una leve diferencia entre las distribuciones de las mediciones de la longitud rodilla maléolo con la pierna a 90° y con la pierna completamente estirada. Sin embargo, es necesario realizar una prueba estadística formal. Inicalmente se calculan las diferencias entre ambos métodos y se les aplica un test de normalidad para elegir qué prueba utilizar para evaluar la hipótesis nula de que la medición longitud rodilla-maléolo con la pierna completamente estirada es igual a la medición de la longitud rodilla-maléolo con la pierna a <span class="math inline">\(90°\)</span>.</p>
@@ -596,16 +663,23 @@ H_1: \, \, \,  \theta_Y - \theta_X \neq 0
 <p>donde <span class="math inline">\(\theta_X\)</span> es una medida de tendencia central de las mediciones realizadas con la pierna recta y <span class="math inline">\(\theta_Y\)</span> es la misma medida de tendencia central para las mediciones con la pierna a 90°.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output-display">
-<p><img src="hipotesis_files/figure-html/unnamed-chunk-37-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="hipotesis_files/figure-html/unnamed-chunk-37-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Tenemos estos datos atípicos.</p>
 <div class="cell">
 <div class="cell-output-display">
-
 <div id="bdjygtozge" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
@@ -1063,146 +1137,165 @@ tbody tr:last-child {
   border-bottom: 2px solid #ffffff00;
 }
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-  <thead>
-    <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Fecha">Fecha</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Localidad">Localidad</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Programa">Programa</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Unidad_atencion">Unidad_atencion</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Sexo">Sexo</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Edad">Edad</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Etnia">Etnia</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Peso">Peso</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="Talla">Talla</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="LRT_CM">LRT_CM</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="LRT_A">LRT_A</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="LRM_90">LRM_90</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase;" scope="col" id="LRM_R">LRM_R</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-09-06</td>
-<td headers="Localidad" class="gt_row gt_left">Engativa</td>
-<td headers="Programa" class="gt_row gt_left">Comunidad de Cuidado</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Comunidad de Cuidado Bosque Popular</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">72</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">68.2</td>
-<td headers="Talla" class="gt_row gt_right">165.15</td>
-<td headers="LRT_CM" class="gt_row gt_right">52.20</td>
-<td headers="LRT_A" class="gt_row gt_right">51.25</td>
-<td headers="LRM_90" class="gt_row gt_right">46.35</td>
-<td headers="LRM_R" class="gt_row gt_right">43.50</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-10</td>
-<td headers="Localidad" class="gt_row gt_left">Suba</td>
-<td headers="Programa" class="gt_row gt_left">Comunidad de Cuidado</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Comunidad de Cuidado Santa Maria</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">73</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">67.8</td>
-<td headers="Talla" class="gt_row gt_right">168.00</td>
-<td headers="LRT_CM" class="gt_row gt_right">51.50</td>
-<td headers="LRT_A" class="gt_row gt_right">53.70</td>
-<td headers="LRM_90" class="gt_row gt_right">45.50</td>
-<td headers="LRM_R" class="gt_row gt_right">47.50</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-09-16</td>
-<td headers="Localidad" class="gt_row gt_left">Usme</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de La Sabiduría San David</td>
-<td headers="Sexo" class="gt_row gt_center">Femenino</td>
-<td headers="Edad" class="gt_row gt_right">74</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">67.6</td>
-<td headers="Talla" class="gt_row gt_right">147.10</td>
-<td headers="LRT_CM" class="gt_row gt_right">46.30</td>
-<td headers="LRT_A" class="gt_row gt_right">45.00</td>
-<td headers="LRM_90" class="gt_row gt_right">41.55</td>
-<td headers="LRM_R" class="gt_row gt_right">42.95</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-17</td>
-<td headers="Localidad" class="gt_row gt_left">Engativa</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Los Cerezos</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">71</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">67.6</td>
-<td headers="Talla" class="gt_row gt_right">166.25</td>
-<td headers="LRT_CM" class="gt_row gt_right">51.25</td>
-<td headers="LRT_A" class="gt_row gt_right">49.65</td>
-<td headers="LRM_90" class="gt_row gt_right">45.25</td>
-<td headers="LRM_R" class="gt_row gt_right">46.60</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-09-09</td>
-<td headers="Localidad" class="gt_row gt_left">Engativa</td>
-<td headers="Programa" class="gt_row gt_left">Comunidad de Cuidado</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Comunidad de Cuidado Bosque Popular</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">85</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">65.4</td>
-<td headers="Talla" class="gt_row gt_right">164.35</td>
-<td headers="LRT_CM" class="gt_row gt_right">51.60</td>
-<td headers="LRT_A" class="gt_row gt_right">50.90</td>
-<td headers="LRM_90" class="gt_row gt_right">44.30</td>
-<td headers="LRM_R" class="gt_row gt_right">45.80</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-09-09</td>
-<td headers="Localidad" class="gt_row gt_left">Engativa</td>
-<td headers="Programa" class="gt_row gt_left">Comunidad de Cuidado</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Comunidad de Cuidado Bosque Popular</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">84</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">56.2</td>
-<td headers="Talla" class="gt_row gt_right">162.55</td>
-<td headers="LRT_CM" class="gt_row gt_right">50.65</td>
-<td headers="LRT_A" class="gt_row gt_right">49.70</td>
-<td headers="LRM_90" class="gt_row gt_right">44.35</td>
-<td headers="LRM_R" class="gt_row gt_right">45.85</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-09-26</td>
-<td headers="Localidad" class="gt_row gt_left">Ciudad Bolivar</td>
-<td headers="Programa" class="gt_row gt_left">Centro Día Casa de la Sabiduría</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Centro Día Casa de la Sabiduría Sierra Morena</td>
-<td headers="Sexo" class="gt_row gt_center">Femenino</td>
-<td headers="Edad" class="gt_row gt_right">68</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">55.0</td>
-<td headers="Talla" class="gt_row gt_right">145.35</td>
-<td headers="LRT_CM" class="gt_row gt_right">44.60</td>
-<td headers="LRT_A" class="gt_row gt_right">43.15</td>
-<td headers="LRM_90" class="gt_row gt_right">38.40</td>
-<td headers="LRM_R" class="gt_row gt_right">40.50</td></tr>
-    <tr><td headers="Fecha" class="gt_row gt_right">2024-10-09</td>
-<td headers="Localidad" class="gt_row gt_left">Teusaquillo</td>
-<td headers="Programa" class="gt_row gt_left">Comunidad de Cuidado</td>
-<td headers="Unidad_atencion" class="gt_row gt_left">Comunidad de Cuidado Libertad</td>
-<td headers="Sexo" class="gt_row gt_center">Masculino</td>
-<td headers="Edad" class="gt_row gt_right">74</td>
-<td headers="Etnia" class="gt_row gt_center">Blanco-Mestizo</td>
-<td headers="Peso" class="gt_row gt_right">54.8</td>
-<td headers="Talla" class="gt_row gt_right">154.30</td>
-<td headers="LRT_CM" class="gt_row gt_right">46.55</td>
-<td headers="LRT_A" class="gt_row gt_right">44.90</td>
-<td headers="LRM_90" class="gt_row gt_right">39.55</td>
-<td headers="LRM_R" class="gt_row gt_right">40.95</td></tr>
-  </tbody>
-  
-  
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="Fecha" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Fecha</th>
+<th id="Localidad" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Localidad</th>
+<th id="Programa" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Programa</th>
+<th id="Unidad_atencion" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Unidad_atencion</th>
+<th id="Sexo" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Sexo</th>
+<th id="Edad" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Edad</th>
+<th id="Etnia" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Etnia</th>
+<th id="Peso" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Peso</th>
+<th id="Talla" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">Talla</th>
+<th id="LRT_CM" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">LRT_CM</th>
+<th id="LRT_A" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">LRT_A</th>
+<th id="LRM_90" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">LRM_90</th>
+<th id="LRM_R" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-top-width: 0px; border-top-style: solid; border-top-color: black; font-family: Chivo; font-size: 14px; vertical-align: bottom; font-weight: 200; text-transform: uppercase" scope="col">LRM_R</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="Fecha">2024-09-06</td>
+<td class="gt_row gt_left" headers="Localidad">Engativa</td>
+<td class="gt_row gt_left" headers="Programa">Comunidad de Cuidado</td>
+<td class="gt_row gt_left" headers="Unidad_atencion">Comunidad de Cuidado Bosque Popular</td>
+<td class="gt_row gt_center" headers="Sexo">Masculino</td>
+<td class="gt_row gt_right" headers="Edad">72</td>
+<td class="gt_row gt_center" headers="Etnia">Blanco-Mestizo</td>
+<td class="gt_row gt_right" headers="Peso">68.2</td>
+<td class="gt_row gt_right" headers="Talla">165.15</td>
+<td class="gt_row gt_right" headers="LRT_CM">52.20</td>
+<td class="gt_row gt_right" headers="LRT_A">51.25</td>
+<td class="gt_row gt_right" headers="LRM_90">46.35</td>
+<td class="gt_row gt_right" headers="LRM_R">43.50</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="Fecha">2024-10-10</td>
+<td class="gt_row gt_left" headers="Localidad">Suba</td>
+<td class="gt_row gt_left" headers="Programa">Comunidad de Cuidado</td>
+<td class="gt_row gt_left" headers="Unidad_atencion">Comunidad de Cuidado Santa Maria</td>
+<td class="gt_row gt_center" headers="Sexo">Masculino</td>
+<td class="gt_row gt_right" headers="Edad">73</td>
+<td class="gt_row gt_center" headers="Etnia">Blanco-Mestizo</td>
+<td class="gt_row gt_right" headers="Peso">67.8</td>
+<td class="gt_row gt_right" headers="Talla">168.00</td>
+<td class="gt_row gt_right" headers="LRT_CM">51.50</td>
+<td class="gt_row gt_right" headers="LRT_A">53.70</td>
+<td class="gt_row gt_right" headers="LRM_90">45.50</td>
+<td class="gt_row gt_right" headers="LRM_R">47.50</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="Fecha">2024-09-16</td>
+<td class="gt_row gt_left" headers="Localidad">Usme</td>
+<td class="gt_row gt_left" headers="Programa">Centro Día Casa de la Sabiduría</td>
+<td class="gt_row gt_left" headers="Unidad_atencion">Centro Día Casa de La Sabiduría San David</td>
+<td class="gt_row gt_center" headers="Sexo">Femenino</td>
+<td class="gt_row gt_right" headers="Edad">74</td>
+<td class="gt_row gt_center" headers="Etnia">Blanco-Mestizo</td>
+<td class="gt_row gt_right" headers="Peso">67.6</td>
+<td class="gt_row gt_right" headers="Talla">147.10</td>
+<td class="gt_row gt_right" headers="LRT_CM">46.30</td>
+<td class="gt_row gt_right" headers="LRT_A">45.00</td>
+<td class="gt_row gt_right" headers="LRM_90">41.55</td>
+<td class="gt_row gt_right" headers="LRM_R">42.95</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="Fecha">2024-10-17</td>
+<td class="gt_row gt_left" headers="Localidad">Engativa</td>
+<td class="gt_row gt_left" headers="Programa">Centro Día Casa de la Sabiduría</td>
+<td class="gt_row gt_left" headers="Unidad_atencion">Centro Día Casa de la Sabiduría Los Cerezos</td>
+<td class="gt_row gt_center" headers="Sexo">Masculino</td>
+<td class="gt_row gt_right" headers="Edad">71</td>
+<td class="gt_row gt_center" headers="Etnia">Blanco-Mestizo</td>
+<td class="gt_row gt_right" headers="Peso">67.6</td>
+<td class="gt_row gt_right" headers="Talla">166.25</td>
+<td class="gt_row gt_right" headers="LRT_CM">51.25</td>
+<td class="gt_row gt_right" headers="LRT_A">49.65</td>
+<td class="gt_row gt_right" headers="LRM_90">45.25</td>
+<td class="gt_row gt_right" headers="LRM_R">46.60</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="Fecha">2024-09-09</td>
+<td class="gt_row gt_left" headers="Localidad">Engativa</td>
+<td class="gt_row gt_left" headers="Programa">Comunidad de Cuidado</td>
+<td class="gt_row gt_left" headers="Unidad_atencion">Comunidad de Cuidado Bosque Popular</td>
+<td class="gt_row gt_center" headers="Sexo">Masculino</td>
+<td class="gt_row gt_right" headers="Edad">85</td>
+<td class="gt_row gt_center" headers="Etnia">Blanco-Mestizo</td>
+<td class="gt_row gt_right" headers="Peso">65.4</td>
+<td class="gt_row gt_right" headers="Talla">164.35</td>
+<td class="gt_row gt_right" headers="LRT_CM">51.60</td>
+<td class="gt_row gt_right" headers="LRT_A">50.90</td>
+<td class="gt_row gt_right" headers="LRM_90">44.30</td>
+<td class="gt_row gt_right" headers="LRM_R">45.80</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="Fecha">2024-09-09</td>
+<td class="gt_row gt_left" headers="Localidad">Engativa</td>
+<td class="gt_row gt_left" headers="Programa">Comunidad de Cuidado</td>
+<td class="gt_row gt_left" headers="Unidad_atencion">Comunidad de Cuidado Bosque Popular</td>
+<td class="gt_row gt_center" headers="Sexo">Masculino</td>
+<td class="gt_row gt_right" headers="Edad">84</td>
+<td class="gt_row gt_center" headers="Etnia">Blanco-Mestizo</td>
+<td class="gt_row gt_right" headers="Peso">56.2</td>
+<td class="gt_row gt_right" headers="Talla">162.55</td>
+<td class="gt_row gt_right" headers="LRT_CM">50.65</td>
+<td class="gt_row gt_right" headers="LRT_A">49.70</td>
+<td class="gt_row gt_right" headers="LRM_90">44.35</td>
+<td class="gt_row gt_right" headers="LRM_R">45.85</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="Fecha">2024-09-26</td>
+<td class="gt_row gt_left" headers="Localidad">Ciudad Bolivar</td>
+<td class="gt_row gt_left" headers="Programa">Centro Día Casa de la Sabiduría</td>
+<td class="gt_row gt_left" headers="Unidad_atencion">Centro Día Casa de la Sabiduría Sierra Morena</td>
+<td class="gt_row gt_center" headers="Sexo">Femenino</td>
+<td class="gt_row gt_right" headers="Edad">68</td>
+<td class="gt_row gt_center" headers="Etnia">Blanco-Mestizo</td>
+<td class="gt_row gt_right" headers="Peso">55.0</td>
+<td class="gt_row gt_right" headers="Talla">145.35</td>
+<td class="gt_row gt_right" headers="LRT_CM">44.60</td>
+<td class="gt_row gt_right" headers="LRT_A">43.15</td>
+<td class="gt_row gt_right" headers="LRM_90">38.40</td>
+<td class="gt_row gt_right" headers="LRM_R">40.50</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="Fecha">2024-10-09</td>
+<td class="gt_row gt_left" headers="Localidad">Teusaquillo</td>
+<td class="gt_row gt_left" headers="Programa">Comunidad de Cuidado</td>
+<td class="gt_row gt_left" headers="Unidad_atencion">Comunidad de Cuidado Libertad</td>
+<td class="gt_row gt_center" headers="Sexo">Masculino</td>
+<td class="gt_row gt_right" headers="Edad">74</td>
+<td class="gt_row gt_center" headers="Etnia">Blanco-Mestizo</td>
+<td class="gt_row gt_right" headers="Peso">54.8</td>
+<td class="gt_row gt_right" headers="Talla">154.30</td>
+<td class="gt_row gt_right" headers="LRT_CM">46.55</td>
+<td class="gt_row gt_right" headers="LRT_A">44.90</td>
+<td class="gt_row gt_right" headers="LRM_90">39.55</td>
+<td class="gt_row gt_right" headers="LRM_R">40.95</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
 <p>Cumpliendo con el procedimiento descrito, primero se calculan las diferencias entre las mediciones de ambos métodos y se verifica si esas diferencias siguen una distribución normal para determinar qué prueba estadística es adecuada para la comparación.</p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="3">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-39-2.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-39-3.png" class="img-fluid" width="672"></p>
 </div>
 </div>
@@ -1240,12 +1333,15 @@ MI = -3.1208, B = 1000, p-value = 0.016</code></pre>
 <p>En resumen, este proceso busca ajustar los datos para que cumplan con los requisitos de pruebas estadísticas más precisas, garantizando resultados confiables. Sin embargo, si los datos no logran cumplir con los criterios necesarios, se utiliza un método alternativo, aunque menos potente.</p>
 <p>Como se explicó previamente, el primer paso consiste en transformar los datos originales usando el logaritmo natural.</p>
 <p>Después de esta transformación, se calculan las diferencias entre los valores transformados. Al observar el histograma de estas diferencias, se nota que la asimetría se ha reducido un poco. Sin embargo, visualmente parece que la media de las diferencias no es igual a cero. Para confirmar esto, seguimos el procedimiento previamente mencionado.</p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-43-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
@@ -1304,12 +1400,15 @@ Upper Achieved CI     0.9517 0.0162 0.0204</code></pre>
 <section id="masculino-1" class="level5">
 <h5 class="anchored" data-anchor-id="masculino-1">Masculino:</h5>
 <p>A continuación se muestra el histograma de la diferencia de las mediciones LRM (pierna a 90° menos pierna completamente estirada) del sexo masculino, además se muestra el box-plot de estas diferencias. Gráficamene, se observa que las diferencias no parecen estar alrededor de cero.</p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-47-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
@@ -1344,12 +1443,15 @@ mean difference
 <section id="femenino-1" class="level5">
 <h5 class="anchored" data-anchor-id="femenino-1">Femenino:</h5>
 <p>A continuación se muestra el histograma de la diferencia de las mediciones LRM (pierna a 90° menos pierna completamente estirada) del sexo femenino, además se muestra el box-plot de estas diferencias. Gráficamene, se observa que las diferencias no parecen estar alrededor de cero.</p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-50-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
@@ -1400,12 +1502,15 @@ sample estimates:
 <section id="blanco-mestizo-1" class="level5">
 <h5 class="anchored" data-anchor-id="blanco-mestizo-1">Blanco-Mestizo</h5>
 <p>A continuación se muestra el histograma de la diferencia de las mediciones LRM (pierna a 90° menos pierna estirada) de la étnia Blanco-Mestizo, además se muestra el box-plot de estas diferencias. Gráficamene, se observa que las diferencias no parecen estar alrededor de cero.</p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-54-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-54-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
@@ -1432,12 +1537,15 @@ MI = -3.1342, B = 1000, p-value = 0.015</code></pre>
 </div>
 </div>
 <p>Luego de aplicar la transformación, se calculan las diferencias. Se observa en el histograma y el box-plot que se logró corregir un poco la asimetría.</p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-58-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-58-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
@@ -1491,12 +1599,15 @@ Upper Achieved CI     0.9542 0.0162 0.0204</code></pre>
 <h5 class="anchored" data-anchor-id="afrocolombiano-indigenas-rrom-1">Afrocolombiano, indigenas, Rrom</h5>
 <p>A continuación se muestra el histograma de la diferencia de las mediciones LRM (pierna a 90° menos pierna estirada) de las otras etnias distintas a Blanco-Mestizo, además se muestra el box-plot de estas diferencias. Gráficamene, se observa que las diferencias no parecen estar alrededor de cero.</p>
 <p>Es importante tener en cuenta que dado que solo hay 15 individuos en este grupo, las pruebas tienden a ser más sensibles, por lo que los resultados pueden no ser muy confiables.</p>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-62-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="hipotesis_files/figure-html/unnamed-chunk-62-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
@@ -1587,18 +1698,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1630,11 +1730,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1644,8 +1783,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1657,7 +1805,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1701,6 +1972,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1726,6 +1998,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1786,6 +2084,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 
