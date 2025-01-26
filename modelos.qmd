@@ -1,6 +1,8 @@
 ---
 echo: false
 warning: false
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r}
@@ -93,9 +95,9 @@ coef(regfit.full, 3)
 Esto sugiere usar el modelo $Talla = 59.11 + 2.19 LRT\_A - 0.12 Edad + 3.06 Sexo$,\
 $$Sexo = \begin{cases} 1 & \text{si sexo = masculino} \\ 0 & \text{si sexo = femenino} \end{cases}$$
 
-Ahora se hará la búsqueda del mejor modelo usando ***K - fold cross validation*** con el fin de calcular directamente los errores de predicción sobre los datos de testeo y evitar así el sobreajuste.
+Ahora se usará ***K - fold cross validation*** con el fin de calcular directamente los errores de predicción sobre los datos de testeo y evitar así el sobreajuste.
 
--   Se crean ***K - folds*** (pliegues) de aproximadamente igual tamaño. En este caso fijamos $k = 10$. Como tenemos $558$ datos, cada pliegue será de tamaño 55 o 56.
+-   Se crean ***K - folds*** (pliegues) de aproximadamente igual tamaño. En este caso fijamos $k = 10$. Como tenemos $543$ datos, cada pliegue será de tamaño 54 o 55.
 -   El $k-ésimo$ pliegue servirá para testear, y los demás pliegues se juntan para entrenar los modelos. Osea que se usará un $90\%$ de los datos para entrenamiento y $10\%$ para test.
 -   Para $k = 1,\cdots,10,$ se calcula el MSE.
 -   Luego, se promedia el MSE a través de los $10$ pliegues y se obtiene el MSE promedio.
@@ -488,174 +490,147 @@ Las estimaciones de los coeficientes del modelo sin las obervaciones influyentes
 
 ### LRT Antropómetro
 
-Para ajustar el modelo LASSO, se consideran todas las variables que podrían influir en la estimación de la talla: Edad, Sexo, Etnia y LRT_A. El modelo se encargará automáticamente de seleccionar las variables significativas. Antes de comenzar, los datos se dividen en dos conjuntos: entrenamiento (90%) y prueba (10%).
+Para ajustar el modelo LASSO, se consideran todas las variables que podrían influir en la estimación de la talla: Edad, Sexo, Etnia y LRT_A. El modelo se encargará automáticamente de seleccionar las variables más significativas. 
+
+Se utiliza el método de ***k-fold cross validation*** con $k = 10$ usando los mismos
+folds utilizados en el modelo normal para que las métricas sean comparables. El objetivo principal de la validación cruzada en el modelo LASSO es obtener el valor de $\lambda$ 
+que minimice el error cuadrático medio cruzado a través de los 10 folds. Es decir, se busca el valor de $\lambda$ que minimice el MSE a través de los 10 folds (lo mismo que en el modelo normal).
 
 ```{r}
-x <- model.matrix(Talla ~ LRT_A + Edad + Sexo + Etnia, data = datos)[, -1]
-y <- datos$Talla
+datos2 <- datos %>% # dataframe auxiliar para obener los id de los k-folds
+  mutate(index = row_number())
 
-grid <- 10^seq(10, -2, length = 100) # grilla para buscar el lambda que minimice el MSE
-
+# Se crean los k-fols igual que en el modelo normal
 set.seed(123)
-train <- sample(1:nrow(x), nrow(x)*0.9) # 90% entrenamiento
-test <- (-train) # 10% para prueba
-y.test <- y[test]
+folds <- vfold_cv(datos2, v = 10)
+
+fold_id <- rep(0, nrow(datos2)) # id's de los k-folds
+for(i in 1:10){
+  prueba = assessment(folds$splits[[i]])
+  ids = prueba %>% pull(index)
+  filas = datos2 %>% filter(index %in% ids)
+  fold_id[filas$index] = i
+}
 ```
 
 El modelo LASSO ajusta los coeficientes de las variables, llevando a cero aquellos que no son significativos. Además, determina de forma óptima el parámetro lambda que controla la penalización y selección de variables.
   
 ```{r}
-lasso.mod <- glmnet(x[train , ], y[train], alpha = 1, lambda = grid)
-plot(lasso.mod)
+# Matriz diseño y variable respuesta
+x <- model.matrix(Talla ~ LRT_A + Edad + Sexo + Etnia, data = datos)[,-1]
+y <- datos$Talla
 ```
 
-Se utiliza el método de***k-fold cross validation*** con $k = 10$ y y se calcula el promedio del MSE obtenido en cada iteración.
-  
-```{r}
-set.seed(123)
-cv.out <- cv.glmnet(x[train, ], y[train], alpha = 1, nfolds = 10) # validación cruzada para buscar el lambda
-plot(cv.out)
-bestlam <- cv.out$lambda.min
-lasso.pred <- predict(lasso.mod , s = bestlam, newx = x[test , ])
-```
-
-El MSE del modelo LASSO utilizando LRT_A es:
+Se ajusta el modelo en cada fold usando `cv.glmnet`:
 
 ```{r}
+grid <- 10^seq(3, -3, length.out = 500) # grilla de valores lambda
+# alpha = 1 se refiere a LASSO
+cv.out <- cv.glmnet(x, y, alpha = 1, lambda = grid, foldid = fold_id, type.measure = "mse")
 
-mean((lasso.pred - y.test)^2) # MSE sobre los datos de prueba 
+plot(cv.out) # muestra dónde se miniza la función de pérdida
 
-MSEs <- rbind(MSEs, data.frame(Modelo = "LASSO", Medida = "LRT_A", MSE = mean((lasso.pred - y.test)^2)))
+cv.out$lambda.min # Mejor lambda
+min(cv.out$cvm) # Este es el MSE promedio de los 10 folds
 
-out <- glmnet(x, y, alpha = 1, lambda = grid)
-lasso.coef <- predict(out , type = "coefficients", s = bestlam)[1:7,]
+MSEs <- rbind(MSEs, data.frame(Modelo = "LASSO", Medida = "LRT_A", MSE = min(cv.out$cvm)))
 ```
 
 Los coeficientes resultantes del modelo ajustado son:
   
 ```{r}
-lasso.coef
+coef(cv.out, s = "lambda.min")
 ```
 
 Finalmente, la ecuación propuesta por este modelo para estimar la talla en adultos mayores es:
 
-$$Talla = 56.74 + 2.19 LRT\_A - 0.12 Edad + 3.05 Sexo + 2.41 BM + 3.309 Ind + 3.93 Rrom$$\
-$$Sexo = \begin{cases} 1 & \text{si sexo = Masculino} \\ 0 & \text{si sexo = Femenino} \end{cases}$$\
-$$BM = \begin{cases} 1 & \text{si Etnia = Blanco-Mestizo} \\ 0 & \text{en otro caso} \end{cases}$$\
-$$Ind = \begin{cases} 1 & \text{si Etnia = Indigena} \\ 0 & \text{en otro caso} \end{cases}$$\
-$$Rrom = \begin{cases} 1 & \text{si Etnia = Rrom} \\ 0 & \text{en otro caso} \end{cases}$$
+$$Talla = 58.514 + 2.174 \cdot LRT\_A - 0.102 \cdot Edad + 2.870 \cdot SexoMasculino + 0.037 \cdot EtniaIndigena$$
+$$Sexo = \begin{cases} 1 & \text{si sexo = Masculino} \\ 0 & \text{si sexo = Femenino} \end{cases}$$
+$$BM = \begin{cases} 1 & \text{si Etnia = Blanco-Mestizo} \\ 0 & \text{en otro caso} \end{cases}$$
+$$Ind = \begin{cases} 1 & \text{si Etnia = Indígena} \\ 0 & \text{en otro caso} \end{cases}$$
 
 ### LRT cinta métrica
 
-Para ajustar el modelo LASSO, se consideran todas las variables que podrían influir en la estimación de la talla: Edad, Sexo, Etnia y LRT_CM. El modelo se encargará automáticamente de seleccionar las variables significativas. Antes de comenzar, los datos se dividen en dos conjuntos: entrenamiento (90%) y prueba (10%).
+Para ajustar el modelo LASSO, se consideran todas las variables que podrían influir en la estimación de la talla: Edad, Sexo, Etnia y LRT_CM. El modelo se encargará automáticamente de seleccionar las variables más significativas. 
 
-```{r}
-x <- model.matrix(Talla ~ LRT_CM + Edad + Sexo + Etnia, data = datos)[, -1]
-y <- datos$Talla
-
-grid <- 10^seq(10, -2, length = 100) # grilla para buscar el lambda que minimice el MSE
-
-set.seed(123)
-train <- sample(1:nrow(x), nrow(x)*0.9) # 90% entrenamiento
-test <- (-train) # 10% para prueba
-y.test <- y[test]
-```
+Se utiliza el método de ***k-fold cross validation*** con $k = 10$ usando los mismos
+folds utilizados en el modelo normal para que las métricas sean comparables. El objetivo principal de la validación cruzada en el modelo LASSO es obtener el valor de $\lambda$ 
+que minimice el error cuadrático medio cruzado a través de los 10 folds. Es decir, se busca el valor de $\lambda$ que minimice el MSE a través de los 10 folds (lo mismo que en el modelo normal).
 
 El modelo LASSO ajusta los coeficientes de las variables, llevando a cero aquellos que no son significativos. Además, determina de forma óptima el parámetro lambda que controla la penalización y selección de variables.
   
 ```{r}
-lasso.mod <- glmnet(x[train , ], y[train], alpha = 1, lambda = grid)
-plot(lasso.mod)
+# Matriz diseño y variable respuesta
+x <- model.matrix(Talla ~ LRT_CM + Edad + Sexo + Etnia, data = datos)[,-1]
+y <- datos$Talla
 ```
 
-Se utiliza el método de***k-fold cross validation*** con $k = 10$ y y se calcula el promedio del MSE obtenido en cada iteración.
-  
-```{r}
-set.seed(123)
-cv.out <- cv.glmnet(x[train, ], y[train], alpha = 1, nfolds = 10) # validación cruzada para buscar el lambda
-plot(cv.out)
-bestlam <- cv.out$lambda.min
-lasso.pred <- predict(lasso.mod , s = bestlam, newx = x[test , ])
-
-```
-
-El MSE del modelo LASSO utilizando LRT_CM es:
+Se ajusta el modelo en cada fold usando `cv.glmnet`:
 
 ```{r}
-mean((lasso.pred - y.test)^2) # MSE sobre los datos de prueba 
-MSEs <- rbind(MSEs, data.frame(Modelo = "LASSO", Medida = "LRT_CM", MSE = mean((lasso.pred - y.test)^2)))
+grid <- 10^seq(3, -3, length.out = 500) # grilla de valores lambda
+# alpha = 1 se refiere a LASSO
+cv.out <- cv.glmnet(x, y, alpha = 1, lambda = grid, foldid = fold_id, type.measure = "mse")
 
-out <- glmnet(x, y, alpha = 1, lambda = grid)
-lasso.coef <- predict(out , type = "coefficients", s = bestlam)[1:7,]
+plot(cv.out) # muestra dónde se miniza la función de pérdida
+
+cv.out$lambda.min # Mejor lambda
+min(cv.out$cvm) # Este es el MSE promedio de los 10 folds
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "LASSO", Medida = "LRT_CM", MSE = min(cv.out$cvm)))
 ```
 
 Los coeficientes resultantes del modelo ajustado son:
   
 ```{r}
-lasso.coef
+coef(cv.out, s = "lambda.min")
 ```
 
 Finalmente, la ecuación propuesta por este modelo para estimar la talla en adultos mayores es:
 
-$$Talla = 55.19 + 2.16 LRT\_CM - 0.13 Edad + 4.12 Sexo + 2.07 BM + 2.76 Ind + 1.09 Rrom$$\
+$$Talla = 56.831 + 2.146 \cdot LRT\_CM - 0.110 \cdot Edad + 3.951 \cdot Sexo$$\
 $$Sexo = \begin{cases} 1 & \text{si sexo = Masculino} \\ 0 & \text{si sexo = Femenino} \end{cases}$$\
-$$BM = \begin{cases} 1 & \text{si Etnia = Blanco-Mestizo} \\ 0 & \text{en otro caso} \end{cases}$$\
-$$Ind = \begin{cases} 1 & \text{si Etnia = Indigena} \\ 0 & \text{en otro caso} \end{cases}$$\
-$$Rrom = \begin{cases} 1 & \text{si Etnia = Rrom} \\ 0 & \text{en otro caso} \end{cases}$$
 
 ### LRM pierna estirada
 
-Para ajustar el modelo LASSO, se consideran todas las variables que podrían influir en la estimación de la talla: Edad, Sexo, Etnia y LRM_R. El modelo se encargará automáticamente de seleccionar las variables significativas. Antes de comenzar, los datos se dividen en dos conjuntos: entrenamiento (90%) y prueba (10%).
+Para ajustar el modelo LASSO, se consideran todas las variables que podrían influir en la estimación de la talla: Edad, Sexo, Etnia y LRM_R. El modelo se encargará automáticamente de seleccionar las variables más significativas. 
 
-```{r}
-x <- model.matrix(Talla ~ LRM_R + Edad + Sexo + Etnia, data = datos)[, -1]
-y <- datos$Talla
-
-grid <- 10^seq(10, -2, length = 100) # grilla para buscar el lambda que minimice el MSE
-
-set.seed(123)
-train <- sample(1:nrow(x), nrow(x)*0.9) # 90% entrenamiento
-test <- (-train) # 10% para prueba
-y.test <- y[test]
-```
+Se utiliza el método de ***k-fold cross validation*** con $k = 10$ usando los mismos
+folds utilizados en el modelo normal para que las métricas sean comparables. El objetivo principal de la validación cruzada en el modelo LASSO es obtener el valor de $\lambda$ 
+que minimice el error cuadrático medio cruzado a través de los 10 folds. Es decir, se busca el valor de $\lambda$ que minimice el MSE a través de los 10 folds (lo mismo que en el modelo normal).
 
 El modelo LASSO ajusta los coeficientes de las variables, llevando a cero aquellos que no son significativos. Además, determina de forma óptima el parámetro lambda que controla la penalización y selección de variables.
   
 ```{r}
-lasso.mod <- glmnet(x[train , ], y[train], alpha = 1, lambda = grid)
-plot(lasso.mod)
+# Matriz diseño y variable respuesta
+x <- model.matrix(Talla ~ LRM_R + Edad + Sexo + Etnia, data = datos)[,-1]
+y <- datos$Talla
 ```
 
-Se utiliza el método de***k-fold cross validation*** con $k = 10$ y y se calcula el promedio del MSE obtenido en cada iteración.
-  
-```{r}
-set.seed(123)
-cv.out <- cv.glmnet(x[train, ], y[train], alpha = 1, nfolds = 10) # validación cruzada para buscar el lambda
-plot(cv.out)
-bestlam <- cv.out$lambda.min
-lasso.pred <- predict(lasso.mod , s = bestlam, newx = x[test , ])
-```
-
-El MSE del modelo LASSO utilizando LRM_R es:
+Se ajusta el modelo en cada fold usando `cv.glmnet`:
 
 ```{r}
-mean((lasso.pred - y.test)^2) # MSE sobre los datos de prueba 
+grid <- 10^seq(3, -3, length.out = 500) # grilla de valores lambda
+# alpha = 1 se refiere a LASSO
+cv.out <- cv.glmnet(x, y, alpha = 1, lambda = grid, foldid = fold_id, type.measure = "mse")
 
-MSEs <- rbind(MSEs, data.frame(Modelo = "LASSO", Medida = "LRM_R", MSE = mean((lasso.pred - y.test)^2)))
+plot(cv.out) # muestra dónde se miniza la función de pérdida
 
-out <- glmnet(x, y, alpha = 1, lambda = grid)
-lasso.coef <- predict(out , type = "coefficients", s = bestlam)[1:7,]
+cv.out$lambda.min # Mejor lambda
+min(cv.out$cvm) # Este es el MSE promedio de los 10 folds
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "LASSO", Medida = "LRM_R", MSE = min(cv.out$cvm)))
 ```
 
 Los coeficientes resultantes del modelo ajustado son:
-
+  
 ```{r}
-lasso.coef
+coef(cv.out, s = "lambda.min")
 ```
 
 Finalmente, la ecuación propuesta por este modelo para estimar la talla en adultos mayores es:
 
-$$Talla = 65.51 + 2.22 LRT\_CM - 0.11 Edad + 3.79 Sexo + 2.58 BM + 3.52 Ind + 5.33 Rrom$$\
+$$Talla = 65.525 + 2.217 \cdot LRM\_R - 0.116 \cdot Edad + 3.797 \cdot Sexo + 2.568 \cdot BM + 3.508 \cdot Ind + 5.314 \cdot Rrom$$\
 $$Sexo = \begin{cases} 1 & \text{si sexo = Masculino} \\ 0 & \text{si sexo = Femenino} \end{cases}$$\
 $$BM = \begin{cases} 1 & \text{si Etnia = Blanco-Mestizo} \\ 0 & \text{en otro caso} \end{cases}$$\
 $$Ind = \begin{cases} 1 & \text{si Etnia = Indigena} \\ 0 & \text{en otro caso} \end{cases}$$\
@@ -663,64 +638,46 @@ $$Rrom = \begin{cases} 1 & \text{si Etnia = Rrom} \\ 0 & \text{en otro caso} \en
 
 ### LRM pierna a 90°
 
-Para ajustar el modelo LASSO, se consideran todas las variables que podrían influir en la estimación de la talla: Edad, Sexo, Etnia y LRM_90. El modelo se encargará automáticamente de seleccionar las variables significativas. Antes de comenzar, los datos se dividen en dos conjuntos: entrenamiento (90%) y prueba (10%).
+Para ajustar el modelo LASSO, se consideran todas las variables que podrían influir en la estimación de la talla: Edad, Sexo, Etnia y LRM_90. El modelo se encargará automáticamente de seleccionar las variables más significativas. 
 
-```{r}
-x <- model.matrix(Talla ~ LRM_90 + Edad + Sexo + Etnia, data = datos)[, -1]
-y <- datos$Talla
-
-grid <- 10^seq(10, -2, length = 100) # grilla para buscar el lambda que minimice el MSE
-
-set.seed(123)
-train <- sample(1:nrow(x), nrow(x)*0.9) # 90% entrenamiento
-test <- (-train) # 10% para prueba
-y.test <- y[test]
-```
+Se utiliza el método de ***k-fold cross validation*** con $k = 10$ usando los mismos
+folds utilizados en el modelo normal para que las métricas sean comparables. El objetivo principal de la validación cruzada en el modelo LASSO es obtener el valor de $\lambda$ 
+que minimice el error cuadrático medio cruzado a través de los 10 folds. Es decir, se busca el valor de $\lambda$ que minimice el MSE a través de los 10 folds (lo mismo que en el modelo normal).
 
 El modelo LASSO ajusta los coeficientes de las variables, llevando a cero aquellos que no son significativos. Además, determina de forma óptima el parámetro lambda que controla la penalización y selección de variables.
   
 ```{r}
-lasso.mod <- glmnet(x[train , ], y[train], alpha = 1, lambda = grid)
-plot(lasso.mod)
+# Matriz diseño y variable respuesta
+x <- model.matrix(Talla ~ LRM_90 + Edad + Sexo + Etnia, data = datos)[,-1]
+y <- datos$Talla
 ```
 
-Se utiliza el método de***k-fold cross validation*** con $k = 10$ y y se calcula el promedio del MSE obtenido en cada iteración.
-  
-```{r}
-set.seed(123)
-cv.out <- cv.glmnet(x[train, ], y[train], alpha = 1, nfolds = 10) # validación cruzada para buscar el lambda
-plot(cv.out)
-bestlam <- cv.out$lambda.min
-lasso.pred <- predict(lasso.mod , s = bestlam, newx = x[test , ])
-```
-
-El MSE del modelo LASSO utilizando LRM_90 es:
+Se ajusta el modelo en cada fold usando `cv.glmnet`:
 
 ```{r}
-mean((lasso.pred - y.test)^2) # MSE sobre los datos de prueba 
+grid <- 10^seq(3, -3, length.out = 500) # grilla de valores lambda
+# alpha = 1 se refiere a LASSO
+cv.out <- cv.glmnet(x, y, alpha = 1, lambda = grid, foldid = fold_id, type.measure = "mse")
 
-MSEs <- rbind(MSEs, data.frame(Modelo = "LASSO", Medida = "LRM_90", MSE = mean((lasso.pred - y.test)^2)))
+plot(cv.out) # muestra dónde se miniza la función de pérdida
 
-out <- glmnet(x, y, alpha = 1, lambda = grid)
-lasso.coef <- predict(out , type = "coefficients", s = bestlam)[1:7,]
+cv.out$lambda.min # Mejor lambda
+min(cv.out$cvm) # Este es el MSE promedio de los 10 folds
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "LASSO", Medida = "LRM_90", MSE = min(cv.out$cvm)))
 ```
 
 Los coeficientes resultantes del modelo ajustado son:
   
 ```{r}
-lasso.coef
+coef(cv.out, s = "lambda.min")
 ```
-Los coeficientes distintos de cero, es decir, las variables seleccionadas por el modelo, son:
-  
-```{r}
-lasso.coef[lasso.coef != 0]
-```
+
 Finalmente, la ecuación propuesta por este modelo para estimar la talla en adultos mayores es:
 
-$$Talla = 65.58 + 2.20 LRT\_CM - 0.10 Edad + 4.65 Sexo + 0.13 BM + 0.14 Rrom$$\
+$$Talla = 65.493 + 2.205 \cdot LRM\_90 - 0.105 \cdot Edad + 4.688 \cdot Sexo + 0.294 \cdot BM + 0.612 \cdot Rrom$$\
 $$Sexo = \begin{cases} 1 & \text{si sexo = Masculino} \\ 0 & \text{si sexo = Femenino} \end{cases}$$\
 $$BM = \begin{cases} 1 & \text{si Etnia = Blanco-Mestizo} \\ 0 & \text{en otro caso} \end{cases}$$\
-$$Ind = \begin{cases} 1 & \text{si Etnia = Indigena} \\ 0 & \text{en otro caso} \end{cases}$$\
 $$Rrom = \begin{cases} 1 & \text{si Etnia = Rrom} \\ 0 & \text{en otro caso} \end{cases}$$
 
 ### Resumen modelos LASSO
@@ -732,7 +689,7 @@ Nuevamente, es preferible el modelo LASSO que tenga menor error cuadrático medi
 La tabla de los errores cuadráticos medios de los modelos ajustados hasta el momento es: 
 
 ```{r}
-MSEs[1:8,]
+MSEs[5:8,]
 ```
 
 El modelo normal con LRT_A sigue siendo el mejor, ya que hasta el momento es el que presenta el menor MSE. Por lo tanto, no se procederá a verificar los supuestos para ninguno de los modelos LASSO, dado que el modelo normal continúa siendo superior.
