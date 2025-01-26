@@ -530,11 +530,16 @@ cv.out <- cv.glmnet(x, y, alpha = 1, lambda = grid, foldid = fold_id, type.measu
 
 plot(cv.out) # muestra dónde se miniza la función de pérdida
 
-cv.out$lambda.min # Mejor lambda
-min(cv.out$cvm) # Este es el MSE promedio de los 10 folds
-
 MSEs <- rbind(MSEs, data.frame(Modelo = "LASSO", Medida = "LRT_A", MSE = min(cv.out$cvm)))
 ```
+
+El valor de $\lambda$ óptimo y el MSE del modelo ajustado con ese valor de $\lambda$ son respectivamente:
+
+```{r}
+paste("Valor de lambda óptimo:", round(cv.out$lambda.min,3)) # Mejor lambda
+paste("MSE:", round(min(cv.out$cvm),3)) # Este es el MSE promedio de los 10 folds
+```
+
 
 Los coeficientes resultantes del modelo ajustado son:
   
@@ -574,10 +579,14 @@ cv.out <- cv.glmnet(x, y, alpha = 1, lambda = grid, foldid = fold_id, type.measu
 
 plot(cv.out) # muestra dónde se miniza la función de pérdida
 
-cv.out$lambda.min # Mejor lambda
-min(cv.out$cvm) # Este es el MSE promedio de los 10 folds
-
 MSEs <- rbind(MSEs, data.frame(Modelo = "LASSO", Medida = "LRT_CM", MSE = min(cv.out$cvm)))
+```
+
+El valor de $\lambda$ óptimo y el MSE del modelo ajustado con ese valor de $\lambda$ son respectivamente:
+
+```{r}
+paste("Valor de lambda óptimo:", round(cv.out$lambda.min,3)) # Mejor lambda
+paste("MSE:", round(min(cv.out$cvm),3)) # Este es el MSE promedio de los 10 folds
 ```
 
 Los coeficientes resultantes del modelo ajustado son:
@@ -616,10 +625,14 @@ cv.out <- cv.glmnet(x, y, alpha = 1, lambda = grid, foldid = fold_id, type.measu
 
 plot(cv.out) # muestra dónde se miniza la función de pérdida
 
-cv.out$lambda.min # Mejor lambda
-min(cv.out$cvm) # Este es el MSE promedio de los 10 folds
-
 MSEs <- rbind(MSEs, data.frame(Modelo = "LASSO", Medida = "LRM_R", MSE = min(cv.out$cvm)))
+```
+
+El valor de $\lambda$ óptimo y el MSE del modelo ajustado con ese valor de $\lambda$ son respectivamente:
+
+```{r}
+paste("Valor de lambda óptimo:", round(cv.out$lambda.min,3)) # Mejor lambda
+paste("MSE:", round(min(cv.out$cvm),3)) # Este es el MSE promedio de los 10 folds
 ```
 
 Los coeficientes resultantes del modelo ajustado son:
@@ -661,10 +674,14 @@ cv.out <- cv.glmnet(x, y, alpha = 1, lambda = grid, foldid = fold_id, type.measu
 
 plot(cv.out) # muestra dónde se miniza la función de pérdida
 
-cv.out$lambda.min # Mejor lambda
-min(cv.out$cvm) # Este es el MSE promedio de los 10 folds
-
 MSEs <- rbind(MSEs, data.frame(Modelo = "LASSO", Medida = "LRM_90", MSE = min(cv.out$cvm)))
+```
+
+El valor de $\lambda$ óptimo y el MSE del modelo ajustado con ese valor de $\lambda$ son respectivamente:
+
+```{r}
+paste("Valor de lambda óptimo:", round(cv.out$lambda.min,3)) # Mejor lambda
+paste("MSE:", round(min(cv.out$cvm),3)) # Este es el MSE promedio de los 10 folds
 ```
 
 Los coeficientes resultantes del modelo ajustado son:
