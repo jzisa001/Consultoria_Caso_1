@@ -1102,7 +1102,7 @@ La tabla de los errores cuadráticos medios con las fórmulas de Benjumea es:
 MSEs[13:14,]
 ```
 
-No parecen dar buenas estimaciones.
+Los MSE son mayores a los modelos ajustados anteriormente.
 
 ## Fórmulas Arango y Zamora
 
@@ -1128,8 +1128,7 @@ datos$Arango_LRM_R = ifelse(datos$Sexo!="Masculino", 107.7 + 1.263*datos$LRM_R -
 
 mean((datos$Talla - datos$Arango_LRM_R)^2, na.rm = TRUE)
 
-MSEs <- rbind(MSEs, data.frame(Modelo = "Arango, Zamora", Medida = "LRT_CM", MSE = mean((datos$Talla - datos$Arango_LRM_R)^2, na.rm = TRUE)))
-
+MSEs <- rbind(MSEs, data.frame(Modelo = "Arango, Zamora", Medida = "LRM_R", MSE = mean((datos$Talla - datos$Arango_LRM_R)^2, na.rm = TRUE)))
 ```
 
 
@@ -1148,7 +1147,7 @@ datos$Arango_LRM_90 = ifelse(datos$Sexo!="Masculino", 107.7 + 1.263*datos$LRM_90
 
 mean((datos$Talla - datos$Arango_LRM_90)^2, na.rm = TRUE)
 
-MSEs <- rbind(MSEs, data.frame(Modelo = "Arango, Zamora", Medida = "LRT_CM", MSE = mean((datos$Talla - datos$Arango_LRM_90)^2, na.rm = TRUE)))
+MSEs <- rbind(MSEs, data.frame(Modelo = "Arango, Zamora", Medida = "LRM_90", MSE = mean((datos$Talla - datos$Arango_LRM_90)^2, na.rm = TRUE)))
 ```
 
 ### Resumen fórmulas Arango y Zamora
@@ -1159,7 +1158,7 @@ La tabla de los errores cuadráticos medios con las fórmulas de Benjumea es:
 MSEs[15:16,]
 ```
 
-No parecen dar buenas estimaciones.
+Los MSE son mayores a los modelos ajustados anteriormente.
 
 ## Conclusión 
 

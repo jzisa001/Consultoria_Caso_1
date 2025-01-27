@@ -886,7 +886,7 @@ Number of Fisher Scoring iterations: 3</code></pre>
 </div>
 </div>
 <p>Entonces, la ecuación propuesta por este modelo para estimar el logaritmo de la talla en adultos mayores es:</p>
-<p><span class="math display">\[\ln(Talla) = 1.033e-02 - 8.813e-05 LRT\_A + 4.989e-06 Edad - 1.318e-04 Sexo\]</span><br>
+<p><span class="math display">\[\ln(Talla) = 0.01033 - 0.00008813 LRT\_A + 0.000004989 Edad - 0.0001318 Sexo\]</span><br>
 <span class="math display">\[Sexo = \begin{cases} 1 &amp; \text{si sexo = Masculino} \\ 0 &amp; \text{si sexo = Femenino} \end{cases}\]</span><br>
 </p>
 <p>Se utiliza el método de<strong><em>k-fold cross validation</em></strong> con <span class="math inline">\(k = 10\)</span> y y se calcula el promedio del MSE obtenido en cada iteración. El MSE para este modelo es:</p>
@@ -1248,7 +1248,7 @@ Number of Fisher Scoring iterations: 3</code></pre>
 <ul>
 <li>Sexo masculino: <span class="math inline">\(Talla = 62.17 + 2.19 LRT\_A - 0.12 Edad\)</span>, la interpretación de cada parámetro es:
 <ul>
-<li>Intercepto: Suponiendo el caso hipotético en que un adulto mayor tenga <span class="math inline">\(LRT\_A = 0\)</span> y <span class="math inline">\(Edad = 0\)</span>, entonces la talla estimada para ese adulto mayor de sexo masculino es <span class="math inline">\(62.17\)</span>.</li>
+<li>Intercepto: Suponiendo el caso hipotético en que un adulto mayor tenga <span class="math inline">\(LRT\_A = 0\)</span> y <span class="math inline">\(Edad = 0\)</span>, entonces la talla estimada para ese adulto mayor de sexo masculino es <span class="math inline">\(62.17cm\)</span>.</li>
 <li>LRT_A: Por cada centímetro adicional que mida la LRT_A del adulto mayor masculino, entonces la estimación de su talla aumenta <span class="math inline">\(2.19\)</span> centímetros.</li>
 <li>Edad: Por cada año cumplido adicional que tenga el adulto mayor de sexo masculino, la estimación de su talla disminuye <span class="math inline">\(0.12cm\)</span>.</li>
 </ul></li>
@@ -1301,7 +1301,7 @@ Number of Fisher Scoring iterations: 3</code></pre>
 14 Benjumea LRT_CM 14.78904</code></pre>
 </div>
 </div>
-<p>No parecen dar buenas estimaciones.</p>
+<p>Los MSE son mayores a los modelos ajustados anteriormente.</p>
 </section>
 </section>
 <section id="fórmulas-arango-y-zamora" class="level2">
@@ -1336,11 +1336,11 @@ Number of Fisher Scoring iterations: 3</code></pre>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>           Modelo Medida      MSE
-15 Arango, Zamora LRT_CM 22.15239
-16 Arango, Zamora LRT_CM 19.98007</code></pre>
+15 Arango, Zamora  LRM_R 22.15239
+16 Arango, Zamora LRM_90 19.98007</code></pre>
 </div>
 </div>
-<p>No parecen dar buenas estimaciones.</p>
+<p>Los MSE son mayores a los modelos ajustados anteriormente.</p>
 </section>
 </section>
 <section id="conclusión" class="level2">
@@ -1363,8 +1363,8 @@ Number of Fisher Scoring iterations: 3</code></pre>
 12          Gamma LRM_90 13.47367
 13       Benjumea  LRT_A 12.90973
 14       Benjumea LRT_CM 14.78904
-15 Arango, Zamora LRT_CM 22.15239
-16 Arango, Zamora LRT_CM 19.98007</code></pre>
+15 Arango, Zamora  LRM_R 22.15239
+16 Arango, Zamora LRM_90 19.98007</code></pre>
 </div>
 </div>
 <p>Se observa que el modelo que presenta menor MSE es el modelo normal con LRT con antropómetro, de modo que, se concluye que este es el mejor modelo pues sus estimaciones de la talla son más cercanas a la verdadera talla del adulto mayor.</p>
