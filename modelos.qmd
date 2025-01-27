@@ -741,7 +741,7 @@ summary(gamma.final)
 ```
 Entonces, la ecuación propuesta por este modelo para estimar el logaritmo de la talla en adultos mayores es:
 
-$$\ln(Talla) = 1.033e-02 - 8.813e-05 LRT\_A + 4.989e-06 Edad - 1.318e-04 Sexo$$\
+$$\ln(Talla) = 0.01033 - 0.00008813 LRT\_A + 0.000004989 Edad - 0.0001318 Sexo$$\
 $$Sexo = \begin{cases} 1 & \text{si sexo = Masculino} \\ 0 & \text{si sexo = Femenino} \end{cases}$$\
 
 Se utiliza el método de***k-fold cross validation*** con $k = 10$ y y se calcula el promedio del MSE obtenido en cada iteración. El MSE para este modelo es:
@@ -1011,7 +1011,7 @@ $$Sexo = \begin{cases} 1 & \text{si sexo = masculino} \\ 0 & \text{si sexo = fem
 Que también puede verse como dos fórmulas, una para cada sexo:
 
 *   Sexo masculino: $Talla = 62.17 + 2.19 LRT\_A - 0.12 Edad$, la interpretación de cada parámetro es: 
-    +   Intercepto: Suponiendo el caso hipotético en que un adulto mayor tenga $LRT\_A = 0$ y $Edad = 0$, entonces la talla estimada para ese adulto mayor de sexo masculino es $62.17$.
+    +   Intercepto: Suponiendo el caso hipotético en que un adulto mayor tenga $LRT\_A = 0$ y $Edad = 0$, entonces la talla estimada para ese adulto mayor de sexo masculino es $62.17cm$.
     +   LRT_A: Por cada centímetro adicional que mida la LRT_A del adulto mayor masculino, entonces la estimación de su talla aumenta $2.19$ centímetros.
     +   Edad: Por cada año cumplido adicional que tenga el adulto mayor de sexo masculino, la estimación de su talla disminuye $0.12cm$.
     

@@ -482,7 +482,7 @@ qqnorm(LRM_dif, main = "Q-Q plot de las diferencias")
 qqline(LRM_dif, col = "red")
 ```
 
-A continuación se presentan los resultados del test de normalidad de Lilliefors para la diferencia de las mediciones LRM_90 y LRT_A:
+A continuación se presentan los resultados del test de normalidad de Lilliefors para la diferencia de las mediciones LRM_90 y LRT_R:
 
 ```{r}
 lillie.test(LRM_dif) 
