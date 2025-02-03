@@ -26,6 +26,7 @@ library(glmtoolbox)
 library(MASS)
 library(rsample)
 library(lawstat)
+library(caret) # Para particion train test
 ```
 
 ```{r}
@@ -47,6 +48,29 @@ datos$Etnia <- as.factor(datos$Etnia)
 datos <- datos[-which(datos$Edad<60),] # >60
 datos <- datos |> filter(!(abs(LRT_A-LRT_CM) > 3 | abs(LRM_90-LRM_R) > 3))
 datos <- datos |> as.data.frame()
+```
+
+
+
+```{r}
+#| results: hide
+# Crear índices estratificados basados en la variable 'Sexo'
+set.seed(123)
+indices <- createDataPartition(datos$Sexo, p = 0.8, list = FALSE)
+
+# Dividir los datos
+train <- datos[indices, ]   # 80% entrenamiento
+test <- datos[-indices, ]   # 20% validación
+
+# Verificar proporciones en cada conjunto
+prop.table(table(datos$Sexo))  # Proporciones en el dataset completo
+prop.table(table(train$Sexo))  # Proporciones en entrenamiento
+prop.table(table(test$Sexo))   # Proporciones en validación
+```
+
+```{r}
+datos_copia <- datos
+datos <- train
 ```
 
 # Modelos
@@ -92,7 +116,7 @@ Los coeficientes del mejor modelo usando el criterio de BIC son:
 coef(regfit.full, 3)
 ```
 
-Esto sugiere usar el modelo $Talla = 59.11 + 2.19 LRT\_A - 0.12 Edad + 3.06 Sexo$,\
+Esto sugiere usar el modelo $Talla = 58.84 + 2.17 \cdot LRT\_A - 0.11 \cdot Edad + 3.22 \cdot Sexo$,\
 $$Sexo = \begin{cases} 1 & \text{si sexo = masculino} \\ 0 & \text{si sexo = femenino} \end{cases}$$
 
 Ahora se usará ***K - fold cross validation*** con el fin de calcular directamente los errores de predicción sobre los datos de testeo y evitar así el sobreajuste.
@@ -133,12 +157,25 @@ El MSE para el modelo de 3 variables ($LRT\_A, Edad, Sexo$) es:
 # Para ir almacenando los MSE de los modelos y las longitudes
 MSEs <- data.frame(Modelo = character(),
                    Medida = character(),
-                   MSE = numeric())
+                   MSE = numeric(),
+                   MSE_validacion = numeric())
 
 # Promedio del error cuadrático medio
 mean(errores)
 
-MSEs <- rbind(MSEs, data.frame(Modelo = "Normal", Medida = "LRT_A", MSE = mean(errores)))
+modelo_fin <- lm(Talla ~ LRT_A + Edad + Sexo, data = datos)
+predicciones_test <- predict(modelo_fin, newdata = test)
+# Calcular el MSE en test
+MSE_test <- mean((test$Talla - predicciones_test)^2)
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "Normal", Medida = "LRT_A", MSE = mean(errores), MSE_validacion = MSE_test))
+```
+
+
+```{r}
+# Para almacenar las estimaciones en un excel
+modelo_comp <- lm(Talla ~ LRT_A + Edad + Sexo, data = datos_copia)
+datos_copia$Normal_LRT_A <- modelo_comp$fitted.values
 ```
 
 ### LRT cinta métrica
@@ -178,7 +215,7 @@ Los coeficientes del mejor modelo usando el criterio de BIC son:
 coef(regfit.full, 3)
 ```
 
-Esto sugiere usar el modelo $Talla = 57.30 + 2.16 LRT\_CM - 0.13 Edad + 4.13 Sexo$,\
+Esto sugiere usar el modelo $Talla = 56.78 + 2.14 \cdot LRT\_CM - 0.11 \cdot Edad + 4.30 \cdot Sexo$,\
 $$Sexo = \begin{cases} 1 & \text{si sexo = Masculino} \\ 0 & \text{si sexo = Femenino} \end{cases}$$
 
 Ahora usamos nuevamente ***K - fold cross validation*** con el fin de calcular directamente los errores de predicción sobre los datos de testeo y evitar así el sobreajuste de la misma manera que se realizó para el modelo normal de $LRT_A$. 
@@ -214,7 +251,20 @@ El MSE para el modelo de 3 variables ($LRT\_CM, Edad, Sexo$) es:
 # Promedio del error cuadrático medio
 mean(errores)
 
-MSEs <- rbind(MSEs, data.frame(Modelo = "Normal", Medida = "LRT_CM", MSE = mean(errores)))
+
+modelo_fin <- lm(Talla ~ LRT_CM + Edad + Sexo, data = datos)
+predicciones_test <- predict(modelo_fin, newdata = test)
+# Calcular el MSE en test
+MSE_test <- mean((test$Talla - predicciones_test)^2)
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "Normal", Medida = "LRT_CM", MSE = mean(errores), MSE_validacion = MSE_test))
+```
+
+
+```{r}
+# Para almacenar las estimaciones en un excel
+modelo_comp <- lm(Talla ~ LRT_CM + Edad + Sexo, data = datos_copia)
+datos_copia$Normal_LRT_CM <- modelo_comp$fitted.values
 ```
 
 ### LRM pierna estirada
@@ -252,7 +302,7 @@ Los coeficientes del mejor modelo usando el criterio de BIC son:
 coef(regfit.full, 3)
 ```
 
-Esto sugiere usar el modelo $Talla = 68.04 + 2.21 LRM\_R - 0.11 Edad + 3.81 Sexo$,\
+Esto sugiere usar el modelo $Talla = 67.21 + 2.22 \cdot LRM\_R - 0.10 \cdot Edad + 3.75 \cdot Sexo$,\
 $$Sexo = \begin{cases} 1 & \text{si sexo = Masculino} \\ 0 & \text{si sexo = Femenino} \end{cases}$$
 
 Nuevamente, se hará la búsqueda del mejor modelo usando ***K - fold cross validation*** con el fin de calcular directamente los errores de predicción sobre los datos de testeo y evitar así el sobreajuste.
@@ -288,7 +338,14 @@ El MSE para el modelo de 3 variables ($LRM\_R, Edad, Sexo$) es:
 # Promedio del error cuadrático medio
 mean(errores)
 
- MSEs <- rbind(MSEs, data.frame(Modelo = "Normal", Medida = "LRM_R", MSE = mean(errores))) # No se incluye pq aparentemente hay una leve homocedasticidad en los errores
+
+modelo_fin <- lm(Talla ~ LRM_R + Edad + Sexo, data = datos)
+predicciones_test <- predict(modelo_fin, newdata = test)
+# Calcular el MSE en test
+MSE_test <- mean((test$Talla - predicciones_test)^2)
+
+
+ MSEs <- rbind(MSEs, data.frame(Modelo = "Normal", Medida = "LRM_R", MSE = mean(errores), MSE_validacion = MSE_test)) # No se incluye pq aparentemente hay una leve homocedasticidad en los errores
 ```
 
 ### LRM pierna a 90°
@@ -327,7 +384,7 @@ Los coeficientes del mejor modelo usando el criterio de BIC son:
 coef(regfit.full, 3)
 ```
 
-Esto sugiere usar el modelo $Talla = 66.20 + 2.22 LRM\_90 - 0.12 Edad + 4.83 Sexo$,\
+Esto sugiere usar el modelo $Talla = 65.90 + 2.19 \cdot LRM\_90 - 0.10 \cdot Edad + 4.91 \cdot Sexo$,\
 $$Sexo = \begin{cases} 1 & \text{si sexo = Masculino} \\ 0 & \text{si sexo = Femenino} \end{cases}$$
 
 Ahora se hará la búsqueda del mejor modelo usando ***K - fold cross validation*** con el fin de calcular directamente los errores de predicción sobre los datos de testeo y evitar así el sobreajuste.
@@ -364,7 +421,14 @@ El MSE para el modelo de 3 variables ($LRM\_90, Edad, Sexo$) es:
 # Promedio del error cuadrático medio
 mean(errores)
 
-MSEs <- rbind(MSEs, data.frame(Modelo = "Normal", Medida = "LRM_90", MSE = mean(errores))) # No se incluye pq el modelo no está bien especificado
+
+modelo_fin <- lm(Talla ~ LRM_90 + Edad + Sexo, data = datos)
+predicciones_test <- predict(modelo_fin, newdata = test)
+# Calcular el MSE en test
+MSE_test <- mean((test$Talla - predicciones_test)^2)
+
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "Normal", Medida = "LRM_90", MSE = mean(errores), MSE_validacion = MSE_test)) # No se incluye pq el modelo no está bien especificado
 ```
 
 ### Resúmen modelos Normal
@@ -381,7 +445,7 @@ MSEs[1:4,]
 
 El modelo con menor error cuadrático medio es el que tiene en cuenta la medida LRT con antropómetro: 
 
-$$Talla = 59.11 + 2.19 LRT\_A - 0.12 Edad + 3.06 Sexo$$
+$$Talla = 58.84 + 2.17 \cdot LRT\_A - 0.11 \cdot Edad + 3.22 \cdot Sexo$$
 
 A continuación, se procederá a validar los supuestos del mejor modelo identificado. Esta validación es crucial, ya que si los supuestos no se cumplen, el modelo no puede considerarse válido y sus resultados podrían no ser confiables.
 
@@ -529,8 +593,28 @@ grid <- 10^seq(3, -3, length.out = 500) # grilla de valores lambda
 cv.out <- cv.glmnet(x, y, alpha = 1, lambda = grid, foldid = fold_id, type.measure = "mse")
 
 plot(cv.out) # muestra dónde se miniza la función de pérdida
+```
 
-MSEs <- rbind(MSEs, data.frame(Modelo = "LASSO", Medida = "LRT_A", MSE = min(cv.out$cvm)))
+```{r}
+# Para calcular MSE test
+# Matriz de diseño para el conjunto de test
+x_test <- model.matrix(Talla ~ LRT_A + Edad + Sexo + Etnia, data = test)[,-1]
+y_test <- test$Talla
+
+# Obtener el mejor lambda (el que minimiza el MSE en validación cruzada)
+best_lambda <- cv.out$lambda.min
+
+# Ajustar el modelo con el mejor lambda usando todos los datos de entrenamiento
+modelo_lasso <- glmnet(x, y, alpha = 1, lambda = best_lambda)
+
+# Hacer predicciones en test
+predicciones_test <- predict(modelo_lasso, newx = x_test)
+
+# Calcular el MSE en test
+MSE_test <- mean((y_test - predicciones_test)^2)
+
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "LASSO", Medida = "LRT_A", MSE = min(cv.out$cvm), MSE_validacion = MSE_test))
 ```
 
 El valor de $\lambda$ óptimo y el MSE del modelo ajustado con ese valor de $\lambda$ son respectivamente:
@@ -549,9 +633,9 @@ coef(cv.out, s = "lambda.min")
 
 Finalmente, la ecuación propuesta por este modelo para estimar la talla en adultos mayores es:
 
-$$Talla = 58.514 + 2.174 \cdot LRT\_A - 0.102 \cdot Edad + 2.870 \cdot SexoMasculino + 0.037 \cdot EtniaIndigena$$
+$$Talla = 58.49 + 2.16 \cdot LRT\_A - 0.09 \cdot Edad + 3.07 \cdot Sexo + 0.87 \cdot Ind$$
 $$Sexo = \begin{cases} 1 & \text{si sexo = Masculino} \\ 0 & \text{si sexo = Femenino} \end{cases}$$
-$$BM = \begin{cases} 1 & \text{si Etnia = Blanco-Mestizo} \\ 0 & \text{en otro caso} \end{cases}$$
+
 $$Ind = \begin{cases} 1 & \text{si Etnia = Indígena} \\ 0 & \text{en otro caso} \end{cases}$$
 
 ### LRT cinta métrica
@@ -578,8 +662,28 @@ grid <- 10^seq(3, -3, length.out = 500) # grilla de valores lambda
 cv.out <- cv.glmnet(x, y, alpha = 1, lambda = grid, foldid = fold_id, type.measure = "mse")
 
 plot(cv.out) # muestra dónde se miniza la función de pérdida
+```
 
-MSEs <- rbind(MSEs, data.frame(Modelo = "LASSO", Medida = "LRT_CM", MSE = min(cv.out$cvm)))
+```{r}
+# Para calcular MSE test
+# Matriz de diseño para el conjunto de test
+x_test <- model.matrix(Talla ~ LRT_CM + Edad + Sexo + Etnia, data = test)[,-1]
+y_test <- test$Talla
+
+# Obtener el mejor lambda (el que minimiza el MSE en validación cruzada)
+best_lambda <- cv.out$lambda.min
+
+# Ajustar el modelo con el mejor lambda usando todos los datos de entrenamiento
+modelo_lasso <- glmnet(x, y, alpha = 1, lambda = best_lambda)
+
+# Hacer predicciones en test
+predicciones_test <- predict(modelo_lasso, newx = x_test)
+
+# Calcular el MSE en test
+MSE_test <- mean((y_test - predicciones_test)^2)
+
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "LASSO", Medida = "LRT_CM", MSE = min(cv.out$cvm), MSE_validacion = MSE_test))
 ```
 
 El valor de $\lambda$ óptimo y el MSE del modelo ajustado con ese valor de $\lambda$ son respectivamente:
@@ -597,8 +701,11 @@ coef(cv.out, s = "lambda.min")
 
 Finalmente, la ecuación propuesta por este modelo para estimar la talla en adultos mayores es:
 
-$$Talla = 56.831 + 2.146 \cdot LRT\_CM - 0.110 \cdot Edad + 3.951 \cdot Sexo$$\
+$$Talla = 55.04 + 2.15 \cdot LRT\_CM - 0.11 \cdot Edad + 4.30 \cdot Sexo + 1.79 \cdot BM + 3.18 \cdot Ind + 0.93 \cdot Rrom$$\
 $$Sexo = \begin{cases} 1 & \text{si sexo = Masculino} \\ 0 & \text{si sexo = Femenino} \end{cases}$$\
+$$BM = \begin{cases} 1 & \text{si Etnia = Blanco-Mestizo} \\ 0 & \text{en otro caso} \end{cases}$$
+$$Ind = \begin{cases} 1 & \text{si Etnia = Indígena} \\ 0 & \text{en otro caso} \end{cases}$$
+$$Rrom = \begin{cases} 1 & \text{si Etnia = Rrom} \\ 0 & \text{en otro caso} \end{cases}$$
 
 ### LRM pierna estirada
 
@@ -624,8 +731,28 @@ grid <- 10^seq(3, -3, length.out = 500) # grilla de valores lambda
 cv.out <- cv.glmnet(x, y, alpha = 1, lambda = grid, foldid = fold_id, type.measure = "mse")
 
 plot(cv.out) # muestra dónde se miniza la función de pérdida
+```
 
-MSEs <- rbind(MSEs, data.frame(Modelo = "LASSO", Medida = "LRM_R", MSE = min(cv.out$cvm)))
+```{r}
+# Para calcular MSE test
+# Matriz de diseño para el conjunto de test
+x_test <- model.matrix(Talla ~ LRM_R + Edad + Sexo + Etnia, data = test)[,-1]
+y_test <- test$Talla
+
+# Obtener el mejor lambda (el que minimiza el MSE en validación cruzada)
+best_lambda <- cv.out$lambda.min
+
+# Ajustar el modelo con el mejor lambda usando todos los datos de entrenamiento
+modelo_lasso <- glmnet(x, y, alpha = 1, lambda = best_lambda)
+
+# Hacer predicciones en test
+predicciones_test <- predict(modelo_lasso, newx = x_test)
+
+# Calcular el MSE en test
+MSE_test <- mean((y_test - predicciones_test)^2)
+
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "LASSO", Medida = "LRM_R", MSE = min(cv.out$cvm), MSE_validacion = MSE_test))
 ```
 
 El valor de $\lambda$ óptimo y el MSE del modelo ajustado con ese valor de $\lambda$ son respectivamente:
@@ -643,7 +770,7 @@ coef(cv.out, s = "lambda.min")
 
 Finalmente, la ecuación propuesta por este modelo para estimar la talla en adultos mayores es:
 
-$$Talla = 65.525 + 2.217 \cdot LRM\_R - 0.116 \cdot Edad + 3.797 \cdot Sexo + 2.568 \cdot BM + 3.508 \cdot Ind + 5.314 \cdot Rrom$$\
+$$Talla = 64.53 + 2.22 \cdot LRM\_R - 0.10 \cdot Edad + 3.75 \cdot Sexo + 2.86 \cdot BM + 4.72 \cdot Ind + 5.75 \cdot Rrom$$\
 $$Sexo = \begin{cases} 1 & \text{si sexo = Masculino} \\ 0 & \text{si sexo = Femenino} \end{cases}$$\
 $$BM = \begin{cases} 1 & \text{si Etnia = Blanco-Mestizo} \\ 0 & \text{en otro caso} \end{cases}$$\
 $$Ind = \begin{cases} 1 & \text{si Etnia = Indigena} \\ 0 & \text{en otro caso} \end{cases}$$\
@@ -673,8 +800,29 @@ grid <- 10^seq(3, -3, length.out = 500) # grilla de valores lambda
 cv.out <- cv.glmnet(x, y, alpha = 1, lambda = grid, foldid = fold_id, type.measure = "mse")
 
 plot(cv.out) # muestra dónde se miniza la función de pérdida
+```
 
-MSEs <- rbind(MSEs, data.frame(Modelo = "LASSO", Medida = "LRM_90", MSE = min(cv.out$cvm)))
+
+```{r}
+# Para calcular MSE test
+# Matriz de diseño para el conjunto de test
+x_test <- model.matrix(Talla ~ LRM_90 + Edad + Sexo + Etnia, data = test)[,-1]
+y_test <- test$Talla
+
+# Obtener el mejor lambda (el que minimiza el MSE en validación cruzada)
+best_lambda <- cv.out$lambda.min
+
+# Ajustar el modelo con el mejor lambda usando todos los datos de entrenamiento
+modelo_lasso <- glmnet(x, y, alpha = 1, lambda = best_lambda)
+
+# Hacer predicciones en test
+predicciones_test <- predict(modelo_lasso, newx = x_test)
+
+# Calcular el MSE en test
+MSE_test <- mean((y_test - predicciones_test)^2)
+
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "LASSO", Medida = "LRM_90", MSE = min(cv.out$cvm), MSE_validacion = MSE_test))
 ```
 
 El valor de $\lambda$ óptimo y el MSE del modelo ajustado con ese valor de $\lambda$ son respectivamente:
@@ -692,9 +840,9 @@ coef(cv.out, s = "lambda.min")
 
 Finalmente, la ecuación propuesta por este modelo para estimar la talla en adultos mayores es:
 
-$$Talla = 65.493 + 2.205 \cdot LRM\_90 - 0.105 \cdot Edad + 4.688 \cdot Sexo + 0.294 \cdot BM + 0.612 \cdot Rrom$$\
+$$Talla = 65.62 + 2.18 \cdot LRM\_90 - 0.09 \cdot Edad + 4.78 \cdot Sexo + 0.19 \cdot Ind + 0.51 \cdot Rrom$$\
 $$Sexo = \begin{cases} 1 & \text{si sexo = Masculino} \\ 0 & \text{si sexo = Femenino} \end{cases}$$\
-$$BM = \begin{cases} 1 & \text{si Etnia = Blanco-Mestizo} \\ 0 & \text{en otro caso} \end{cases}$$\
+$$Ind = \begin{cases} 1 & \text{si Etnia = Indígena} \\ 0 & \text{en otro caso} \end{cases}$$\
 $$Rrom = \begin{cases} 1 & \text{si Etnia = Rrom} \\ 0 & \text{en otro caso} \end{cases}$$
 
 ### Resumen modelos LASSO
@@ -741,7 +889,7 @@ summary(gamma.final)
 ```
 Entonces, la ecuación propuesta por este modelo para estimar el logaritmo de la talla en adultos mayores es:
 
-$$\ln(Talla) = 0.01033 - 0.00008813 LRT\_A + 0.000004989 Edad - 0.0001318 Sexo$$\
+$$\ln(Talla) = 0.01035 - 0.00008776 \cdot LRT\_A + 0.000004417 \cdot Edad - 0.0001370 \cdot Sexo$$\
 $$Sexo = \begin{cases} 1 & \text{si sexo = Masculino} \\ 0 & \text{si sexo = Femenino} \end{cases}$$\
 
 Se utiliza el método de***k-fold cross validation*** con $k = 10$ y y se calcula el promedio del MSE obtenido en cada iteración. El MSE para este modelo es:
@@ -777,7 +925,13 @@ for (i in seq_along(folds$splits)) {
 # Error cuadratico medio
 mean(errores)
 
-MSEs <- rbind(MSEs, data.frame(Modelo = "Gamma", Medida = "LRT_A", MSE = mean(errores)))
+# Hacer predicciones en test
+predicciones_test <- predict(gamma.final, newdata = test, type = "response")
+
+# Calcular el MSE en test
+MSE_test <- mean((test$Talla - predicciones_test)^2)
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "Gamma", Medida = "LRT_A", MSE = mean(errores), MSE_validacion = MSE_test))
 ```
 
 ### LRT cinta métrica
@@ -810,7 +964,7 @@ summary(gamma.final)
 
 Entonces, la ecuación propuesta por este modelo para estimar el logaritmo de la talla en adultos mayores es:
 
-$$\ln(Talla) = 1.041e-02 - 8.703e-05 LRT\_CM + 5.205e-06 Edad - 1.745e-04 Sexo$$\
+$$\ln(Talla) = 0.01045 - 0.00008680 \cdot LRT\_CM + 0.000004502 \cdot Edad - 0.0001797 \cdot Sexo$$\
 $$Sexo = \begin{cases} 1 & \text{si sexo = Masculino} \\ 0 & \text{si sexo = Femenino} \end{cases}$$\
 
 Se utiliza el método de***k-fold cross validation*** con $k = 10$ y y se calcula el promedio del MSE obtenido en cada iteración. El MSE para este modelo es:
@@ -846,7 +1000,13 @@ for (i in seq_along(folds$splits)) {
 # Error cuadratico medio
 mean(errores)
 
-MSEs <- rbind(MSEs, data.frame(Modelo = "Gamma", Medida = "LRT_CM", MSE = mean(errores)))
+# Hacer predicciones en test
+predicciones_test <- predict(gamma.final, newdata = test, type = "response")
+
+# Calcular el MSE en test
+MSE_test <- mean((test$Talla - predicciones_test)^2)
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "Gamma", Medida = "LRT_CM", MSE = mean(errores), MSE_validacion = MSE_test))
 ```
 
 ### LRM pierna estirada
@@ -879,7 +1039,7 @@ summary(gamma.final)
 
 Entonces, la ecuación propuesta por este modelo para estimar el logaritmo de la talla en adultos mayores es:
 
-$$\ln(Talla) = 9.972e-03 - 8.941e-05 LRM\_R + 4.774e-06 Edad - 1.618e-04 Sexo$$\
+$$\ln(Talla) = 0.01002 - 0.00008954 \cdot LRM\_R + 0.000004103 \cdot Edad - 0.0001579 \cdot Sexo$$\
 $$Sexo = \begin{cases} 1 & \text{si sexo = Masculino} \\ 0 & \text{si sexo = Femenino} \end{cases}$$\
 
 Se utiliza el método de***k-fold cross validation*** con $k = 10$ y y se calcula el promedio del MSE obtenido en cada iteración. El MSE para este modelo es:
@@ -915,7 +1075,13 @@ for (i in seq_along(folds$splits)) {
 # Error cuadratico medio
 mean(errores)
 
-MSEs <- rbind(MSEs, data.frame(Modelo = "Gamma", Medida = "LRM_R", MSE = mean(errores)))
+# Hacer predicciones en test
+predicciones_test <- predict(gamma.final, newdata = test, type = "response")
+
+# Calcular el MSE en test
+MSE_test <- mean((test$Talla - predicciones_test)^2)
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "Gamma", Medida = "LRM_R", MSE = mean(errores), MSE_validacion = MSE_test))
 ```
 
 ### LRM pierna 90°
@@ -948,7 +1114,7 @@ summary(gamma.final)
 
 Entonces, la ecuación propuesta por este modelo para estimar el logaritmo de la talla en adultos mayores es:
 
-$$\ln(Talla) = 1.005e-02 - 8.939e-05 LRT\_A + 4.792e-06 Edad - 2.022e-04 Sexo$$\
+$$\ln(Talla) = 0.01009 - 0.00008884 \cdot LRT\_A + 0.000003964 \cdot Edad - 0.0002038 \cdot Sexo$$\
 $$Sexo = \begin{cases} 1 & \text{si sexo = Masculino} \\ 0 & \text{si sexo = Femenino} \end{cases}$$\
 
 Se utiliza el método de***k-fold cross validation*** con $k = 10$ y y se calcula el promedio del MSE obtenido en cada iteración. El MSE para este modelo es:
@@ -984,7 +1150,13 @@ for (i in seq_along(folds$splits)) {
 # Error cuadratico medio
 mean(errores)
 
-MSEs <- rbind(MSEs, data.frame(Modelo = "Gamma", Medida = "LRM_90", MSE = mean(errores)))
+# Hacer predicciones en test
+predicciones_test <- predict(gamma.final, newdata = test, type = "response")
+
+# Calcular el MSE en test
+MSE_test <- mean((test$Talla - predicciones_test)^2)
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "Gamma", Medida = "LRM_90", MSE = mean(errores), MSE_validacion = MSE_test))
 ```
 
 ### Resumen modelos Gamma
@@ -1005,20 +1177,20 @@ El modelo normal con LRT_A sigue siendo el mejor, ya que hasta el momento es el 
 
 Dado que el modelo ajustado con menor error cuadrático medio es el normal con LRT con antropómetro, la fórmula que se propone en esta investigación para realizar la estimación de la talla de adultos mayores en Colombia es 
 
-$$Talla = 59.11 + 2.19 LRT\_A - 0.12 Edad + 3.06 Sexo$$\
+$$Talla = 58.84 + 2.17 \cdot LRT\_A - 0.11 \cdot Edad + 3.22 \cdot Sexo$$\
 $$Sexo = \begin{cases} 1 & \text{si sexo = masculino} \\ 0 & \text{si sexo = femenino} \end{cases}$$
 
 Que también puede verse como dos fórmulas, una para cada sexo:
 
-*   Sexo masculino: $Talla = 62.17 + 2.19 LRT\_A - 0.12 Edad$, la interpretación de cada parámetro es: 
-    +   Intercepto: Suponiendo el caso hipotético en que un adulto mayor tenga $LRT\_A = 0$ y $Edad = 0$, entonces la talla estimada para ese adulto mayor de sexo masculino es $62.17cm$.
-    +   LRT_A: Por cada centímetro adicional que mida la LRT_A del adulto mayor masculino, entonces la estimación de su talla aumenta $2.19$ centímetros.
-    +   Edad: Por cada año cumplido adicional que tenga el adulto mayor de sexo masculino, la estimación de su talla disminuye $0.12cm$.
+*   Sexo masculino: $Talla = 62.06 + 2.17 LRT\_A - 0.11 Edad$, la interpretación de cada parámetro es: 
+    +   Intercepto: Suponiendo el caso hipotético en que un adulto mayor tenga $LRT\_A = 0$ y $Edad = 0$, entonces la talla estimada para ese adulto mayor de sexo masculino es $62.06$ centímetros.
+    +   LRT_A: Por cada centímetro adicional que mida la LRT_A del adulto mayor masculino, entonces la estimación de su talla aumenta $2.17$ centímetros.
+    +   Edad: Por cada año cumplido adicional que tenga el adulto mayor de sexo masculino, la estimación de su talla disminuye $0.11$ centímetros.
     
-*   Sexo femenino: $Talla = 59.11 + 2.19 LRT\_A - 0.12 Edad$, la interpretación de cada parámetro es:
-    +   Intercepto: Suponiendo el caso hipotético en que un adulto mayor tenga $LRT\_A = 0$ y $Edad = 0$, entonces la talla estimada para ese adulto mayor de sexo femenino es $59.11$.
-    +   LRT_A: Por cada centímetro adicional que mida la LRT_A del adulto mayor femenino, entonces la estimación de su talla aumenta $2.19$ centímetros.
-    +   Edad: Por cada año cumplido adicional que tenga el adulto mayor de sexo femenino, la estimación de su talla disminuye $0.12cm$.
+*   Sexo femenino: $Talla = 58.84 + 2.17 LRT\_A - 0.11 Edad$, la interpretación de cada parámetro es:
+    +   Intercepto: Suponiendo el caso hipotético en que un adulto mayor tenga $LRT\_A = 0$ y $Edad = 0$, entonces la talla estimada para ese adulto mayor de sexo femenino es $58.84$ centímetros.
+    +   LRT_A: Por cada centímetro adicional que mida la LRT_A del adulto mayor femenino, entonces la estimación de su talla aumenta $2.17$ centímetros.
+    +   Edad: Por cada año cumplido adicional que tenga el adulto mayor de sexo femenino, la estimación de su talla disminuye $0.11$ centímetros.
 
 
 ## Fórmulas Benjumea
@@ -1063,8 +1235,55 @@ datos$Benjumea_LRT_A = ifelse(datos$Sexo=="Masculino" & datos$Etnia == "Blanco-M
 datos$Benjumea_LRT_A = ifelse(datos$Sexo!="Masculino" & datos$Etnia == "Blanco-Mestizo", 86.497 + 1.553*datos$LRT_A - 0.119*datos$Edad, datos$Benjumea_LRT_A)
 
 mean((datos$Talla - datos$Benjumea_LRT_A)^2, na.rm = TRUE)
+```
 
-MSEs <- rbind(MSEs, data.frame(Modelo = "Benjumea", Medida = "LRT_A", MSE = mean((datos$Talla - datos$Benjumea_LRT_A)^2, na.rm = TRUE)))
+```{r}
+test$Benjumea_LRT_A <- rep(NA, nrow(test))
+
+# Indigena masculino
+test$Benjumea_LRT_A <- ifelse(test$Sexo == "Masculino" & test$Etnia == "Indigena", 
+                              82.695 + 1.745 * test$LRT_A - 0.121 * test$Edad, test$Benjumea_LRT_A)
+# Indigena femenino
+test$Benjumea_LRT_A <- ifelse(test$Sexo != "Masculino" & test$Etnia == "Indigena", 
+                              90.281 + 1.436 * test$LRT_A - 0.102 * test$Edad, test$Benjumea_LRT_A)
+# Afrodescendiente masculino
+test$Benjumea_LRT_A <- ifelse(test$Sexo == "Masculino" & test$Etnia == "Afrocolombiano", 
+                              79.298 + 1.855 * test$LRT_A - 0.141 * test$Edad, test$Benjumea_LRT_A)
+# Afrodescendiente femenino
+test$Benjumea_LRT_A <- ifelse(test$Sexo != "Masculino" & test$Etnia == "Afrocolombiano", 
+                              76.233 + 1.767 * test$LRT_A - 0.098 * test$Edad, test$Benjumea_LRT_A)
+# Blanco-Mestizo masculino
+test$Benjumea_LRT_A <- ifelse(test$Sexo == "Masculino" & test$Etnia == "Blanco-Mestizo", 
+                              75.514 + 1.883 * test$LRT_A - 0.108 * test$Edad, test$Benjumea_LRT_A)
+# Blanco-Mestizo femenino
+test$Benjumea_LRT_A <- ifelse(test$Sexo != "Masculino" & test$Etnia == "Blanco-Mestizo", 
+                              86.497 + 1.553 * test$LRT_A - 0.119 * test$Edad, test$Benjumea_LRT_A)
+
+# Calcular el MSE en test
+MSE_test <- mean((test$Talla - test$Benjumea_LRT_A)^2, na.rm = TRUE)
+
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "Benjumea", Medida = "LRT_A", MSE = mean((datos$Talla - datos$Benjumea_LRT_A)^2, na.rm = TRUE), MSE_validacion = MSE_test))
+```
+
+
+```{r}
+# Para almacenar las estimaciones en un excel
+# LRT_A
+datos_copia$Benjumea_LRT_A = rep(NA,nrow(datos_copia))
+
+# Indigena masculino
+datos_copia$Benjumea_LRT_A = ifelse(datos_copia$Sexo=="Masculino" & datos_copia$Etnia == "Indigena", 82.695 + 1.745*datos_copia$LRT_A - 0.121*datos_copia$Edad, datos_copia$Benjumea_LRT_A)
+# Indigena femenino
+datos_copia$Benjumea_LRT_A = ifelse(datos_copia$Sexo!="Masculino" & datos_copia$Etnia == "Indigena", 90.281 + 1.436*datos_copia$LRT_A - 0.102*datos_copia$Edad, datos_copia$Benjumea_LRT_A)
+# Afrodescendiente masculino
+datos_copia$Benjumea_LRT_A = ifelse(datos_copia$Sexo=="Masculino" & datos_copia$Etnia == "Afrocolombiano", 79.298 + 1.855*datos_copia$LRT_A - 0.141*datos_copia$Edad, datos_copia$Benjumea_LRT_A)
+# Afrodescendiente femenino
+datos_copia$Benjumea_LRT_A = ifelse(datos_copia$Sexo!="Masculino" & datos_copia$Etnia == "Afrocolombiano", 76.233 + 1.767*datos_copia$LRT_A - 0.098*datos_copia$Edad, datos_copia$Benjumea_LRT_A)
+# Blanco-Mestizo masculino
+datos_copia$Benjumea_LRT_A = ifelse(datos_copia$Sexo=="Masculino" & datos_copia$Etnia == "Blanco-Mestizo", 75.514 + 1.883*datos_copia$LRT_A - 0.108*datos_copia$Edad, datos_copia$Benjumea_LRT_A)
+# Blanco-Mestizo femenino
+datos_copia$Benjumea_LRT_A = ifelse(datos_copia$Sexo!="Masculino" & datos_copia$Etnia == "Blanco-Mestizo", 86.497 + 1.553*datos_copia$LRT_A - 0.119*datos_copia$Edad, datos_copia$Benjumea_LRT_A)
 ```
 
 
@@ -1090,8 +1309,55 @@ datos$Benjumea_LRT_CM = ifelse(datos$Sexo=="Masculino" & datos$Etnia == "Blanco-
 datos$Benjumea_LRT_CM = ifelse(datos$Sexo!="Masculino" & datos$Etnia == "Blanco-Mestizo", 86.497 + 1.553*datos$LRT_CM - 0.119*datos$Edad, datos$Benjumea_LRT_CM)
 
 mean((datos$Talla - datos$Benjumea_LRT_CM)^2, na.rm = TRUE)
+```
 
-MSEs <- rbind(MSEs, data.frame(Modelo = "Benjumea", Medida = "LRT_CM", MSE = mean((datos$Talla - datos$Benjumea_LRT_CM)^2, na.rm = TRUE)))
+```{r}
+test$Benjumea_LRT_CM <- rep(NA, nrow(test))
+
+# Indigena masculino
+test$Benjumea_LRT_CM <- ifelse(test$Sexo == "Masculino" & test$Etnia == "Indigena", 
+                              82.695 + 1.745 * test$LRT_CM - 0.121 * test$Edad, test$Benjumea_LRT_CM)
+# Indigena femenino
+test$Benjumea_LRT_CM <- ifelse(test$Sexo != "Masculino" & test$Etnia == "Indigena", 
+                              90.281 + 1.436 * test$LRT_CM - 0.102 * test$Edad, test$Benjumea_LRT_CM)
+# Afrodescendiente masculino
+test$Benjumea_LRT_CM <- ifelse(test$Sexo == "Masculino" & test$Etnia == "Afrocolombiano", 
+                              79.298 + 1.855 * test$LRT_CM - 0.141 * test$Edad, test$Benjumea_LRT_CM)
+# Afrodescendiente femenino
+test$Benjumea_LRT_CM <- ifelse(test$Sexo != "Masculino" & test$Etnia == "Afrocolombiano", 
+                              76.233 + 1.767 * test$LRT_CM - 0.098 * test$Edad, test$Benjumea_LRT_CM)
+# Blanco-Mestizo masculino
+test$Benjumea_LRT_CM <- ifelse(test$Sexo == "Masculino" & test$Etnia == "Blanco-Mestizo", 
+                              75.514 + 1.883 * test$LRT_CM - 0.108 * test$Edad, test$Benjumea_LRT_CM)
+# Blanco-Mestizo femenino
+test$Benjumea_LRT_CM <- ifelse(test$Sexo != "Masculino" & test$Etnia == "Blanco-Mestizo", 
+                              86.497 + 1.553 * test$LRT_CM - 0.119 * test$Edad, test$Benjumea_LRT_CM)
+
+# Calcular el MSE en test
+MSE_test <- mean((test$Talla - test$Benjumea_LRT_CM)^2, na.rm = TRUE)
+
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "Benjumea", Medida = "LRT_CM", MSE = mean((datos$Talla - datos$Benjumea_LRT_CM)^2, na.rm = TRUE), MSE_validacion = MSE_test))
+```
+
+
+```{r}
+# Para almacenar las estimaciones en un excel
+# LRT_A
+datos_copia$Benjumea_LRT_CM = rep(NA,nrow(datos_copia))
+
+# Indigena masculino
+datos_copia$Benjumea_LRT_CM = ifelse(datos_copia$Sexo=="Masculino" & datos_copia$Etnia == "Indigena", 82.695 + 1.745*datos_copia$LRT_CM - 0.121*datos_copia$Edad, datos_copia$Benjumea_LRT_CM)
+# Indigena femenino
+datos_copia$Benjumea_LRT_CM = ifelse(datos_copia$Sexo!="Masculino" & datos_copia$Etnia == "Indigena", 90.281 + 1.436*datos_copia$LRT_CM - 0.102*datos_copia$Edad, datos_copia$Benjumea_LRT_CM)
+# Afrodescendiente masculino
+datos_copia$Benjumea_LRT_CM = ifelse(datos_copia$Sexo=="Masculino" & datos_copia$Etnia == "Afrocolombiano", 79.298 + 1.855*datos_copia$LRT_CM - 0.141*datos_copia$Edad, datos_copia$Benjumea_LRT_CM)
+# Afrodescendiente femenino
+datos_copia$Benjumea_LRT_CM = ifelse(datos_copia$Sexo!="Masculino" & datos_copia$Etnia == "Afrocolombiano", 76.233 + 1.767*datos_copia$LRT_CM - 0.098*datos_copia$Edad, datos_copia$Benjumea_LRT_CM)
+# Blanco-Mestizo masculino
+datos_copia$Benjumea_LRT_CM = ifelse(datos_copia$Sexo=="Masculino" & datos_copia$Etnia == "Blanco-Mestizo", 75.514 + 1.883*datos_copia$LRT_CM - 0.108*datos_copia$Edad, datos_copia$Benjumea_LRT_CM)
+# Blanco-Mestizo femenino
+datos_copia$Benjumea_LRT_CM = ifelse(datos_copia$Sexo!="Masculino" & datos_copia$Etnia == "Blanco-Mestizo", 86.497 + 1.553*datos_copia$LRT_CM - 0.119*datos_copia$Edad, datos_copia$Benjumea_LRT_CM)
 ```
 
 ### Resumen fórmulas Benjumea
@@ -1127,10 +1393,33 @@ datos$Arango_LRM_R = ifelse(datos$Sexo=="Masculino", 119.6 + 1.121*datos$LRM_R -
 datos$Arango_LRM_R = ifelse(datos$Sexo!="Masculino", 107.7 + 1.263*datos$LRM_R - 0.159*datos$Edad, datos$Arango_LRM_R)
 
 mean((datos$Talla - datos$Arango_LRM_R)^2, na.rm = TRUE)
-
-MSEs <- rbind(MSEs, data.frame(Modelo = "Arango, Zamora", Medida = "LRM_R", MSE = mean((datos$Talla - datos$Arango_LRM_R)^2, na.rm = TRUE)))
 ```
 
+```{r}
+# LRM_R
+test$Arango_LRM_R = rep(NA,nrow(test))
+
+# Masculino
+test$Arango_LRM_R = ifelse(test$Sexo=="Masculino", 119.6 + 1.121*test$LRM_R - 0.117*test$Edad, test$Arango_LRM_R)
+# Femenino
+test$Arango_LRM_R = ifelse(test$Sexo!="Masculino", 107.7 + 1.263*test$LRM_R - 0.159*test$Edad, test$Arango_LRM_R)
+
+MSE_test <- mean((test$Talla - test$Arango_LRM_R)^2, na.rm = TRUE)
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "Arango, Zamora", Medida = "LRM_R", MSE = mean((datos$Talla - datos$Arango_LRM_R)^2, na.rm = TRUE), MSE_validacion = MSE_test))
+```
+
+
+```{r}
+# Para almacenar las estimaciones en un excel
+# LRM_R
+datos_copia$Arango_LRM_R = rep(NA,nrow(datos_copia))
+
+# Masculino
+datos_copia$Arango_LRM_R = ifelse(datos_copia$Sexo=="Masculino", 119.6 + 1.121*datos_copia$LRM_R - 0.117*datos_copia$Edad, datos_copia$Arango_LRM_R)
+# Femenino
+datos_copia$Arango_LRM_R = ifelse(datos_copia$Sexo!="Masculino", 107.7 + 1.263*datos_copia$LRM_R - 0.159*datos_copia$Edad, datos_copia$Arango_LRM_R)
+```
 
 ### LRM pierna a 90°
 
@@ -1147,7 +1436,42 @@ datos$Arango_LRM_90 = ifelse(datos$Sexo!="Masculino", 107.7 + 1.263*datos$LRM_90
 
 mean((datos$Talla - datos$Arango_LRM_90)^2, na.rm = TRUE)
 
-MSEs <- rbind(MSEs, data.frame(Modelo = "Arango, Zamora", Medida = "LRM_90", MSE = mean((datos$Talla - datos$Arango_LRM_90)^2, na.rm = TRUE)))
+```
+
+```{r}
+# LRM_R
+test$Arango_LRM_90 = rep(NA,nrow(test))
+
+# Masculino
+test$Arango_LRM_90 = ifelse(test$Sexo=="Masculino", 119.6 + 1.121*test$LRM_90 - 0.117*test$Edad, test$Arango_LRM_90)
+# Femenino
+test$Arango_LRM_90 = ifelse(test$Sexo!="Masculino", 107.7 + 1.263*test$LRM_90 - 0.159*test$Edad, test$Arango_LRM_90)
+
+MSE_test <- mean((test$Talla - test$Arango_LRM_90)^2, na.rm = TRUE)
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "Arango, Zamora", Medida = "LRM_90", MSE = mean((datos$Talla - datos$Arango_LRM_90)^2, na.rm = TRUE), MSE_validacion = MSE_test))
+```
+
+
+```{r}
+# Para almacenar las estimaciones en un excel
+# LRM_90
+datos_copia$Arango_LRM_90 = rep(NA,nrow(datos_copia))
+
+# Masculino
+datos_copia$Arango_LRM_90 = ifelse(datos_copia$Sexo=="Masculino", 119.6 + 1.121*datos_copia$LRM_90 - 0.117*datos_copia$Edad, datos_copia$Arango_LRM_90)
+# Femenino
+datos_copia$Arango_LRM_90 = ifelse(datos_copia$Sexo!="Masculino", 107.7 + 1.263*datos_copia$LRM_90 - 0.159*datos_copia$Edad, datos_copia$Arango_LRM_90)
+```
+
+
+```{r}
+#| eval: false
+# Escribimos el excel con las estimaciones
+
+library(writexl)
+
+write_xlsx(datos_copia[,-1], "Estimaciones.xlsx")
 ```
 
 ### Resumen fórmulas Arango y Zamora
@@ -1174,7 +1498,433 @@ Se observa que el modelo que presenta menor MSE es el modelo normal con LRT con 
 
 Por lo que las fórmulas que mejor estiman la talla de los adultos mayores en Colombia, según la base de datos analizada, son:
 
-$$Talla = 59.11 + 2.19 LRT\_A - 0.12 Edad + 3.06 Sexo$$\
+$$Talla = 58.84 + 2.17 \cdot LRT\_A - 0.11 \cdot Edad + 3.22 \cdot Sexo$$\
 $$Sexo = \begin{cases} 1 & \text{si sexo = masculino} \\ 0 & \text{si sexo = femenino} \end{cases}$$
 
 :::
+
+
+## Comportamiento de las variables de interés por subgrupos
+
+A continuación se mestra un resumen de las variables Edad, Talla, LRT_A y LRT_CM para cada subgrupo (femenino o masculino) de la muestra. Dentro de las medidas de resumen se encuentran tamaño de la muestra ($n$), mínimo, máximo, promedio, desviación estándar (DesEst) y mediana del grupo de datos con el que se ajustaron los modelos, además, estas mismas mediciones para el grupo de datos con el que se vaidaron los modelos (n_val, Minimo_val, Maximo_val, Promedio_val, DesEst_val, Mediana_val), y también el valor p (P_valor) de la prueba de independencia U de Mann-Whitney para Edad, o de la prueba $t$ de independencia para Talla, LRT_A y LRT_CM.
+
+### Sexo femenino
+
+```{r}
+femenino_tab <- data.frame(Variable = character(),
+                           n = numeric(),
+                           Minimo = numeric(),
+                           Maximo = numeric(),
+                           Promedio = numeric(),
+                           DesEst = numeric(),
+                           Mediana = numeric(),
+                           n_val = numeric(),
+                           Minimo_val = numeric(),
+                           Maximo_val = numeric(),
+                           Promedio_val = numeric(),
+                           DesEst_val = numeric(),
+                           Mediana_val = numeric(),
+                           P_valor = numeric())
+
+femenino <- datos[datos$Sexo == "Femenino",]
+femenino_test <- test[test$Sexo == "Femenino",]
+```
+
+
+```{r}
+#| results: hide
+lillie.test(femenino$Edad) # No normalidad
+lillie.test(femenino_test$Edad) # No normalidad
+
+
+lillie.test(femenino$Talla) # Normalidad
+lillie.test(femenino_test$Talla) # Normalidad
+
+lillie.test(femenino$LRT_A) # Normalidad
+lillie.test(femenino_test$LRT_A) # Normalidad
+
+lillie.test(femenino$LRT_CM) # Normalidad
+lillie.test(femenino_test$LRT_CM) # Normalidad
+```
+
+
+```{r}
+femenino_tab <- rbind(femenino_tab, 
+                      data.frame(Variable = "Edad",
+                                 n = nrow(femenino),
+                                 Minimo = min(femenino$Edad),
+                                 Maximo = max(femenino$Edad),
+                                 Promedio = mean(femenino$Edad),
+                                 DesEst = sd(femenino$Edad),
+                                 Mediana = median(femenino$Edad),
+                                 n_val = nrow(femenino_test),
+                                 Minimo_val = min(femenino_test$Edad),
+                                 Maximo_val = max(femenino_test$Edad),
+                                 Promedio_val = mean(femenino_test$Edad),
+                                 DesEst_val = sd(femenino_test$Edad),
+                                 Mediana_val = median(femenino_test$Edad),
+                                 P_valor = wilcox.test(femenino$Edad, femenino_test$Edad)$p.value))
+
+femenino_tab <- rbind(femenino_tab, 
+                      data.frame(Variable = "Talla",
+                                 n = nrow(femenino),
+                                 Minimo = min(femenino$Talla),
+                                 Maximo = max(femenino$Talla),
+                                 Promedio = mean(femenino$Talla),
+                                 DesEst = sd(femenino$Talla),
+                                 Mediana = median(femenino$Talla),
+                                 n_val = nrow(femenino_test),
+                                 Minimo_val = min(femenino_test$Talla),
+                                 Maximo_val = max(femenino_test$Talla),
+                                 Promedio_val = mean(femenino_test$Talla),
+                                 DesEst_val = sd(femenino_test$Talla),
+                                 Mediana_val = median(femenino_test$Talla),
+                                 P_valor = t.test(femenino$Talla, femenino_test$Talla)$p.value))
+
+femenino_tab <- rbind(femenino_tab, 
+                      data.frame(Variable = "LRT_A",
+                                 n = nrow(femenino),
+                                 Minimo = min(femenino$LRT_A),
+                                 Maximo = max(femenino$LRT_A),
+                                 Promedio = mean(femenino$LRT_A),
+                                 DesEst = sd(femenino$LRT_A),
+                                 Mediana = median(femenino$LRT_A),
+                                 n_val = nrow(femenino_test),
+                                 Minimo_val = min(femenino_test$LRT_A),
+                                 Maximo_val = max(femenino_test$LRT_A),
+                                 Promedio_val = mean(femenino_test$LRT_A),
+                                 DesEst_val = sd(femenino_test$LRT_A),
+                                 Mediana_val = median(femenino_test$LRT_A),
+                                 P_valor = t.test(femenino$LRT_A, femenino_test$LRT_A)$p.value))
+
+femenino_tab <- rbind(femenino_tab, 
+                      data.frame(Variable = "LRT_CM",
+                                 n = nrow(femenino),
+                                 Minimo = min(femenino$LRT_CM),
+                                 Maximo = max(femenino$LRT_CM),
+                                 Promedio = mean(femenino$LRT_CM),
+                                 DesEst = sd(femenino$LRT_CM),
+                                 Mediana = median(femenino$LRT_CM),
+                                 n_val = nrow(femenino_test),
+                                 Minimo_val = min(femenino_test$LRT_CM),
+                                 Maximo_val = max(femenino_test$LRT_CM),
+                                 Promedio_val = mean(femenino_test$LRT_CM),
+                                 DesEst_val = sd(femenino_test$LRT_CM),
+                                 Mediana_val = median(femenino_test$LRT_CM),
+                                 P_valor = t.test(femenino$LRT_CM, femenino_test$LRT_CM)$p.value))
+
+femenino_tab |> gt()
+```
+
+### Sexo masculino
+
+```{r}
+masculino_tab <- data.frame(Variable = character(),
+                           n = numeric(),
+                           Minimo = numeric(),
+                           Maximo = numeric(),
+                           Promedio = numeric(),
+                           DesEst = numeric(),
+                           Mediana = numeric(),
+                           n_val = numeric(),
+                           Minimo_val = numeric(),
+                           Maximo_val = numeric(),
+                           Promedio_val = numeric(),
+                           DesEst_val = numeric(),
+                           Mediana_val = numeric(),
+                           P_valor = numeric())
+
+masculino <- datos[datos$Sexo == "Masculino",]
+masculino_test <- test[test$Sexo == "Masculino",]
+```
+
+```{r}
+#| results: hide
+lillie.test(masculino$Edad) # No normalidad
+lillie.test(masculino_test$Edad) # No normalidad
+
+
+lillie.test(masculino$Talla) # Normalidad
+lillie.test(masculino_test$Talla) # Normalidad
+
+lillie.test(masculino$LRT_A) # Normalidad
+lillie.test(masculino_test$LRT_A) # Normalidad
+
+lillie.test(masculino$LRT_CM) # Normalidad
+lillie.test(masculino_test$LRT_CM) # Normalidad
+```
+
+
+```{r}
+masculino_tab <- rbind(masculino_tab, 
+                      data.frame(Variable = "Edad",
+                                 n = nrow(masculino),
+                                 Minimo = min(masculino$Edad),
+                                 Maximo = max(masculino$Edad),
+                                 Promedio = mean(masculino$Edad),
+                                 DesEst = sd(masculino$Edad),
+                                 Mediana = median(masculino$Edad),
+                                 n_val = nrow(masculino_test),
+                                 Minimo_val = min(masculino_test$Edad),
+                                 Maximo_val = max(masculino_test$Edad),
+                                 Promedio_val = mean(masculino_test$Edad),
+                                 DesEst_val = sd(masculino_test$Edad),
+                                 Mediana_val = median(masculino_test$Edad),
+                                 P_valor = wilcox.test(masculino$Edad, masculino_test$Edad)$p.value))
+
+masculino_tab <- rbind(masculino_tab, 
+                      data.frame(Variable = "Talla",
+                                 n = nrow(masculino),
+                                 Minimo = min(masculino$Talla),
+                                 Maximo = max(masculino$Talla),
+                                 Promedio = mean(masculino$Talla),
+                                 DesEst = sd(masculino$Talla),
+                                 Mediana = median(masculino$Talla),
+                                 n_val = nrow(masculino_test),
+                                 Minimo_val = min(masculino_test$Talla),
+                                 Maximo_val = max(masculino_test$Talla),
+                                 Promedio_val = mean(masculino_test$Talla),
+                                 DesEst_val = sd(masculino_test$Talla),
+                                 Mediana_val = median(masculino_test$Talla),
+                                 P_valor = t.test(masculino$Talla, masculino_test$Talla)$p.value))
+
+masculino_tab <- rbind(masculino_tab, 
+                      data.frame(Variable = "LRT_A",
+                                 n = nrow(masculino),
+                                 Minimo = min(masculino$LRT_A),
+                                 Maximo = max(masculino$LRT_A),
+                                 Promedio = mean(masculino$LRT_A),
+                                 DesEst = sd(masculino$LRT_A),
+                                 Mediana = median(masculino$LRT_A),
+                                 n_val = nrow(masculino_test),
+                                 Minimo_val = min(masculino_test$LRT_A),
+                                 Maximo_val = max(masculino_test$LRT_A),
+                                 Promedio_val = mean(masculino_test$LRT_A),
+                                 DesEst_val = sd(masculino_test$LRT_A),
+                                 Mediana_val = median(masculino_test$LRT_A),
+                                 P_valor = t.test(masculino$LRT_A, masculino_test$LRT_A)$p.value))
+
+masculino_tab <- rbind(masculino_tab, 
+                      data.frame(Variable = "LRT_CM",
+                                 n = nrow(masculino),
+                                 Minimo = min(masculino$LRT_CM),
+                                 Maximo = max(masculino$LRT_CM),
+                                 Promedio = mean(masculino$LRT_CM),
+                                 DesEst = sd(masculino$LRT_CM),
+                                 Mediana = median(masculino$LRT_CM),
+                                 n_val = nrow(masculino_test),
+                                 Minimo_val = min(masculino_test$LRT_CM),
+                                 Maximo_val = max(masculino_test$LRT_CM),
+                                 Promedio_val = mean(masculino_test$LRT_CM),
+                                 DesEst_val = sd(masculino_test$LRT_CM),
+                                 Mediana_val = median(masculino_test$LRT_CM),
+                                 P_valor = t.test(masculino$LRT_CM, masculino_test$LRT_CM)$p.value))
+
+masculino_tab |> gt()
+```
+
+## Cuadro Modelos predicción de la talla por sexo
+
+### Opción 1: Modelo normal LRT_A
+
+A continuación se muestran los resultados del mejor modelo (normal con LRT_A) dentro del conjunto de entrenamiento, de modo que se muestra el tamaño de la muestra de entrenamiento ($n$), el *r-*cuadrado que muestra la varianza explciada por el modelo (R2), el error estándar de la estimación (EE), el valor p de la prueba de normalidad de Lilliefors (Normalidad), y el valor p de la prueba Breusch-Pagan para homocedasticidad (Homocedasticidad).
+
+```{r}
+modelos_tab <- data.frame(n = numeric(),
+                          R2 = numeric(),
+                          EE = numeric(),
+                          Normalidad = numeric(),
+                          Homocedasticidad = numeric())
+
+modelo_femenino <- lm(Talla ~ LRT_A + Edad, data = femenino)
+r2_femenino <- summary(modelo_femenino)$r.squared
+ee_femenino <- sqrt(mean(residuals(modelo_femenino)^2))
+normalidad_femenino <- lillie.test(residuals(modelo_femenino))$p.value
+homocedasticidad_femenino <- bptest(modelo_femenino)$p.value
+
+modelos_tab <- rbind(modelos_tab, 
+                     data.frame(n = nrow(femenino),
+                                R2 = r2_femenino,
+                                EE = ee_femenino,
+                                Normalidad = normalidad_femenino,
+                                Homocedasticidad = homocedasticidad_femenino))
+
+modelo_masculino <- lm(Talla ~ LRT_A + Edad, data = masculino)
+r2_masculino <- summary(modelo_masculino)$r.squared
+ee_masculino <- sqrt(mean(residuals(modelo_masculino)^2))
+normalidad_masculino <- lillie.test(residuals(modelo_masculino))$p.value
+homocedasticidad_masculino <- bptest(modelo_masculino)$p.value
+
+modelos_tab <- rbind(modelos_tab, 
+                     data.frame(n = nrow(masculino),
+                                R2 = r2_masculino,
+                                EE = ee_masculino,
+                                Normalidad = normalidad_masculino,
+                                Homocedasticidad = homocedasticidad_masculino))
+
+
+nombres <- c("Femenino", "Masculino")
+modelos_tab <- cbind(nombres, modelos_tab)
+modelos_tab |> gt()
+```
+
+
+### Opción 2: Modelo normal LRT_CM
+
+A continuación se muestran los resultados del SEGUNDO mejor modelo (normal con LRT_CM) dentro del conjunto de entrenamiento, de modo que se muestra el tamaño de la muestra de entrenamiento ($n$), el *r-*cuadrado que muestra la varianza explciada por el modelo (R2), el error estándar de la estimación (EE), el valor p de la prueba de normalidad de Lilliefors (Normalidad), y el valor p de la prueba Breusch-Pagan para homocedasticidad (Homocedasticidad).
+
+```{r}
+modelos_tab <- data.frame(n = numeric(),
+                          R2 = numeric(),
+                          EE = numeric(),
+                          Normalidad = numeric(),
+                          Homocedasticidad = numeric())
+
+modelo_femenino <- lm(Talla ~ LRT_CM + Edad, data = femenino)
+r2_femenino <- summary(modelo_femenino)$r.squared
+ee_femenino <- sqrt(mean(residuals(modelo_femenino)^2))
+normalidad_femenino <- lillie.test(residuals(modelo_femenino))$p.value
+homocedasticidad_femenino <- bptest(modelo_femenino)$p.value
+
+modelos_tab <- rbind(modelos_tab, 
+                     data.frame(n = nrow(femenino),
+                                R2 = r2_femenino,
+                                EE = ee_femenino,
+                                Normalidad = normalidad_femenino,
+                                Homocedasticidad = homocedasticidad_femenino))
+
+modelo_masculino <- lm(Talla ~ LRT_CM + Edad, data = masculino)
+r2_masculino <- summary(modelo_masculino)$r.squared
+ee_masculino <- sqrt(mean(residuals(modelo_masculino)^2))
+normalidad_masculino <- lillie.test(residuals(modelo_masculino))$p.value
+homocedasticidad_masculino <- bptest(modelo_masculino)$p.value
+
+modelos_tab <- rbind(modelos_tab, 
+                     data.frame(n = nrow(masculino),
+                                R2 = r2_masculino,
+                                EE = ee_masculino,
+                                Normalidad = normalidad_masculino,
+                                Homocedasticidad = homocedasticidad_masculino))
+
+nombres <- c("Femenino", "Masculino")
+modelos_tab <- cbind(nombres, modelos_tab)
+
+modelos_tab |> gt()
+```
+
+
+## Cuadro Validación de las ecuaciones para estimar la talla en el grupo de validación
+
+### Opción 1: Modelo normal LRT_A
+
+Se muestra un resumen de los resultados del mejor modelo (normal con LRT_A) sobre el conjunto de validación, por lo que se encuentra $n$ el  tamaño de muestra del conjunto de validación para cada subgrupo (femenino o masculino), el *r-*cuadrado (R2) y el error puro (Error_Puro).
+
+```{r}
+modelos_tab_val <- data.frame(n = numeric(),
+                              R2 = numeric(),
+                              Error_Puro = numeric())
+
+# Para mujeres
+# Ajustar el modelo en el conjunto de entrenamiento
+modelo <- lm(Talla ~ LRT_A + Edad, data = femenino)
+
+# Hacer predicciones en el conjunto de validación (test)
+predicciones <- predict(modelo, newdata = femenino_test)
+
+# Calcular el R2 en test
+SSE <- sum((femenino_test$Talla - predicciones)^2)  # Suma de errores cuadráticos
+SST <- sum((femenino_test$Talla - mean(femenino_test$Talla))^2)  # Suma total de cuadrados
+R2_test <- 1 - (SSE / SST)
+
+
+MSE_test <- mean((femenino_test$Talla - predicciones)^2)
+
+modelos_tab_val <- rbind(modelos_tab_val,
+                         data.frame(n = nrow(femenino_test),
+                                    R2 = R2_test,
+                                    Error_Puro = sqrt(MSE_test)))
+
+
+
+# Para hombres 
+# Ajustar el modelo en el conjunto de entrenamiento
+modelo <- lm(Talla ~ LRT_A + Edad, data = masculino)
+
+# Hacer predicciones en el conjunto de validación (test)
+predicciones <- predict(modelo, newdata = masculino_test)
+
+# Calcular el R2 en test
+SSE <- sum((masculino_test$Talla - predicciones)^2)  # Suma de errores cuadráticos
+SST <- sum((masculino_test$Talla - mean(masculino_test$Talla))^2)  # Suma total de cuadrados
+R2_test <- 1 - (SSE / SST)
+
+
+MSE_test <- mean((masculino_test$Talla - predicciones)^2)
+
+modelos_tab_val <- rbind(modelos_tab_val,
+                         data.frame(n = nrow(masculino_test),
+                                    R2 = R2_test,
+                                    Error_Puro = sqrt(MSE_test)))
+
+nombres <- c("Femenino", "Masculino")
+modelos_tab_val <- cbind(nombres, modelos_tab_val)
+
+modelos_tab_val |> gt()
+```
+
+### Opción 2: Modelo normal LRT_CM
+
+Se muestra un resumen de los resultados del SEGUNDO mejor modelo (normal con LRT_CM) sobre el conjunto de validación, por lo que se encuentra $n$ el  tamaño de muestra del conjunto de validación para cada subgrupo (femenino o masculino), el *r-*cuadrado (R2) y el error puro (Error_Puro).
+
+```{r}
+modelos_tab_val <- data.frame(n = numeric(),
+                              R2 = numeric(),
+                              Error_Puro = numeric())
+
+# Para mujeres
+# Ajustar el modelo en el conjunto de entrenamiento
+modelo <- lm(Talla ~ LRT_CM + Edad, data = femenino)
+
+# Hacer predicciones en el conjunto de validación (test)
+predicciones <- predict(modelo, newdata = femenino_test)
+
+# Calcular el R2 en test
+SSE <- sum((femenino_test$Talla - predicciones)^2)  # Suma de errores cuadráticos
+SST <- sum((femenino_test$Talla - mean(femenino_test$Talla))^2)  # Suma total de cuadrados
+R2_test <- 1 - (SSE / SST)
+
+
+MSE_test <- mean((femenino_test$Talla - predicciones)^2)
+
+modelos_tab_val <- rbind(modelos_tab_val,
+                         data.frame(n = nrow(femenino_test),
+                                    R2 = R2_test,
+                                    Error_Puro = sqrt(MSE_test)))
+
+
+
+# Para hombres 
+# Ajustar el modelo en el conjunto de entrenamiento
+modelo <- lm(Talla ~ LRT_CM + Edad, data = masculino)
+
+# Hacer predicciones en el conjunto de validación (test)
+predicciones <- predict(modelo, newdata = masculino_test)
+
+# Calcular el R2 en test
+SSE <- sum((masculino_test$Talla - predicciones)^2)  # Suma de errores cuadráticos
+SST <- sum((masculino_test$Talla - mean(masculino_test$Talla))^2)  # Suma total de cuadrados
+R2_test <- 1 - (SSE / SST)
+
+
+MSE_test <- mean((masculino_test$Talla - predicciones)^2)
+
+modelos_tab_val <- rbind(modelos_tab_val,
+                         data.frame(n = nrow(masculino_test),
+                                    R2 = R2_test,
+                                    Error_Puro = sqrt(MSE_test)))
+
+nombres <- c("Femenino", "Masculino")
+modelos_tab_val <- cbind(nombres, modelos_tab_val)
+
+modelos_tab_val |> gt()
+```

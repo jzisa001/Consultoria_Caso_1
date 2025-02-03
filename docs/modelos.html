@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -45,13 +45,7 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
+  "limit": 20,
   "language": {
     "search-no-results-text": "Ninguna coincidencia",
     "search-matching-documents-text": "coincidencias",
@@ -60,42 +54,14 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "",
     "search-label": "Search"
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -104,34 +70,34 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Inicio</span></a>
+    <a class="nav-link" href="./index.html" rel="" target="">
+ <span class="menu-text">Inicio</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./descriptivo.html"> 
-<span class="menu-text">Análisis descriptivo</span></a>
+    <a class="nav-link" href="./descriptivo.html" rel="" target="">
+ <span class="menu-text">Análisis descriptivo</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./hipotesis.html"> 
-<span class="menu-text">Evaluación de hipótesis</span></a>
+    <a class="nav-link" href="./hipotesis.html" rel="" target="">
+ <span class="menu-text">Evaluación de hipótesis</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./modelos.html" aria-current="page"> 
-<span class="menu-text">Modelos</span></a>
+    <a class="nav-link active" href="./modelos.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Modelos</span></a>
   </li>  
 </ul>
-          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
+          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -184,13 +150,27 @@ window.Quarto = {
   <li><a href="#resumen-fórmulas-arango-y-zamora" id="toc-resumen-fórmulas-arango-y-zamora" class="nav-link" data-scroll-target="#resumen-fórmulas-arango-y-zamora">Resumen fórmulas Arango y Zamora</a></li>
   </ul></li>
   <li><a href="#conclusión" id="toc-conclusión" class="nav-link" data-scroll-target="#conclusión">Conclusión</a></li>
+  <li><a href="#comportamiento-de-las-variables-de-interés-por-subgrupos" id="toc-comportamiento-de-las-variables-de-interés-por-subgrupos" class="nav-link" data-scroll-target="#comportamiento-de-las-variables-de-interés-por-subgrupos">Comportamiento de las variables de interés por subgrupos</a>
+  <ul class="collapse">
+  <li><a href="#sexo-femenino" id="toc-sexo-femenino" class="nav-link" data-scroll-target="#sexo-femenino">Sexo femenino</a></li>
+  <li><a href="#sexo-masculino" id="toc-sexo-masculino" class="nav-link" data-scroll-target="#sexo-masculino">Sexo masculino</a></li>
+  </ul></li>
+  <li><a href="#cuadro-modelos-predicción-de-la-talla-por-sexo" id="toc-cuadro-modelos-predicción-de-la-talla-por-sexo" class="nav-link" data-scroll-target="#cuadro-modelos-predicción-de-la-talla-por-sexo">Cuadro Modelos predicción de la talla por sexo</a>
+  <ul class="collapse">
+  <li><a href="#opción-1-modelo-normal-lrt_a" id="toc-opción-1-modelo-normal-lrt_a" class="nav-link" data-scroll-target="#opción-1-modelo-normal-lrt_a">Opción 1: Modelo normal LRT_A</a></li>
+  <li><a href="#opción-2-modelo-normal-lrt_cm" id="toc-opción-2-modelo-normal-lrt_cm" class="nav-link" data-scroll-target="#opción-2-modelo-normal-lrt_cm">Opción 2: Modelo normal LRT_CM</a></li>
+  </ul></li>
+  <li><a href="#cuadro-validación-de-las-ecuaciones-para-estimar-la-talla-en-el-grupo-de-validación" id="toc-cuadro-validación-de-las-ecuaciones-para-estimar-la-talla-en-el-grupo-de-validación" class="nav-link" data-scroll-target="#cuadro-validación-de-las-ecuaciones-para-estimar-la-talla-en-el-grupo-de-validación">Cuadro Validación de las ecuaciones para estimar la talla en el grupo de validación</a>
+  <ul class="collapse">
+  <li><a href="#opción-1-modelo-normal-lrt_a-1" id="toc-opción-1-modelo-normal-lrt_a-1" class="nav-link" data-scroll-target="#opción-1-modelo-normal-lrt_a-1">Opción 1: Modelo normal LRT_A</a></li>
+  <li><a href="#opción-2-modelo-normal-lrt_cm-1" id="toc-opción-2-modelo-normal-lrt_cm-1" class="nav-link" data-scroll-target="#opción-2-modelo-normal-lrt_cm-1">Opción 2: Modelo normal LRT_CM</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content column-page-left" id="quarto-document-content">
-
 
 
 
@@ -206,7 +186,7 @@ window.Quarto = {
 <p>A continuación, se muestra el BIC para cada mejor modelo del correspondiente tamaño:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -1089.766 -1127.650 -1155.202 -1149.550 -1145.850 -1141.407</code></pre>
+<pre><code>[1] -869.8783 -907.9493 -924.4497 -919.9051 -915.3551 -910.8365</code></pre>
 </div>
 </div>
 <p>Usando el criterio del BIC, el mejor modelo es el de 3 variables:</p>
@@ -215,28 +195,20 @@ window.Quarto = {
 <pre><code>[1] 3</code></pre>
 </div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Los coeficientes del mejor modelo usando el criterio de BIC son:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>  (Intercept)         LRT_A          Edad SexoMasculino 
-   59.1083106     2.1894102    -0.1216628     3.0653353 </code></pre>
+   58.8428454     2.1763364    -0.1096942     3.2256625 </code></pre>
 </div>
 </div>
-<p>Esto sugiere usar el modelo <span class="math inline">\(Talla = 59.11 + 2.19 LRT\_A - 0.12 Edad + 3.06 Sexo\)</span>,<br>
+<p>Esto sugiere usar el modelo <span class="math inline">\(Talla = 58.84 + 2.17 \cdot LRT\_A - 0.11 \cdot Edad + 3.22 \cdot Sexo\)</span>,<br>
 <span class="math display">\[Sexo = \begin{cases} 1 &amp; \text{si sexo = masculino} \\ 0 &amp; \text{si sexo = femenino} \end{cases}\]</span></p>
 <p>Ahora se usará <strong><em>K - fold cross validation</em></strong> con el fin de calcular directamente los errores de predicción sobre los datos de testeo y evitar así el sobreajuste.</p>
 <ul>
@@ -248,7 +220,7 @@ window.Quarto = {
 <p>El MSE para el modelo de 3 variables (<span class="math inline">\(LRT\_A, Edad, Sexo\)</span>) es:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 10.39225</code></pre>
+<pre><code>[1] 10.14466</code></pre>
 </div>
 </div>
 </section>
@@ -258,7 +230,7 @@ window.Quarto = {
 <p>A continuación, se muestra el BIC para cada mejor modelo del correspondiente tamaño:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  -984.6341 -1057.4421 -1084.1402 -1078.3435 -1074.4531 -1068.4135</code></pre>
+<pre><code>[1] -785.0072 -854.2349 -869.3562 -864.2374 -859.6006 -853.6608</code></pre>
 </div>
 </div>
 <p>Usando el criterio BIC, el mejor modelo es el de 3 variables:</p>
@@ -267,34 +239,26 @@ window.Quarto = {
 <pre><code>[1] 3</code></pre>
 </div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-14-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Los coeficientes del mejor modelo usando el criterio de BIC son:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>  (Intercept)        LRT_CM          Edad SexoMasculino 
-   57.3048203     2.1612215    -0.1281442     4.1354010 </code></pre>
+   56.7788743     2.1486596    -0.1131516     4.3001219 </code></pre>
 </div>
 </div>
-<p>Esto sugiere usar el modelo <span class="math inline">\(Talla = 57.30 + 2.16 LRT\_CM - 0.13 Edad + 4.13 Sexo\)</span>,<br>
+<p>Esto sugiere usar el modelo <span class="math inline">\(Talla = 56.78 + 2.14 \cdot LRT\_CM - 0.11 \cdot Edad + 4.30 \cdot Sexo\)</span>,<br>
 <span class="math display">\[Sexo = \begin{cases} 1 &amp; \text{si sexo = Masculino} \\ 0 &amp; \text{si sexo = Femenino} \end{cases}\]</span></p>
 <p>Ahora usamos nuevamente <strong><em>K - fold cross validation</em></strong> con el fin de calcular directamente los errores de predicción sobre los datos de testeo y evitar así el sobreajuste de la misma manera que se realizó para el modelo normal de <span class="math inline">\(LRT_A\)</span>.</p>
 <p>El MSE para el modelo de 3 variables (<span class="math inline">\(LRT\_CM, Edad, Sexo\)</span>) es:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 11.78225</code></pre>
+<pre><code>[1] 11.52624</code></pre>
 </div>
 </div>
 </section>
@@ -304,7 +268,7 @@ window.Quarto = {
 <p>A continuación, se muestra el BIC para cada mejor modelo del correspondiente tamaño:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  -963.144 -1017.156 -1035.460 -1029.924 -1025.438 -1021.676</code></pre>
+<pre><code>[1] -770.6371 -814.0382 -823.5290 -818.9141 -814.1528 -810.4009</code></pre>
 </div>
 </div>
 <p>Usando el criterio BIC, el mejor modelo es el de 3 variables:</p>
@@ -313,34 +277,26 @@ window.Quarto = {
 <pre><code>[1] 3</code></pre>
 </div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-17-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-21-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Los coeficientes del mejor modelo usando el criterio de BIC son:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>  (Intercept)         LRM_R          Edad SexoMasculino 
-    68.048537      2.217070     -0.115388      3.814406 </code></pre>
+   67.2117181     2.2173933    -0.1018772     3.7494134 </code></pre>
 </div>
 </div>
-<p>Esto sugiere usar el modelo <span class="math inline">\(Talla = 68.04 + 2.21 LRM\_R - 0.11 Edad + 3.81 Sexo\)</span>,<br>
+<p>Esto sugiere usar el modelo <span class="math inline">\(Talla = 67.21 + 2.22 \cdot LRM\_R - 0.10 \cdot Edad + 3.75 \cdot Sexo\)</span>,<br>
 <span class="math display">\[Sexo = \begin{cases} 1 &amp; \text{si sexo = Masculino} \\ 0 &amp; \text{si sexo = Femenino} \end{cases}\]</span></p>
 <p>Nuevamente, se hará la búsqueda del mejor modelo usando <strong><em>K - fold cross validation</em></strong> con el fin de calcular directamente los errores de predicción sobre los datos de testeo y evitar así el sobreajuste.</p>
 <p>El MSE para el modelo de 3 variables (<span class="math inline">\(LRM\_R, Edad, Sexo\)</span>) es:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 12.99465</code></pre>
+<pre><code>[1] 12.83537</code></pre>
 </div>
 </div>
 </section>
@@ -350,7 +306,7 @@ window.Quarto = {
 <p>A continuación, se muestra el BIC para cada mejor modelo del correspondiente tamaño:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  -911.8475 -1010.8238 -1030.2001 -1024.5910 -1019.0264 -1013.7421</code></pre>
+<pre><code>[1] -724.1015 -810.4493 -819.5010 -813.7540 -808.3704 -803.4330</code></pre>
 </div>
 </div>
 <p>Usando el criterio BIC, el mejor modelo es el de 3 variables:</p>
@@ -359,34 +315,26 @@ window.Quarto = {
 <pre><code>[1] 3</code></pre>
 </div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-23-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-27-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Los coeficientes del mejor modelo usando el criterio de BIC son:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>  (Intercept)        LRM_90          Edad SexoMasculino 
-   66.2016693     2.2163573    -0.1184789     4.8293028 </code></pre>
+   65.9041633     2.1944725    -0.1008714     4.9118635 </code></pre>
 </div>
 </div>
-<p>Esto sugiere usar el modelo <span class="math inline">\(Talla = 66.20 + 2.22 LRM\_90 - 0.12 Edad + 4.83 Sexo\)</span>,<br>
+<p>Esto sugiere usar el modelo <span class="math inline">\(Talla = 65.90 + 2.19 \cdot LRM\_90 - 0.10 \cdot Edad + 4.91 \cdot Sexo\)</span>,<br>
 <span class="math display">\[Sexo = \begin{cases} 1 &amp; \text{si sexo = Masculino} \\ 0 &amp; \text{si sexo = Femenino} \end{cases}\]</span></p>
 <p>Ahora se hará la búsqueda del mejor modelo usando <strong><em>K - fold cross validation</em></strong> con el fin de calcular directamente los errores de predicción sobre los datos de testeo y evitar así el sobreajuste.</p>
 <p>El MSE para el modelo de 3 variables (<span class="math inline">\(LRM\_90, Edad, Sexo\)</span>) es:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 13.08059</code></pre>
+<pre><code>[1] 12.97915</code></pre>
 </div>
 </div>
 </section>
@@ -397,15 +345,15 @@ window.Quarto = {
 <p>La tabla de los errores cuadráticos medios para la regresión lineal simple es la siguiente:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>  Modelo Medida      MSE
-1 Normal  LRT_A 10.39225
-2 Normal LRT_CM 11.78225
-3 Normal  LRM_R 12.99465
-4 Normal LRM_90 13.08059</code></pre>
+<pre><code>  Modelo Medida      MSE MSE_validacion
+1 Normal  LRT_A 10.14466       11.27857
+2 Normal LRT_CM 11.52624       13.05033
+3 Normal  LRM_R 12.83537       13.50163
+4 Normal LRM_90 12.97915       13.65316</code></pre>
 </div>
 </div>
 <p>El modelo con menor error cuadrático medio es el que tiene en cuenta la medida LRT con antropómetro:</p>
-<p><span class="math display">\[Talla = 59.11 + 2.19 LRT\_A - 0.12 Edad + 3.06 Sexo\]</span></p>
+<p><span class="math display">\[Talla = 58.84 + 2.17 \cdot LRT\_A - 0.11 \cdot Edad + 3.22 \cdot Sexo\]</span></p>
 <p>A continuación, se procederá a validar los supuestos del mejor modelo identificado. Esta validación es crucial, ya que si los supuestos no se cumplen, el modelo no puede considerarse válido y sus resultados podrían no ser confiables.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -415,31 +363,27 @@ lm(formula = Talla ~ LRT_A + Edad + Sexo, data = datos)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--10.4374  -2.0311   0.1058   2.2783   9.2680 
+-10.6057  -1.9307   0.0574   2.3335   8.5648 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   59.10831    2.90260  20.364  &lt; 2e-16 ***
-LRT_A          2.18941    0.05360  40.848  &lt; 2e-16 ***
-Edad          -0.12166    0.02066  -5.888 6.88e-09 ***
-SexoMasculino  3.06534    0.38877   7.885 1.76e-14 ***
+(Intercept)   58.84285    3.15618  18.644  &lt; 2e-16 ***
+LRT_A          2.17634    0.05994  36.310  &lt; 2e-16 ***
+Edad          -0.10969    0.02289  -4.792 2.28e-06 ***
+SexoMasculino  3.22566    0.42876   7.523 3.14e-13 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 3.207 on 539 degrees of freedom
-Multiple R-squared:  0.8863,    Adjusted R-squared:  0.8856 
-F-statistic:  1400 on 3 and 539 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 3.17 on 431 degrees of freedom
+Multiple R-squared:  0.8871,    Adjusted R-squared:  0.8863 
+F-statistic:  1129 on 3 and 431 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>El modelo tiene un <span class="math inline">\(R^2\)</span> ajustado de <span class="math inline">\(0.8856\)</span>, es decir que aproximadamente un <span class="math inline">\(88.56\%\)</span> de la variabilidad de la talla es explicada por LRT_A, la edad y el sexo.</p>
 <p><strong><em>Linealidad:</em></strong> Con el fin de verificar que la relación entre la talla y las variables LRT_A (discriminando por sexo) y la edad es lineal, se visualiza el gráfico de los residuos vs los valores predichos del modelo <span class="math inline">\(\left(\hat{e},\hat{y} \right)\)</span>:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>El gráfico no muestra ningún patrón marcado, la ubicación de los puntos parece ser aleatoria alrededor de cero, indicando también homoscedasticidad en los residuales y posible independencia de los mismos. El gráfico muestra algunos valores atípicos que valdría la pena explorar.</p>
@@ -450,7 +394,7 @@ F-statistic:  1400 on 3 and 539 DF,  p-value: &lt; 2.2e-16</code></pre>
     Durbin-Watson test
 
 data:  reg
-DW = 2.0507, p-value = 0.7173
+DW = 2.1354, p-value = 0.9191
 alternative hypothesis: true autocorrelation is greater than 0</code></pre>
 </div>
 </div>
@@ -458,36 +402,28 @@ alternative hypothesis: true autocorrelation is greater than 0</code></pre>
 <p><strong><em>Normalidad de los errores:</em></strong> Se realiza el gráfico QQ-plot para comparar la distribución de los residuales del modelo con la distribución teórica de una normal. También se hace el test de normalidad de Lilliefors y Anderson-Darling:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Lilliefors (Kolmogorov-Smirnov) normality test
 
 data:  reg$residuals
-D = 0.02184, p-value = 0.7651</code></pre>
+D = 0.028887, p-value = 0.5079</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Anderson-Darling normality test
 
 data:  reg$residuals
-A = 0.41295, p-value = 0.337</code></pre>
+A = 0.51324, p-value = 0.1926</code></pre>
 </div>
 </div>
 <p>El QQ-plot muestra que los residuales se ajustan aceptablemente a una distribución normal. Las pruebas de normalidad de Lilliefors y Anderson-Darling también apoyan este resultado.</p>
 <p><strong><em>Homoscedasticidad:</em></strong> Aunque no se vio un patron que indicara heteroscedasticidad en el gráfico de los residuales vs los valores predichos, a continuación se muestra el gráfico de los residuales estandarizados vs los valores predichos con el fin de mejorar la interpretabilidad de la homoscedasticidad y tener una visión más clara de las observaciones atípicas e influyentes:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>No se observan patrones que indiquen hereroscedasticidad en los residuos (forma de cono o embudo). Se siguien observando algunas observaciones atípicas y/o influyentes.</p>
@@ -498,7 +434,7 @@ A = 0.41295, p-value = 0.337</code></pre>
     studentized Breusch-Pagan test
 
 data:  reg
-BP = 0.8348, df = 3, p-value = 0.8411</code></pre>
+BP = 1.5378, df = 3, p-value = 0.6736</code></pre>
 </div>
 </div>
 <p>No se rechaza la hipótesis nula de que los errores del modelo son homoscedasticos.</p>
@@ -506,7 +442,7 @@ BP = 0.8348, df = 3, p-value = 0.8411</code></pre>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>   LRT_A     Edad     Sexo 
-1.942637 1.038371 1.995345 </code></pre>
+1.955928 1.034172 1.988986 </code></pre>
 </div>
 </div>
 <p>Dado que los VIFs son mucho menores a 5, esto indica que cada variable tiene una correlación moderada (leve) con las demás. Por lo que se puede concluir que los resultados del modelo posiblemente no estarán muy afectados por la multicolinealidad.</p>
@@ -517,51 +453,46 @@ BP = 0.8348, df = 3, p-value = 0.8411</code></pre>
     RESET test
 
 data:  reg
-RESET = 0.62101, df1 = 4, df2 = 535, p-value = 0.6477</code></pre>
+RESET = 1.0309, df1 = 4, df2 = 427, p-value = 0.3909</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     RESET test
 
 data:  reg
-RESET = 0.98691, df1 = 2, df2 = 537, p-value = 0.3734</code></pre>
+RESET = 0.73692, df1 = 2, df2 = 429, p-value = 0.4792</code></pre>
 </div>
 </div>
 <p>No se rechaza la hipótesis nula de que el modelo está bien especificado.</p>
 <p><strong><em>Observaciones atípicas y de alto apalancamiento:</em></strong></p>
-<div>
-
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="modelos_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="modelos_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="modelos_files/figure-html/unnamed-chunk-36-2.png" class="img-fluid" width="672"></p>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="modelos_files/figure-html/unnamed-chunk-40-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
 <p>Usando los residuales estudentizados, se observan <span class="math inline">\(5\)</span> datos atípicos.</p>
-<div>
-
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="modelos_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="cell quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="modelos_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="modelos_files/figure-html/unnamed-chunk-37-2.png" class="img-fluid" width="672"></p>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="modelos_files/figure-html/unnamed-chunk-41-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="quarto-layout-row">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <pre><code>       StudRes        Hat       CookD
-41  -2.9464281 0.01514476 0.032906079
-505 -0.6485772 0.03066342 0.003330247
-520 -3.3029648 0.01104953 0.029923010
-538 -0.8302135 0.02463562 0.004354784</code></pre>
+25  -0.7292660 0.02933562 0.004022631
+491 -2.6083060 0.01716950 0.029317535
+520 -3.4102219 0.01403516 0.040390587
+529 -2.8640783 0.01333301 0.027256453
+538 -0.8522359 0.03089114 0.005791578</code></pre>
 </div>
 </div>
 </div>
@@ -577,20 +508,20 @@ lm(formula = Talla ~ LRT_A + Edad + Sexo, data = datos, subset = {
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--10.4573  -2.0353   0.1184   2.2692   9.2417 
+-10.6058  -1.9277   0.0483   2.3297   8.5671 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   59.22121    2.91027  20.349  &lt; 2e-16 ***
-LRT_A          2.18636    0.05401  40.477  &lt; 2e-16 ***
-Edad          -0.12112    0.02073  -5.843 8.88e-09 ***
-SexoMasculino  3.07005    0.38910   7.890 1.70e-14 ***
+(Intercept)   58.96460    3.16648  18.622  &lt; 2e-16 ***
+LRT_A          2.17491    0.06004  36.224  &lt; 2e-16 ***
+Edad          -0.11051    0.02296  -4.813 2.06e-06 ***
+SexoMasculino  3.22663    0.42911   7.519 3.24e-13 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 3.208 on 537 degrees of freedom
-Multiple R-squared:  0.8846,    Adjusted R-squared:  0.8839 
-F-statistic:  1372 on 3 and 537 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 3.173 on 430 degrees of freedom
+Multiple R-squared:  0.8867,    Adjusted R-squared:  0.8859 
+F-statistic:  1122 on 3 and 430 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Las estimaciones de los coeficientes del modelo sin las obervaciones influyentes han cambiado un poco respecto al modelo original. El <span class="math inline">\(R^2\)</span> ajustado ha incrementado un poco también.</p>
@@ -606,20 +537,16 @@ F-statistic:  1372 on 3 and 537 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Se ajusta el modelo en cada fold usando <code>cv.glmnet</code>:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-45-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>El valor de <span class="math inline">\(\lambda\)</span> óptimo y el MSE del modelo ajustado con ese valor de <span class="math inline">\(\lambda\)</span> son respectivamente:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Valor de lambda óptimo: 0.111"</code></pre>
+<pre><code>[1] "Valor de lambda óptimo: 0.099"</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "MSE: 10.453"</code></pre>
+<pre><code>[1] "MSE: 10.186"</code></pre>
 </div>
 </div>
 <p>Los coeficientes resultantes del modelo ajustado son:</p>
@@ -627,17 +554,18 @@ F-statistic:  1372 on 3 and 537 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>7 x 1 sparse Matrix of class "dgCMatrix"
                              s1
-(Intercept)         58.51417927
-LRT_A                2.17429764
-Edad                -0.10202039
-SexoMasculino        2.87000568
+(Intercept)         58.49212479
+LRT_A                2.15790258
+Edad                -0.09165771
+SexoMasculino        3.07058891
 EtniaBlanco-Mestizo  .         
-EtniaIndigena        0.03660454
+EtniaIndigena        0.87257838
 EtniaRrom            .         </code></pre>
 </div>
 </div>
 <p>Finalmente, la ecuación propuesta por este modelo para estimar la talla en adultos mayores es:</p>
-<p><span class="math display">\[Talla = 58.514 + 2.174 \cdot LRT\_A - 0.102 \cdot Edad + 2.870 \cdot SexoMasculino + 0.037 \cdot EtniaIndigena\]</span> <span class="math display">\[Sexo = \begin{cases} 1 &amp; \text{si sexo = Masculino} \\ 0 &amp; \text{si sexo = Femenino} \end{cases}\]</span> <span class="math display">\[BM = \begin{cases} 1 &amp; \text{si Etnia = Blanco-Mestizo} \\ 0 &amp; \text{en otro caso} \end{cases}\]</span> <span class="math display">\[Ind = \begin{cases} 1 &amp; \text{si Etnia = Indígena} \\ 0 &amp; \text{en otro caso} \end{cases}\]</span></p>
+<p><span class="math display">\[Talla = 58.49 + 2.16 \cdot LRT\_A - 0.09 \cdot Edad + 3.07 \cdot Sexo + 0.87 \cdot Ind\]</span> <span class="math display">\[Sexo = \begin{cases} 1 &amp; \text{si sexo = Masculino} \\ 0 &amp; \text{si sexo = Femenino} \end{cases}\]</span></p>
+<p><span class="math display">\[Ind = \begin{cases} 1 &amp; \text{si Etnia = Indígena} \\ 0 &amp; \text{en otro caso} \end{cases}\]</span></p>
 </section>
 <section id="lrt-cinta-métrica-1" class="level3">
 <h3 class="anchored" data-anchor-id="lrt-cinta-métrica-1">LRT cinta métrica</h3>
@@ -647,40 +575,36 @@ EtniaRrom            .         </code></pre>
 <p>Se ajusta el modelo en cada fold usando <code>cv.glmnet</code>:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-45-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>El valor de <span class="math inline">\(\lambda\)</span> óptimo y el MSE del modelo ajustado con ese valor de <span class="math inline">\(\lambda\)</span> son respectivamente:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Valor de lambda óptimo: 0.105"</code></pre>
+<pre><code>[1] "Valor de lambda óptimo: 0.008"</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "MSE: 11.84"</code></pre>
+<pre><code>[1] "MSE: 11.542"</code></pre>
 </div>
 </div>
 <p>Los coeficientes resultantes del modelo ajustado son:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>7 x 1 sparse Matrix of class "dgCMatrix"
-                           s1
-(Intercept)         56.831070
-LRT_CM               2.145520
-Edad                -0.109548
-SexoMasculino        3.951163
-EtniaBlanco-Mestizo  .       
-EtniaIndigena        .       
-EtniaRrom            .       </code></pre>
+                            s1
+(Intercept)         55.0472932
+LRT_CM               2.1472901
+Edad                -0.1131422
+SexoMasculino        4.3041272
+EtniaBlanco-Mestizo  1.7987785
+EtniaIndigena        3.1804166
+EtniaRrom            0.9271863</code></pre>
 </div>
 </div>
 <p>Finalmente, la ecuación propuesta por este modelo para estimar la talla en adultos mayores es:</p>
-<p><span class="math display">\[Talla = 56.831 + 2.146 \cdot LRT\_CM - 0.110 \cdot Edad + 3.951 \cdot Sexo\]</span><br>
+<p><span class="math display">\[Talla = 55.04 + 2.15 \cdot LRT\_CM - 0.11 \cdot Edad + 4.30 \cdot Sexo + 1.79 \cdot BM + 3.18 \cdot Ind + 0.93 \cdot Rrom\]</span><br>
 <span class="math display">\[Sexo = \begin{cases} 1 &amp; \text{si sexo = Masculino} \\ 0 &amp; \text{si sexo = Femenino} \end{cases}\]</span><br>
-</p>
+<span class="math display">\[BM = \begin{cases} 1 &amp; \text{si Etnia = Blanco-Mestizo} \\ 0 &amp; \text{en otro caso} \end{cases}\]</span> <span class="math display">\[Ind = \begin{cases} 1 &amp; \text{si Etnia = Indígena} \\ 0 &amp; \text{en otro caso} \end{cases}\]</span> <span class="math display">\[Rrom = \begin{cases} 1 &amp; \text{si Etnia = Rrom} \\ 0 &amp; \text{en otro caso} \end{cases}\]</span></p>
 </section>
 <section id="lrm-pierna-estirada-1" class="level3">
 <h3 class="anchored" data-anchor-id="lrm-pierna-estirada-1">LRM pierna estirada</h3>
@@ -690,38 +614,34 @@ EtniaRrom            .       </code></pre>
 <p>Se ajusta el modelo en cada fold usando <code>cv.glmnet</code>:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-49-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-55-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>El valor de <span class="math inline">\(\lambda\)</span> óptimo y el MSE del modelo ajustado con ese valor de <span class="math inline">\(\lambda\)</span> son respectivamente:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Valor de lambda óptimo: 0.016"</code></pre>
+<pre><code>[1] "Valor de lambda óptimo: 0.005"</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "MSE: 13.041"</code></pre>
+<pre><code>[1] "MSE: 12.828"</code></pre>
 </div>
 </div>
 <p>Los coeficientes resultantes del modelo ajustado son:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>7 x 1 sparse Matrix of class "dgCMatrix"
-                            s1
-(Intercept)         65.5249311
-LRM_R                2.2166275
-Edad                -0.1155135
-SexoMasculino        3.7972716
-EtniaBlanco-Mestizo  2.5682231
-EtniaIndigena        3.5081921
-EtniaRrom            5.3139123</code></pre>
+                           s1
+(Intercept)         64.530104
+LRM_R                2.216361
+Edad                -0.103810
+SexoMasculino        3.753767
+EtniaBlanco-Mestizo  2.860621
+EtniaIndigena        4.717920
+EtniaRrom            5.746844</code></pre>
 </div>
 </div>
 <p>Finalmente, la ecuación propuesta por este modelo para estimar la talla en adultos mayores es:</p>
-<p><span class="math display">\[Talla = 65.525 + 2.217 \cdot LRM\_R - 0.116 \cdot Edad + 3.797 \cdot Sexo + 2.568 \cdot BM + 3.508 \cdot Ind + 5.314 \cdot Rrom\]</span><br>
+<p><span class="math display">\[Talla = 64.53 + 2.22 \cdot LRM\_R - 0.10 \cdot Edad + 3.75 \cdot Sexo + 2.86 \cdot BM + 4.72 \cdot Ind + 5.75 \cdot Rrom\]</span><br>
 <span class="math display">\[Sexo = \begin{cases} 1 &amp; \text{si sexo = Masculino} \\ 0 &amp; \text{si sexo = Femenino} \end{cases}\]</span><br>
 <span class="math display">\[BM = \begin{cases} 1 &amp; \text{si Etnia = Blanco-Mestizo} \\ 0 &amp; \text{en otro caso} \end{cases}\]</span><br>
 <span class="math display">\[Ind = \begin{cases} 1 &amp; \text{si Etnia = Indigena} \\ 0 &amp; \text{en otro caso} \end{cases}\]</span><br>
@@ -735,40 +655,36 @@ EtniaRrom            5.3139123</code></pre>
 <p>Se ajusta el modelo en cada fold usando <code>cv.glmnet</code>:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="modelos_files/figure-html/unnamed-chunk-53-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="modelos_files/figure-html/unnamed-chunk-60-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>El valor de <span class="math inline">\(\lambda\)</span> óptimo y el MSE del modelo ajustado con ese valor de <span class="math inline">\(\lambda\)</span> son respectivamente:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Valor de lambda óptimo: 0.079"</code></pre>
+<pre><code>[1] "Valor de lambda óptimo: 0.077"</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "MSE: 13.12"</code></pre>
+<pre><code>[1] "MSE: 13.005"</code></pre>
 </div>
 </div>
 <p>Los coeficientes resultantes del modelo ajustado son:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>7 x 1 sparse Matrix of class "dgCMatrix"
-                            s1
-(Intercept)         65.4928997
-LRM_90               2.2048555
-Edad                -0.1047034
-SexoMasculino        4.6877149
-EtniaBlanco-Mestizo  0.2938109
-EtniaIndigena        .        
-EtniaRrom            0.6123650</code></pre>
+                             s1
+(Intercept)         65.62591887
+LRM_90               2.17921716
+Edad                -0.08695065
+SexoMasculino        4.78312097
+EtniaBlanco-Mestizo  .         
+EtniaIndigena        0.19566037
+EtniaRrom            0.51369340</code></pre>
 </div>
 </div>
 <p>Finalmente, la ecuación propuesta por este modelo para estimar la talla en adultos mayores es:</p>
-<p><span class="math display">\[Talla = 65.493 + 2.205 \cdot LRM\_90 - 0.105 \cdot Edad + 4.688 \cdot Sexo + 0.294 \cdot BM + 0.612 \cdot Rrom\]</span><br>
+<p><span class="math display">\[Talla = 65.62 + 2.18 \cdot LRM\_90 - 0.09 \cdot Edad + 4.78 \cdot Sexo + 0.19 \cdot Ind + 0.51 \cdot Rrom\]</span><br>
 <span class="math display">\[Sexo = \begin{cases} 1 &amp; \text{si sexo = Masculino} \\ 0 &amp; \text{si sexo = Femenino} \end{cases}\]</span><br>
-<span class="math display">\[BM = \begin{cases} 1 &amp; \text{si Etnia = Blanco-Mestizo} \\ 0 &amp; \text{en otro caso} \end{cases}\]</span><br>
+<span class="math display">\[Ind = \begin{cases} 1 &amp; \text{si Etnia = Indígena} \\ 0 &amp; \text{en otro caso} \end{cases}\]</span><br>
 <span class="math display">\[Rrom = \begin{cases} 1 &amp; \text{si Etnia = Rrom} \\ 0 &amp; \text{en otro caso} \end{cases}\]</span></p>
 </section>
 <section id="resumen-modelos-lasso" class="level3">
@@ -778,11 +694,11 @@ EtniaRrom            0.6123650</code></pre>
 <p>La tabla de los errores cuadráticos medios de los modelos ajustados hasta el momento es:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>  Modelo Medida      MSE
-5  LASSO  LRT_A 10.45275
-6  LASSO LRT_CM 11.84011
-7  LASSO  LRM_R 13.04057
-8  LASSO LRM_90 13.12027</code></pre>
+<pre><code>  Modelo Medida      MSE MSE_validacion
+5  LASSO  LRT_A 10.18571       11.41032
+6  LASSO LRT_CM 11.54195       13.02483
+7  LASSO  LRM_R 12.82789       13.53493
+8  LASSO LRM_90 13.00511       13.81053</code></pre>
 </div>
 </div>
 <p>El modelo normal con LRT_A sigue siendo el mejor, ya que hasta el momento es el que presenta el menor MSE. Por lo tanto, no se procederá a verificar los supuestos para ninguno de los modelos LASSO, dado que el modelo normal continúa siendo superior.</p>
@@ -802,21 +718,21 @@ glm(formula = Talla ~ LRT_A + Edad + Etnia + Sexo, family = Gamma(),
 
 Coefficients:
                       Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)          1.044e-02  1.358e-04  76.905  &lt; 2e-16 ***
-LRT_A               -8.823e-05  2.245e-06 -39.291  &lt; 2e-16 ***
-Edad                 5.140e-06  8.817e-07   5.830 9.57e-09 ***
-EtniaBlanco-Mestizo -1.209e-04  5.954e-05  -2.031   0.0428 *  
-EtniaIndigena       -1.696e-04  7.985e-05  -2.123   0.0342 *  
-EtniaRrom           -1.767e-04  1.381e-04  -1.280   0.2012    
-SexoMasculino       -1.325e-04  1.650e-05  -8.032 6.14e-15 ***
+(Intercept)          1.046e-02  1.487e-04  70.307  &lt; 2e-16 ***
+LRT_A               -8.778e-05  2.517e-06 -34.880  &lt; 2e-16 ***
+Edad                 4.542e-06  9.714e-07   4.676 3.93e-06 ***
+EtniaBlanco-Mestizo -1.134e-04  6.586e-05  -1.721   0.0859 .  
+EtniaIndigena       -1.862e-04  8.716e-05  -2.137   0.0332 *  
+EtniaRrom           -1.647e-04  1.396e-04  -1.180   0.2387    
+SexoMasculino       -1.378e-04  1.817e-05  -7.587 2.06e-13 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-(Dispersion parameter for Gamma family taken to be 0.0004486863)
+(Dispersion parameter for Gamma family taken to be 0.0004379319)
 
-    Null deviance: 2.00425  on 542  degrees of freedom
-Residual deviance: 0.24156  on 536  degrees of freedom
-AIC: 2849.2
+    Null deviance: 1.57735  on 434  degrees of freedom
+Residual deviance: 0.18837  on 428  degrees of freedom
+AIC: 2274.7
 
 Number of Fisher Scoring iterations: 3</code></pre>
 </div>
@@ -824,39 +740,39 @@ Number of Fisher Scoring iterations: 3</code></pre>
 <p>A continuación se realiza una selección de variables con el método “forward” de tal forma que se minimice el AIC. El modelo seleccionado resulta ser el que incluye Edad, Sexo y LRT_A.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>Start:  AIC=3986.45
+<pre><code>Start:  AIC=3187.34
 Talla ~ 1
 
         Df Deviance    AIC
-+ LRT_A  1  0.28112 3521.3
-+ Sexo   1  0.96443 3706.6
-&lt;none&gt;      2.00425 3986.5
-+ Etnia  3  1.98665 3987.7
-+ Edad   1  2.00387 3988.3
++ LRT_A  1  0.22113 2814.8
++ Sexo   1  0.73444 2956.6
+&lt;none&gt;      1.57735 3187.3
++ Edad   1  1.57197 3187.9
++ Etnia  3  1.56020 3188.6
 
-Step:  AIC=2921.58
+Step:  AIC=2334.45
 Talla ~ LRT_A
 
         Df Deviance    AIC
-+ Sexo   1  0.25839 2879.7
-+ Edad   1  0.27254 2907.0
-&lt;none&gt;      0.28112 2921.6
-+ Etnia  3  0.27963 2924.7
++ Sexo   1  0.19960 2294.1
++ Edad   1  0.21541 2325.2
+&lt;none&gt;      0.22113 2334.4
++ Etnia  3  0.21965 2337.5
 
-Step:  AIC=2877.81
+Step:  AIC=2291.88
 Talla ~ LRT_A + Sexo
 
         Df Deviance    AIC
-+ Edad   1  0.24391 2849.4
-&lt;none&gt;      0.25839 2877.8
-+ Etnia  3  0.25684 2880.5
++ Edad   1  0.19048 2274.0
+&lt;none&gt;      0.19960 2291.9
++ Etnia  3  0.19796 2294.3
 
-Step:  AIC=2848.47
+Step:  AIC=2273.53
 Talla ~ LRT_A + Sexo + Edad
 
         Df Deviance    AIC
-&lt;none&gt;      0.24391 2848.5
-+ Etnia  3  0.24156 2849.3</code></pre>
+&lt;none&gt;      0.19048 2273.5
++ Etnia  3  0.18837 2274.7</code></pre>
 </div>
 </div>
 <p>Los coeficientes del modelo son</p>
@@ -869,30 +785,30 @@ glm(formula = Talla ~ LRT_A + Edad + Sexo, family = Gamma(),
 
 Coefficients:
                 Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)    1.033e-02  1.225e-04  84.303  &lt; 2e-16 ***
-LRT_A         -8.813e-05  2.245e-06 -39.249  &lt; 2e-16 ***
-Edad           4.989e-06  8.805e-07   5.666 2.39e-08 ***
-SexoMasculino -1.318e-04  1.653e-05  -7.973 9.35e-15 ***
+(Intercept)    1.035e-02  1.332e-04  77.730  &lt; 2e-16 ***
+LRT_A         -8.776e-05  2.512e-06 -34.932  &lt; 2e-16 ***
+Edad           4.417e-06  9.704e-07   4.552 6.93e-06 ***
+SexoMasculino -1.370e-04  1.820e-05  -7.531 2.98e-13 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-(Dispersion parameter for Gamma family taken to be 0.0004505331)
+(Dispersion parameter for Gamma family taken to be 0.0004397181)
 
-    Null deviance: 2.00425  on 542  degrees of freedom
-Residual deviance: 0.24391  on 539  degrees of freedom
-AIC: 2848.5
+    Null deviance: 1.57735  on 434  degrees of freedom
+Residual deviance: 0.19047  on 431  degrees of freedom
+AIC: 2273.5
 
 Number of Fisher Scoring iterations: 3</code></pre>
 </div>
 </div>
 <p>Entonces, la ecuación propuesta por este modelo para estimar el logaritmo de la talla en adultos mayores es:</p>
-<p><span class="math display">\[\ln(Talla) = 0.01033 - 0.00008813 LRT\_A + 0.000004989 Edad - 0.0001318 Sexo\]</span><br>
+<p><span class="math display">\[\ln(Talla) = 0.01035 - 0.00008776 \cdot LRT\_A + 0.000004417 \cdot Edad - 0.0001370 \cdot Sexo\]</span><br>
 <span class="math display">\[Sexo = \begin{cases} 1 &amp; \text{si sexo = Masculino} \\ 0 &amp; \text{si sexo = Femenino} \end{cases}\]</span><br>
 </p>
 <p>Se utiliza el método de<strong><em>k-fold cross validation</em></strong> con <span class="math inline">\(k = 10\)</span> y y se calcula el promedio del MSE obtenido en cada iteración. El MSE para este modelo es:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 11.06637</code></pre>
+<pre><code>[1] 10.6452</code></pre>
 </div>
 </div>
 </section>
@@ -908,21 +824,21 @@ glm(formula = Talla ~ LRT_CM + Edad + Etnia + Sexo, family = Gamma(),
 
 Coefficients:
                       Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)          1.051e-02  1.484e-04  70.831  &lt; 2e-16 ***
-LRT_CM              -8.717e-05  2.422e-06 -35.988  &lt; 2e-16 ***
-Edad                 5.328e-06  9.379e-07   5.680 2.21e-08 ***
-EtniaBlanco-Mestizo -1.068e-04  6.342e-05  -1.685   0.0927 .  
-EtniaIndigena       -1.448e-04  8.505e-05  -1.703   0.0892 .  
-EtniaRrom           -6.135e-05  1.472e-04  -0.417   0.6771    
-SexoMasculino       -1.753e-04  1.697e-05 -10.328  &lt; 2e-16 ***
+(Intercept)          1.054e-02  1.623e-04  64.925  &lt; 2e-16 ***
+LRT_CM              -8.687e-05  2.709e-06 -32.067  &lt; 2e-16 ***
+Edad                 4.592e-06  1.031e-06   4.456 1.07e-05 ***
+EtniaBlanco-Mestizo -9.189e-05  6.994e-05  -1.314    0.190    
+EtniaIndigena       -1.509e-04  9.259e-05  -1.630    0.104    
+EtniaRrom           -4.257e-05  1.484e-04  -0.287    0.774    
+SexoMasculino       -1.805e-04  1.861e-05  -9.697  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-(Dispersion parameter for Gamma family taken to be 0.0005091626)
+(Dispersion parameter for Gamma family taken to be 0.0004942473)
 
-    Null deviance: 2.00425  on 542  degrees of freedom
-Residual deviance: 0.27374  on 536  degrees of freedom
-AIC: 2917.1
+    Null deviance: 1.5774  on 434  degrees of freedom
+Residual deviance: 0.2122  on 428  degrees of freedom
+AIC: 2326.5
 
 Number of Fisher Scoring iterations: 3</code></pre>
 </div>
@@ -930,39 +846,39 @@ Number of Fisher Scoring iterations: 3</code></pre>
 <p>A continuación se realiza una selección de variables con el método “forward” de tal forma que se minimice el AIC. El modelo seleccionado resulta ser el que incluye Edad, Sexo y LRT_A.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>Start:  AIC=3986.45
+<pre><code>Start:  AIC=3187.34
 Talla ~ 1
 
          Df Deviance    AIC
-+ LRT_CM  1  0.33696 3536.5
-+ Sexo    1  0.96443 3706.6
-&lt;none&gt;       2.00425 3986.5
-+ Etnia   3  1.98665 3987.7
-+ Edad    1  2.00387 3988.3
++ LRT_CM  1  0.26454 2826.8
++ Sexo    1  0.73444 2956.6
+&lt;none&gt;       1.57735 3187.3
++ Edad    1  1.57197 3187.9
++ Etnia   3  1.56020 3188.6
 
-Step:  AIC=3019.97
+Step:  AIC=2412.42
 Talla ~ LRT_CM
 
         Df Deviance    AIC
-+ Sexo   1  0.29131 2948.6
-+ Edad   1  0.32934 3009.7
-&lt;none&gt;      0.33696 3020.0
-+ Etnia  3  0.33599 3024.4
++ Sexo   1  0.22310 2346.6
++ Edad   1  0.25969 2406.5
+&lt;none&gt;      0.26454 2412.4
++ Etnia  3  0.26369 2417.0
 
-Step:  AIC=2942.91
+Step:  AIC=2340.3
 Talla ~ LRT_CM + Sexo
 
         Df Deviance    AIC
-+ Edad   1  0.27549 2915.5
-&lt;none&gt;      0.29131 2942.9
-+ Etnia  3  0.29019 2946.8
++ Edad   1  0.21359 2323.8
+&lt;none&gt;      0.22310 2340.3
++ Etnia  3  0.22202 2344.2
 
-Step:  AIC=2914.59
+Step:  AIC=2323.36
 Talla ~ LRT_CM + Sexo + Edad
 
         Df Deviance    AIC
-&lt;none&gt;      0.27549 2914.6
-+ Etnia  3  0.27374 2917.2</code></pre>
+&lt;none&gt;      0.21359 2323.4
++ Etnia  3  0.21219 2326.5</code></pre>
 </div>
 </div>
 <p>Los coeficientes del modelo son</p>
@@ -975,30 +891,30 @@ glm(formula = Talla ~ LRT_CM + Edad + Sexo, family = Gamma(),
 
 Coefficients:
                 Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)    1.041e-02  1.345e-04  77.376  &lt; 2e-16 ***
-LRT_CM        -8.703e-05  2.416e-06 -36.026  &lt; 2e-16 ***
-Edad           5.205e-06  9.352e-07   5.566 4.12e-08 ***
-SexoMasculino -1.745e-04  1.697e-05 -10.282  &lt; 2e-16 ***
+(Intercept)    1.045e-02  1.461e-04  71.520  &lt; 2e-16 ***
+LRT_CM        -8.680e-05  2.694e-06 -32.214  &lt; 2e-16 ***
+Edad           4.502e-06  1.027e-06   4.383 1.47e-05 ***
+SexoMasculino -1.797e-04  1.860e-05  -9.661  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-(Dispersion parameter for Gamma family taken to be 0.0005096052)
+(Dispersion parameter for Gamma family taken to be 0.0004940556)
 
-    Null deviance: 2.00425  on 542  degrees of freedom
-Residual deviance: 0.27549  on 539  degrees of freedom
-AIC: 2914.6
+    Null deviance: 1.57735  on 434  degrees of freedom
+Residual deviance: 0.21359  on 431  degrees of freedom
+AIC: 2323.4
 
 Number of Fisher Scoring iterations: 3</code></pre>
 </div>
 </div>
 <p>Entonces, la ecuación propuesta por este modelo para estimar el logaritmo de la talla en adultos mayores es:</p>
-<p><span class="math display">\[\ln(Talla) = 1.041e-02 - 8.703e-05 LRT\_CM + 5.205e-06 Edad - 1.745e-04 Sexo\]</span><br>
+<p><span class="math display">\[\ln(Talla) = 0.01045 - 0.00008680 \cdot LRT\_CM + 0.000004502 \cdot Edad - 0.0001797 \cdot Sexo\]</span><br>
 <span class="math display">\[Sexo = \begin{cases} 1 &amp; \text{si sexo = Masculino} \\ 0 &amp; \text{si sexo = Femenino} \end{cases}\]</span><br>
 </p>
 <p>Se utiliza el método de<strong><em>k-fold cross validation</em></strong> con <span class="math inline">\(k = 10\)</span> y y se calcula el promedio del MSE obtenido en cada iteración. El MSE para este modelo es:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 12.28992</code></pre>
+<pre><code>[1] 11.86227</code></pre>
 </div>
 </div>
 </section>
@@ -1014,21 +930,21 @@ glm(formula = Talla ~ LRM_R + Edad + Etnia + Sexo, family = Gamma(),
 
 Coefficients:
                       Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)          1.010e-02  1.459e-04  69.195  &lt; 2e-16 ***
-LRM_R               -8.954e-05  2.621e-06 -34.157  &lt; 2e-16 ***
-Edad                 4.943e-06  9.752e-07   5.068 5.53e-07 ***
-EtniaBlanco-Mestizo -1.320e-04  6.581e-05  -2.005   0.0454 *  
-EtniaIndigena       -1.788e-04  8.822e-05  -2.026   0.0432 *  
-EtniaRrom           -2.369e-04  1.526e-04  -1.553   0.1211    
-SexoMasculino       -1.624e-04  1.797e-05  -9.037  &lt; 2e-16 ***
+(Intercept)          1.014e-02  1.618e-04  62.706  &lt; 2e-16 ***
+LRM_R               -8.963e-05  2.985e-06 -30.027  &lt; 2e-16 ***
+Edad                 4.255e-06  1.080e-06   3.941 9.47e-05 ***
+EtniaBlanco-Mestizo -1.327e-04  7.323e-05  -1.811   0.0708 .  
+EtniaIndigena       -2.077e-04  9.686e-05  -2.144   0.0326 *  
+EtniaRrom           -2.324e-04  1.551e-04  -1.498   0.1349    
+SexoMasculino       -1.583e-04  2.015e-05  -7.860 3.16e-14 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-(Dispersion parameter for Gamma family taken to be 0.0005478053)
+(Dispersion parameter for Gamma family taken to be 0.0005409435)
 
-    Null deviance: 2.00425  on 542  degrees of freedom
-Residual deviance: 0.29489  on 536  degrees of freedom
-AIC: 2957.5
+    Null deviance: 1.57735  on 434  degrees of freedom
+Residual deviance: 0.23282  on 428  degrees of freedom
+AIC: 2366.9
 
 Number of Fisher Scoring iterations: 3</code></pre>
 </div>
@@ -1036,39 +952,39 @@ Number of Fisher Scoring iterations: 3</code></pre>
 <p>A continuación se realiza una selección de variables con el método “forward” de tal forma que se minimice el AIC. El modelo seleccionado resulta ser el que incluye Edad, Sexo y LRT_A.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>Start:  AIC=3986.45
+<pre><code>Start:  AIC=3187.34
 Talla ~ 1
 
         Df Deviance    AIC
-+ LRM_R  1  0.34839 3539.6
-+ Sexo   1  0.96443 3706.6
-&lt;none&gt;      2.00425 3986.5
-+ Etnia  3  1.98665 3987.7
-+ Edad   1  2.00387 3988.3
++ LRM_R  1  0.27302 2829.1
++ Sexo   1  0.73444 2956.6
+&lt;none&gt;      1.57735 3187.3
++ Edad   1  1.57197 3187.9
++ Etnia  3  1.56020 3188.6
 
-Step:  AIC=3038.09
+Step:  AIC=2426.15
 Talla ~ LRM_R
 
         Df Deviance    AIC
-+ Sexo   1  0.31104 2982.0
-+ Edad   1  0.34223 3030.5
-&lt;none&gt;      0.34839 3038.1
-+ Etnia  3  0.34633 3040.9
++ Sexo   1  0.24354 2381.3
++ Edad   1  0.26889 2421.6
+&lt;none&gt;      0.27302 2426.2
++ Etnia  3  0.27075 2428.6
 
-Step:  AIC=2978.5
+Step:  AIC=2378.44
 Talla ~ LRM_R + Sexo
 
         Df Deviance    AIC
-+ Edad   1  0.29780 2957.4
-&lt;none&gt;      0.31104 2978.5
-+ Etnia  3  0.30899 2980.9
++ Edad   1  0.23567 2366.4
+&lt;none&gt;      0.24354 2378.4
++ Etnia  3  0.24124 2380.3
 
-Step:  AIC=2956.89
+Step:  AIC=2366.15
 Talla ~ LRM_R + Sexo + Edad
 
         Df Deviance    AIC
-&lt;none&gt;      0.29780 2956.9
-+ Etnia  3  0.29489 2957.6</code></pre>
+&lt;none&gt;      0.23567 2366.2
++ Etnia  3  0.23282 2366.9</code></pre>
 </div>
 </div>
 <p>Los coeficientes del modelo son</p>
@@ -1081,30 +997,30 @@ glm(formula = Talla ~ LRM_R + Edad + Sexo, family = Gamma(),
 
 Coefficients:
                 Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)    9.972e-03  1.306e-04  76.374  &lt; 2e-16 ***
-LRM_R         -8.941e-05  2.621e-06 -34.106  &lt; 2e-16 ***
-Edad           4.774e-06  9.741e-07   4.901 1.26e-06 ***
-SexoMasculino -1.618e-04  1.801e-05  -8.987  &lt; 2e-16 ***
+(Intercept)    1.002e-02  1.436e-04  69.770  &lt; 2e-16 ***
+LRM_R         -8.954e-05  2.980e-06 -30.045  &lt; 2e-16 ***
+Edad           4.103e-06  1.079e-06   3.802 0.000164 ***
+SexoMasculino -1.579e-04  2.019e-05  -7.819 4.14e-14 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-(Dispersion parameter for Gamma family taken to be 0.0005501601)
+(Dispersion parameter for Gamma family taken to be 0.0005437082)
 
-    Null deviance: 2.0042  on 542  degrees of freedom
-Residual deviance: 0.2978  on 539  degrees of freedom
-AIC: 2956.9
+    Null deviance: 1.57735  on 434  degrees of freedom
+Residual deviance: 0.23567  on 431  degrees of freedom
+AIC: 2366.2
 
 Number of Fisher Scoring iterations: 3</code></pre>
 </div>
 </div>
 <p>Entonces, la ecuación propuesta por este modelo para estimar el logaritmo de la talla en adultos mayores es:</p>
-<p><span class="math display">\[\ln(Talla) = 9.972e-03 - 8.941e-05 LRM\_R + 4.774e-06 Edad - 1.618e-04 Sexo\]</span><br>
+<p><span class="math display">\[\ln(Talla) = 0.01002 - 0.00008954 \cdot LRM\_R + 0.000004103 \cdot Edad - 0.0001579 \cdot Sexo\]</span><br>
 <span class="math display">\[Sexo = \begin{cases} 1 &amp; \text{si sexo = Masculino} \\ 0 &amp; \text{si sexo = Femenino} \end{cases}\]</span><br>
 </p>
 <p>Se utiliza el método de<strong><em>k-fold cross validation</em></strong> con <span class="math inline">\(k = 10\)</span> y y se calcula el promedio del MSE obtenido en cada iteración. El MSE para este modelo es:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 13.42149</code></pre>
+<pre><code>[1] 13.1695</code></pre>
 </div>
 </div>
 </section>
@@ -1120,21 +1036,21 @@ glm(formula = Talla ~ LRM_90 + Edad + Etnia + Sexo, family = Gamma(),
 
 Coefficients:
                       Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)          1.015e-02  1.488e-04  68.205  &lt; 2e-16 ***
-LRM_90              -8.948e-05  2.654e-06 -33.715  &lt; 2e-16 ***
-Edad                 4.913e-06  9.837e-07   4.995 7.99e-07 ***
-EtniaBlanco-Mestizo -9.842e-05  6.634e-05  -1.483    0.139    
-EtniaIndigena       -9.528e-05  8.898e-05  -1.071    0.285    
-EtniaRrom           -1.621e-04  1.539e-04  -1.053    0.293    
-SexoMasculino       -2.031e-04  1.737e-05 -11.692  &lt; 2e-16 ***
+(Intercept)          1.018e-02  1.641e-04  62.017  &lt; 2e-16 ***
+LRM_90              -8.885e-05  2.989e-06 -29.728  &lt; 2e-16 ***
+Edad                 4.076e-06  1.087e-06   3.749 0.000202 ***
+EtniaBlanco-Mestizo -9.746e-05  7.367e-05  -1.323 0.186574    
+EtniaIndigena       -1.293e-04  9.752e-05  -1.326 0.185459    
+EtniaRrom           -1.580e-04  1.562e-04  -1.012 0.312337    
+SexoMasculino       -2.046e-04  1.927e-05 -10.619  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-(Dispersion parameter for Gamma family taken to be 0.0005573112)
+(Dispersion parameter for Gamma family taken to be 0.0005481876)
 
-    Null deviance: 2.00425  on 542  degrees of freedom
-Residual deviance: 0.29974  on 536  degrees of freedom
-AIC: 2966.4
+    Null deviance: 1.57735  on 434  degrees of freedom
+Residual deviance: 0.23564  on 428  degrees of freedom
+AIC: 2372.1
 
 Number of Fisher Scoring iterations: 3</code></pre>
 </div>
@@ -1142,39 +1058,39 @@ Number of Fisher Scoring iterations: 3</code></pre>
 <p>A continuación se realiza una selección de variables con el método “forward” de tal forma que se minimice el AIC. El modelo seleccionado resulta ser el que incluye Edad, Sexo y LRT_A.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>Start:  AIC=3986.45
+<pre><code>Start:  AIC=3187.34
 Talla ~ 1
 
          Df Deviance    AIC
-+ LRM_90  1  0.38114 3548.4
-+ Sexo    1  0.96443 3706.6
-&lt;none&gt;       2.00425 3986.5
-+ Etnia   3  1.98665 3987.7
-+ Edad    1  2.00387 3988.3
++ LRM_90  1  0.30077 2836.8
++ Sexo    1  0.73444 2956.6
+&lt;none&gt;       1.57735 3187.3
++ Edad    1  1.57197 3187.9
++ Etnia   3  1.56020 3188.6
 
-Step:  AIC=3086.87
+Step:  AIC=2468.26
 Talla ~ LRM_90
 
         Df Deviance    AIC
-+ Sexo   1  0.31443 2994.1
-+ Edad   1  0.37671 3082.6
-&lt;none&gt;      0.38114 3086.9
-+ Etnia  3  0.38057 3092.1
++ Sexo   1  0.24419 2388.7
++ Edad   1  0.29828 2466.7
+&lt;none&gt;      0.30077 2468.3
++ Etnia  3  0.30011 2473.3
 
-Step:  AIC=2984.39
+Step:  AIC=2379.61
 Talla ~ LRM_90 + Sexo
 
         Df Deviance    AIC
-+ Edad   1  0.30110 2963.4
-&lt;none&gt;      0.31443 2984.4
-+ Etnia  3  0.31366 2989.1
++ Edad   1  0.23686 2368.6
+&lt;none&gt;      0.24419 2379.6
++ Etnia  3  0.24335 2384.1
 
-Step:  AIC=2962.86
+Step:  AIC=2368.33
 Talla ~ LRM_90 + Sexo + Edad
 
         Df Deviance    AIC
-&lt;none&gt;      0.30110 2962.9
-+ Etnia  3  0.29974 2966.4</code></pre>
+&lt;none&gt;      0.23686 2368.3
++ Etnia  3  0.23564 2372.1</code></pre>
 </div>
 </div>
 <p>Los coeficientes del modelo son</p>
@@ -1187,30 +1103,30 @@ glm(formula = Talla ~ LRM_90 + Edad + Sexo, family = Gamma(),
 
 Coefficients:
                 Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)    1.005e-02  1.338e-04   75.15  &lt; 2e-16 ***
-LRM_90        -8.939e-05  2.645e-06  -33.79  &lt; 2e-16 ***
-Edad           4.792e-06  9.800e-07    4.89 1.34e-06 ***
-SexoMasculino -2.022e-04  1.735e-05  -11.66  &lt; 2e-16 ***
+(Intercept)    1.009e-02  1.463e-04   68.96  &lt; 2e-16 ***
+LRM_90        -8.884e-05  2.972e-06  -29.90  &lt; 2e-16 ***
+Edad           3.964e-06  1.083e-06    3.66 0.000284 ***
+SexoMasculino -2.038e-04  1.924e-05  -10.60  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-(Dispersion parameter for Gamma family taken to be 0.0005567802)
+(Dispersion parameter for Gamma family taken to be 0.0005471928)
 
-    Null deviance: 2.0042  on 542  degrees of freedom
-Residual deviance: 0.3011  on 539  degrees of freedom
-AIC: 2962.9
+    Null deviance: 1.57735  on 434  degrees of freedom
+Residual deviance: 0.23686  on 431  degrees of freedom
+AIC: 2368.3
 
 Number of Fisher Scoring iterations: 3</code></pre>
 </div>
 </div>
 <p>Entonces, la ecuación propuesta por este modelo para estimar el logaritmo de la talla en adultos mayores es:</p>
-<p><span class="math display">\[\ln(Talla) = 1.005e-02 - 8.939e-05 LRT\_A + 4.792e-06 Edad - 2.022e-04 Sexo\]</span><br>
+<p><span class="math display">\[\ln(Talla) = 0.01009 - 0.00008884 \cdot LRT\_A + 0.000003964 \cdot Edad - 0.0002038 \cdot Sexo\]</span><br>
 <span class="math display">\[Sexo = \begin{cases} 1 &amp; \text{si sexo = Masculino} \\ 0 &amp; \text{si sexo = Femenino} \end{cases}\]</span><br>
 </p>
 <p>Se utiliza el método de<strong><em>k-fold cross validation</em></strong> con <span class="math inline">\(k = 10\)</span> y y se calcula el promedio del MSE obtenido en cada iteración. El MSE para este modelo es:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 13.47367</code></pre>
+<pre><code>[1] 13.19002</code></pre>
 </div>
 </div>
 </section>
@@ -1221,19 +1137,19 @@ Number of Fisher Scoring iterations: 3</code></pre>
 <p>La tabla de los errores cuadráticos medios de los modelos ajustados hasta el momento es:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>   Modelo Medida      MSE
-1  Normal  LRT_A 10.39225
-2  Normal LRT_CM 11.78225
-3  Normal  LRM_R 12.99465
-4  Normal LRM_90 13.08059
-5   LASSO  LRT_A 10.45275
-6   LASSO LRT_CM 11.84011
-7   LASSO  LRM_R 13.04057
-8   LASSO LRM_90 13.12027
-9   Gamma  LRT_A 11.06637
-10  Gamma LRT_CM 12.28992
-11  Gamma  LRM_R 13.42149
-12  Gamma LRM_90 13.47367</code></pre>
+<pre><code>   Modelo Medida      MSE MSE_validacion
+1  Normal  LRT_A 10.14466       11.27857
+2  Normal LRT_CM 11.52624       13.05033
+3  Normal  LRM_R 12.83537       13.50163
+4  Normal LRM_90 12.97915       13.65316
+5   LASSO  LRT_A 10.18571       11.41032
+6   LASSO LRT_CM 11.54195       13.02483
+7   LASSO  LRM_R 12.82789       13.53493
+8   LASSO LRM_90 13.00511       13.81053
+9   Gamma  LRT_A 10.64520       12.42071
+10  Gamma LRT_CM 11.86227       14.01769
+11  Gamma  LRM_R 13.16950       14.19875
+12  Gamma LRM_90 13.19002       14.47528</code></pre>
 </div>
 </div>
 <p>El modelo normal con LRT_A sigue siendo el mejor, ya que hasta el momento es el que presenta el menor MSE. Por lo tanto, no se procederá a verificar los supuestos para ninguno de los modelos Gamma, dado que el modelo normal continúa siendo superior.</p>
@@ -1242,21 +1158,21 @@ Number of Fisher Scoring iterations: 3</code></pre>
 <section id="propuesta-nuevas-fórmulas" class="level2">
 <h2 class="anchored" data-anchor-id="propuesta-nuevas-fórmulas">Propuesta: Nuevas fórmulas</h2>
 <p>Dado que el modelo ajustado con menor error cuadrático medio es el normal con LRT con antropómetro, la fórmula que se propone en esta investigación para realizar la estimación de la talla de adultos mayores en Colombia es</p>
-<p><span class="math display">\[Talla = 59.11 + 2.19 LRT\_A - 0.12 Edad + 3.06 Sexo\]</span><br>
+<p><span class="math display">\[Talla = 58.84 + 2.17 \cdot LRT\_A - 0.11 \cdot Edad + 3.22 \cdot Sexo\]</span><br>
 <span class="math display">\[Sexo = \begin{cases} 1 &amp; \text{si sexo = masculino} \\ 0 &amp; \text{si sexo = femenino} \end{cases}\]</span></p>
 <p>Que también puede verse como dos fórmulas, una para cada sexo:</p>
 <ul>
-<li>Sexo masculino: <span class="math inline">\(Talla = 62.17 + 2.19 LRT\_A - 0.12 Edad\)</span>, la interpretación de cada parámetro es:
+<li>Sexo masculino: <span class="math inline">\(Talla = 62.06 + 2.17 LRT\_A - 0.11 Edad\)</span>, la interpretación de cada parámetro es:
 <ul>
-<li>Intercepto: Suponiendo el caso hipotético en que un adulto mayor tenga <span class="math inline">\(LRT\_A = 0\)</span> y <span class="math inline">\(Edad = 0\)</span>, entonces la talla estimada para ese adulto mayor de sexo masculino es <span class="math inline">\(62.17cm\)</span>.</li>
-<li>LRT_A: Por cada centímetro adicional que mida la LRT_A del adulto mayor masculino, entonces la estimación de su talla aumenta <span class="math inline">\(2.19\)</span> centímetros.</li>
-<li>Edad: Por cada año cumplido adicional que tenga el adulto mayor de sexo masculino, la estimación de su talla disminuye <span class="math inline">\(0.12cm\)</span>.</li>
+<li>Intercepto: Suponiendo el caso hipotético en que un adulto mayor tenga <span class="math inline">\(LRT\_A = 0\)</span> y <span class="math inline">\(Edad = 0\)</span>, entonces la talla estimada para ese adulto mayor de sexo masculino es <span class="math inline">\(62.06\)</span> centímetros.</li>
+<li>LRT_A: Por cada centímetro adicional que mida la LRT_A del adulto mayor masculino, entonces la estimación de su talla aumenta <span class="math inline">\(2.17\)</span> centímetros.</li>
+<li>Edad: Por cada año cumplido adicional que tenga el adulto mayor de sexo masculino, la estimación de su talla disminuye <span class="math inline">\(0.11\)</span> centímetros.</li>
 </ul></li>
-<li>Sexo femenino: <span class="math inline">\(Talla = 59.11 + 2.19 LRT\_A - 0.12 Edad\)</span>, la interpretación de cada parámetro es:
+<li>Sexo femenino: <span class="math inline">\(Talla = 58.84 + 2.17 LRT\_A - 0.11 Edad\)</span>, la interpretación de cada parámetro es:
 <ul>
-<li>Intercepto: Suponiendo el caso hipotético en que un adulto mayor tenga <span class="math inline">\(LRT\_A = 0\)</span> y <span class="math inline">\(Edad = 0\)</span>, entonces la talla estimada para ese adulto mayor de sexo femenino es <span class="math inline">\(59.11\)</span>.</li>
-<li>LRT_A: Por cada centímetro adicional que mida la LRT_A del adulto mayor femenino, entonces la estimación de su talla aumenta <span class="math inline">\(2.19\)</span> centímetros.</li>
-<li>Edad: Por cada año cumplido adicional que tenga el adulto mayor de sexo femenino, la estimación de su talla disminuye <span class="math inline">\(0.12cm\)</span>.</li>
+<li>Intercepto: Suponiendo el caso hipotético en que un adulto mayor tenga <span class="math inline">\(LRT\_A = 0\)</span> y <span class="math inline">\(Edad = 0\)</span>, entonces la talla estimada para ese adulto mayor de sexo femenino es <span class="math inline">\(58.84\)</span> centímetros.</li>
+<li>LRT_A: Por cada centímetro adicional que mida la LRT_A del adulto mayor femenino, entonces la estimación de su talla aumenta <span class="math inline">\(2.17\)</span> centímetros.</li>
+<li>Edad: Por cada año cumplido adicional que tenga el adulto mayor de sexo femenino, la estimación de su talla disminuye <span class="math inline">\(0.11\)</span> centímetros.</li>
 </ul></li>
 </ul>
 </section>
@@ -1278,7 +1194,7 @@ Number of Fisher Scoring iterations: 3</code></pre>
 <p>Las fórmulas de Benjumea tienen en cuenta la medición LRT. El error cuadrático medio de las fórmulas de Benjumea con LRT_A es</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 12.90973</code></pre>
+<pre><code>[1] 12.69694</code></pre>
 </div>
 </div>
 </section>
@@ -1287,7 +1203,7 @@ Number of Fisher Scoring iterations: 3</code></pre>
 <p>Las fórmulas de Benjumea tienen en cuenta la medición LRT. El error cuadrático medio de las fórmulas de Benjumea con LRT_CM es</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 14.78904</code></pre>
+<pre><code>[1] 14.24937</code></pre>
 </div>
 </div>
 </section>
@@ -1296,9 +1212,9 @@ Number of Fisher Scoring iterations: 3</code></pre>
 <p>La tabla de los errores cuadráticos medios con las fórmulas de Benjumea es:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>     Modelo Medida      MSE
-13 Benjumea  LRT_A 12.90973
-14 Benjumea LRT_CM 14.78904</code></pre>
+<pre><code>     Modelo Medida      MSE MSE_validacion
+13 Benjumea  LRT_A 12.69694       13.76484
+14 Benjumea LRT_CM 14.24937       16.95772</code></pre>
 </div>
 </div>
 <p>Los MSE son mayores a los modelos ajustados anteriormente.</p>
@@ -1317,7 +1233,7 @@ Number of Fisher Scoring iterations: 3</code></pre>
 <p>Las fórmulas de Arango y Zamora tienen en cuenta la medición LRM. El error cuadrático medio de las fórmulas de Arango y Zamora con LRM_R es</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 22.15239</code></pre>
+<pre><code>[1] 22.18134</code></pre>
 </div>
 </div>
 </section>
@@ -1326,7 +1242,7 @@ Number of Fisher Scoring iterations: 3</code></pre>
 <p>Las fórmulas de Arango y Zamora tienen en cuenta la medición LRM. El error cuadrático medio de las fórmulas de Arango y Zamora con LRM_90 es</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 19.98007</code></pre>
+<pre><code>[1] 19.60496</code></pre>
 </div>
 </div>
 </section>
@@ -1335,9 +1251,9 @@ Number of Fisher Scoring iterations: 3</code></pre>
 <p>La tabla de los errores cuadráticos medios con las fórmulas de Benjumea es:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>           Modelo Medida      MSE
-15 Arango, Zamora  LRM_R 22.15239
-16 Arango, Zamora LRM_90 19.98007</code></pre>
+<pre><code>           Modelo Medida      MSE MSE_validacion
+15 Arango, Zamora  LRM_R 22.18134       22.03581
+16 Arango, Zamora LRM_90 19.60496       21.49090</code></pre>
 </div>
 </div>
 <p>Los MSE son mayores a los modelos ajustados anteriormente.</p>
@@ -1348,23 +1264,23 @@ Number of Fisher Scoring iterations: 3</code></pre>
 <p>A continuación, se muestra la tabla de los MSE de todos los modelos ajustados en la investigación y de las fórmulas de Benjumea y de Arango y Zamora.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>           Modelo Medida      MSE
-1          Normal  LRT_A 10.39225
-2          Normal LRT_CM 11.78225
-3          Normal  LRM_R 12.99465
-4          Normal LRM_90 13.08059
-5           LASSO  LRT_A 10.45275
-6           LASSO LRT_CM 11.84011
-7           LASSO  LRM_R 13.04057
-8           LASSO LRM_90 13.12027
-9           Gamma  LRT_A 11.06637
-10          Gamma LRT_CM 12.28992
-11          Gamma  LRM_R 13.42149
-12          Gamma LRM_90 13.47367
-13       Benjumea  LRT_A 12.90973
-14       Benjumea LRT_CM 14.78904
-15 Arango, Zamora  LRM_R 22.15239
-16 Arango, Zamora LRM_90 19.98007</code></pre>
+<pre><code>           Modelo Medida      MSE MSE_validacion
+1          Normal  LRT_A 10.14466       11.27857
+2          Normal LRT_CM 11.52624       13.05033
+3          Normal  LRM_R 12.83537       13.50163
+4          Normal LRM_90 12.97915       13.65316
+5           LASSO  LRT_A 10.18571       11.41032
+6           LASSO LRT_CM 11.54195       13.02483
+7           LASSO  LRM_R 12.82789       13.53493
+8           LASSO LRM_90 13.00511       13.81053
+9           Gamma  LRT_A 10.64520       12.42071
+10          Gamma LRT_CM 11.86227       14.01769
+11          Gamma  LRM_R 13.16950       14.19875
+12          Gamma LRM_90 13.19002       14.47528
+13       Benjumea  LRT_A 12.69694       13.76484
+14       Benjumea LRT_CM 14.24937       16.95772
+15 Arango, Zamora  LRM_R 22.18134       22.03581
+16 Arango, Zamora LRM_90 19.60496       21.49090</code></pre>
 </div>
 </div>
 <p>Se observa que el modelo que presenta menor MSE es el modelo normal con LRT con antropómetro, de modo que, se concluye que este es el mejor modelo pues sus estimaciones de la talla son más cercanas a la verdadera talla del adulto mayor.</p>
@@ -1379,12 +1295,3034 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p>Por lo que las fórmulas que mejor estiman la talla de los adultos mayores en Colombia, según la base de datos analizada, son:</p>
-<p><span class="math display">\[Talla = 59.11 + 2.19 LRT\_A - 0.12 Edad + 3.06 Sexo\]</span><br>
+<p><span class="math display">\[Talla = 58.84 + 2.17 \cdot LRT\_A - 0.11 \cdot Edad + 3.22 \cdot Sexo\]</span><br>
 <span class="math display">\[Sexo = \begin{cases} 1 &amp; \text{si sexo = masculino} \\ 0 &amp; \text{si sexo = femenino} \end{cases}\]</span></p>
 </div>
 </div>
+</section>
+<section id="comportamiento-de-las-variables-de-interés-por-subgrupos" class="level2">
+<h2 class="anchored" data-anchor-id="comportamiento-de-las-variables-de-interés-por-subgrupos">Comportamiento de las variables de interés por subgrupos</h2>
+<p>A continuación se mestra un resumen de las variables Edad, Talla, LRT_A y LRT_CM para cada subgrupo (femenino o masculino) de la muestra. Dentro de las medidas de resumen se encuentran tamaño de la muestra (<span class="math inline">\(n\)</span>), mínimo, máximo, promedio, desviación estándar (DesEst) y mediana del grupo de datos con el que se ajustaron los modelos, además, estas mismas mediciones para el grupo de datos con el que se vaidaron los modelos (n_val, Minimo_val, Maximo_val, Promedio_val, DesEst_val, Mediana_val), y también el valor p (P_valor) de la prueba de independencia U de Mann-Whitney para Edad, o de la prueba <span class="math inline">\(t\)</span> de independencia para Talla, LRT_A y LRT_CM.</p>
+<section id="sexo-femenino" class="level3">
+<h3 class="anchored" data-anchor-id="sexo-femenino">Sexo femenino</h3>
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="rbxhkuygsw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rbxhkuygsw table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#rbxhkuygsw thead, #rbxhkuygsw tbody, #rbxhkuygsw tfoot, #rbxhkuygsw tr, #rbxhkuygsw td, #rbxhkuygsw th {
+  border-style: none;
+}
+
+#rbxhkuygsw p {
+  margin: 0;
+  padding: 0;
+}
+
+#rbxhkuygsw .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#rbxhkuygsw .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#rbxhkuygsw .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#rbxhkuygsw .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#rbxhkuygsw .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rbxhkuygsw .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rbxhkuygsw .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rbxhkuygsw .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#rbxhkuygsw .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#rbxhkuygsw .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#rbxhkuygsw .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#rbxhkuygsw .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#rbxhkuygsw .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#rbxhkuygsw .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#rbxhkuygsw .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#rbxhkuygsw .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#rbxhkuygsw .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#rbxhkuygsw .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#rbxhkuygsw .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rbxhkuygsw .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#rbxhkuygsw .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#rbxhkuygsw .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#rbxhkuygsw .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rbxhkuygsw .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#rbxhkuygsw .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#rbxhkuygsw .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rbxhkuygsw .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rbxhkuygsw .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#rbxhkuygsw .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rbxhkuygsw .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#rbxhkuygsw .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rbxhkuygsw .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rbxhkuygsw .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rbxhkuygsw .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rbxhkuygsw .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rbxhkuygsw .gt_left {
+  text-align: left;
+}
+
+#rbxhkuygsw .gt_center {
+  text-align: center;
+}
+
+#rbxhkuygsw .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#rbxhkuygsw .gt_font_normal {
+  font-weight: normal;
+}
+
+#rbxhkuygsw .gt_font_bold {
+  font-weight: bold;
+}
+
+#rbxhkuygsw .gt_font_italic {
+  font-style: italic;
+}
+
+#rbxhkuygsw .gt_super {
+  font-size: 65%;
+}
+
+#rbxhkuygsw .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#rbxhkuygsw .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#rbxhkuygsw .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#rbxhkuygsw .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#rbxhkuygsw .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#rbxhkuygsw .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#rbxhkuygsw .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#rbxhkuygsw .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#rbxhkuygsw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Variable">Variable</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n">n</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Minimo">Minimo</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Maximo">Maximo</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Promedio">Promedio</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="DesEst">DesEst</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Mediana">Mediana</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n_val">n_val</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Minimo_val">Minimo_val</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Maximo_val">Maximo_val</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Promedio_val">Promedio_val</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="DesEst_val">DesEst_val</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Mediana_val">Mediana_val</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="P_valor">P_valor</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Variable" class="gt_row gt_left">Edad</td>
+<td headers="n" class="gt_row gt_right">218</td>
+<td headers="Minimo" class="gt_row gt_right">60.00</td>
+<td headers="Maximo" class="gt_row gt_right">88.00</td>
+<td headers="Promedio" class="gt_row gt_right">70.63761</td>
+<td headers="DesEst" class="gt_row gt_right">6.545260</td>
+<td headers="Mediana" class="gt_row gt_right">70.000</td>
+<td headers="n_val" class="gt_row gt_right">54</td>
+<td headers="Minimo_val" class="gt_row gt_right">60.00</td>
+<td headers="Maximo_val" class="gt_row gt_right">95.0</td>
+<td headers="Promedio_val" class="gt_row gt_right">70.29630</td>
+<td headers="DesEst_val" class="gt_row gt_right">7.223206</td>
+<td headers="Mediana_val" class="gt_row gt_right">68.500</td>
+<td headers="P_valor" class="gt_row gt_right">0.5087940</td></tr>
+    <tr><td headers="Variable" class="gt_row gt_left">Talla</td>
+<td headers="n" class="gt_row gt_right">218</td>
+<td headers="Minimo" class="gt_row gt_right">127.10</td>
+<td headers="Maximo" class="gt_row gt_right">163.65</td>
+<td headers="Promedio" class="gt_row gt_right">149.37936</td>
+<td headers="DesEst" class="gt_row gt_right">6.063146</td>
+<td headers="Mediana" class="gt_row gt_right">149.575</td>
+<td headers="n_val" class="gt_row gt_right">54</td>
+<td headers="Minimo_val" class="gt_row gt_right">132.55</td>
+<td headers="Maximo_val" class="gt_row gt_right">162.1</td>
+<td headers="Promedio_val" class="gt_row gt_right">148.97963</td>
+<td headers="DesEst_val" class="gt_row gt_right">6.549366</td>
+<td headers="Mediana_val" class="gt_row gt_right">149.325</td>
+<td headers="P_valor" class="gt_row gt_right">0.6848868</td></tr>
+    <tr><td headers="Variable" class="gt_row gt_left">LRT_A</td>
+<td headers="n" class="gt_row gt_right">218</td>
+<td headers="Minimo" class="gt_row gt_right">36.85</td>
+<td headers="Maximo" class="gt_row gt_right">50.55</td>
+<td headers="Promedio" class="gt_row gt_right">45.16078</td>
+<td headers="DesEst" class="gt_row gt_right">2.384959</td>
+<td headers="Mediana" class="gt_row gt_right">45.200</td>
+<td headers="n_val" class="gt_row gt_right">54</td>
+<td headers="Minimo_val" class="gt_row gt_right">38.20</td>
+<td headers="Maximo_val" class="gt_row gt_right">49.8</td>
+<td headers="Promedio_val" class="gt_row gt_right">44.93519</td>
+<td headers="DesEst_val" class="gt_row gt_right">2.352851</td>
+<td headers="Mediana_val" class="gt_row gt_right">45.000</td>
+<td headers="P_valor" class="gt_row gt_right">0.5310545</td></tr>
+    <tr><td headers="Variable" class="gt_row gt_left">LRT_CM</td>
+<td headers="n" class="gt_row gt_right">218</td>
+<td headers="Minimo" class="gt_row gt_right">38.00</td>
+<td headers="Maximo" class="gt_row gt_right">52.05</td>
+<td headers="Promedio" class="gt_row gt_right">46.81674</td>
+<td headers="DesEst" class="gt_row gt_right">2.362067</td>
+<td headers="Mediana" class="gt_row gt_right">46.900</td>
+<td headers="n_val" class="gt_row gt_right">54</td>
+<td headers="Minimo_val" class="gt_row gt_right">41.20</td>
+<td headers="Maximo_val" class="gt_row gt_right">50.3</td>
+<td headers="Promedio_val" class="gt_row gt_right">46.48333</td>
+<td headers="DesEst_val" class="gt_row gt_right">2.189964</td>
+<td headers="Mediana_val" class="gt_row gt_right">46.425</td>
+<td headers="P_valor" class="gt_row gt_right">0.3270314</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="sexo-masculino" class="level3">
+<h3 class="anchored" data-anchor-id="sexo-masculino">Sexo masculino</h3>
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="hjeqwfhtfo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hjeqwfhtfo table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#hjeqwfhtfo thead, #hjeqwfhtfo tbody, #hjeqwfhtfo tfoot, #hjeqwfhtfo tr, #hjeqwfhtfo td, #hjeqwfhtfo th {
+  border-style: none;
+}
+
+#hjeqwfhtfo p {
+  margin: 0;
+  padding: 0;
+}
+
+#hjeqwfhtfo .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#hjeqwfhtfo .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#hjeqwfhtfo .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#hjeqwfhtfo .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#hjeqwfhtfo .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hjeqwfhtfo .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hjeqwfhtfo .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hjeqwfhtfo .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#hjeqwfhtfo .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#hjeqwfhtfo .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#hjeqwfhtfo .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#hjeqwfhtfo .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#hjeqwfhtfo .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#hjeqwfhtfo .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#hjeqwfhtfo .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#hjeqwfhtfo .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#hjeqwfhtfo .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#hjeqwfhtfo .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#hjeqwfhtfo .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hjeqwfhtfo .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#hjeqwfhtfo .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#hjeqwfhtfo .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#hjeqwfhtfo .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hjeqwfhtfo .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#hjeqwfhtfo .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#hjeqwfhtfo .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hjeqwfhtfo .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hjeqwfhtfo .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#hjeqwfhtfo .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hjeqwfhtfo .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#hjeqwfhtfo .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hjeqwfhtfo .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hjeqwfhtfo .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hjeqwfhtfo .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hjeqwfhtfo .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hjeqwfhtfo .gt_left {
+  text-align: left;
+}
+
+#hjeqwfhtfo .gt_center {
+  text-align: center;
+}
+
+#hjeqwfhtfo .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#hjeqwfhtfo .gt_font_normal {
+  font-weight: normal;
+}
+
+#hjeqwfhtfo .gt_font_bold {
+  font-weight: bold;
+}
+
+#hjeqwfhtfo .gt_font_italic {
+  font-style: italic;
+}
+
+#hjeqwfhtfo .gt_super {
+  font-size: 65%;
+}
+
+#hjeqwfhtfo .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#hjeqwfhtfo .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#hjeqwfhtfo .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#hjeqwfhtfo .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#hjeqwfhtfo .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#hjeqwfhtfo .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#hjeqwfhtfo .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#hjeqwfhtfo .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#hjeqwfhtfo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Variable">Variable</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n">n</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Minimo">Minimo</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Maximo">Maximo</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Promedio">Promedio</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="DesEst">DesEst</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Mediana">Mediana</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n_val">n_val</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Minimo_val">Minimo_val</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Maximo_val">Maximo_val</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Promedio_val">Promedio_val</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="DesEst_val">DesEst_val</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Mediana_val">Mediana_val</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="P_valor">P_valor</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Variable" class="gt_row gt_left">Edad</td>
+<td headers="n" class="gt_row gt_right">217</td>
+<td headers="Minimo" class="gt_row gt_right">60.0</td>
+<td headers="Maximo" class="gt_row gt_right">93.00</td>
+<td headers="Promedio" class="gt_row gt_right">73.09217</td>
+<td headers="DesEst" class="gt_row gt_right">6.763928</td>
+<td headers="Mediana" class="gt_row gt_right">72.00</td>
+<td headers="n_val" class="gt_row gt_right">54</td>
+<td headers="Minimo_val" class="gt_row gt_right">62.00</td>
+<td headers="Maximo_val" class="gt_row gt_right">90.00</td>
+<td headers="Promedio_val" class="gt_row gt_right">72.92593</td>
+<td headers="DesEst_val" class="gt_row gt_right">6.468653</td>
+<td headers="Mediana_val" class="gt_row gt_right">72.000</td>
+<td headers="P_valor" class="gt_row gt_right">0.8308018</td></tr>
+    <tr><td headers="Variable" class="gt_row gt_left">Talla</td>
+<td headers="n" class="gt_row gt_right">217</td>
+<td headers="Minimo" class="gt_row gt_right">141.5</td>
+<td headers="Maximo" class="gt_row gt_right">181.50</td>
+<td headers="Promedio" class="gt_row gt_right">163.12880</td>
+<td headers="DesEst" class="gt_row gt_right">6.745210</td>
+<td headers="Mediana" class="gt_row gt_right">162.95</td>
+<td headers="n_val" class="gt_row gt_right">54</td>
+<td headers="Minimo_val" class="gt_row gt_right">147.25</td>
+<td headers="Maximo_val" class="gt_row gt_right">180.70</td>
+<td headers="Promedio_val" class="gt_row gt_right">162.26944</td>
+<td headers="DesEst_val" class="gt_row gt_right">7.879268</td>
+<td headers="Mediana_val" class="gt_row gt_right">162.075</td>
+<td headers="P_valor" class="gt_row gt_right">0.4634270</td></tr>
+    <tr><td headers="Variable" class="gt_row gt_left">LRT_A</td>
+<td headers="n" class="gt_row gt_right">217</td>
+<td headers="Minimo" class="gt_row gt_right">44.3</td>
+<td headers="Maximo" class="gt_row gt_right">58.35</td>
+<td headers="Promedio" class="gt_row gt_right">50.12005</td>
+<td headers="DesEst" class="gt_row gt_right">2.690587</td>
+<td headers="Mediana" class="gt_row gt_right">50.00</td>
+<td headers="n_val" class="gt_row gt_right">54</td>
+<td headers="Minimo_val" class="gt_row gt_right">43.00</td>
+<td headers="Maximo_val" class="gt_row gt_right">57.65</td>
+<td headers="Promedio_val" class="gt_row gt_right">49.98056</td>
+<td headers="DesEst_val" class="gt_row gt_right">3.062731</td>
+<td headers="Mediana_val" class="gt_row gt_right">49.875</td>
+<td headers="P_valor" class="gt_row gt_right">0.7600478</td></tr>
+    <tr><td headers="Variable" class="gt_row gt_left">LRT_CM</td>
+<td headers="n" class="gt_row gt_right">217</td>
+<td headers="Minimo" class="gt_row gt_right">45.1</td>
+<td headers="Maximo" class="gt_row gt_right">59.00</td>
+<td headers="Promedio" class="gt_row gt_right">51.34378</td>
+<td headers="DesEst" class="gt_row gt_right">2.664260</td>
+<td headers="Mediana" class="gt_row gt_right">51.35</td>
+<td headers="n_val" class="gt_row gt_right">54</td>
+<td headers="Minimo_val" class="gt_row gt_right">43.70</td>
+<td headers="Maximo_val" class="gt_row gt_right">57.70</td>
+<td headers="Promedio_val" class="gt_row gt_right">51.14444</td>
+<td headers="DesEst_val" class="gt_row gt_right">3.108762</td>
+<td headers="Mediana_val" class="gt_row gt_right">51.425</td>
+<td headers="P_valor" class="gt_row gt_right">0.6660997</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="cuadro-modelos-predicción-de-la-talla-por-sexo" class="level2">
+<h2 class="anchored" data-anchor-id="cuadro-modelos-predicción-de-la-talla-por-sexo">Cuadro Modelos predicción de la talla por sexo</h2>
+<section id="opción-1-modelo-normal-lrt_a" class="level3">
+<h3 class="anchored" data-anchor-id="opción-1-modelo-normal-lrt_a">Opción 1: Modelo normal LRT_A</h3>
+<p>A continuación se muestran los resultados del mejor modelo (normal con LRT_A) dentro del conjunto de entrenamiento, de modo que se muestra el tamaño de la muestra de entrenamiento (<span class="math inline">\(n\)</span>), el <em>r-</em>cuadrado que muestra la varianza explciada por el modelo (R2), el error estándar de la estimación (EE), el valor p de la prueba de normalidad de Lilliefors (Normalidad), y el valor p de la prueba Breusch-Pagan para homocedasticidad (Homocedasticidad).</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="qcotaekotb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qcotaekotb table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#qcotaekotb thead, #qcotaekotb tbody, #qcotaekotb tfoot, #qcotaekotb tr, #qcotaekotb td, #qcotaekotb th {
+  border-style: none;
+}
+
+#qcotaekotb p {
+  margin: 0;
+  padding: 0;
+}
+
+#qcotaekotb .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#qcotaekotb .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#qcotaekotb .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#qcotaekotb .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#qcotaekotb .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qcotaekotb .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qcotaekotb .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qcotaekotb .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#qcotaekotb .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#qcotaekotb .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#qcotaekotb .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#qcotaekotb .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#qcotaekotb .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#qcotaekotb .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#qcotaekotb .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#qcotaekotb .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#qcotaekotb .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#qcotaekotb .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#qcotaekotb .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qcotaekotb .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#qcotaekotb .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#qcotaekotb .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#qcotaekotb .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qcotaekotb .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#qcotaekotb .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#qcotaekotb .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qcotaekotb .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qcotaekotb .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#qcotaekotb .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qcotaekotb .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#qcotaekotb .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qcotaekotb .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qcotaekotb .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qcotaekotb .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qcotaekotb .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qcotaekotb .gt_left {
+  text-align: left;
+}
+
+#qcotaekotb .gt_center {
+  text-align: center;
+}
+
+#qcotaekotb .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#qcotaekotb .gt_font_normal {
+  font-weight: normal;
+}
+
+#qcotaekotb .gt_font_bold {
+  font-weight: bold;
+}
+
+#qcotaekotb .gt_font_italic {
+  font-style: italic;
+}
+
+#qcotaekotb .gt_super {
+  font-size: 65%;
+}
+
+#qcotaekotb .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#qcotaekotb .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#qcotaekotb .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#qcotaekotb .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#qcotaekotb .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#qcotaekotb .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#qcotaekotb .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#qcotaekotb .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#qcotaekotb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="nombres">nombres</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n">n</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="R2">R2</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="EE">EE</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Normalidad">Normalidad</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Homocedasticidad">Homocedasticidad</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="nombres" class="gt_row gt_left">Femenino</td>
+<td headers="n" class="gt_row gt_right">218</td>
+<td headers="R2" class="gt_row gt_right">0.7303663</td>
+<td headers="EE" class="gt_row gt_right">3.141136</td>
+<td headers="Normalidad" class="gt_row gt_right">0.2926674</td>
+<td headers="Homocedasticidad" class="gt_row gt_right">0.8010954</td></tr>
+    <tr><td headers="nombres" class="gt_row gt_left">Masculino</td>
+<td headers="n" class="gt_row gt_right">217</td>
+<td headers="R2" class="gt_row gt_right">0.7804718</td>
+<td headers="EE" class="gt_row gt_right">3.153099</td>
+<td headers="Normalidad" class="gt_row gt_right">0.9472230</td>
+<td headers="Homocedasticidad" class="gt_row gt_right">0.1386984</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="opción-2-modelo-normal-lrt_cm" class="level3">
+<h3 class="anchored" data-anchor-id="opción-2-modelo-normal-lrt_cm">Opción 2: Modelo normal LRT_CM</h3>
+<p>A continuación se muestran los resultados del SEGUNDO mejor modelo (normal con LRT_CM) dentro del conjunto de entrenamiento, de modo que se muestra el tamaño de la muestra de entrenamiento (<span class="math inline">\(n\)</span>), el <em>r-</em>cuadrado que muestra la varianza explciada por el modelo (R2), el error estándar de la estimación (EE), el valor p de la prueba de normalidad de Lilliefors (Normalidad), y el valor p de la prueba Breusch-Pagan para homocedasticidad (Homocedasticidad).</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="pwsjsqgfld" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pwsjsqgfld table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#pwsjsqgfld thead, #pwsjsqgfld tbody, #pwsjsqgfld tfoot, #pwsjsqgfld tr, #pwsjsqgfld td, #pwsjsqgfld th {
+  border-style: none;
+}
+
+#pwsjsqgfld p {
+  margin: 0;
+  padding: 0;
+}
+
+#pwsjsqgfld .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#pwsjsqgfld .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#pwsjsqgfld .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#pwsjsqgfld .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#pwsjsqgfld .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pwsjsqgfld .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pwsjsqgfld .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pwsjsqgfld .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#pwsjsqgfld .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#pwsjsqgfld .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#pwsjsqgfld .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#pwsjsqgfld .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#pwsjsqgfld .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#pwsjsqgfld .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#pwsjsqgfld .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#pwsjsqgfld .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#pwsjsqgfld .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#pwsjsqgfld .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#pwsjsqgfld .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pwsjsqgfld .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#pwsjsqgfld .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#pwsjsqgfld .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#pwsjsqgfld .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pwsjsqgfld .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#pwsjsqgfld .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#pwsjsqgfld .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pwsjsqgfld .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pwsjsqgfld .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#pwsjsqgfld .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pwsjsqgfld .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#pwsjsqgfld .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pwsjsqgfld .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pwsjsqgfld .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pwsjsqgfld .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pwsjsqgfld .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pwsjsqgfld .gt_left {
+  text-align: left;
+}
+
+#pwsjsqgfld .gt_center {
+  text-align: center;
+}
+
+#pwsjsqgfld .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#pwsjsqgfld .gt_font_normal {
+  font-weight: normal;
+}
+
+#pwsjsqgfld .gt_font_bold {
+  font-weight: bold;
+}
+
+#pwsjsqgfld .gt_font_italic {
+  font-style: italic;
+}
+
+#pwsjsqgfld .gt_super {
+  font-size: 65%;
+}
+
+#pwsjsqgfld .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#pwsjsqgfld .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#pwsjsqgfld .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#pwsjsqgfld .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#pwsjsqgfld .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#pwsjsqgfld .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#pwsjsqgfld .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#pwsjsqgfld .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#pwsjsqgfld div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="nombres">nombres</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n">n</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="R2">R2</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="EE">EE</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Normalidad">Normalidad</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Homocedasticidad">Homocedasticidad</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="nombres" class="gt_row gt_left">Femenino</td>
+<td headers="n" class="gt_row gt_right">218</td>
+<td headers="R2" class="gt_row gt_right">0.6930547</td>
+<td headers="EE" class="gt_row gt_right">3.351430</td>
+<td headers="Normalidad" class="gt_row gt_right">0.07928016</td>
+<td headers="Homocedasticidad" class="gt_row gt_right">0.14221501</td></tr>
+    <tr><td headers="nombres" class="gt_row gt_left">Masculino</td>
+<td headers="n" class="gt_row gt_right">217</td>
+<td headers="R2" class="gt_row gt_right">0.7521653</td>
+<td headers="EE" class="gt_row gt_right">3.350222</td>
+<td headers="Normalidad" class="gt_row gt_right">0.39498815</td>
+<td headers="Homocedasticidad" class="gt_row gt_right">0.01975212</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="cuadro-validación-de-las-ecuaciones-para-estimar-la-talla-en-el-grupo-de-validación" class="level2">
+<h2 class="anchored" data-anchor-id="cuadro-validación-de-las-ecuaciones-para-estimar-la-talla-en-el-grupo-de-validación">Cuadro Validación de las ecuaciones para estimar la talla en el grupo de validación</h2>
+<section id="opción-1-modelo-normal-lrt_a-1" class="level3">
+<h3 class="anchored" data-anchor-id="opción-1-modelo-normal-lrt_a-1">Opción 1: Modelo normal LRT_A</h3>
+<p>Se muestra un resumen de los resultados del mejor modelo (normal con LRT_A) sobre el conjunto de validación, por lo que se encuentra <span class="math inline">\(n\)</span> el tamaño de muestra del conjunto de validación para cada subgrupo (femenino o masculino), el <em>r-</em>cuadrado (R2) y el error puro (Error_Puro).</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="uwsbxdvzwk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#uwsbxdvzwk table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#uwsbxdvzwk thead, #uwsbxdvzwk tbody, #uwsbxdvzwk tfoot, #uwsbxdvzwk tr, #uwsbxdvzwk td, #uwsbxdvzwk th {
+  border-style: none;
+}
+
+#uwsbxdvzwk p {
+  margin: 0;
+  padding: 0;
+}
+
+#uwsbxdvzwk .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#uwsbxdvzwk .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#uwsbxdvzwk .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#uwsbxdvzwk .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#uwsbxdvzwk .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#uwsbxdvzwk .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#uwsbxdvzwk .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#uwsbxdvzwk .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#uwsbxdvzwk .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#uwsbxdvzwk .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#uwsbxdvzwk .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#uwsbxdvzwk .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#uwsbxdvzwk .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#uwsbxdvzwk .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#uwsbxdvzwk .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#uwsbxdvzwk .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#uwsbxdvzwk .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#uwsbxdvzwk .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#uwsbxdvzwk .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uwsbxdvzwk .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#uwsbxdvzwk .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#uwsbxdvzwk .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#uwsbxdvzwk .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uwsbxdvzwk .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#uwsbxdvzwk .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#uwsbxdvzwk .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#uwsbxdvzwk .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uwsbxdvzwk .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#uwsbxdvzwk .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#uwsbxdvzwk .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#uwsbxdvzwk .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#uwsbxdvzwk .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#uwsbxdvzwk .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uwsbxdvzwk .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#uwsbxdvzwk .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uwsbxdvzwk .gt_left {
+  text-align: left;
+}
+
+#uwsbxdvzwk .gt_center {
+  text-align: center;
+}
+
+#uwsbxdvzwk .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#uwsbxdvzwk .gt_font_normal {
+  font-weight: normal;
+}
+
+#uwsbxdvzwk .gt_font_bold {
+  font-weight: bold;
+}
+
+#uwsbxdvzwk .gt_font_italic {
+  font-style: italic;
+}
+
+#uwsbxdvzwk .gt_super {
+  font-size: 65%;
+}
+
+#uwsbxdvzwk .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#uwsbxdvzwk .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#uwsbxdvzwk .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#uwsbxdvzwk .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#uwsbxdvzwk .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#uwsbxdvzwk .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#uwsbxdvzwk .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#uwsbxdvzwk .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#uwsbxdvzwk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="nombres">nombres</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n">n</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="R2">R2</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Error_Puro">Error_Puro</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="nombres" class="gt_row gt_left">Femenino</td>
+<td headers="n" class="gt_row gt_right">54</td>
+<td headers="R2" class="gt_row gt_right">0.7806806</td>
+<td headers="Error_Puro" class="gt_row gt_right">3.038637</td></tr>
+    <tr><td headers="nombres" class="gt_row gt_left">Masculino</td>
+<td headers="n" class="gt_row gt_right">54</td>
+<td headers="R2" class="gt_row gt_right">0.7802996</td>
+<td headers="Error_Puro" class="gt_row gt_right">3.658831</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="opción-2-modelo-normal-lrt_cm-1" class="level3">
+<h3 class="anchored" data-anchor-id="opción-2-modelo-normal-lrt_cm-1">Opción 2: Modelo normal LRT_CM</h3>
+<p>Se muestra un resumen de los resultados del SEGUNDO mejor modelo (normal con LRT_CM) sobre el conjunto de validación, por lo que se encuentra <span class="math inline">\(n\)</span> el tamaño de muestra del conjunto de validación para cada subgrupo (femenino o masculino), el <em>r-</em>cuadrado (R2) y el error puro (Error_Puro).</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="vavxsrpcab" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vavxsrpcab table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#vavxsrpcab thead, #vavxsrpcab tbody, #vavxsrpcab tfoot, #vavxsrpcab tr, #vavxsrpcab td, #vavxsrpcab th {
+  border-style: none;
+}
+
+#vavxsrpcab p {
+  margin: 0;
+  padding: 0;
+}
+
+#vavxsrpcab .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#vavxsrpcab .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#vavxsrpcab .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#vavxsrpcab .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#vavxsrpcab .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vavxsrpcab .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vavxsrpcab .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vavxsrpcab .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#vavxsrpcab .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#vavxsrpcab .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#vavxsrpcab .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#vavxsrpcab .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#vavxsrpcab .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#vavxsrpcab .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#vavxsrpcab .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#vavxsrpcab .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#vavxsrpcab .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#vavxsrpcab .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#vavxsrpcab .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vavxsrpcab .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#vavxsrpcab .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#vavxsrpcab .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#vavxsrpcab .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vavxsrpcab .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#vavxsrpcab .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#vavxsrpcab .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vavxsrpcab .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vavxsrpcab .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#vavxsrpcab .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vavxsrpcab .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#vavxsrpcab .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vavxsrpcab .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vavxsrpcab .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vavxsrpcab .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vavxsrpcab .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vavxsrpcab .gt_left {
+  text-align: left;
+}
+
+#vavxsrpcab .gt_center {
+  text-align: center;
+}
+
+#vavxsrpcab .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#vavxsrpcab .gt_font_normal {
+  font-weight: normal;
+}
+
+#vavxsrpcab .gt_font_bold {
+  font-weight: bold;
+}
+
+#vavxsrpcab .gt_font_italic {
+  font-style: italic;
+}
+
+#vavxsrpcab .gt_super {
+  font-size: 65%;
+}
+
+#vavxsrpcab .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#vavxsrpcab .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#vavxsrpcab .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#vavxsrpcab .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#vavxsrpcab .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#vavxsrpcab .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#vavxsrpcab .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#vavxsrpcab .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#vavxsrpcab div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="nombres">nombres</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n">n</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="R2">R2</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Error_Puro">Error_Puro</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="nombres" class="gt_row gt_left">Femenino</td>
+<td headers="n" class="gt_row gt_right">54</td>
+<td headers="R2" class="gt_row gt_right">0.7131252</td>
+<td headers="Error_Puro" class="gt_row gt_right">3.475254</td></tr>
+    <tr><td headers="nombres" class="gt_row gt_left">Masculino</td>
+<td headers="n" class="gt_row gt_right">54</td>
+<td headers="R2" class="gt_row gt_right">0.7682204</td>
+<td headers="Error_Puro" class="gt_row gt_right">3.758067</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
 
 
+</section>
 </section>
 </section>
 
@@ -1424,7 +4362,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const onCopySuccess = function(e) {
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1456,50 +4405,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
   });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+  function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
+      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1509,17 +4419,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start',
+      placement: 'bottom-start'
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1531,130 +4432,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
+      return note.innerHTML;
     });
   }
       let selectedAnnoteEl;
@@ -1698,7 +4476,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
-            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1724,32 +4501,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1810,7 +4561,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-
 
 
 

@@ -1,0 +1,1347 @@
+---
+echo: false
+warning: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+# Librerias 
+library(readxl)
+library(tidyverse)
+library(nortest)
+library(dplyr)
+library(ggplot2)
+library(GGally) # para la funcion ggpairs
+library(gt)
+library(gtExtras)
+library(moments)
+library(leaps)
+library(MASS)
+library(lmtest)
+library(car)
+library(BSDA) # Test del signo
+library(glmnet)
+library(glmtoolbox)
+library(MASS)
+library(rsample)
+library(lawstat)
+library(caret) # Para particion train test
+```
+
+```{r}
+datos <- read_excel("Datos/Corregida - COMPILADO DATOS COMUNIDAD DE CUIDADO Y CENTRO DÍA.xlsx", 
+                      range = "B2:AN561", col_types = c("date", 
+                      "skip", "text", "text", "text", "skip", 
+                      "text", "numeric", "text", "skip", 
+                      "skip", "skip", "skip", "numeric", 
+                      "skip", "skip", "skip", "skip", "numeric", 
+                      "skip", "skip", "skip", "skip", "numeric", 
+                      "skip", "skip", "skip", "skip", "numeric", 
+                      "skip", "skip", "skip", "skip", "numeric", 
+                      "skip", "skip", "skip", "skip", "numeric"))
+colnames(datos) <- c("Fecha", "Localidad", "Programa", "Unidad_atencion", 
+                     "Sexo", "Edad", "Etnia", "Peso", "Talla",
+                     "LRT_CM","LRT_A", "LRM_90","LRM_R")
+datos$Sexo <- as.factor(datos$Sexo)
+datos$Etnia <- as.factor(datos$Etnia)
+datos <- datos[-which(datos$Edad<60),] # >60
+datos <- datos |> filter(!(abs(LRT_A-LRT_CM) > 3 | abs(LRM_90-LRM_R) > 3))
+datos <- datos |> as.data.frame()
+```
+
+
+
+```{r}
+#| results: hide
+# Crear índices estratificados basados en la variable 'Sexo'
+set.seed(123)
+indices <- createDataPartition(datos$Sexo, p = 0.8, list = FALSE)
+
+# Dividir los datos
+train <- datos[indices, ]   # 80% entrenamiento
+test <- datos[-indices, ]   # 20% validación
+
+# Verificar proporciones en cada conjunto
+prop.table(table(datos$Sexo))  # Proporciones en el dataset completo
+prop.table(table(train$Sexo))  # Proporciones en entrenamiento
+prop.table(table(test$Sexo))   # Proporciones en validación
+```
+
+```{r}
+datos_copia <- datos
+datos <- train
+```
+
+# Modelos
+
+En esta sección se ajustarán tres tipos de modelos —Normal, LASSO y Gamma— para estimar la talla de adultos mayores en Colombia, utilizando diferentes mediciones: LRT_A, LRT_CM, LRM_R y LRM_90.
+
+La elección de estos modelos se basa en la revisión de la literatura, que indica que las tallas suelen seguir una distribución normal. Además, se incluyen los modelos LASSO y Gamma debido a la naturaleza de la variable respuesta (talla), que es siempre positiva, lo que los hace adecuados para este tipo de datos.
+
+## Modelo Normal
+
+### LRT Antropómetro
+
+Se hace una búsqueda del mejor modelo normal por cada número de posibles combinaciones de variables de las cuales se tenga evidencia que influyen en la talla de adultos mayores (Edad, Sexo, Etnia y LRT_A). Primero se hará la búsqueda usando todo el conjunto de datos.
+
+```{r}
+#| results: hide
+regfit.full <- regsubsets(Talla ~ LRT_A + Edad + Sexo + Etnia,
+                          datos, nbest = 1, nvmax = 10) # Mejor modelo de cada número de variables 
+
+(reg.summary <- summary(regfit.full))
+```
+
+A continuación, se muestra el BIC para cada mejor modelo del correspondiente tamaño:
+
+```{r}
+reg.summary$bic
+```
+
+Usando el criterio del BIC, el mejor modelo es el de 3 variables:
+
+```{r}
+which.min(reg.summary$bic)
+plot(reg.summary$bic , xlab = "Number of Variables",
+ylab = "BIC", type = "l")
+points(3, reg.summary$bic[3], col = "red", cex = 2,
+pch = 20)
+plot(regfit.full , scale = "bic")
+```
+
+Los coeficientes del mejor modelo usando el criterio de BIC son:
+
+```{r}
+coef(regfit.full, 3)
+```
+
+Esto sugiere usar el modelo $Talla = 59.11 + 2.19 LRT\_A - 0.12 Edad + 3.06 Sexo$,\
+$$Sexo = \begin{cases} 1 & \text{si sexo = masculino} \\ 0 & \text{si sexo = femenino} \end{cases}$$
+
+Ahora se usará ***K - fold cross validation*** con el fin de calcular directamente los errores de predicción sobre los datos de testeo y evitar así el sobreajuste.
+
+-   Se crean ***K - folds*** (pliegues) de aproximadamente igual tamaño. En este caso fijamos $k = 10$. Como tenemos $543$ datos, cada pliegue será de tamaño 54 o 55.
+-   El $k-ésimo$ pliegue servirá para testear, y los demás pliegues se juntan para entrenar los modelos. Osea que se usará un $90\%$ de los datos para entrenamiento y $10\%$ para test.
+-   Para $k = 1,\cdots,10,$ se calcula el MSE.
+-   Luego, se promedia el MSE a través de los $10$ pliegues y se obtiene el MSE promedio.
+
+```{r}
+# Crear 5 folds
+set.seed(123)  # Semilla para reproducibilidad
+folds <- vfold_cv(datos, v = 10)
+
+# Inicializar lista para almacenar errores
+errores <- numeric(length(folds$splits))
+
+# Loop para entrenar y validar el modelo en cada fold
+for (i in seq_along(folds$splits)) {
+  # Dividir datos
+  train_data <- analysis(folds$splits[[i]])  # Datos de entrenamiento
+  test_data <- assessment(folds$splits[[i]]) # Datos de validación
+
+  # Ajustar el modelo
+  modelo <- lm(Talla ~ LRT_A + Edad + Sexo, data = train_data)
+
+  # Predicciones
+  predicciones <- predict(modelo, newdata = test_data)
+
+  # Calcular error cuadrático medio
+  errores[i] <- mean((test_data$Talla - predicciones)^2)
+}
+```
+
+El MSE para el modelo de 3 variables ($LRT\_A, Edad, Sexo$) es:
+
+```{r}
+# Para ir almacenando los MSE de los modelos y las longitudes
+MSEs <- data.frame(Modelo = character(),
+                   Medida = character(),
+                   MSE = numeric())
+
+# Promedio del error cuadrático medio
+mean(errores)
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "Normal", Medida = "LRT_A", MSE = mean(errores)))
+```
+
+### LRT cinta métrica
+
+Se hace una búsqueda del mejor modelo normal por cada número de posibles combinaciones de variables de las cuales se tenga evidencia que influyen en la talla de adultos mayores (Edad, Sexo, Etnia y LRT_CM). Primero se hará la búsqueda usando todo el conjunto de datos.
+
+
+```{r}
+#| results: hide
+regfit.full <- regsubsets(Talla ~ LRT_CM + Edad + Sexo + Etnia,
+                          datos, nbest = 1, nvmax = 10) # Mejor modelo de cada número de variables 
+
+(reg.summary <- summary(regfit.full))
+# names(reg.summary)
+```
+
+A continuación, se muestra el BIC para cada mejor modelo del correspondiente tamaño:
+
+```{r}
+reg.summary$bic
+```
+
+Usando el criterio BIC, el mejor modelo es el de 3 variables:
+
+```{r}
+which.min(reg.summary$bic)
+plot(reg.summary$bic , xlab = "Number of Variables",
+ylab = "BIC", type = "l")
+points(3, reg.summary$bic[3], col = "red", cex = 2,
+pch = 20)
+plot(regfit.full , scale = "bic")
+```
+
+Los coeficientes del mejor modelo usando el criterio de BIC son:
+
+```{r}
+coef(regfit.full, 3)
+```
+
+Esto sugiere usar el modelo $Talla = 57.30 + 2.16 LRT\_CM - 0.13 Edad + 4.13 Sexo$,\
+$$Sexo = \begin{cases} 1 & \text{si sexo = Masculino} \\ 0 & \text{si sexo = Femenino} \end{cases}$$
+
+Ahora usamos nuevamente ***K - fold cross validation*** con el fin de calcular directamente los errores de predicción sobre los datos de testeo y evitar así el sobreajuste de la misma manera que se realizó para el modelo normal de $LRT_A$. 
+
+```{r}
+# Crear 10 folds
+set.seed(123)  # Semilla para reproducibilidad
+folds <- vfold_cv(datos, v = 10)
+
+# Inicializar lista para almacenar errores
+errores <- numeric(length(folds$splits))
+
+# Loop para entrenar y validar el modelo en cada fold
+for (i in seq_along(folds$splits)) {
+  # Dividir datos
+  train_data <- analysis(folds$splits[[i]])  # Datos de entrenamiento
+  test_data <- assessment(folds$splits[[i]]) # Datos de validación
+
+  # Ajustar el modelo
+  modelo <- lm(Talla ~ LRT_CM + Edad + Sexo, data = train_data)
+
+  # Predicciones
+  predicciones <- predict(modelo, newdata = test_data)
+
+  # Calcular error cuadrático medio
+  errores[i] <- mean((test_data$Talla - predicciones)^2)
+}
+```
+
+El MSE para el modelo de 3 variables ($LRT\_CM, Edad, Sexo$) es:
+
+```{r}
+# Promedio del error cuadrático medio
+mean(errores)
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "Normal", Medida = "LRT_CM", MSE = mean(errores)))
+```
+
+### LRM pierna estirada
+
+Se hace una búsqueda del mejor modelo normal por cada número de posibles combinaciones de variables de las cuales se tenga evidencia que influyen en la talla de adultos mayores (Edad, Sexo, Etnia y LRM_R). Primero se hará la búsqueda usando todo el conjunto de datos.
+
+```{r}
+#| results: hide
+regfit.full <- regsubsets(Talla ~ LRM_R + Edad + Sexo + Etnia,
+                          datos, nbest = 1, nvmax = 10) # Mejor modelo de cada número de variables 
+
+(reg.summary <- summary(regfit.full))
+```
+
+A continuación, se muestra el BIC para cada mejor modelo del correspondiente tamaño:
+
+```{r}
+reg.summary$bic
+```
+
+Usando el criterio BIC, el mejor modelo es el de 3 variables:
+
+```{r}
+which.min(reg.summary$bic)
+plot(reg.summary$bic , xlab = "Number of Variables",
+ylab = "BIC", type = "l")
+points(3, reg.summary$bic[3], col = "red", cex = 2,
+pch = 20)
+plot(regfit.full , scale = "bic")
+```
+
+Los coeficientes del mejor modelo usando el criterio de BIC son:
+
+```{r}
+coef(regfit.full, 3)
+```
+
+Esto sugiere usar el modelo $Talla = 68.04 + 2.21 LRM\_R - 0.11 Edad + 3.81 Sexo$,\
+$$Sexo = \begin{cases} 1 & \text{si sexo = Masculino} \\ 0 & \text{si sexo = Femenino} \end{cases}$$
+
+Nuevamente, se hará la búsqueda del mejor modelo usando ***K - fold cross validation*** con el fin de calcular directamente los errores de predicción sobre los datos de testeo y evitar así el sobreajuste.
+
+```{r}
+# Crear 10 folds
+set.seed(123)  # Semilla para reproducibilidad
+folds <- vfold_cv(datos, v = 10)
+
+# Inicializar lista para almacenar errores
+errores <- numeric(length(folds$splits))
+
+# Loop para entrenar y validar el modelo en cada fold
+for (i in seq_along(folds$splits)) {
+  # Dividir datos
+  train_data <- analysis(folds$splits[[i]])  # Datos de entrenamiento
+  test_data <- assessment(folds$splits[[i]]) # Datos de validación
+
+  # Ajustar el modelo
+  modelo <- lm(Talla ~ LRM_R + Edad + Sexo, data = train_data)
+
+  # Predicciones
+  predicciones <- predict(modelo, newdata = test_data)
+
+  # Calcular error cuadrático medio
+  errores[i] <- mean((test_data$Talla - predicciones)^2)
+}
+```
+
+El MSE para el modelo de 3 variables ($LRM\_R, Edad, Sexo$) es:
+
+```{r}
+# Promedio del error cuadrático medio
+mean(errores)
+
+ MSEs <- rbind(MSEs, data.frame(Modelo = "Normal", Medida = "LRM_R", MSE = mean(errores))) # No se incluye pq aparentemente hay una leve homocedasticidad en los errores
+```
+
+### LRM pierna a 90°
+
+Se hace una búsqueda del mejor modelo normal por cada número de posibles combinaciones de variables de las cuales se tenga evidencia que influyen en la talla de adultos mayores (Edad, Sexo, Etnia y LRM_90). Primero se hará la búsqueda usando todo el conjunto de datos.
+
+```{r}
+#| results: hide
+regfit.full <- regsubsets(Talla ~ LRM_90 + Edad + Sexo + Etnia,
+                          datos, nbest = 1, nvmax = 10) # Mejor modelo de cada número de variables 
+
+(reg.summary <- summary(regfit.full))
+# names(reg.summary)
+```
+
+A continuación, se muestra el BIC para cada mejor modelo del correspondiente tamaño:
+
+```{r}
+reg.summary$bic
+```
+
+Usando el criterio BIC, el mejor modelo es el de 3 variables:
+
+```{r}
+which.min(reg.summary$bic)
+plot(reg.summary$bic , xlab = "Number of Variables",
+ylab = "BIC", type = "l")
+points(3, reg.summary$bic[3], col = "red", cex = 2,
+pch = 20)
+plot(regfit.full , scale = "bic")
+```
+
+Los coeficientes del mejor modelo usando el criterio de BIC son:
+
+```{r}
+coef(regfit.full, 3)
+```
+
+Esto sugiere usar el modelo $Talla = 66.20 + 2.22 LRM\_90 - 0.12 Edad + 4.83 Sexo$,\
+$$Sexo = \begin{cases} 1 & \text{si sexo = Masculino} \\ 0 & \text{si sexo = Femenino} \end{cases}$$
+
+Ahora se hará la búsqueda del mejor modelo usando ***K - fold cross validation*** con el fin de calcular directamente los errores de predicción sobre los datos de testeo y evitar así el sobreajuste.
+
+
+```{r}
+# Crear 10 folds
+set.seed(123)  # Semilla para reproducibilidad
+folds <- vfold_cv(datos, v = 10)
+
+# Inicializar lista para almacenar errores
+errores <- numeric(length(folds$splits))
+
+# Loop para entrenar y validar el modelo en cada fold
+for (i in seq_along(folds$splits)) {
+  # Dividir datos
+  train_data <- analysis(folds$splits[[i]])  # Datos de entrenamiento
+  test_data <- assessment(folds$splits[[i]]) # Datos de validación
+
+  # Ajustar el modelo
+  modelo <- lm(Talla ~ LRM_90 + Edad + Sexo, data = train_data)
+
+  # Predicciones
+  predicciones <- predict(modelo, newdata = test_data)
+
+  # Calcular error cuadrático medio
+  errores[i] <- mean((test_data$Talla - predicciones)^2)
+}
+```
+
+El MSE para el modelo de 3 variables ($LRM\_90, Edad, Sexo$) es:
+
+```{r}
+# Promedio del error cuadrático medio
+mean(errores)
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "Normal", Medida = "LRM_90", MSE = mean(errores))) # No se incluye pq el modelo no está bien especificado
+```
+
+### Resúmen modelos Normal
+
+En general, los modelos ajustados incluyeron como variables la edad, el sexo y el intercepto, variando únicamente entre las mediciones utilizadas: LRT_A, LRT_CM, LRM_90 y LRM_R. Cada modelo produjo diferentes estimaciones para los parámetros, lo que resulta en ecuaciones distintas para estimar la talla de los adultos mayores.
+
+El criterio principal para seleccionar el mejor modelo, ya sea normal o de otro tipo, será **el menor error cuadrático medio (MSE)**. Esto se debe a que un MSE más bajo indica que el modelo realiza estimaciones de la talla más cercanas a los valores reales, reflejando una mayor precisión.
+
+La tabla de los errores cuadráticos medios para la regresión lineal simple es la siguiente: 
+
+```{r}
+MSEs[1:4,]
+```
+
+El modelo con menor error cuadrático medio es el que tiene en cuenta la medida LRT con antropómetro: 
+
+$$Talla = 59.11 + 2.19 LRT\_A - 0.12 Edad + 3.06 Sexo$$
+
+A continuación, se procederá a validar los supuestos del mejor modelo identificado. Esta validación es crucial, ya que si los supuestos no se cumplen, el modelo no puede considerarse válido y sus resultados podrían no ser confiables.
+
+```{r}
+reg <- lm(Talla ~ LRT_A + Edad + Sexo, data = datos)
+(summary.reg <- summary(reg))
+```
+
+El modelo tiene un $R^2$ ajustado de $0.8856$, es decir que aproximadamente un $88.56\%$ de la variabilidad de la talla es explicada por LRT_A, la edad y el sexo. 
+
+***Linealidad:*** Con el fin de verificar que la relación entre la talla y las variables LRT_A (discriminando por sexo) y la edad es lineal, se visualiza el gráfico de los residuos vs los valores predichos del modelo $\left(\hat{e},\hat{y} \right)$:
+
+```{r}
+plot(reg, which = 1)
+```
+
+El gráfico no muestra ningún patrón marcado, la ubicación de los puntos parece ser aleatoria alrededor de cero, indicando también homoscedasticidad en los residuales y posible independencia de los mismos. El gráfico muestra algunos valores atípicos que valdría la pena explorar.
+
+***Independencia de los errores:*** Aunque nuestros datos no son temporales, el test de Durbin-Watson nos puede ayudar a evaluar la autocorrelación de los errores del modelo:
+
+```{r}
+dwtest(reg)
+```
+
+La estadística del test de Durbin-Watson es muy cercano a $2$, se concluye que los errores son independientes.
+
+***Normalidad de los errores:*** Se realiza el gráfico QQ-plot para comparar la distribución de los residuales del modelo con la distribución teórica de una normal. También se hace el test de normalidad de Lilliefors y Anderson-Darling:
+
+```{r}
+plot(reg, which = 2)
+lillie.test(reg$residuals)
+ad.test(reg$residuals)
+```
+
+El QQ-plot muestra que los residuales se ajustan aceptablemente a una distribución normal. Las pruebas de normalidad de Lilliefors y Anderson-Darling también apoyan este resultado.
+
+***Homoscedasticidad:*** Aunque no se vio un patron que indicara heteroscedasticidad en el gráfico de los residuales vs los valores predichos, a continuación se muestra el gráfico de los residuales estandarizados vs los valores predichos con el fin de mejorar la interpretabilidad de la homoscedasticidad y tener una visión más clara de las observaciones atípicas e influyentes:
+
+```{r}
+plot(reg, which = 3)
+```
+
+No se observan patrones que indiquen hereroscedasticidad en los residuos (forma de cono o embudo). Se siguien observando algunas observaciones atípicas y/o influyentes.
+
+Adicional, se realiza la prueba de Breusch-Pagan para verificar la homoscedasticidad de los residuales:
+
+```{r}
+bptest(reg)
+```
+
+No se rechaza la hipótesis nula de que los errores del modelo son homoscedasticos.
+
+***Multicolinealidad:*** Se verifica que las variables incluídas en el modelo no están altamente correlacionadas entre sí, y así evitar obtener resultados inestables que dificulten la interpretabilidad de los coeficientes del modelo. Se calculan los Factores de Inflación de la Varianza (VIFs):
+
+```{r}
+vif(reg)
+```
+
+Dado que los VIFs son mucho menores a 5, esto indica que cada variable tiene una correlación moderada (leve) con las demás. Por lo que se puede concluir que los resultados del modelo posiblemente no estarán muy afectados por la multicolinealidad.
+
+***El modelo está bien especificado:*** Se hace el test de RESET para examinar si el modelo ajustado está bien especificado o si se han omitido términos no lineales o interacciones importantes:
+
+```{r}
+resettest(reg, type="regressor")
+resettest(reg, type="fitted")
+```
+
+No se rechaza la hipótesis nula de que el modelo está bien especificado.
+
+***Observaciones atípicas y de alto apalancamiento:*** 
+
+```{r}
+#| layout-ncol: 2
+plot(reg,which=5)
+stud_res<-studres(reg)
+# head(sort(abs(stud_res),decreasing=TRUE))
+boxplot(stud_res)
+```
+
+Usando los residuales estudentizados, se observan $5$ datos atípicos.
+
+```{r}
+#| layout-ncol: 2
+n <- nrow(datos)
+corte <- 4/(n-length(reg$coefficients)-2) #Es una regla usada en la práctica
+plot(reg, which=4, cook.levels=corte)
+abline(h=corte, lty=2, col="red")
+cooksd<-cooks.distance(reg)
+# cooksd[which(cooksd>corte)]
+
+influencePlot(reg, id.method="identify", main="Gráfico de influencia", sub="El tamaño del círculo es proporcional a la D_Cook")
+```
+
+En total 29 observaciones superan el umbral especificado para la distancia de Cook, pero esto no significa que todas sean influyentes (alto leverage). Particularmente hay 3 observaciones que son marcadas como influyentes significativamente según la distancia de Cook. Esto indica que la inclusión de estas observaciones en el modelo pueden tener una influencia significativa en los coeficientes del modelo y en la predicción de la talla. Se debe explorar con cautela estas observaciones y decidir qué hacer con ellas.
+
+Para esto, se puede comprobar el cambio en los coeficientes del modelo al excluir estas observaciones influyentes.
+
+```{r}
+reg2 <- update(reg,subset={setdiff(row(datos)[,1], c(533,43,549))})
+summary(reg2)
+```
+
+Las estimaciones de los coeficientes del modelo sin las obervaciones influyentes han cambiado un poco respecto al modelo original. El $R^2$ ajustado ha incrementado un poco también.
+
+## Modelo Lasso
+
+### LRT Antropómetro
+
+Para ajustar el modelo LASSO, se consideran todas las variables que podrían influir en la estimación de la talla: Edad, Sexo, Etnia y LRT_A. El modelo se encargará automáticamente de seleccionar las variables más significativas. 
+
+Se utiliza el método de ***k-fold cross validation*** con $k = 10$ usando los mismos
+folds utilizados en el modelo normal para que las métricas sean comparables. El objetivo principal de la validación cruzada en el modelo LASSO es obtener el valor de $\lambda$ 
+que minimice el error cuadrático medio cruzado a través de los 10 folds. Es decir, se busca el valor de $\lambda$ que minimice el MSE a través de los 10 folds (lo mismo que en el modelo normal).
+
+```{r}
+datos2 <- datos %>% # dataframe auxiliar para obener los id de los k-folds
+  mutate(index = row_number())
+
+# Se crean los k-fols igual que en el modelo normal
+set.seed(123)
+folds <- vfold_cv(datos2, v = 10)
+
+fold_id <- rep(0, nrow(datos2)) # id's de los k-folds
+for(i in 1:10){
+  prueba = assessment(folds$splits[[i]])
+  ids = prueba %>% pull(index)
+  filas = datos2 %>% filter(index %in% ids)
+  fold_id[filas$index] = i
+}
+```
+
+El modelo LASSO ajusta los coeficientes de las variables, llevando a cero aquellos que no son significativos. Además, determina de forma óptima el parámetro lambda que controla la penalización y selección de variables.
+  
+```{r}
+# Matriz diseño y variable respuesta
+x <- model.matrix(Talla ~ LRT_A + Edad + Sexo + Etnia, data = datos)[,-1]
+y <- datos$Talla
+```
+
+Se ajusta el modelo en cada fold usando `cv.glmnet`:
+
+```{r}
+grid <- 10^seq(3, -3, length.out = 500) # grilla de valores lambda
+# alpha = 1 se refiere a LASSO
+cv.out <- cv.glmnet(x, y, alpha = 1, lambda = grid, foldid = fold_id, type.measure = "mse")
+
+plot(cv.out) # muestra dónde se miniza la función de pérdida
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "LASSO", Medida = "LRT_A", MSE = min(cv.out$cvm)))
+```
+
+El valor de $\lambda$ óptimo y el MSE del modelo ajustado con ese valor de $\lambda$ son respectivamente:
+
+```{r}
+paste("Valor de lambda óptimo:", round(cv.out$lambda.min,3)) # Mejor lambda
+paste("MSE:", round(min(cv.out$cvm),3)) # Este es el MSE promedio de los 10 folds
+```
+
+
+Los coeficientes resultantes del modelo ajustado son:
+  
+```{r}
+coef(cv.out, s = "lambda.min")
+```
+
+Finalmente, la ecuación propuesta por este modelo para estimar la talla en adultos mayores es:
+
+$$Talla = 58.514 + 2.174 \cdot LRT\_A - 0.102 \cdot Edad + 2.870 \cdot SexoMasculino + 0.037 \cdot EtniaIndigena$$
+$$Sexo = \begin{cases} 1 & \text{si sexo = Masculino} \\ 0 & \text{si sexo = Femenino} \end{cases}$$
+$$BM = \begin{cases} 1 & \text{si Etnia = Blanco-Mestizo} \\ 0 & \text{en otro caso} \end{cases}$$
+$$Ind = \begin{cases} 1 & \text{si Etnia = Indígena} \\ 0 & \text{en otro caso} \end{cases}$$
+
+### LRT cinta métrica
+
+Para ajustar el modelo LASSO, se consideran todas las variables que podrían influir en la estimación de la talla: Edad, Sexo, Etnia y LRT_CM. El modelo se encargará automáticamente de seleccionar las variables más significativas. 
+
+Se utiliza el método de ***k-fold cross validation*** con $k = 10$ usando los mismos
+folds utilizados en el modelo normal para que las métricas sean comparables. El objetivo principal de la validación cruzada en el modelo LASSO es obtener el valor de $\lambda$ 
+que minimice el error cuadrático medio cruzado a través de los 10 folds. Es decir, se busca el valor de $\lambda$ que minimice el MSE a través de los 10 folds (lo mismo que en el modelo normal).
+
+El modelo LASSO ajusta los coeficientes de las variables, llevando a cero aquellos que no son significativos. Además, determina de forma óptima el parámetro lambda que controla la penalización y selección de variables.
+  
+```{r}
+# Matriz diseño y variable respuesta
+x <- model.matrix(Talla ~ LRT_CM + Edad + Sexo + Etnia, data = datos)[,-1]
+y <- datos$Talla
+```
+
+Se ajusta el modelo en cada fold usando `cv.glmnet`:
+
+```{r}
+grid <- 10^seq(3, -3, length.out = 500) # grilla de valores lambda
+# alpha = 1 se refiere a LASSO
+cv.out <- cv.glmnet(x, y, alpha = 1, lambda = grid, foldid = fold_id, type.measure = "mse")
+
+plot(cv.out) # muestra dónde se miniza la función de pérdida
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "LASSO", Medida = "LRT_CM", MSE = min(cv.out$cvm)))
+```
+
+El valor de $\lambda$ óptimo y el MSE del modelo ajustado con ese valor de $\lambda$ son respectivamente:
+
+```{r}
+paste("Valor de lambda óptimo:", round(cv.out$lambda.min,3)) # Mejor lambda
+paste("MSE:", round(min(cv.out$cvm),3)) # Este es el MSE promedio de los 10 folds
+```
+
+Los coeficientes resultantes del modelo ajustado son:
+  
+```{r}
+coef(cv.out, s = "lambda.min")
+```
+
+Finalmente, la ecuación propuesta por este modelo para estimar la talla en adultos mayores es:
+
+$$Talla = 56.831 + 2.146 \cdot LRT\_CM - 0.110 \cdot Edad + 3.951 \cdot Sexo$$\
+$$Sexo = \begin{cases} 1 & \text{si sexo = Masculino} \\ 0 & \text{si sexo = Femenino} \end{cases}$$\
+
+### LRM pierna estirada
+
+Para ajustar el modelo LASSO, se consideran todas las variables que podrían influir en la estimación de la talla: Edad, Sexo, Etnia y LRM_R. El modelo se encargará automáticamente de seleccionar las variables más significativas. 
+
+Se utiliza el método de ***k-fold cross validation*** con $k = 10$ usando los mismos
+folds utilizados en el modelo normal para que las métricas sean comparables. El objetivo principal de la validación cruzada en el modelo LASSO es obtener el valor de $\lambda$ 
+que minimice el error cuadrático medio cruzado a través de los 10 folds. Es decir, se busca el valor de $\lambda$ que minimice el MSE a través de los 10 folds (lo mismo que en el modelo normal).
+
+El modelo LASSO ajusta los coeficientes de las variables, llevando a cero aquellos que no son significativos. Además, determina de forma óptima el parámetro lambda que controla la penalización y selección de variables.
+  
+```{r}
+# Matriz diseño y variable respuesta
+x <- model.matrix(Talla ~ LRM_R + Edad + Sexo + Etnia, data = datos)[,-1]
+y <- datos$Talla
+```
+
+Se ajusta el modelo en cada fold usando `cv.glmnet`:
+
+```{r}
+grid <- 10^seq(3, -3, length.out = 500) # grilla de valores lambda
+# alpha = 1 se refiere a LASSO
+cv.out <- cv.glmnet(x, y, alpha = 1, lambda = grid, foldid = fold_id, type.measure = "mse")
+
+plot(cv.out) # muestra dónde se miniza la función de pérdida
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "LASSO", Medida = "LRM_R", MSE = min(cv.out$cvm)))
+```
+
+El valor de $\lambda$ óptimo y el MSE del modelo ajustado con ese valor de $\lambda$ son respectivamente:
+
+```{r}
+paste("Valor de lambda óptimo:", round(cv.out$lambda.min,3)) # Mejor lambda
+paste("MSE:", round(min(cv.out$cvm),3)) # Este es el MSE promedio de los 10 folds
+```
+
+Los coeficientes resultantes del modelo ajustado son:
+  
+```{r}
+coef(cv.out, s = "lambda.min")
+```
+
+Finalmente, la ecuación propuesta por este modelo para estimar la talla en adultos mayores es:
+
+$$Talla = 65.525 + 2.217 \cdot LRM\_R - 0.116 \cdot Edad + 3.797 \cdot Sexo + 2.568 \cdot BM + 3.508 \cdot Ind + 5.314 \cdot Rrom$$\
+$$Sexo = \begin{cases} 1 & \text{si sexo = Masculino} \\ 0 & \text{si sexo = Femenino} \end{cases}$$\
+$$BM = \begin{cases} 1 & \text{si Etnia = Blanco-Mestizo} \\ 0 & \text{en otro caso} \end{cases}$$\
+$$Ind = \begin{cases} 1 & \text{si Etnia = Indigena} \\ 0 & \text{en otro caso} \end{cases}$$\
+$$Rrom = \begin{cases} 1 & \text{si Etnia = Rrom} \\ 0 & \text{en otro caso} \end{cases}$$
+
+### LRM pierna a 90°
+
+Para ajustar el modelo LASSO, se consideran todas las variables que podrían influir en la estimación de la talla: Edad, Sexo, Etnia y LRM_90. El modelo se encargará automáticamente de seleccionar las variables más significativas. 
+
+Se utiliza el método de ***k-fold cross validation*** con $k = 10$ usando los mismos
+folds utilizados en el modelo normal para que las métricas sean comparables. El objetivo principal de la validación cruzada en el modelo LASSO es obtener el valor de $\lambda$ 
+que minimice el error cuadrático medio cruzado a través de los 10 folds. Es decir, se busca el valor de $\lambda$ que minimice el MSE a través de los 10 folds (lo mismo que en el modelo normal).
+
+El modelo LASSO ajusta los coeficientes de las variables, llevando a cero aquellos que no son significativos. Además, determina de forma óptima el parámetro lambda que controla la penalización y selección de variables.
+  
+```{r}
+# Matriz diseño y variable respuesta
+x <- model.matrix(Talla ~ LRM_90 + Edad + Sexo + Etnia, data = datos)[,-1]
+y <- datos$Talla
+```
+
+Se ajusta el modelo en cada fold usando `cv.glmnet`:
+
+```{r}
+grid <- 10^seq(3, -3, length.out = 500) # grilla de valores lambda
+# alpha = 1 se refiere a LASSO
+cv.out <- cv.glmnet(x, y, alpha = 1, lambda = grid, foldid = fold_id, type.measure = "mse")
+
+plot(cv.out) # muestra dónde se miniza la función de pérdida
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "LASSO", Medida = "LRM_90", MSE = min(cv.out$cvm)))
+```
+
+El valor de $\lambda$ óptimo y el MSE del modelo ajustado con ese valor de $\lambda$ son respectivamente:
+
+```{r}
+paste("Valor de lambda óptimo:", round(cv.out$lambda.min,3)) # Mejor lambda
+paste("MSE:", round(min(cv.out$cvm),3)) # Este es el MSE promedio de los 10 folds
+```
+
+Los coeficientes resultantes del modelo ajustado son:
+  
+```{r}
+coef(cv.out, s = "lambda.min")
+```
+
+Finalmente, la ecuación propuesta por este modelo para estimar la talla en adultos mayores es:
+
+$$Talla = 65.493 + 2.205 \cdot LRM\_90 - 0.105 \cdot Edad + 4.688 \cdot Sexo + 0.294 \cdot BM + 0.612 \cdot Rrom$$\
+$$Sexo = \begin{cases} 1 & \text{si sexo = Masculino} \\ 0 & \text{si sexo = Femenino} \end{cases}$$\
+$$BM = \begin{cases} 1 & \text{si Etnia = Blanco-Mestizo} \\ 0 & \text{en otro caso} \end{cases}$$\
+$$Rrom = \begin{cases} 1 & \text{si Etnia = Rrom} \\ 0 & \text{en otro caso} \end{cases}$$
+
+### Resumen modelos LASSO
+
+En general, los modelos ajustados incluyeron más variables que las tres del modelo normal (edad, sexo y mediciones). Cada modelo produjo diferentes estimaciones para los parámetros, lo que resulta en ecuaciones distintas para estimar la talla de los adultos mayores.
+
+Nuevamente, es preferible el modelo LASSO que tenga menor error cuadrático medio. Y en general, es preferible el modelo (normal o LASSO) que tenga menor MSE.
+
+La tabla de los errores cuadráticos medios de los modelos ajustados hasta el momento es: 
+
+```{r}
+MSEs[5:8,]
+```
+
+El modelo normal con LRT_A sigue siendo el mejor, ya que hasta el momento es el que presenta el menor MSE. Por lo tanto, no se procederá a verificar los supuestos para ninguno de los modelos LASSO, dado que el modelo normal continúa siendo superior.
+
+## Modelo Gamma
+
+### LRT Antropómetro
+
+Inicialmente, se ajusta el modelo Gamma que incluye a todas las variables regresoras que se cree influyen en la estimación de la talla. 
+
+```{r}
+# Modelo nulo
+gamma.reg_null <- glm(Talla ~ 1, family= Gamma(),data = datos)
+
+# Estimacion del modelo
+gamma.reg <- glm(Talla ~ LRT_A + Edad + Etnia + Sexo, family= Gamma(),data = datos)
+summary(gamma.reg)
+
+```
+
+A continuación se realiza una selección de variables con el método "forward" de tal forma que se minimice el AIC. El modelo seleccionado resulta ser el que incluye Edad, Sexo y LRT_A.
+
+```{r}
+stepwise <- stepAIC(gamma.reg_null, scope = list(lower = gamma.reg_null, upper = gamma.reg), trace = TRUE, k= 2, direction="forward") # k= log(nrow(datos)) - BIC
+```
+Los coeficientes del modelo son
+
+```{r}
+# Estimacion del modelo
+gamma.final <- glm(Talla ~ LRT_A + Edad + Sexo, family= Gamma(),data = datos)
+summary(gamma.final)
+```
+Entonces, la ecuación propuesta por este modelo para estimar el logaritmo de la talla en adultos mayores es:
+
+$$\ln(Talla) = 0.01033 - 0.00008813 LRT\_A + 0.000004989 Edad - 0.0001318 Sexo$$\
+$$Sexo = \begin{cases} 1 & \text{si sexo = Masculino} \\ 0 & \text{si sexo = Femenino} \end{cases}$$\
+
+Se utiliza el método de***k-fold cross validation*** con $k = 10$ y y se calcula el promedio del MSE obtenido en cada iteración. El MSE para este modelo es:
+
+```{r}
+# k folds
+best.fit <- pred <- CV.ERRORS <- cv.errors <- NULL
+
+set.seed(123)  # Semilla para reproducibilidad
+folds <- vfold_cv(datos, v = 10)
+
+# Inicializar lista para almacenar errores
+errores <- numeric(length(folds$splits))
+
+# Loop para entrenar y validar el modelo en cada fold
+for (i in seq_along(folds$splits)) {
+  # Dividir datos
+  train_data <- analysis(folds$splits[[i]])  # Datos de entrenamiento
+  test_data <- assessment(folds$splits[[i]]) # Datos de validación
+
+  # Ajustar el modelo
+  modelo <- glm(Talla ~ LRT_A + Edad + Sexo, family= Gamma(), data = train_data)
+
+  # Predicciones
+  predicciones <- predict(modelo, newdata = test_data, type = "response")
+
+  # Calcular error cuadrático medio
+  errores[i] <- mean((test_data$Talla - predicciones)^2)
+}
+```
+
+```{r}
+# Error cuadratico medio
+mean(errores)
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "Gamma", Medida = "LRT_A", MSE = mean(errores)))
+```
+
+### LRT cinta métrica
+
+Inicialmente, se ajusta el modelo Gamma que incluye a todas las variables regresoras que se cree influyen en la estimación de la talla. 
+
+```{r}
+# Modelo nulo
+gamma.reg_null <- glm(Talla ~ 1, family= Gamma(),data = datos)
+
+# Estimacion del modelo
+gamma.reg <- glm(Talla ~ LRT_CM + Edad + Etnia + Sexo, family= Gamma(),data = datos)
+summary(gamma.reg)
+
+```
+
+A continuación se realiza una selección de variables con el método "forward" de tal forma que se minimice el AIC. El modelo seleccionado resulta ser el que incluye Edad, Sexo y LRT_A.
+
+```{r}
+stepwise <- stepAIC(gamma.reg_null, scope = list(lower = gamma.reg_null, upper = gamma.reg), trace = TRUE, k= 2, direction="forward") # k= log(nrow(datos)) - BIC
+```
+
+Los coeficientes del modelo son
+
+```{r}
+# Estimacion del modelo
+gamma.final <- glm(Talla ~ LRT_CM + Edad + Sexo, family= Gamma(),data = datos)
+summary(gamma.final)
+```
+
+Entonces, la ecuación propuesta por este modelo para estimar el logaritmo de la talla en adultos mayores es:
+
+$$\ln(Talla) = 1.041e-02 - 8.703e-05 LRT\_CM + 5.205e-06 Edad - 1.745e-04 Sexo$$\
+$$Sexo = \begin{cases} 1 & \text{si sexo = Masculino} \\ 0 & \text{si sexo = Femenino} \end{cases}$$\
+
+Se utiliza el método de***k-fold cross validation*** con $k = 10$ y y se calcula el promedio del MSE obtenido en cada iteración. El MSE para este modelo es:
+
+```{r}
+# k folds
+best.fit <- pred <- CV.ERRORS <- cv.errors <- NULL
+
+set.seed(123)  # Semilla para reproducibilidad
+folds <- vfold_cv(datos, v = 10)
+
+# Inicializar lista para almacenar errores
+errores <- numeric(length(folds$splits))
+
+# Loop para entrenar y validar el modelo en cada fold
+for (i in seq_along(folds$splits)) {
+  # Dividir datos
+  train_data <- analysis(folds$splits[[i]])  # Datos de entrenamiento
+  test_data <- assessment(folds$splits[[i]]) # Datos de validación
+
+  # Ajustar el modelo
+  modelo <- glm(Talla ~ LRT_CM + Edad + Sexo, family= Gamma(), data = train_data)
+
+  # Predicciones
+  predicciones <- predict(modelo, newdata = test_data, type = "response")
+
+  # Calcular error cuadrático medio
+  errores[i] <- mean((test_data$Talla - predicciones)^2)
+}
+```
+
+```{r}
+# Error cuadratico medio
+mean(errores)
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "Gamma", Medida = "LRT_CM", MSE = mean(errores)))
+```
+
+### LRM pierna estirada
+
+Inicialmente, se ajusta el modelo Gamma que incluye a todas las variables regresoras que se cree influyen en la estimación de la talla. 
+
+```{r}
+# Modelo nulo
+gamma.reg_null <- glm(Talla ~ 1, family= Gamma(),data = datos)
+
+# Estimacion del modelo
+gamma.reg <- glm(Talla ~ LRM_R + Edad + Etnia + Sexo, family= Gamma(),data = datos)
+summary(gamma.reg)
+
+```
+
+A continuación se realiza una selección de variables con el método "forward" de tal forma que se minimice el AIC. El modelo seleccionado resulta ser el que incluye Edad, Sexo y LRT_A.
+
+```{r}
+stepwise <- stepAIC(gamma.reg_null, scope = list(lower = gamma.reg_null, upper = gamma.reg), trace = TRUE, k= 2, direction="forward") # k= log(nrow(datos)) - BIC
+```
+
+Los coeficientes del modelo son
+
+```{r}
+# Estimacion del modelo
+gamma.final <- glm(Talla ~ LRM_R + Edad + Sexo, family= Gamma(),data = datos)
+summary(gamma.final)
+```
+
+Entonces, la ecuación propuesta por este modelo para estimar el logaritmo de la talla en adultos mayores es:
+
+$$\ln(Talla) = 9.972e-03 - 8.941e-05 LRM\_R + 4.774e-06 Edad - 1.618e-04 Sexo$$\
+$$Sexo = \begin{cases} 1 & \text{si sexo = Masculino} \\ 0 & \text{si sexo = Femenino} \end{cases}$$\
+
+Se utiliza el método de***k-fold cross validation*** con $k = 10$ y y se calcula el promedio del MSE obtenido en cada iteración. El MSE para este modelo es:
+
+```{r}
+# k folds
+best.fit <- pred <- CV.ERRORS <- cv.errors <- NULL
+
+set.seed(123)  # Semilla para reproducibilidad
+folds <- vfold_cv(datos, v = 10)
+
+# Inicializar lista para almacenar errores
+errores <- numeric(length(folds$splits))
+
+# Loop para entrenar y validar el modelo en cada fold
+for (i in seq_along(folds$splits)) {
+  # Dividir datos
+  train_data <- analysis(folds$splits[[i]])  # Datos de entrenamiento
+  test_data <- assessment(folds$splits[[i]]) # Datos de validación
+
+  # Ajustar el modelo
+  modelo <- glm(Talla ~ LRM_R + Edad + Sexo, family= Gamma(), data = train_data)
+
+  # Predicciones
+  predicciones <- predict(modelo, newdata = test_data, type = "response")
+
+  # Calcular error cuadrático medio
+  errores[i] <- mean((test_data$Talla - predicciones)^2)
+}
+```
+
+```{r}
+# Error cuadratico medio
+mean(errores)
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "Gamma", Medida = "LRM_R", MSE = mean(errores)))
+```
+
+### LRM pierna 90°
+
+Inicialmente, se ajusta el modelo Gamma que incluye a todas las variables regresoras que se cree influyen en la estimación de la talla. 
+
+```{r}
+# Modelo nulo
+gamma.reg_null <- glm(Talla ~ 1, family= Gamma(),data = datos)
+
+# Estimacion del modelo
+gamma.reg <- glm(Talla ~ LRM_90 + Edad + Etnia + Sexo, family= Gamma(),data = datos)
+summary(gamma.reg)
+
+```
+
+A continuación se realiza una selección de variables con el método "forward" de tal forma que se minimice el AIC. El modelo seleccionado resulta ser el que incluye Edad, Sexo y LRT_A.
+
+```{r}
+stepwise <- stepAIC(gamma.reg_null, scope = list(lower = gamma.reg_null, upper = gamma.reg), trace = TRUE, k= 2, direction="forward") # k= log(nrow(datos)) - BIC
+```
+
+Los coeficientes del modelo son
+
+```{r}
+# Estimacion del modelo
+gamma.final <- glm(Talla ~ LRM_90 + Edad + Sexo, family= Gamma(),data = datos)
+summary(gamma.final)
+```
+
+Entonces, la ecuación propuesta por este modelo para estimar el logaritmo de la talla en adultos mayores es:
+
+$$\ln(Talla) = 1.005e-02 - 8.939e-05 LRT\_A + 4.792e-06 Edad - 2.022e-04 Sexo$$\
+$$Sexo = \begin{cases} 1 & \text{si sexo = Masculino} \\ 0 & \text{si sexo = Femenino} \end{cases}$$\
+
+Se utiliza el método de***k-fold cross validation*** con $k = 10$ y y se calcula el promedio del MSE obtenido en cada iteración. El MSE para este modelo es:
+
+```{r}
+# k folds
+best.fit <- pred <- CV.ERRORS <- cv.errors <- NULL
+
+set.seed(123)  # Semilla para reproducibilidad
+folds <- vfold_cv(datos, v = 10)
+
+# Inicializar lista para almacenar errores
+errores <- numeric(length(folds$splits))
+
+# Loop para entrenar y validar el modelo en cada fold
+for (i in seq_along(folds$splits)) {
+  # Dividir datos
+  train_data <- analysis(folds$splits[[i]])  # Datos de entrenamiento
+  test_data <- assessment(folds$splits[[i]]) # Datos de validación
+
+  # Ajustar el modelo
+  modelo <- glm(Talla ~ LRM_90 + Edad + Sexo, family= Gamma(), data = train_data)
+
+  # Predicciones
+  predicciones <- predict(modelo, newdata = test_data, type = "response")
+
+  # Calcular error cuadrático medio
+  errores[i] <- mean((test_data$Talla - predicciones)^2)
+}
+```
+
+```{r}
+# Error cuadratico medio
+mean(errores)
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "Gamma", Medida = "LRM_90", MSE = mean(errores)))
+```
+
+### Resumen modelos Gamma
+
+En general, los modelos Gamma ajustados incluyeron las mismas tres variables del modelo normal (edad, sexo y mediciones). Cada modelo produjo diferentes estimaciones para los parámetros, lo que resulta en ecuaciones distintas para estimar la talla de los adultos mayores.
+
+De nuevo, es preferible el modelo Gamma que tenga menor error cuadrático medio. Y en general, es preferible el modelo (normal, LASSO o Gamma) que tenga menor MSE.
+
+La tabla de los errores cuadráticos medios de los modelos ajustados hasta el momento es:
+
+```{r}
+MSEs[1:12,]
+```
+
+El modelo normal con LRT_A sigue siendo el mejor, ya que hasta el momento es el que presenta el menor MSE. Por lo tanto, no se procederá a verificar los supuestos para ninguno de los modelos Gamma, dado que el modelo normal continúa siendo superior.
+
+## Propuesta: Nuevas fórmulas
+
+Dado que el modelo ajustado con menor error cuadrático medio es el normal con LRT con antropómetro, la fórmula que se propone en esta investigación para realizar la estimación de la talla de adultos mayores en Colombia es 
+
+$$Talla = 59.11 + 2.19 LRT\_A - 0.12 Edad + 3.06 Sexo$$\
+$$Sexo = \begin{cases} 1 & \text{si sexo = masculino} \\ 0 & \text{si sexo = femenino} \end{cases}$$
+
+Que también puede verse como dos fórmulas, una para cada sexo:
+
+*   Sexo masculino: $Talla = 62.17 + 2.19 LRT\_A - 0.12 Edad$, la interpretación de cada parámetro es: 
+    +   Intercepto: Suponiendo el caso hipotético en que un adulto mayor tenga $LRT\_A = 0$ y $Edad = 0$, entonces la talla estimada para ese adulto mayor de sexo masculino es $62.17cm$.
+    +   LRT_A: Por cada centímetro adicional que mida la LRT_A del adulto mayor masculino, entonces la estimación de su talla aumenta $2.19$ centímetros.
+    +   Edad: Por cada año cumplido adicional que tenga el adulto mayor de sexo masculino, la estimación de su talla disminuye $0.12cm$.
+    
+*   Sexo femenino: $Talla = 59.11 + 2.19 LRT\_A - 0.12 Edad$, la interpretación de cada parámetro es:
+    +   Intercepto: Suponiendo el caso hipotético en que un adulto mayor tenga $LRT\_A = 0$ y $Edad = 0$, entonces la talla estimada para ese adulto mayor de sexo femenino es $59.11$.
+    +   LRT_A: Por cada centímetro adicional que mida la LRT_A del adulto mayor femenino, entonces la estimación de su talla aumenta $2.19$ centímetros.
+    +   Edad: Por cada año cumplido adicional que tenga el adulto mayor de sexo femenino, la estimación de su talla disminuye $0.12cm$.
+
+
+## Fórmulas Benjumea
+
+Se calculan las estimaciones de las tallas a partir de las fórmulas de Benjumea, esto para compararlas con las estimaciones de la fórmula propuesta en esta investigación.
+
+Las fórmulas de Benjumea son:
+
+*   Indígena masculino: $82.695 + 1.745 LRT_A - 0.121 Edad$
+
+*   Indígena femenino: $90.281 + 1.436 LRT_A - 0.102 Edad$
+
+*   Afrodescendiente masculino: $9.298 + 1.855 LRT_A - 0.141 Edad$
+
+*   Afrodescendiente femenino: $76.233 + 1.767 LRT_A - 0.098 Edad$
+
+*   Blanco-Mestizo masculino: $75.514 + 1.883 LRT_A - 0.108 Edad$
+
+*   Blanco-Mestizo femenino: $86.497 + 1.553 LRT_A - 0.119 Edad$
+
+Cabe resaltar que no existe fórmula para la etnia Rrom, por lo que hubo un individuo en la muestra a quien no fue posible realizar la estimación por medio de las fórmulas de Benjumea.
+
+### LRT Antropómetro
+
+Las fórmulas de Benjumea tienen en cuenta la medición LRT. El error cuadrático medio de las fórmulas de Benjumea con LRT_A es 
+
+```{r}
+# LRT_A
+datos$Benjumea_LRT_A = rep(NA,nrow(datos))
+
+# Indigena masculino
+datos$Benjumea_LRT_A = ifelse(datos$Sexo=="Masculino" & datos$Etnia == "Indigena", 82.695 + 1.745*datos$LRT_A - 0.121*datos$Edad, datos$Benjumea_LRT_A)
+# Indigena femenino
+datos$Benjumea_LRT_A = ifelse(datos$Sexo!="Masculino" & datos$Etnia == "Indigena", 90.281 + 1.436*datos$LRT_A - 0.102*datos$Edad, datos$Benjumea_LRT_A)
+# Afrodescendiente masculino
+datos$Benjumea_LRT_A = ifelse(datos$Sexo=="Masculino" & datos$Etnia == "Afrocolombiano", 79.298 + 1.855*datos$LRT_A - 0.141*datos$Edad, datos$Benjumea_LRT_A)
+# Afrodescendiente femenino
+datos$Benjumea_LRT_A = ifelse(datos$Sexo!="Masculino" & datos$Etnia == "Afrocolombiano", 76.233 + 1.767*datos$LRT_A - 0.098*datos$Edad, datos$Benjumea_LRT_A)
+# Blanco-Mestizo masculino
+datos$Benjumea_LRT_A = ifelse(datos$Sexo=="Masculino" & datos$Etnia == "Blanco-Mestizo", 75.514 + 1.883*datos$LRT_A - 0.108*datos$Edad, datos$Benjumea_LRT_A)
+# Blanco-Mestizo femenino
+datos$Benjumea_LRT_A = ifelse(datos$Sexo!="Masculino" & datos$Etnia == "Blanco-Mestizo", 86.497 + 1.553*datos$LRT_A - 0.119*datos$Edad, datos$Benjumea_LRT_A)
+
+mean((datos$Talla - datos$Benjumea_LRT_A)^2, na.rm = TRUE)
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "Benjumea", Medida = "LRT_A", MSE = mean((datos$Talla - datos$Benjumea_LRT_A)^2, na.rm = TRUE)))
+```
+
+
+### LRT cinta métrica
+
+Las fórmulas de Benjumea tienen en cuenta la medición LRT. El error cuadrático medio de las fórmulas de Benjumea con LRT_CM es 
+
+```{r}
+# LRT_CM
+datos$Benjumea_LRT_CM = rep(NA,nrow(datos))
+
+# Indigena masculino
+datos$Benjumea_LRT_CM = ifelse(datos$Sexo=="Masculino" & datos$Etnia == "Indigena", 82.695 + 1.745*datos$LRT_CM - 0.121*datos$Edad, datos$Benjumea_LRT_CM)
+# Indigena femenino
+datos$Benjumea_LRT_CM = ifelse(datos$Sexo!="Masculino" & datos$Etnia == "Indigena", 90.281 + 1.436*datos$LRT_CM - 0.102*datos$Edad, datos$Benjumea_LRT_CM)
+# Afrodescendiente masculino
+datos$Benjumea_LRT_CM = ifelse(datos$Sexo=="Masculino" & datos$Etnia == "Afrocolombiano", 79.298 + 1.855*datos$LRT_CM - 0.141*datos$Edad, datos$Benjumea_LRT_CM)
+# Afrodescendiente femenino
+datos$Benjumea_LRT_CM = ifelse(datos$Sexo!="Masculino" & datos$Etnia == "Afrocolombiano", 76.233 + 1.767*datos$LRT_CM - 0.098*datos$Edad, datos$Benjumea_LRT_CM)
+# Blanco-Mestizo masculino
+datos$Benjumea_LRT_CM = ifelse(datos$Sexo=="Masculino" & datos$Etnia == "Blanco-Mestizo", 75.514 + 1.883*datos$LRT_CM - 0.108*datos$Edad, datos$Benjumea_LRT_CM)
+# Blanco-Mestizo femenino
+datos$Benjumea_LRT_CM = ifelse(datos$Sexo!="Masculino" & datos$Etnia == "Blanco-Mestizo", 86.497 + 1.553*datos$LRT_CM - 0.119*datos$Edad, datos$Benjumea_LRT_CM)
+
+mean((datos$Talla - datos$Benjumea_LRT_CM)^2, na.rm = TRUE)
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "Benjumea", Medida = "LRT_CM", MSE = mean((datos$Talla - datos$Benjumea_LRT_CM)^2, na.rm = TRUE)))
+```
+
+### Resumen fórmulas Benjumea
+
+La tabla de los errores cuadráticos medios con las fórmulas de Benjumea es:
+
+```{r}
+MSEs[13:14,]
+```
+
+Los MSE son mayores a los modelos ajustados anteriormente.
+
+## Fórmulas Arango y Zamora
+
+Se calculan las estimaciones de las tallas a partir de las fórmulas de Arango y Zamora, esto para compararlas con las estimaciones de la fórmula propuesta en esta investigación.
+
+Las fórmulas de Arango y Zamora son:
+
+*   Sexo masculino: $119.6 + 1.121 LRM_R - 0.117 Edad$
+*   Sexo femenino: $107.7 + 1.263 LRM_R - 0.159 Edad$
+
+### LRM pierna estirada
+
+Las fórmulas de Arango y Zamora tienen en cuenta la medición LRM. El error cuadrático medio de las fórmulas de Arango y Zamora con LRM_R es 
+
+```{r}
+# LRM_R
+datos$Arango_LRM_R = rep(NA,nrow(datos))
+
+# Masculino
+datos$Arango_LRM_R = ifelse(datos$Sexo=="Masculino", 119.6 + 1.121*datos$LRM_R - 0.117*datos$Edad, datos$Arango_LRM_R)
+# Femenino
+datos$Arango_LRM_R = ifelse(datos$Sexo!="Masculino", 107.7 + 1.263*datos$LRM_R - 0.159*datos$Edad, datos$Arango_LRM_R)
+
+mean((datos$Talla - datos$Arango_LRM_R)^2, na.rm = TRUE)
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "Arango, Zamora", Medida = "LRM_R", MSE = mean((datos$Talla - datos$Arango_LRM_R)^2, na.rm = TRUE)))
+```
+
+
+### LRM pierna a 90°
+
+Las fórmulas de Arango y Zamora tienen en cuenta la medición LRM. El error cuadrático medio de las fórmulas de Arango y Zamora con LRM_90 es 
+
+```{r}
+# LRM_90
+datos$Arango_LRM_90 = rep(NA,nrow(datos))
+
+# Masculino
+datos$Arango_LRM_90 = ifelse(datos$Sexo=="Masculino", 119.6 + 1.121*datos$LRM_90 - 0.117*datos$Edad, datos$Arango_LRM_90)
+# Femenino
+datos$Arango_LRM_90 = ifelse(datos$Sexo!="Masculino", 107.7 + 1.263*datos$LRM_90 - 0.159*datos$Edad, datos$Arango_LRM_90)
+
+mean((datos$Talla - datos$Arango_LRM_90)^2, na.rm = TRUE)
+
+MSEs <- rbind(MSEs, data.frame(Modelo = "Arango, Zamora", Medida = "LRM_90", MSE = mean((datos$Talla - datos$Arango_LRM_90)^2, na.rm = TRUE)))
+```
+
+### Resumen fórmulas Arango y Zamora
+
+La tabla de los errores cuadráticos medios con las fórmulas de Benjumea es:
+
+```{r}
+MSEs[15:16,]
+```
+
+Los MSE son mayores a los modelos ajustados anteriormente.
+
+## Conclusión 
+
+A continuación, se muestra la tabla de los MSE de todos los modelos ajustados en la investigación y de las fórmulas de Benjumea y de Arango y Zamora.
+
+```{r}
+MSEs
+```
+
+Se observa que el modelo que presenta menor MSE es el modelo normal con LRT con antropómetro, de modo que, se concluye que este es el mejor modelo pues sus estimaciones de la talla son más cercanas a la verdadera talla del adulto mayor. 
+
+::: {.callout-note}
+
+Por lo que las fórmulas que mejor estiman la talla de los adultos mayores en Colombia, según la base de datos analizada, son:
+
+$$Talla = 59.11 + 2.19 LRT\_A - 0.12 Edad + 3.06 Sexo$$\
+$$Sexo = \begin{cases} 1 & \text{si sexo = masculino} \\ 0 & \text{si sexo = femenino} \end{cases}$$
+
+:::
+
+
+## Comportamiento de las variables de interés por subgrupos
+
+### Sexo femenino
+
+```{r}
+femenino_tab <- data.frame(Variable = character(),
+                           n = numeric(),
+                           Minimo = numeric(),
+                           Maximo = numeric(),
+                           Promedio = numeric(),
+                           DesEst = numeric(),
+                           Mediana = numeric())
+
+femenino <- datos[datos$Sexo == "Femenino",]
+
+femenino_tab <- rbind(femenino_tab, 
+                      data.frame(Variable = "Edad",
+                                 n = nrow(femenino),
+                                 Minimo = min(femenino$Edad),
+                                 Maximo = max(femenino$Edad),
+                                 Promedio = mean(femenino$Edad),
+                                 DesEst = sd(femenino$Edad),
+                                 Mediana = median(femenino$Edad)))
+
+femenino_tab <- rbind(femenino_tab, 
+                      data.frame(Variable = "Talla",
+                                 n = nrow(femenino),
+                                 Minimo = min(femenino$Talla),
+                                 Maximo = max(femenino$Talla),
+                                 Promedio = mean(femenino$Talla),
+                                 DesEst = sd(femenino$Talla),
+                                 Mediana = median(femenino$Talla)))
+
+femenino_tab <- rbind(femenino_tab, 
+                      data.frame(Variable = "LRT_A",
+                                 n = nrow(femenino),
+                                 Minimo = min(femenino$LRT_A),
+                                 Maximo = max(femenino$LRT_A),
+                                 Promedio = mean(femenino$LRT_A),
+                                 DesEst = sd(femenino$LRT_A),
+                                 Mediana = median(femenino$LRT_A)))
+
+femenino_tab <- rbind(femenino_tab, 
+                      data.frame(Variable = "LRT_CM",
+                                 n = nrow(femenino),
+                                 Minimo = min(femenino$LRT_CM),
+                                 Maximo = max(femenino$LRT_CM),
+                                 Promedio = mean(femenino$LRT_CM),
+                                 DesEst = sd(femenino$LRT_CM),
+                                 Mediana = median(femenino$LRT_CM)))
+
+femenino_tab
+```
+
+### Sexo masculino
+
+```{r}
+masculino <- datos[datos$Sexo == "Masculino",]
+```
+
+
+## Cuadro Modelos predicción de la talla por sexo
+
+### Opción 1: Modelo normal LRT_A
+
+```{r}
+modelos_tab <- data.frame(n = numeric(),
+                          R2 = numeric(),
+                          EE = numeric(),
+                          Normalidad = numeric(),
+                          Homocedasticidad = numeric())
+
+modelo_femenino <- lm(Talla ~ LRT_A + Edad, data = femenino)
+r2_femenino <- summary(modelo_femenino)$r.squared
+ee_femenino <- sqrt(mean(residuals(modelo_femenino)^2))
+normalidad_femenino <- lillie.test(residuals(modelo_femenino))$p.value
+homocedasticidad_femenino <- bptest(modelo_femenino)$p.value
+
+modelos_tab <- rbind(modelos_tab, 
+                     data.frame(n = nrow(femenino),
+                                R2 = r2_femenino,
+                                EE = ee_femenino,
+                                Normalidad = normalidad_femenino,
+                                Homocedasticidad = homocedasticidad_femenino))
+
+modelo_masculino <- lm(Talla ~ LRT_A + Edad, data = masculino)
+r2_masculino <- summary(modelo_masculino)$r.squared
+ee_masculino <- sqrt(mean(residuals(modelo_masculino)^2))
+normalidad_masculino <- lillie.test(residuals(modelo_masculino))$p.value
+homocedasticidad_masculino <- bptest(modelo_masculino)$p.value
+
+modelos_tab <- rbind(modelos_tab, 
+                     data.frame(n = nrow(masculino),
+                                R2 = r2_masculino,
+                                EE = ee_masculino,
+                                Normalidad = normalidad_masculino,
+                                Homocedasticidad = homocedasticidad_masculino))
+
+modelos_tab
+row.names(modelos_tab) <- c("Femenino", "Masculino")
+```
+
+
+### Opción 2: Modelo normal LRT_CM
+
+```{r}
+modelos_tab <- data.frame(n = numeric(),
+                          R2 = numeric(),
+                          EE = numeric(),
+                          Normalidad = numeric(),
+                          Homocedasticidad = numeric())
+
+modelo_femenino <- lm(Talla ~ LRT_CM + Edad, data = femenino)
+r2_femenino <- summary(modelo_femenino)$r.squared
+ee_femenino <- sqrt(mean(residuals(modelo_femenino)^2))
+normalidad_femenino <- lillie.test(residuals(modelo_femenino))$p.value
+homocedasticidad_femenino <- bptest(modelo_femenino)$p.value
+
+modelos_tab <- rbind(modelos_tab, 
+                     data.frame(n = nrow(femenino),
+                                R2 = r2_femenino,
+                                EE = ee_femenino,
+                                Normalidad = normalidad_femenino,
+                                Homocedasticidad = homocedasticidad_femenino))
+
+modelo_masculino <- lm(Talla ~ LRT_CM + Edad, data = masculino)
+r2_masculino <- summary(modelo_masculino)$r.squared
+ee_masculino <- sqrt(mean(residuals(modelo_masculino)^2))
+normalidad_masculino <- lillie.test(residuals(modelo_masculino))$p.value
+homocedasticidad_masculino <- bptest(modelo_masculino)$p.value
+
+modelos_tab <- rbind(modelos_tab, 
+                     data.frame(n = nrow(masculino),
+                                R2 = r2_masculino,
+                                EE = ee_masculino,
+                                Normalidad = normalidad_masculino,
+                                Homocedasticidad = homocedasticidad_masculino))
+
+modelos_tab
+row.names(modelos_tab) <- c("Femenino", "Masculino")
+```
