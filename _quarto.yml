@@ -20,7 +20,7 @@ website:
       - text: Modelos
         file: modelos.qmd
       - text: IMC
-        file: ipc.qmd
+        file: imc.qmd
 
 format:
   html:
