@@ -6,7 +6,7 @@ project:
     # - "!descriptivo.qmd"
     # - "!hipotesis.qmd"
     # - "!modelos.qmd"
-    # - "!imc.qmd"
+    # - "!ipc.qmd"
 
 website:
   navbar:
@@ -21,7 +21,7 @@ website:
       - text: Modelos
         file: modelos.qmd
       - text: IMC
-        file: imc.qmd
+        file: ipc.qmd
 
 format:
   html:
