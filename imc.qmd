@@ -1,0 +1,203 @@
+---
+echo: false
+warning: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+# Librerias 
+library(readxl)
+library(tidyverse)
+library(nortest)
+library(dplyr)
+library(ggplot2)
+library(GGally) # para la funcion ggpairs
+library(gt)
+library(gtExtras)
+library(moments)
+library(leaps)
+library(MASS)
+library(lmtest)
+library(car)
+library(BSDA) # Test del signo
+library(glmnet)
+library(glmtoolbox)
+library(MASS)
+library(rsample)
+library(lawstat)
+library(caret) # Para particion train test
+```
+
+
+```{r}
+# Lectura de la base de datos
+estimaciones <- read_xlsx("Datos/Estimaciones.xlsx")
+estimaciones$Sexo <- as.factor(estimaciones$Sexo)
+estimaciones$Etnia <- as.factor(estimaciones$Etnia)
+```
+
+# IMC 
+
+En esta sección, se calcula el Índice de Masa Corporal (IMC) de la forma
+
+$$ \text{IMC} = \frac{\text{Peso en kg}}{\left[\text{Talla (o estimación) en } m \right]^2}$$
+
+utilizando la talla real de los individuos de la muestra, y las estimaciones obtenidas utilizando el modelo normal LRT_A, normal LRT_CM, las fórmulas de Benjumea con LRT_A y LRT_CM, y las fórmulas de Arango y Zamora con LRM_R y LRT_90.
+
+```{r}
+# El IMC es peso en kg sobre altura en metros cuadrados
+
+estimaciones$IMC <- estimaciones$Peso/(estimaciones$Talla/100)^2
+estimaciones$IMC_Normal_LRT_A <- estimaciones$Peso/(estimaciones$Normal_LRT_A/100)^2
+estimaciones$IMC_Normal_LRT_CM <- estimaciones$Peso/(estimaciones$Normal_LRT_CM/100)^2
+estimaciones$IMC_Benjumea_LRT_A <- estimaciones$Peso/(estimaciones$Benjumea_LRT_A/100)^2
+estimaciones$IMC_Benjumea_LRT_CM <- estimaciones$Peso/(estimaciones$Benjumea_LRT_CM/100)^2
+estimaciones$IMC_Arango_LRM_R <- estimaciones$Peso/(estimaciones$Arango_LRM_R/100)^2
+estimaciones$IMC_Arango_LRM_90 <- estimaciones$Peso/(estimaciones$Arango_LRM_90/100)^2
+
+head(estimaciones) |> gt()
+```
+
+## Clasificación
+
+Para cada uno de los IMC's calculados, se realiza la clasificación nutricional utilizando el siguiente criterio 
+
+$$ \text{Clasificacion} = \begin{cases} \text{Delgadez} & \text{si IMC} < 18.5 kg/m^2 \\ \text{Normal} & \text{si } 18.5 \leq \text{IMC} < 25 kg/m^2 \\ \text{Sobrepeso} & \text{si } 25 \leq \text{IMC} < 30 kg/m^2 \\ \text{Obesidad} & \text{si IMC} \geq 30 kg/m^2 \end{cases}$$
+
+```{r}
+# Clasificacion nutricional
+estimaciones$Clasificacion <- ifelse(estimaciones$IMC<18.5, "Delgadez", ifelse(estimaciones$IMC>=18.5 & estimaciones$IMC<25, "Normal", ifelse(estimaciones$IMC>=25 & estimaciones$IMC<30, "Sobrepeso","Obesidad")))
+
+estimaciones$Clasificacion_Normal_LRT_A <- ifelse(estimaciones$IMC_Normal_LRT_A<18.5, "Delgadez", ifelse(estimaciones$IMC_Normal_LRT_A>=18.5 & estimaciones$IMC_Normal_LRT_A<25, "Normal", ifelse(estimaciones$IMC_Normal_LRT_A>=25 & estimaciones$IMC_Normal_LRT_A<30, "Sobrepeso","Obesidad")))
+
+estimaciones$Clasificacion_Normal_LRT_CM <- ifelse(estimaciones$IMC_Normal_LRT_CM<18.5, "Delgadez", ifelse(estimaciones$IMC_Normal_LRT_CM>=18.5 & estimaciones$IMC_Normal_LRT_CM<25, "Normal", ifelse(estimaciones$IMC_Normal_LRT_CM>=25 & estimaciones$IMC_Normal_LRT_CM<30, "Sobrepeso","Obesidad")))
+
+estimaciones$Clasificacion_Benjumea_LRT_A <- ifelse(estimaciones$IMC_Benjumea_LRT_A<18.5, "Delgadez", ifelse(estimaciones$IMC_Benjumea_LRT_A>=18.5 & estimaciones$IMC_Benjumea_LRT_A<25, "Normal", ifelse(estimaciones$IMC_Benjumea_LRT_A>=25 & estimaciones$IMC_Benjumea_LRT_A<30, "Sobrepeso","Obesidad")))
+
+estimaciones$Clasificacion_Benjumea_LRT_CM <- ifelse(estimaciones$IMC_Benjumea_LRT_CM<18.5, "Delgadez", ifelse(estimaciones$IMC_Benjumea_LRT_CM>=18.5 & estimaciones$IMC_Benjumea_LRT_CM<25, "Normal", ifelse(estimaciones$IMC_Benjumea_LRT_CM>=25 & estimaciones$IMC_Benjumea_LRT_CM<30, "Sobrepeso","Obesidad")))
+
+estimaciones$Clasificacion_Arango_LRM_R <- ifelse(estimaciones$IMC_Arango_LRM_R<18.5, "Delgadez", ifelse(estimaciones$IMC_Arango_LRM_R>=18.5 & estimaciones$IMC_Arango_LRM_R<25, "Normal", ifelse(estimaciones$IMC_Arango_LRM_R>=25 & estimaciones$IMC_Arango_LRM_R<30, "Sobrepeso","Obesidad")))
+
+estimaciones$Clasificacion_Arango_LRM_90 <- ifelse(estimaciones$IMC_Arango_LRM_90<18.5, "Delgadez", ifelse(estimaciones$IMC_Arango_LRM_90>=18.5 & estimaciones$IMC_Arango_LRM_90<25, "Normal", ifelse(estimaciones$IMC_Arango_LRM_90>=25 & estimaciones$IMC_Arango_LRM_90<30, "Sobrepeso","Obesidad")))
+
+head(estimaciones) |> gt()
+```
+
+## Proporciones
+
+A continuación, se muestran las proporciones de cada una de las categorías de clasificación (Delgadez, Normal, Sobrepeso y Obesidad) para cada el IMC real y sus estimaciones.
+
+```{r}
+# Proporciones
+
+n <- nrow(estimaciones)
+
+proporciones_tab <- data.frame(Estimacion = character(),
+                               Delgadez = numeric(),
+                               Normal = numeric(),
+                               Sobrepeso = numeric(),
+                               Obesidad = numeric())
+
+# Real
+proporciones_tab <- rbind(proporciones_tab, data.frame(Estimacion = "Real",
+                          Delgadez = sum(estimaciones$Clasificacion == "Delgadez")/n,
+                          Normal = sum(estimaciones$Clasificacion == "Normal")/n,
+                          Sobrepeso = sum(estimaciones$Clasificacion == "Sobrepeso")/n,
+                          Obesidad = sum(estimaciones$Clasificacion == "Obesidad")/n))
+
+# Normal_LRT_A
+proporciones_tab <- rbind(proporciones_tab, data.frame(Estimacion = "Normal_LRT_A",
+                          Delgadez = sum(estimaciones$Clasificacion_Normal_LRT_A == "Delgadez")/n,
+                          Normal = sum(estimaciones$Clasificacion_Normal_LRT_A == "Normal")/n,
+                          Sobrepeso = sum(estimaciones$Clasificacion_Normal_LRT_A == "Sobrepeso")/n,
+                          Obesidad = sum(estimaciones$Clasificacion_Normal_LRT_A == "Obesidad")/n))
+
+
+# Normal_LRT_CM
+proporciones_tab <- rbind(proporciones_tab, data.frame(Estimacion = "Normal_LRT_CM",
+                          Delgadez = sum(estimaciones$Clasificacion_Normal_LRT_CM == "Delgadez")/n,
+                          Normal = sum(estimaciones$Clasificacion_Normal_LRT_CM == "Normal")/n,
+                          Sobrepeso = sum(estimaciones$Clasificacion_Normal_LRT_CM == "Sobrepeso")/n,
+                          Obesidad = sum(estimaciones$Clasificacion_Normal_LRT_CM == "Obesidad")/n))
+
+# Benjumea_LRT_A
+proporciones_tab <- rbind(proporciones_tab, data.frame(Estimacion = "Benjumea_LRT_A",
+                          Delgadez = sum(estimaciones$Clasificacion_Benjumea_LRT_A == "Delgadez", na.rm = T)/n,
+                          Normal = sum(estimaciones$Clasificacion_Benjumea_LRT_A == "Normal", na.rm = T)/n,
+                          Sobrepeso = sum(estimaciones$Clasificacion_Benjumea_LRT_A == "Sobrepeso", na.rm = T)/n,
+                          Obesidad = sum(estimaciones$Clasificacion_Benjumea_LRT_A == "Obesidad", na.rm = T)/n))
+
+
+# Benjumea_LRT_CM
+proporciones_tab <- rbind(proporciones_tab, data.frame(Estimacion = "Benjumea_LRT_CM",
+                          Delgadez = sum(estimaciones$Clasificacion_Benjumea_LRT_CM == "Delgadez", na.rm = T)/n,
+                          Normal = sum(estimaciones$Clasificacion_Benjumea_LRT_CM == "Normal", na.rm = T)/n,
+                          Sobrepeso = sum(estimaciones$Clasificacion_Benjumea_LRT_CM == "Sobrepeso", na.rm = T)/n,
+                          Obesidad = sum(estimaciones$Clasificacion_Benjumea_LRT_CM == "Obesidad", na.rm = T)/n))
+
+
+# Arango_LRM_R
+proporciones_tab <- rbind(proporciones_tab, data.frame(Estimacion = "Arango_LRM_R",
+                          Delgadez = sum(estimaciones$Clasificacion_Arango_LRM_R == "Delgadez")/n,
+                          Normal = sum(estimaciones$Clasificacion_Arango_LRM_R == "Normal")/n,
+                          Sobrepeso = sum(estimaciones$Clasificacion_Arango_LRM_R == "Sobrepeso")/n,
+                          Obesidad = sum(estimaciones$Clasificacion_Arango_LRM_R == "Obesidad")/n))
+
+
+# Arango_LRM_90
+proporciones_tab <- rbind(proporciones_tab, data.frame(Estimacion = "Arango_LRM_90",
+                          Delgadez = sum(estimaciones$Clasificacion_Arango_LRM_90 == "Delgadez")/n,
+                          Normal = sum(estimaciones$Clasificacion_Arango_LRM_90 == "Normal")/n,
+                          Sobrepeso = sum(estimaciones$Clasificacion_Arango_LRM_90 == "Sobrepeso")/n,
+                          Obesidad = sum(estimaciones$Clasificacion_Arango_LRM_90 == "Obesidad")/n))
+
+proporciones_tab |> gt()
+
+```
+
+En el gráfico se muestra que la clasificación utilizando la estimación de la talla del modelo normal LRT_A y LRT_CM no son muy distintas de la clasificación real. La clasificación con las fórmulas de Benjume y Arango y Zamora sí son algo distintas.
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+# Transformar a formato largo
+df_long <- proporciones_tab %>%
+  pivot_longer(cols = Delgadez:Obesidad, names_to = "Categoria", values_to = "Proporcion")
+
+# Gráfico de barras apiladas
+ggplot(df_long, aes(x = Estimacion, y = Proporcion, fill = Categoria)) +
+  geom_bar(stat = "identity", position = "fill") +  # "fill" para proporciones
+  scale_y_continuous(labels = scales::percent) +    # Convertir eje Y a porcentaje
+  labs(x = "Estimación", y = "Proporción", fill = "Categoría", 
+       title = "Comparación de proporciones por estimación") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotar etiquetas para mejor visibilidad
+
+```
+
+## Error ponderado
+
+Se calcula el error para cada técnica de estimación del IMC, ponderado por la clasificación nutricional. Nuevamente, se confirman los resultados obtenidos en la sección de Modelos, donde muestra que la que clasifica los individuos más parecido que la clasificación real, es la clasificación utilizando el modelo normal LRT_A y el segundo mejor es el normal LRT_CM.
+
+```{r}
+# Separar la fila real y los modelos
+
+real_values <- subset(proporciones_tab, Estimacion == "Real")[, !names(proporciones_tab) %in% "Estimacion"]
+
+model_estimations <- subset(proporciones_tab, Estimacion != "Real")
+
+# Calcular el error absoluto ponderado por categoría
+error_df <- model_estimations %>%
+    mutate(across(Delgadez:Obesidad, ~abs(. - real_values[[cur_column()]]))) %>%
+    rowwise() %>%
+    mutate(Error_Ponderado = sum(c_across(Delgadez:Obesidad) * unlist(real_values))) %>% 
+  dplyr::select(Estimacion, Error_Ponderado) %>%
+    arrange(Error_Ponderado)
+
+# Mostrar el modelo con menor error
+error_df |> gt()
+```
+

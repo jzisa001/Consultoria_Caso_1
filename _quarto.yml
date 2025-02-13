@@ -19,6 +19,8 @@ website:
         file: hipotesis.qmd
       - text: Modelos
         file: modelos.qmd
+      - text: IMC
+        file: ipc.qmd
 
 format:
   html:
