@@ -6,6 +6,7 @@ project:
     # - "!descriptivo.qmd"
     # - "!hipotesis.qmd"
     # - "!modelos.qmd"
+    # - "!imc.qmd"
 
 website:
   navbar:

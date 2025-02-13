@@ -27,6 +27,8 @@ library(MASS)
 library(rsample)
 library(lawstat)
 library(caret) # Para particion train test
+library(ggplot2)
+library(tidyr)
 ```
 
 
@@ -159,10 +161,6 @@ proporciones_tab |> gt()
 En el gráfico se muestra que la clasificación utilizando la estimación de la talla del modelo normal LRT_A y LRT_CM no son muy distintas de la clasificación real. La clasificación con las fórmulas de Benjume y Arango y Zamora sí son algo distintas.
 
 ```{r}
-library(ggplot2)
-library(dplyr)
-library(tidyr)
-
 # Transformar a formato largo
 df_long <- proporciones_tab %>%
   pivot_longer(cols = Delgadez:Obesidad, names_to = "Categoria", values_to = "Proporcion")
