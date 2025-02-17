@@ -29,6 +29,7 @@ library(lawstat)
 library(caret) # Para particion train test
 library(ggplot2)
 library(tidyr)
+library(contingencytables) # Para prueba McNemar
 ```
 
 
@@ -63,25 +64,27 @@ head(estimaciones) |> gt()
 
 ## Clasificación
 
-Para cada uno de los IMC's calculados, se realiza la clasificación nutricional utilizando el siguiente criterio 
+Para cada uno de los IMC's calculados, se realiza la clasificación nutricional utilizando el siguiente criterio para adultos con edad $<=65$ años.
 
 $$ \text{Clasificacion} = \begin{cases} \text{Delgadez} & \text{si IMC} < 18.5 kg/m^2 \\ \text{Normal} & \text{si } 18.5 \leq \text{IMC} < 25 kg/m^2 \\ \text{Sobrepeso} & \text{si } 25 \leq \text{IMC} < 30 kg/m^2 \\ \text{Obesidad} & \text{si IMC} \geq 30 kg/m^2 \end{cases}$$
+Y el siguiente criterio para adultos con edad $>65$ años.
 
+$$ \text{Clasificacion} = \begin{cases} \text{Delgadez} & \text{si IMC} < 22 kg/m^2 \\ \text{Normal} & \text{si } 22 \leq \text{IMC} < 27 kg/m^2 \\ \text{Sobrepeso} & \text{si } 27 \leq \text{IMC} < 30 kg/m^2 \\ \text{Obesidad} & \text{si IMC} \geq 30 kg/m^2 \end{cases}$$
 ```{r}
 # Clasificacion nutricional
-estimaciones$Clasificacion <- ifelse(estimaciones$IMC<18.5, "Delgadez", ifelse(estimaciones$IMC>=18.5 & estimaciones$IMC<25, "Normal", ifelse(estimaciones$IMC>=25 & estimaciones$IMC<30, "Sobrepeso","Obesidad")))
+estimaciones$Clasificacion <- ifelse(estimaciones$Edad <=65,ifelse(estimaciones$IMC<18.5, "Delgadez", ifelse(estimaciones$IMC>=18.5 & estimaciones$IMC<25, "Normal", ifelse(estimaciones$IMC>=25 & estimaciones$IMC<30, "Sobrepeso","Obesidad"))),ifelse(estimaciones$IMC<22, "Delgadez", ifelse(estimaciones$IMC>=22 & estimaciones$IMC<27, "Normal", ifelse(estimaciones$IMC>=27 & estimaciones$IMC<30, "Sobrepeso","Obesidad"))))
 
-estimaciones$Clasificacion_Normal_LRT_A <- ifelse(estimaciones$IMC_Normal_LRT_A<18.5, "Delgadez", ifelse(estimaciones$IMC_Normal_LRT_A>=18.5 & estimaciones$IMC_Normal_LRT_A<25, "Normal", ifelse(estimaciones$IMC_Normal_LRT_A>=25 & estimaciones$IMC_Normal_LRT_A<30, "Sobrepeso","Obesidad")))
+estimaciones$Clasificacion_Normal_LRT_A <- ifelse(estimaciones$Edad <=65,ifelse(estimaciones$IMC_Normal_LRT_A<18.5, "Delgadez", ifelse(estimaciones$IMC_Normal_LRT_A>=18.5 & estimaciones$IMC_Normal_LRT_A<25, "Normal", ifelse(estimaciones$IMC_Normal_LRT_A>=25 & estimaciones$IMC_Normal_LRT_A<30, "Sobrepeso","Obesidad"))),ifelse(estimaciones$IMC_Normal_LRT_A<22, "Delgadez", ifelse(estimaciones$IMC_Normal_LRT_A>=22 & estimaciones$IMC_Normal_LRT_A<27, "Normal", ifelse(estimaciones$IMC_Normal_LRT_A>=27 & estimaciones$IMC_Normal_LRT_A<30, "Sobrepeso","Obesidad"))))
 
-estimaciones$Clasificacion_Normal_LRT_CM <- ifelse(estimaciones$IMC_Normal_LRT_CM<18.5, "Delgadez", ifelse(estimaciones$IMC_Normal_LRT_CM>=18.5 & estimaciones$IMC_Normal_LRT_CM<25, "Normal", ifelse(estimaciones$IMC_Normal_LRT_CM>=25 & estimaciones$IMC_Normal_LRT_CM<30, "Sobrepeso","Obesidad")))
+estimaciones$Clasificacion_Normal_LRT_CM <- ifelse(estimaciones$Edad <= 65,ifelse(estimaciones$IMC_Normal_LRT_CM<18.5, "Delgadez", ifelse(estimaciones$IMC_Normal_LRT_CM>=18.5 & estimaciones$IMC_Normal_LRT_CM<25, "Normal", ifelse(estimaciones$IMC_Normal_LRT_CM>=25 & estimaciones$IMC_Normal_LRT_CM<30, "Sobrepeso","Obesidad"))),ifelse(estimaciones$IMC_Normal_LRT_CM<22, "Delgadez", ifelse(estimaciones$IMC_Normal_LRT_CM>=22 & estimaciones$IMC_Normal_LRT_CM<27, "Normal", ifelse(estimaciones$IMC_Normal_LRT_CM>=27 & estimaciones$IMC_Normal_LRT_CM<30, "Sobrepeso","Obesidad"))))
 
-estimaciones$Clasificacion_Benjumea_LRT_A <- ifelse(estimaciones$IMC_Benjumea_LRT_A<18.5, "Delgadez", ifelse(estimaciones$IMC_Benjumea_LRT_A>=18.5 & estimaciones$IMC_Benjumea_LRT_A<25, "Normal", ifelse(estimaciones$IMC_Benjumea_LRT_A>=25 & estimaciones$IMC_Benjumea_LRT_A<30, "Sobrepeso","Obesidad")))
+estimaciones$Clasificacion_Benjumea_LRT_A <- ifelse(estimaciones$Edad<=65,ifelse(estimaciones$IMC_Benjumea_LRT_A<18.5, "Delgadez", ifelse(estimaciones$IMC_Benjumea_LRT_A>=18.5 & estimaciones$IMC_Benjumea_LRT_A<25, "Normal", ifelse(estimaciones$IMC_Benjumea_LRT_A>=25 & estimaciones$IMC_Benjumea_LRT_A<30, "Sobrepeso","Obesidad"))),ifelse(estimaciones$IMC_Benjumea_LRT_A<22, "Delgadez", ifelse(estimaciones$IMC_Benjumea_LRT_A>=22 & estimaciones$IMC_Benjumea_LRT_A<27, "Normal", ifelse(estimaciones$IMC_Benjumea_LRT_A>=27 & estimaciones$IMC_Benjumea_LRT_A<30, "Sobrepeso","Obesidad"))))
 
-estimaciones$Clasificacion_Benjumea_LRT_CM <- ifelse(estimaciones$IMC_Benjumea_LRT_CM<18.5, "Delgadez", ifelse(estimaciones$IMC_Benjumea_LRT_CM>=18.5 & estimaciones$IMC_Benjumea_LRT_CM<25, "Normal", ifelse(estimaciones$IMC_Benjumea_LRT_CM>=25 & estimaciones$IMC_Benjumea_LRT_CM<30, "Sobrepeso","Obesidad")))
+estimaciones$Clasificacion_Benjumea_LRT_CM <- ifelse(estimaciones$Edad<=65,ifelse(estimaciones$IMC_Benjumea_LRT_CM<18.5, "Delgadez", ifelse(estimaciones$IMC_Benjumea_LRT_CM>=18.5 & estimaciones$IMC_Benjumea_LRT_CM<25, "Normal", ifelse(estimaciones$IMC_Benjumea_LRT_CM>=25 & estimaciones$IMC_Benjumea_LRT_CM<30, "Sobrepeso","Obesidad"))),ifelse(estimaciones$IMC_Benjumea_LRT_CM<22, "Delgadez", ifelse(estimaciones$IMC_Benjumea_LRT_CM>=22 & estimaciones$IMC_Benjumea_LRT_CM<27, "Normal", ifelse(estimaciones$IMC_Benjumea_LRT_CM>=27 & estimaciones$IMC_Benjumea_LRT_CM<30, "Sobrepeso","Obesidad"))))
 
-estimaciones$Clasificacion_Arango_LRM_R <- ifelse(estimaciones$IMC_Arango_LRM_R<18.5, "Delgadez", ifelse(estimaciones$IMC_Arango_LRM_R>=18.5 & estimaciones$IMC_Arango_LRM_R<25, "Normal", ifelse(estimaciones$IMC_Arango_LRM_R>=25 & estimaciones$IMC_Arango_LRM_R<30, "Sobrepeso","Obesidad")))
+estimaciones$Clasificacion_Arango_LRM_R <- ifelse(estimaciones$Edad<=65,ifelse(estimaciones$IMC_Arango_LRM_R<18.5, "Delgadez", ifelse(estimaciones$IMC_Arango_LRM_R>=18.5 & estimaciones$IMC_Arango_LRM_R<25, "Normal", ifelse(estimaciones$IMC_Arango_LRM_R>=25 & estimaciones$IMC_Arango_LRM_R<30, "Sobrepeso","Obesidad"))),ifelse(estimaciones$IMC_Arango_LRM_R<22, "Delgadez", ifelse(estimaciones$IMC_Arango_LRM_R>=22 & estimaciones$IMC_Arango_LRM_R<27, "Normal", ifelse(estimaciones$IMC_Arango_LRM_R>=27 & estimaciones$IMC_Arango_LRM_R<30, "Sobrepeso","Obesidad"))))
 
-estimaciones$Clasificacion_Arango_LRM_90 <- ifelse(estimaciones$IMC_Arango_LRM_90<18.5, "Delgadez", ifelse(estimaciones$IMC_Arango_LRM_90>=18.5 & estimaciones$IMC_Arango_LRM_90<25, "Normal", ifelse(estimaciones$IMC_Arango_LRM_90>=25 & estimaciones$IMC_Arango_LRM_90<30, "Sobrepeso","Obesidad")))
+estimaciones$Clasificacion_Arango_LRM_90 <- ifelse(estimaciones$Edad<=65,ifelse(estimaciones$IMC_Arango_LRM_90<18.5, "Delgadez", ifelse(estimaciones$IMC_Arango_LRM_90>=18.5 & estimaciones$IMC_Arango_LRM_90<25, "Normal", ifelse(estimaciones$IMC_Arango_LRM_90>=25 & estimaciones$IMC_Arango_LRM_90<30, "Sobrepeso","Obesidad"))),ifelse(estimaciones$IMC_Arango_LRM_90<22, "Delgadez", ifelse(estimaciones$IMC_Arango_LRM_90>=22 & estimaciones$IMC_Arango_LRM_90<27, "Normal", ifelse(estimaciones$IMC_Arango_LRM_90>=27 & estimaciones$IMC_Arango_LRM_90<30, "Sobrepeso","Obesidad"))))
 
 head(estimaciones) |> gt()
 ```
@@ -199,3 +202,134 @@ error_df <- model_estimations %>%
 error_df |> gt()
 ```
 
+## Prueba McNemar-Bowker para muestras pareadas
+
+A continuación, se muestran los resultados de la prueba McNemar-Bowker para muestras pareadas. Las hipótesis de esta prueba son:
+
+*   *Hipótesis nula ($H_0$):*  La distribución de las clasificaciones es simétrica, es decir, no hay diferencias sistemáticas en la forma en que los individuos cambian de categoría entre la clasificación utilizando la talla real y la clasificación estimada.
+
+*   *Hipótesis alternativa ($H_1$):* Hay diferencias significativas en la clasificación de los individuos entre los métodos, es decir, las proporciones de cambio entre categorías no son simétricas.
+
+En nuestro contexto, queremos NO RECHAZAR $H_0$, ya que esto diría que la clasificación utilizando la estimación de la talla con tal modelo, es la misma clasificación que resultarpia al utilizar la talla real.
+
+### Clasificasión real vs Clasificasión Normal_LRT_A
+
+```{r}
+p_mcnemar <- data.frame(Modelo = character(),
+                        Valor_p = numeric())
+
+table_mcnemar <- as.matrix(table(estimaciones$Clasificacion, estimaciones$Clasificacion_Normal_LRT_A))
+
+mnt <- McNemarBowker_test_paired_cxc(table_mcnemar)
+mnt
+pv = mnt$Pvalue
+
+p_mcnemar <- rbind(p_mcnemar, data.frame(Modelo = "Normal_LRT_A",
+                                         Valor_p = pv))
+```
+
+Aquí, el valor $p$ resulta ser $0.914246$, de modo que no se rechaza $H_0$, entonces la clasificación nutricional utilizando la estimación de la talla dada por el modelo normal LRT_A, es la misma clasificación nutricional utilizando la talla real.
+
+### Clasificasión real vs Clasificasión Normal_LRT_CM
+
+```{r}
+table_mcnemar <- as.matrix(table(estimaciones$Clasificacion, estimaciones$Clasificacion_Normal_LRT_CM))
+
+mnt <- McNemarBowker_test_paired_cxc(table_mcnemar)
+mnt
+pv = mnt$Pvalue
+
+p_mcnemar <- rbind(p_mcnemar, data.frame(Modelo = "Normal_LRT_CM",
+                                         Valor_p = pv))
+```
+
+Aquí, el valor $p$ resulta ser $0.858014$, de modo que no se rechaza $H_0$, entonces la clasificación nutricional utilizando la estimación de la talla dada por el modelo normal LRT_CM, es la misma clasificación nutricional utilizando la talla real.
+
+### Clasificasión real vs Clasificasión Benjumea_LRT_A
+
+```{r}
+table_mcnemar <- as.matrix(table(estimaciones$Clasificacion, estimaciones$Clasificacion_Benjumea_LRT_A))
+
+mnt <- McNemarBowker_test_paired_cxc(table_mcnemar)
+mnt
+pv = mnt$Pvalue
+
+p_mcnemar <- rbind(p_mcnemar, data.frame(Modelo = "Benjumea_LRT_A",
+                                         Valor_p = pv))
+```
+
+Aquí, el valor $p$ resulta ser $0.002150$, de modo que se rechaza $H_0$, entonces la clasificación nutricional utilizando las fórmulas de Benjumea con LRT_A es diferente a la clasificación nutricional utilizando la talla real.
+
+### Clasificasión real vs Clasificasión Benjumea_LRT_CM
+
+```{r}
+table_mcnemar <- as.matrix(table(estimaciones$Clasificacion, estimaciones$Clasificacion_Benjumea_LRT_CM))
+
+mnt <- McNemarBowker_test_paired_cxc(table_mcnemar)
+mnt
+pv = mnt$Pvalue
+
+p_mcnemar <- rbind(p_mcnemar, data.frame(Modelo = "Benjumea_LRT_CM",
+                                         Valor_p = pv))
+```
+
+Aquí, el valor $p$ resulta ser $0.000040$, de modo que se rechaza $H_0$, entonces la clasificación nutricional utilizando las fórmulas de Benjumea con LRT_CM es diferente a la clasificación nutricional utilizando la talla real.
+
+### Clasificasión real vs Clasificasión Arango_LRM_R
+
+```{r}
+table_mcnemar <- as.matrix(table(estimaciones$Clasificacion, estimaciones$Clasificacion_Arango_LRM_R))
+
+mnt <- McNemarBowker_test_paired_cxc(table_mcnemar)
+mnt
+pv = mnt$Pvalue
+
+p_mcnemar <- rbind(p_mcnemar, data.frame(Modelo = "Arango_LRM_R",
+                                         Valor_p = pv))
+```
+
+Aquí, el valor $p$ resulta ser $0.000005$, de modo que se rechaza $H_0$, entonces la clasificación nutricional utilizando las fórmulas de Arango y Zamora con LRM_R (pierna estirada) es diferente a la clasificación nutricional utilizando la talla real.
+
+### Clasificasión real vs Clasificasión Arango_LRM_90
+
+```{r}
+table_mcnemar <- as.matrix(table(estimaciones$Clasificacion, estimaciones$Clasificacion_Arango_LRM_90))
+
+mnt <- McNemarBowker_test_paired_cxc(table_mcnemar)
+mnt
+pv = mnt$Pvalue
+
+p_mcnemar <- rbind(p_mcnemar, data.frame(Modelo = "Arango_LRM_90",
+                                         Valor_p = pv))
+```
+
+Aquí, el valor $p$ resulta ser $0.055623$, de modo que no se rechaza $H_0$, entonces la clasificación nutricional utilizando las fórmulas de Benjumea con LRM_90 es la misma clasificación nutricional utilizando la talla real. Sin embargo, debe tenerse en cuenta que este valor es muy muy cercano a $0.05$, entonces puede que no sea la clasificación más similar a la real como sí lo son Normal LRT_A y Normal LRT_CM.
+
+## Conclusión clasificación
+
+Se muestra la tabla con los valores $p$ de la prueba McNemar-Bowker, así como también el gráfico de barras apilado que muestra la clasificacipon nutricional de cada método de estimación y la clasificación real.
+
+
+```{r}
+# Transformar a formato largo
+df_long <- proporciones_tab %>%
+  pivot_longer(cols = Delgadez:Obesidad, names_to = "Categoria", values_to = "Proporcion")
+
+# Gráfico de barras apiladas
+ggplot(df_long, aes(x = Estimacion, y = Proporcion, fill = Categoria)) +
+  geom_bar(stat = "identity", position = "fill") +  # "fill" para proporciones
+  scale_y_continuous(labels = scales::percent) +    # Convertir eje Y a porcentaje
+  labs(x = "Estimación", y = "Proporción", fill = "Categoría", 
+       title = "Comparación de proporciones por estimación") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotar etiquetas para mejor visibilidad
+
+p_mcnemar |> gt()
+
+```
+
+De acuerdo a los resultados de la tabla y la gráfica, las clasificaciones nutricionales obtenidas por los modelos normal LRT_A y normal LRT_CM son iguales a la clasificación nutricional real (utilizando la talla de pie real).
+
+::: {.callout-note}
+Podría considerarse también la clasificación nutricional utilizando las fórmulas de Arango y Zamora con la pierna a 90°, sin embargo, esta no es la mejor pues su valor $p$ es cercano a $0.05$, es decir, cercano a rechazar $H_0$ y por lo tanto no obtener una clasificación cercana a la real.
+:::

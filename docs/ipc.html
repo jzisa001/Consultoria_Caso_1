@@ -119,6 +119,16 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#clasificación" id="toc-clasificación" class="nav-link" data-scroll-target="#clasificación">Clasificación</a></li>
   <li><a href="#proporciones" id="toc-proporciones" class="nav-link" data-scroll-target="#proporciones">Proporciones</a></li>
   <li><a href="#error-ponderado" id="toc-error-ponderado" class="nav-link" data-scroll-target="#error-ponderado">Error ponderado</a></li>
+  <li><a href="#prueba-mcnemar-bowker-para-muestras-pareadas" id="toc-prueba-mcnemar-bowker-para-muestras-pareadas" class="nav-link" data-scroll-target="#prueba-mcnemar-bowker-para-muestras-pareadas">Prueba McNemar-Bowker para muestras pareadas</a>
+  <ul class="collapse">
+  <li><a href="#clasificasión-real-vs-clasificasión-normal_lrt_a" id="toc-clasificasión-real-vs-clasificasión-normal_lrt_a" class="nav-link" data-scroll-target="#clasificasión-real-vs-clasificasión-normal_lrt_a">Clasificasión real vs Clasificasión Normal_LRT_A</a></li>
+  <li><a href="#clasificasión-real-vs-clasificasión-normal_lrt_cm" id="toc-clasificasión-real-vs-clasificasión-normal_lrt_cm" class="nav-link" data-scroll-target="#clasificasión-real-vs-clasificasión-normal_lrt_cm">Clasificasión real vs Clasificasión Normal_LRT_CM</a></li>
+  <li><a href="#clasificasión-real-vs-clasificasión-benjumea_lrt_a" id="toc-clasificasión-real-vs-clasificasión-benjumea_lrt_a" class="nav-link" data-scroll-target="#clasificasión-real-vs-clasificasión-benjumea_lrt_a">Clasificasión real vs Clasificasión Benjumea_LRT_A</a></li>
+  <li><a href="#clasificasión-real-vs-clasificasión-benjumea_lrt_cm" id="toc-clasificasión-real-vs-clasificasión-benjumea_lrt_cm" class="nav-link" data-scroll-target="#clasificasión-real-vs-clasificasión-benjumea_lrt_cm">Clasificasión real vs Clasificasión Benjumea_LRT_CM</a></li>
+  <li><a href="#clasificasión-real-vs-clasificasión-arango_lrm_r" id="toc-clasificasión-real-vs-clasificasión-arango_lrm_r" class="nav-link" data-scroll-target="#clasificasión-real-vs-clasificasión-arango_lrm_r">Clasificasión real vs Clasificasión Arango_LRM_R</a></li>
+  <li><a href="#clasificasión-real-vs-clasificasión-arango_lrm_90" id="toc-clasificasión-real-vs-clasificasión-arango_lrm_90" class="nav-link" data-scroll-target="#clasificasión-real-vs-clasificasión-arango_lrm_90">Clasificasión real vs Clasificasión Arango_LRM_90</a></li>
+  </ul></li>
+  <li><a href="#conclusión-clasificación" id="toc-conclusión-clasificación" class="nav-link" data-scroll-target="#conclusión-clasificación">Conclusión clasificación</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -136,23 +146,23 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="zogsqlyfdb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zogsqlyfdb table {
+<div id="lraikgjwwf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lraikgjwwf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zogsqlyfdb thead, #zogsqlyfdb tbody, #zogsqlyfdb tfoot, #zogsqlyfdb tr, #zogsqlyfdb td, #zogsqlyfdb th {
+#lraikgjwwf thead, #lraikgjwwf tbody, #lraikgjwwf tfoot, #lraikgjwwf tr, #lraikgjwwf td, #lraikgjwwf th {
   border-style: none;
 }
 
-#zogsqlyfdb p {
+#lraikgjwwf p {
   margin: 0;
   padding: 0;
 }
 
-#zogsqlyfdb .gt_table {
+#lraikgjwwf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -178,12 +188,12 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-#zogsqlyfdb .gt_caption {
+#lraikgjwwf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zogsqlyfdb .gt_title {
+#lraikgjwwf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -195,7 +205,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-#zogsqlyfdb .gt_subtitle {
+#lraikgjwwf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -207,7 +217,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-#zogsqlyfdb .gt_heading {
+#lraikgjwwf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -219,13 +229,13 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#zogsqlyfdb .gt_bottom_border {
+#lraikgjwwf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zogsqlyfdb .gt_col_headings {
+#lraikgjwwf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -240,7 +250,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#zogsqlyfdb .gt_col_heading {
+#lraikgjwwf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -260,7 +270,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#zogsqlyfdb .gt_column_spanner_outer {
+#lraikgjwwf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -272,15 +282,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-#zogsqlyfdb .gt_column_spanner_outer:first-child {
+#lraikgjwwf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zogsqlyfdb .gt_column_spanner_outer:last-child {
+#lraikgjwwf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zogsqlyfdb .gt_column_spanner {
+#lraikgjwwf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -292,11 +302,11 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-#zogsqlyfdb .gt_spanner_row {
+#lraikgjwwf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zogsqlyfdb .gt_group_heading {
+#lraikgjwwf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -322,7 +332,7 @@ ul.task-list li input[type="checkbox"] {
   text-align: left;
 }
 
-#zogsqlyfdb .gt_empty_group_heading {
+#lraikgjwwf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -337,15 +347,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-#zogsqlyfdb .gt_from_md > :first-child {
+#lraikgjwwf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zogsqlyfdb .gt_from_md > :last-child {
+#lraikgjwwf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zogsqlyfdb .gt_row {
+#lraikgjwwf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -364,7 +374,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#zogsqlyfdb .gt_stub {
+#lraikgjwwf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -377,7 +387,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#zogsqlyfdb .gt_stub_row_group {
+#lraikgjwwf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -391,15 +401,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-#zogsqlyfdb .gt_row_group_first td {
+#lraikgjwwf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zogsqlyfdb .gt_row_group_first th {
+#lraikgjwwf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zogsqlyfdb .gt_summary_row {
+#lraikgjwwf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -409,16 +419,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#zogsqlyfdb .gt_first_summary_row {
+#lraikgjwwf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zogsqlyfdb .gt_first_summary_row.thick {
+#lraikgjwwf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zogsqlyfdb .gt_last_summary_row {
+#lraikgjwwf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -428,7 +438,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#zogsqlyfdb .gt_grand_summary_row {
+#lraikgjwwf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -438,7 +448,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#zogsqlyfdb .gt_first_grand_summary_row {
+#lraikgjwwf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -448,7 +458,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-#zogsqlyfdb .gt_last_grand_summary_row_top {
+#lraikgjwwf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -458,11 +468,11 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#zogsqlyfdb .gt_striped {
+#lraikgjwwf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zogsqlyfdb .gt_table_body {
+#lraikgjwwf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -471,7 +481,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#zogsqlyfdb .gt_footnotes {
+#lraikgjwwf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -485,7 +495,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#zogsqlyfdb .gt_footnote {
+#lraikgjwwf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -494,7 +504,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#zogsqlyfdb .gt_sourcenotes {
+#lraikgjwwf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -508,7 +518,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#zogsqlyfdb .gt_sourcenote {
+#lraikgjwwf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -516,72 +526,72 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#zogsqlyfdb .gt_left {
+#lraikgjwwf .gt_left {
   text-align: left;
 }
 
-#zogsqlyfdb .gt_center {
+#lraikgjwwf .gt_center {
   text-align: center;
 }
 
-#zogsqlyfdb .gt_right {
+#lraikgjwwf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zogsqlyfdb .gt_font_normal {
+#lraikgjwwf .gt_font_normal {
   font-weight: normal;
 }
 
-#zogsqlyfdb .gt_font_bold {
+#lraikgjwwf .gt_font_bold {
   font-weight: bold;
 }
 
-#zogsqlyfdb .gt_font_italic {
+#lraikgjwwf .gt_font_italic {
   font-style: italic;
 }
 
-#zogsqlyfdb .gt_super {
+#lraikgjwwf .gt_super {
   font-size: 65%;
 }
 
-#zogsqlyfdb .gt_footnote_marks {
+#lraikgjwwf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zogsqlyfdb .gt_asterisk {
+#lraikgjwwf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zogsqlyfdb .gt_indent_1 {
+#lraikgjwwf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zogsqlyfdb .gt_indent_2 {
+#lraikgjwwf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zogsqlyfdb .gt_indent_3 {
+#lraikgjwwf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zogsqlyfdb .gt_indent_4 {
+#lraikgjwwf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zogsqlyfdb .gt_indent_5 {
+#lraikgjwwf .gt_indent_5 {
   text-indent: 25px;
 }
 
-#zogsqlyfdb .katex-display {
+#lraikgjwwf .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#zogsqlyfdb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#lraikgjwwf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -775,28 +785,29 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <section id="clasificación" class="level2">
 <h2 class="anchored" data-anchor-id="clasificación">Clasificación</h2>
-<p>Para cada uno de los IMC’s calculados, se realiza la clasificación nutricional utilizando el siguiente criterio</p>
-<p><span class="math display">\[ \text{Clasificacion} = \begin{cases} \text{Delgadez} &amp; \text{si IMC} &lt; 18.5 kg/m^2 \\ \text{Normal} &amp; \text{si } 18.5 \leq \text{IMC} &lt; 25 kg/m^2 \\ \text{Sobrepeso} &amp; \text{si } 25 \leq \text{IMC} &lt; 30 kg/m^2 \\ \text{Obesidad} &amp; \text{si IMC} \geq 30 kg/m^2 \end{cases}\]</span></p>
+<p>Para cada uno de los IMC’s calculados, se realiza la clasificación nutricional utilizando el siguiente criterio para adultos con edad <span class="math inline">\(&lt;=65\)</span> años.</p>
+<p><span class="math display">\[ \text{Clasificacion} = \begin{cases} \text{Delgadez} &amp; \text{si IMC} &lt; 18.5 kg/m^2 \\ \text{Normal} &amp; \text{si } 18.5 \leq \text{IMC} &lt; 25 kg/m^2 \\ \text{Sobrepeso} &amp; \text{si } 25 \leq \text{IMC} &lt; 30 kg/m^2 \\ \text{Obesidad} &amp; \text{si IMC} \geq 30 kg/m^2 \end{cases}\]</span> Y el siguiente criterio para adultos con edad <span class="math inline">\(&gt;65\)</span> años.</p>
+<p><span class="math display">\[ \text{Clasificacion} = \begin{cases} \text{Delgadez} &amp; \text{si IMC} &lt; 22 kg/m^2 \\ \text{Normal} &amp; \text{si } 22 \leq \text{IMC} &lt; 27 kg/m^2 \\ \text{Sobrepeso} &amp; \text{si } 27 \leq \text{IMC} &lt; 30 kg/m^2 \\ \text{Obesidad} &amp; \text{si IMC} \geq 30 kg/m^2 \end{cases}\]</span></p>
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="xyasmlmwml" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xyasmlmwml table {
+<div id="jtdkqwpdsk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jtdkqwpdsk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xyasmlmwml thead, #xyasmlmwml tbody, #xyasmlmwml tfoot, #xyasmlmwml tr, #xyasmlmwml td, #xyasmlmwml th {
+#jtdkqwpdsk thead, #jtdkqwpdsk tbody, #jtdkqwpdsk tfoot, #jtdkqwpdsk tr, #jtdkqwpdsk td, #jtdkqwpdsk th {
   border-style: none;
 }
 
-#xyasmlmwml p {
+#jtdkqwpdsk p {
   margin: 0;
   padding: 0;
 }
 
-#xyasmlmwml .gt_table {
+#jtdkqwpdsk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -822,12 +833,12 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-#xyasmlmwml .gt_caption {
+#jtdkqwpdsk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xyasmlmwml .gt_title {
+#jtdkqwpdsk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -839,7 +850,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-#xyasmlmwml .gt_subtitle {
+#jtdkqwpdsk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -851,7 +862,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-#xyasmlmwml .gt_heading {
+#jtdkqwpdsk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -863,13 +874,13 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#xyasmlmwml .gt_bottom_border {
+#jtdkqwpdsk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xyasmlmwml .gt_col_headings {
+#jtdkqwpdsk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -884,7 +895,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#xyasmlmwml .gt_col_heading {
+#jtdkqwpdsk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -904,7 +915,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#xyasmlmwml .gt_column_spanner_outer {
+#jtdkqwpdsk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -916,15 +927,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-#xyasmlmwml .gt_column_spanner_outer:first-child {
+#jtdkqwpdsk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xyasmlmwml .gt_column_spanner_outer:last-child {
+#jtdkqwpdsk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xyasmlmwml .gt_column_spanner {
+#jtdkqwpdsk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -936,11 +947,11 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-#xyasmlmwml .gt_spanner_row {
+#jtdkqwpdsk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xyasmlmwml .gt_group_heading {
+#jtdkqwpdsk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -966,7 +977,7 @@ ul.task-list li input[type="checkbox"] {
   text-align: left;
 }
 
-#xyasmlmwml .gt_empty_group_heading {
+#jtdkqwpdsk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -981,15 +992,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-#xyasmlmwml .gt_from_md > :first-child {
+#jtdkqwpdsk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xyasmlmwml .gt_from_md > :last-child {
+#jtdkqwpdsk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xyasmlmwml .gt_row {
+#jtdkqwpdsk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1008,7 +1019,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#xyasmlmwml .gt_stub {
+#jtdkqwpdsk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1021,7 +1032,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#xyasmlmwml .gt_stub_row_group {
+#jtdkqwpdsk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1035,15 +1046,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-#xyasmlmwml .gt_row_group_first td {
+#jtdkqwpdsk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xyasmlmwml .gt_row_group_first th {
+#jtdkqwpdsk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xyasmlmwml .gt_summary_row {
+#jtdkqwpdsk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1053,16 +1064,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#xyasmlmwml .gt_first_summary_row {
+#jtdkqwpdsk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xyasmlmwml .gt_first_summary_row.thick {
+#jtdkqwpdsk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xyasmlmwml .gt_last_summary_row {
+#jtdkqwpdsk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1072,7 +1083,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#xyasmlmwml .gt_grand_summary_row {
+#jtdkqwpdsk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1082,7 +1093,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#xyasmlmwml .gt_first_grand_summary_row {
+#jtdkqwpdsk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1092,7 +1103,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-#xyasmlmwml .gt_last_grand_summary_row_top {
+#jtdkqwpdsk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1102,11 +1113,11 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#xyasmlmwml .gt_striped {
+#jtdkqwpdsk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xyasmlmwml .gt_table_body {
+#jtdkqwpdsk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1115,7 +1126,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#xyasmlmwml .gt_footnotes {
+#jtdkqwpdsk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1129,7 +1140,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#xyasmlmwml .gt_footnote {
+#jtdkqwpdsk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1138,7 +1149,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#xyasmlmwml .gt_sourcenotes {
+#jtdkqwpdsk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1152,7 +1163,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#xyasmlmwml .gt_sourcenote {
+#jtdkqwpdsk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1160,72 +1171,72 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#xyasmlmwml .gt_left {
+#jtdkqwpdsk .gt_left {
   text-align: left;
 }
 
-#xyasmlmwml .gt_center {
+#jtdkqwpdsk .gt_center {
   text-align: center;
 }
 
-#xyasmlmwml .gt_right {
+#jtdkqwpdsk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xyasmlmwml .gt_font_normal {
+#jtdkqwpdsk .gt_font_normal {
   font-weight: normal;
 }
 
-#xyasmlmwml .gt_font_bold {
+#jtdkqwpdsk .gt_font_bold {
   font-weight: bold;
 }
 
-#xyasmlmwml .gt_font_italic {
+#jtdkqwpdsk .gt_font_italic {
   font-style: italic;
 }
 
-#xyasmlmwml .gt_super {
+#jtdkqwpdsk .gt_super {
   font-size: 65%;
 }
 
-#xyasmlmwml .gt_footnote_marks {
+#jtdkqwpdsk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xyasmlmwml .gt_asterisk {
+#jtdkqwpdsk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xyasmlmwml .gt_indent_1 {
+#jtdkqwpdsk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xyasmlmwml .gt_indent_2 {
+#jtdkqwpdsk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xyasmlmwml .gt_indent_3 {
+#jtdkqwpdsk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xyasmlmwml .gt_indent_4 {
+#jtdkqwpdsk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xyasmlmwml .gt_indent_5 {
+#jtdkqwpdsk .gt_indent_5 {
   text-indent: 25px;
 }
 
-#xyasmlmwml .katex-display {
+#jtdkqwpdsk .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#xyasmlmwml div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jtdkqwpdsk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1473,23 +1484,23 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="hjuklbeqby" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#hjuklbeqby table {
+<div id="ldxjuyghpr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ldxjuyghpr table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#hjuklbeqby thead, #hjuklbeqby tbody, #hjuklbeqby tfoot, #hjuklbeqby tr, #hjuklbeqby td, #hjuklbeqby th {
+#ldxjuyghpr thead, #ldxjuyghpr tbody, #ldxjuyghpr tfoot, #ldxjuyghpr tr, #ldxjuyghpr td, #ldxjuyghpr th {
   border-style: none;
 }
 
-#hjuklbeqby p {
+#ldxjuyghpr p {
   margin: 0;
   padding: 0;
 }
 
-#hjuklbeqby .gt_table {
+#ldxjuyghpr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1515,12 +1526,12 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-#hjuklbeqby .gt_caption {
+#ldxjuyghpr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#hjuklbeqby .gt_title {
+#ldxjuyghpr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1532,7 +1543,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-#hjuklbeqby .gt_subtitle {
+#ldxjuyghpr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1544,7 +1555,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-#hjuklbeqby .gt_heading {
+#ldxjuyghpr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1556,13 +1567,13 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#hjuklbeqby .gt_bottom_border {
+#ldxjuyghpr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hjuklbeqby .gt_col_headings {
+#ldxjuyghpr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1577,7 +1588,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#hjuklbeqby .gt_col_heading {
+#ldxjuyghpr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1597,7 +1608,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#hjuklbeqby .gt_column_spanner_outer {
+#ldxjuyghpr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1609,15 +1620,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-#hjuklbeqby .gt_column_spanner_outer:first-child {
+#ldxjuyghpr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hjuklbeqby .gt_column_spanner_outer:last-child {
+#ldxjuyghpr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hjuklbeqby .gt_column_spanner {
+#ldxjuyghpr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1629,11 +1640,11 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-#hjuklbeqby .gt_spanner_row {
+#ldxjuyghpr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#hjuklbeqby .gt_group_heading {
+#ldxjuyghpr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1659,7 +1670,7 @@ ul.task-list li input[type="checkbox"] {
   text-align: left;
 }
 
-#hjuklbeqby .gt_empty_group_heading {
+#ldxjuyghpr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1674,15 +1685,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-#hjuklbeqby .gt_from_md > :first-child {
+#ldxjuyghpr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hjuklbeqby .gt_from_md > :last-child {
+#ldxjuyghpr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hjuklbeqby .gt_row {
+#ldxjuyghpr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1701,7 +1712,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#hjuklbeqby .gt_stub {
+#ldxjuyghpr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1714,7 +1725,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#hjuklbeqby .gt_stub_row_group {
+#ldxjuyghpr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1728,15 +1739,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-#hjuklbeqby .gt_row_group_first td {
+#ldxjuyghpr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#hjuklbeqby .gt_row_group_first th {
+#ldxjuyghpr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#hjuklbeqby .gt_summary_row {
+#ldxjuyghpr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1746,16 +1757,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#hjuklbeqby .gt_first_summary_row {
+#ldxjuyghpr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#hjuklbeqby .gt_first_summary_row.thick {
+#ldxjuyghpr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#hjuklbeqby .gt_last_summary_row {
+#ldxjuyghpr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1765,7 +1776,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#hjuklbeqby .gt_grand_summary_row {
+#ldxjuyghpr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1775,7 +1786,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#hjuklbeqby .gt_first_grand_summary_row {
+#ldxjuyghpr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1785,7 +1796,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-#hjuklbeqby .gt_last_grand_summary_row_top {
+#ldxjuyghpr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1795,11 +1806,11 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#hjuklbeqby .gt_striped {
+#ldxjuyghpr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hjuklbeqby .gt_table_body {
+#ldxjuyghpr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1808,7 +1819,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#hjuklbeqby .gt_footnotes {
+#ldxjuyghpr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1822,7 +1833,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#hjuklbeqby .gt_footnote {
+#ldxjuyghpr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1831,7 +1842,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#hjuklbeqby .gt_sourcenotes {
+#ldxjuyghpr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1845,7 +1856,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#hjuklbeqby .gt_sourcenote {
+#ldxjuyghpr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1853,72 +1864,72 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#hjuklbeqby .gt_left {
+#ldxjuyghpr .gt_left {
   text-align: left;
 }
 
-#hjuklbeqby .gt_center {
+#ldxjuyghpr .gt_center {
   text-align: center;
 }
 
-#hjuklbeqby .gt_right {
+#ldxjuyghpr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hjuklbeqby .gt_font_normal {
+#ldxjuyghpr .gt_font_normal {
   font-weight: normal;
 }
 
-#hjuklbeqby .gt_font_bold {
+#ldxjuyghpr .gt_font_bold {
   font-weight: bold;
 }
 
-#hjuklbeqby .gt_font_italic {
+#ldxjuyghpr .gt_font_italic {
   font-style: italic;
 }
 
-#hjuklbeqby .gt_super {
+#ldxjuyghpr .gt_super {
   font-size: 65%;
 }
 
-#hjuklbeqby .gt_footnote_marks {
+#ldxjuyghpr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#hjuklbeqby .gt_asterisk {
+#ldxjuyghpr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#hjuklbeqby .gt_indent_1 {
+#ldxjuyghpr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#hjuklbeqby .gt_indent_2 {
+#ldxjuyghpr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#hjuklbeqby .gt_indent_3 {
+#ldxjuyghpr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#hjuklbeqby .gt_indent_4 {
+#ldxjuyghpr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#hjuklbeqby .gt_indent_5 {
+#ldxjuyghpr .gt_indent_5 {
   text-indent: 25px;
 }
 
-#hjuklbeqby .katex-display {
+#ldxjuyghpr .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#hjuklbeqby div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ldxjuyghpr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1934,39 +1945,39 @@ ul.task-list li input[type="checkbox"] {
   </thead>
   <tbody class="gt_table_body">
     <tr><td headers="Estimacion" class="gt_row gt_left">Real</td>
-<td headers="Delgadez" class="gt_row gt_right">0.011049724</td>
-<td headers="Normal" class="gt_row gt_right">0.4604052</td>
-<td headers="Sobrepeso" class="gt_row gt_right">0.3314917</td>
+<td headers="Delgadez" class="gt_row gt_right">0.1528545</td>
+<td headers="Normal" class="gt_row gt_right">0.4732965</td>
+<td headers="Sobrepeso" class="gt_row gt_right">0.1767956</td>
 <td headers="Obesidad" class="gt_row gt_right">0.1970534</td></tr>
     <tr><td headers="Estimacion" class="gt_row gt_left">Normal_LRT_A</td>
-<td headers="Delgadez" class="gt_row gt_right">0.011049724</td>
-<td headers="Normal" class="gt_row gt_right">0.4585635</td>
-<td headers="Sobrepeso" class="gt_row gt_right">0.3443831</td>
+<td headers="Delgadez" class="gt_row gt_right">0.1602210</td>
+<td headers="Normal" class="gt_row gt_right">0.4604052</td>
+<td headers="Sobrepeso" class="gt_row gt_right">0.1933702</td>
 <td headers="Obesidad" class="gt_row gt_right">0.1860037</td></tr>
     <tr><td headers="Estimacion" class="gt_row gt_left">Normal_LRT_CM</td>
-<td headers="Delgadez" class="gt_row gt_right">0.005524862</td>
-<td headers="Normal" class="gt_row gt_right">0.4585635</td>
-<td headers="Sobrepeso" class="gt_row gt_right">0.3499079</td>
+<td headers="Delgadez" class="gt_row gt_right">0.1620626</td>
+<td headers="Normal" class="gt_row gt_right">0.4567219</td>
+<td headers="Sobrepeso" class="gt_row gt_right">0.1952118</td>
 <td headers="Obesidad" class="gt_row gt_right">0.1860037</td></tr>
     <tr><td headers="Estimacion" class="gt_row gt_left">Benjumea_LRT_A</td>
-<td headers="Delgadez" class="gt_row gt_right">0.009208103</td>
-<td headers="Normal" class="gt_row gt_right">0.4198895</td>
-<td headers="Sobrepeso" class="gt_row gt_right">0.3609576</td>
+<td headers="Delgadez" class="gt_row gt_right">0.1325967</td>
+<td headers="Normal" class="gt_row gt_right">0.4456722</td>
+<td headers="Sobrepeso" class="gt_row gt_right">0.2117864</td>
 <td headers="Obesidad" class="gt_row gt_right">0.2081031</td></tr>
     <tr><td headers="Estimacion" class="gt_row gt_left">Benjumea_LRT_CM</td>
-<td headers="Delgadez" class="gt_row gt_right">0.018416206</td>
-<td headers="Normal" class="gt_row gt_right">0.4861878</td>
-<td headers="Sobrepeso" class="gt_row gt_right">0.3370166</td>
+<td headers="Delgadez" class="gt_row gt_right">0.1970534</td>
+<td headers="Normal" class="gt_row gt_right">0.4493554</td>
+<td headers="Sobrepeso" class="gt_row gt_right">0.1952118</td>
 <td headers="Obesidad" class="gt_row gt_right">0.1565378</td></tr>
     <tr><td headers="Estimacion" class="gt_row gt_left">Arango_LRM_R</td>
-<td headers="Delgadez" class="gt_row gt_right">0.011049724</td>
-<td headers="Normal" class="gt_row gt_right">0.3904236</td>
-<td headers="Sobrepeso" class="gt_row gt_right">0.3738490</td>
+<td headers="Delgadez" class="gt_row gt_right">0.1399632</td>
+<td headers="Normal" class="gt_row gt_right">0.4162063</td>
+<td headers="Sobrepeso" class="gt_row gt_right">0.2191529</td>
 <td headers="Obesidad" class="gt_row gt_right">0.2246777</td></tr>
     <tr><td headers="Estimacion" class="gt_row gt_left">Arango_LRM_90</td>
-<td headers="Delgadez" class="gt_row gt_right">0.014732965</td>
-<td headers="Normal" class="gt_row gt_right">0.4106814</td>
-<td headers="Sobrepeso" class="gt_row gt_right">0.3572744</td>
+<td headers="Delgadez" class="gt_row gt_right">0.1510129</td>
+<td headers="Normal" class="gt_row gt_right">0.4364641</td>
+<td headers="Sobrepeso" class="gt_row gt_right">0.1952118</td>
 <td headers="Obesidad" class="gt_row gt_right">0.2173112</td></tr>
   </tbody>
   
@@ -1988,23 +1999,23 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="qbidkfxauw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qbidkfxauw table {
+<div id="ctxmyseqkj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ctxmyseqkj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qbidkfxauw thead, #qbidkfxauw tbody, #qbidkfxauw tfoot, #qbidkfxauw tr, #qbidkfxauw td, #qbidkfxauw th {
+#ctxmyseqkj thead, #ctxmyseqkj tbody, #ctxmyseqkj tfoot, #ctxmyseqkj tr, #ctxmyseqkj td, #ctxmyseqkj th {
   border-style: none;
 }
 
-#qbidkfxauw p {
+#ctxmyseqkj p {
   margin: 0;
   padding: 0;
 }
 
-#qbidkfxauw .gt_table {
+#ctxmyseqkj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2030,12 +2041,12 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-#qbidkfxauw .gt_caption {
+#ctxmyseqkj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qbidkfxauw .gt_title {
+#ctxmyseqkj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2047,7 +2058,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-#qbidkfxauw .gt_subtitle {
+#ctxmyseqkj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2059,7 +2070,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-#qbidkfxauw .gt_heading {
+#ctxmyseqkj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2071,13 +2082,13 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#qbidkfxauw .gt_bottom_border {
+#ctxmyseqkj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qbidkfxauw .gt_col_headings {
+#ctxmyseqkj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2092,7 +2103,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#qbidkfxauw .gt_col_heading {
+#ctxmyseqkj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2112,7 +2123,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#qbidkfxauw .gt_column_spanner_outer {
+#ctxmyseqkj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2124,15 +2135,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-#qbidkfxauw .gt_column_spanner_outer:first-child {
+#ctxmyseqkj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qbidkfxauw .gt_column_spanner_outer:last-child {
+#ctxmyseqkj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qbidkfxauw .gt_column_spanner {
+#ctxmyseqkj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2144,11 +2155,11 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-#qbidkfxauw .gt_spanner_row {
+#ctxmyseqkj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qbidkfxauw .gt_group_heading {
+#ctxmyseqkj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2174,7 +2185,7 @@ ul.task-list li input[type="checkbox"] {
   text-align: left;
 }
 
-#qbidkfxauw .gt_empty_group_heading {
+#ctxmyseqkj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2189,15 +2200,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-#qbidkfxauw .gt_from_md > :first-child {
+#ctxmyseqkj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qbidkfxauw .gt_from_md > :last-child {
+#ctxmyseqkj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qbidkfxauw .gt_row {
+#ctxmyseqkj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2216,7 +2227,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#qbidkfxauw .gt_stub {
+#ctxmyseqkj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2229,7 +2240,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#qbidkfxauw .gt_stub_row_group {
+#ctxmyseqkj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2243,15 +2254,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-#qbidkfxauw .gt_row_group_first td {
+#ctxmyseqkj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qbidkfxauw .gt_row_group_first th {
+#ctxmyseqkj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qbidkfxauw .gt_summary_row {
+#ctxmyseqkj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2261,16 +2272,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#qbidkfxauw .gt_first_summary_row {
+#ctxmyseqkj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qbidkfxauw .gt_first_summary_row.thick {
+#ctxmyseqkj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qbidkfxauw .gt_last_summary_row {
+#ctxmyseqkj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2280,7 +2291,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#qbidkfxauw .gt_grand_summary_row {
+#ctxmyseqkj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2290,7 +2301,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#qbidkfxauw .gt_first_grand_summary_row {
+#ctxmyseqkj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2300,7 +2311,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-#qbidkfxauw .gt_last_grand_summary_row_top {
+#ctxmyseqkj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2310,11 +2321,11 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#qbidkfxauw .gt_striped {
+#ctxmyseqkj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qbidkfxauw .gt_table_body {
+#ctxmyseqkj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2323,7 +2334,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#qbidkfxauw .gt_footnotes {
+#ctxmyseqkj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2337,7 +2348,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#qbidkfxauw .gt_footnote {
+#ctxmyseqkj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2346,7 +2357,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#qbidkfxauw .gt_sourcenotes {
+#ctxmyseqkj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2360,7 +2371,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#qbidkfxauw .gt_sourcenote {
+#ctxmyseqkj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2368,72 +2379,72 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#qbidkfxauw .gt_left {
+#ctxmyseqkj .gt_left {
   text-align: left;
 }
 
-#qbidkfxauw .gt_center {
+#ctxmyseqkj .gt_center {
   text-align: center;
 }
 
-#qbidkfxauw .gt_right {
+#ctxmyseqkj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qbidkfxauw .gt_font_normal {
+#ctxmyseqkj .gt_font_normal {
   font-weight: normal;
 }
 
-#qbidkfxauw .gt_font_bold {
+#ctxmyseqkj .gt_font_bold {
   font-weight: bold;
 }
 
-#qbidkfxauw .gt_font_italic {
+#ctxmyseqkj .gt_font_italic {
   font-style: italic;
 }
 
-#qbidkfxauw .gt_super {
+#ctxmyseqkj .gt_super {
   font-size: 65%;
 }
 
-#qbidkfxauw .gt_footnote_marks {
+#ctxmyseqkj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qbidkfxauw .gt_asterisk {
+#ctxmyseqkj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qbidkfxauw .gt_indent_1 {
+#ctxmyseqkj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qbidkfxauw .gt_indent_2 {
+#ctxmyseqkj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qbidkfxauw .gt_indent_3 {
+#ctxmyseqkj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qbidkfxauw .gt_indent_4 {
+#ctxmyseqkj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qbidkfxauw .gt_indent_5 {
+#ctxmyseqkj .gt_indent_5 {
   text-indent: 25px;
 }
 
-#qbidkfxauw .katex-display {
+#ctxmyseqkj .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#qbidkfxauw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ctxmyseqkj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2446,22 +2457,585 @@ ul.task-list li input[type="checkbox"] {
   </thead>
   <tbody class="gt_table_body">
     <tr><td headers="Estimacion" class="gt_row gt_left">Normal_LRT_A</td>
-<td headers="Error_Ponderado" class="gt_row gt_right">0.007298651</td></tr>
+<td headers="Error_Ponderado" class="gt_row gt_right">0.01233513</td></tr>
     <tr><td headers="Estimacion" class="gt_row gt_left">Normal_LRT_CM</td>
-<td headers="Error_Ponderado" class="gt_row gt_right">0.009191145</td></tr>
-    <tr><td headers="Estimacion" class="gt_row gt_left">Benjumea_LRT_CM</td>
-<td headers="Error_Ponderado" class="gt_row gt_right">0.021767074</td></tr>
+<td headers="Error_Ponderado" class="gt_row gt_right">0.01468548</td></tr>
     <tr><td headers="Estimacion" class="gt_row gt_left">Benjumea_LRT_A</td>
-<td headers="Error_Ponderado" class="gt_row gt_right">0.030619063</td></tr>
+<td headers="Error_Ponderado" class="gt_row gt_right">0.02453459</td></tr>
     <tr><td headers="Estimacion" class="gt_row gt_left">Arango_LRM_90</td>
-<td headers="Error_Ponderado" class="gt_row gt_right">0.035472394</td></tr>
+<td headers="Error_Ponderado" class="gt_row gt_right">0.02496193</td></tr>
+    <tr><td headers="Estimacion" class="gt_row gt_left">Benjumea_LRT_CM</td>
+<td headers="Error_Ponderado" class="gt_row gt_right">0.02932688</td></tr>
     <tr><td headers="Estimacion" class="gt_row gt_left">Arango_LRM_R</td>
-<td headers="Error_Ponderado" class="gt_row gt_right">0.051704432</td></tr>
+<td headers="Error_Ponderado" class="gt_row gt_right">0.04192315</td></tr>
   </tbody>
   
   
 </table>
 </div>
+</div>
+</div>
+</section>
+<section id="prueba-mcnemar-bowker-para-muestras-pareadas" class="level2">
+<h2 class="anchored" data-anchor-id="prueba-mcnemar-bowker-para-muestras-pareadas">Prueba McNemar-Bowker para muestras pareadas</h2>
+<p>A continuación, se muestran los resultados de la prueba McNemar-Bowker para muestras pareadas. Las hipótesis de esta prueba son:</p>
+<ul>
+<li><p><em>Hipótesis nula (<span class="math inline">\(H_0\)</span>):</em> La distribución de las clasificaciones es simétrica, es decir, no hay diferencias sistemáticas en la forma en que los individuos cambian de categoría entre la clasificación utilizando la talla real y la clasificación estimada.</p></li>
+<li><p><em>Hipótesis alternativa (<span class="math inline">\(H_1\)</span>):</em> Hay diferencias significativas en la clasificación de los individuos entre los métodos, es decir, las proporciones de cambio entre categorías no son simétricas.</p></li>
+</ul>
+<p>En nuestro contexto, queremos NO RECHAZAR <span class="math inline">\(H_0\)</span>, ya que esto diría que la clasificación utilizando la estimación de la talla con tal modelo, es la misma clasificación que resultarpia al utilizar la talla real.</p>
+<section id="clasificasión-real-vs-clasificasión-normal_lrt_a" class="level3">
+<h3 class="anchored" data-anchor-id="clasificasión-real-vs-clasificasión-normal_lrt_a">Clasificasión real vs Clasificasión Normal_LRT_A</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>The McNemar-Bowker test for symmetry: P = 0.914246, T0 =  2.058 (df=6)</code></pre>
+</div>
+</div>
+<p>Aquí, el valor <span class="math inline">\(p\)</span> resulta ser <span class="math inline">\(0.914246\)</span>, de modo que no se rechaza <span class="math inline">\(H_0\)</span>, entonces la clasificación nutricional utilizando la estimación de la talla dada por el modelo normal LRT_A, es la misma clasificación nutricional utilizando la talla real.</p>
+</section>
+<section id="clasificasión-real-vs-clasificasión-normal_lrt_cm" class="level3">
+<h3 class="anchored" data-anchor-id="clasificasión-real-vs-clasificasión-normal_lrt_cm">Clasificasión real vs Clasificasión Normal_LRT_CM</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>The McNemar-Bowker test for symmetry: P = 0.858014, T0 =  2.592 (df=6)</code></pre>
+</div>
+</div>
+<p>Aquí, el valor <span class="math inline">\(p\)</span> resulta ser <span class="math inline">\(0.858014\)</span>, de modo que no se rechaza <span class="math inline">\(H_0\)</span>, entonces la clasificación nutricional utilizando la estimación de la talla dada por el modelo normal LRT_CM, es la misma clasificación nutricional utilizando la talla real.</p>
+</section>
+<section id="clasificasión-real-vs-clasificasión-benjumea_lrt_a" class="level3">
+<h3 class="anchored" data-anchor-id="clasificasión-real-vs-clasificasión-benjumea_lrt_a">Clasificasión real vs Clasificasión Benjumea_LRT_A</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>The McNemar-Bowker test for symmetry: P = 0.002150, T0 = 20.616 (df=6)</code></pre>
+</div>
+</div>
+<p>Aquí, el valor <span class="math inline">\(p\)</span> resulta ser <span class="math inline">\(0.002150\)</span>, de modo que se rechaza <span class="math inline">\(H_0\)</span>, entonces la clasificación nutricional utilizando las fórmulas de Benjumea con LRT_A es diferente a la clasificación nutricional utilizando la talla real.</p>
+</section>
+<section id="clasificasión-real-vs-clasificasión-benjumea_lrt_cm" class="level3">
+<h3 class="anchored" data-anchor-id="clasificasión-real-vs-clasificasión-benjumea_lrt_cm">Clasificasión real vs Clasificasión Benjumea_LRT_CM</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>The McNemar-Bowker test for symmetry: P = 0.000040, T0 = 29.944 (df=6)</code></pre>
+</div>
+</div>
+<p>Aquí, el valor <span class="math inline">\(p\)</span> resulta ser <span class="math inline">\(0.000040\)</span>, de modo que se rechaza <span class="math inline">\(H_0\)</span>, entonces la clasificación nutricional utilizando las fórmulas de Benjumea con LRT_CM es diferente a la clasificación nutricional utilizando la talla real.</p>
+</section>
+<section id="clasificasión-real-vs-clasificasión-arango_lrm_r" class="level3">
+<h3 class="anchored" data-anchor-id="clasificasión-real-vs-clasificasión-arango_lrm_r">Clasificasión real vs Clasificasión Arango_LRM_R</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>The McNemar-Bowker test for symmetry: P = 0.000005, T0 = 34.528 (df=6)</code></pre>
+</div>
+</div>
+<p>Aquí, el valor <span class="math inline">\(p\)</span> resulta ser <span class="math inline">\(0.000005\)</span>, de modo que se rechaza <span class="math inline">\(H_0\)</span>, entonces la clasificación nutricional utilizando las fórmulas de Arango y Zamora con LRM_R (pierna estirada) es diferente a la clasificación nutricional utilizando la talla real.</p>
+</section>
+<section id="clasificasión-real-vs-clasificasión-arango_lrm_90" class="level3">
+<h3 class="anchored" data-anchor-id="clasificasión-real-vs-clasificasión-arango_lrm_90">Clasificasión real vs Clasificasión Arango_LRM_90</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>The McNemar-Bowker test for symmetry: P = 0.055623, T0 = 12.299 (df=6)</code></pre>
+</div>
+</div>
+<p>Aquí, el valor <span class="math inline">\(p\)</span> resulta ser <span class="math inline">\(0.055623\)</span>, de modo que no se rechaza <span class="math inline">\(H_0\)</span>, entonces la clasificación nutricional utilizando las fórmulas de Benjumea con LRM_90 es la misma clasificación nutricional utilizando la talla real. Sin embargo, debe tenerse en cuenta que este valor es muy muy cercano a <span class="math inline">\(0.05\)</span>, entonces puede que no sea la clasificación más similar a la real como sí lo son Normal LRT_A y Normal LRT_CM.</p>
+</section>
+</section>
+<section id="conclusión-clasificación" class="level2">
+<h2 class="anchored" data-anchor-id="conclusión-clasificación">Conclusión clasificación</h2>
+<p>Se muestra la tabla con los valores <span class="math inline">\(p\)</span> de la prueba McNemar-Bowker, así como también el gráfico de barras apilado que muestra la clasificacipon nutricional de cada método de estimación y la clasificación real.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="ipc_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+
+<div id="zthytwsekv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zthytwsekv table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#zthytwsekv thead, #zthytwsekv tbody, #zthytwsekv tfoot, #zthytwsekv tr, #zthytwsekv td, #zthytwsekv th {
+  border-style: none;
+}
+
+#zthytwsekv p {
+  margin: 0;
+  padding: 0;
+}
+
+#zthytwsekv .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#zthytwsekv .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#zthytwsekv .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#zthytwsekv .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#zthytwsekv .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#zthytwsekv .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zthytwsekv .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#zthytwsekv .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#zthytwsekv .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#zthytwsekv .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#zthytwsekv .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#zthytwsekv .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#zthytwsekv .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#zthytwsekv .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#zthytwsekv .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#zthytwsekv .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#zthytwsekv .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#zthytwsekv .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#zthytwsekv .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zthytwsekv .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#zthytwsekv .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#zthytwsekv .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#zthytwsekv .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zthytwsekv .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#zthytwsekv .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#zthytwsekv .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zthytwsekv .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zthytwsekv .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#zthytwsekv .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zthytwsekv .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#zthytwsekv .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zthytwsekv .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#zthytwsekv .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zthytwsekv .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#zthytwsekv .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zthytwsekv .gt_left {
+  text-align: left;
+}
+
+#zthytwsekv .gt_center {
+  text-align: center;
+}
+
+#zthytwsekv .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#zthytwsekv .gt_font_normal {
+  font-weight: normal;
+}
+
+#zthytwsekv .gt_font_bold {
+  font-weight: bold;
+}
+
+#zthytwsekv .gt_font_italic {
+  font-style: italic;
+}
+
+#zthytwsekv .gt_super {
+  font-size: 65%;
+}
+
+#zthytwsekv .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#zthytwsekv .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#zthytwsekv .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#zthytwsekv .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#zthytwsekv .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#zthytwsekv .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#zthytwsekv .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#zthytwsekv .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#zthytwsekv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Modelo">Modelo</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Valor_p">Valor_p</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Modelo" class="gt_row gt_left">Normal_LRT_A</td>
+<td headers="Valor_p" class="gt_row gt_right">9.142460e-01</td></tr>
+    <tr><td headers="Modelo" class="gt_row gt_left">Normal_LRT_CM</td>
+<td headers="Valor_p" class="gt_row gt_right">8.580136e-01</td></tr>
+    <tr><td headers="Modelo" class="gt_row gt_left">Benjumea_LRT_A</td>
+<td headers="Valor_p" class="gt_row gt_right">2.149615e-03</td></tr>
+    <tr><td headers="Modelo" class="gt_row gt_left">Benjumea_LRT_CM</td>
+<td headers="Valor_p" class="gt_row gt_right">4.027599e-05</td></tr>
+    <tr><td headers="Modelo" class="gt_row gt_left">Arango_LRM_R</td>
+<td headers="Valor_p" class="gt_row gt_right">5.317577e-06</td></tr>
+    <tr><td headers="Modelo" class="gt_row gt_left">Arango_LRM_90</td>
+<td headers="Valor_p" class="gt_row gt_right">5.562340e-02</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+<p>De acuerdo a los resultados de la tabla y la gráfica, las clasificaciones nutricionales obtenidas por los modelos normal LRT_A y normal LRT_CM son iguales a la clasificación nutricional real (utilizando la talla de pie real).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Podría considerarse también la clasificación nutricional utilizando las fórmulas de Arango y Zamora con la pierna a 90°, sin embargo, esta no es la mejor pues su valor <span class="math inline">\(p\)</span> es cercano a <span class="math inline">\(0.05\)</span>, es decir, cercano a rechazar <span class="math inline">\(H_0\)</span> y por lo tanto no obtener una clasificación cercana a la real.</p>
 </div>
 </div>
 
