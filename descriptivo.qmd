@@ -114,12 +114,62 @@ datos[which(datos$Edad>box_Edad$stats[5] | datos$Edad<box_Edad$stats[1]),-c(1,2)
 
 El mínimo de edad en la muestra es `r summary(datos$Edad)[1]` años, el máximo son `r round(max(datos$Edad),2)` años, la media es `r mean(datos$Edad)` años y la mediana es de `r median(datos$Edad)` años. Existen dos datos atípicos: 93 y 95 años.
 
+##### Edad sexo femenino
+
+```{r}
+femenino <- subset(datos, Sexo == "Femenino")
+summary(femenino$Edad)
+
+#| layout-ncol: 2
+hist(femenino$Edad, freq=FALSE, main = 'Histograma de Edad sexo femenino', xlab = 'Edad', ylab = 'Densidad')
+lines(density(femenino$Edad), col ="red")
+box_Edad <- boxplot(femenino$Edad, main = "Boxplot de Edad sexo femenino")
+
+femenino[which(femenino$Edad>box_Edad$stats[5] | femenino$Edad<box_Edad$stats[1]),-c(1,2)] |> 
+  gt() |> gtExtras::gt_theme_538() |> 
+  tab_options(table.font.size = 9)
+```
+
+##### Edad sexo masculino
+
+```{r}
+masculino <- subset(datos, Sexo == "Masculino")
+summary(masculino$Edad)
+
+#| layout-ncol: 2
+hist(masculino$Edad, freq=FALSE, main = 'Histograma de Edad sexo masculino', xlab = 'Edad', ylab = 'Densidad')
+lines(density(masculino$Edad), col ="red")
+box_Edad <- boxplot(masculino$Edad, main = "Boxplot de Edad sexo masculino")
+
+masculino[which(masculino$Edad>box_Edad$stats[5] | masculino$Edad<box_Edad$stats[1]),-c(1,2)] |> 
+  gt() |> gtExtras::gt_theme_538() |> 
+  tab_options(table.font.size = 9)
+```
+
 #### Etnia
 
 Resumen de la variable `Etnia`:
 
 ```{r}
 datos |> 
+  dplyr::count(Etnia) |> 
+  dplyr::mutate(porcentaje = n / sum(n)) |> 
+  gt() |> gtExtras::gt_theme_538() |> fmt_percent(column = 3, decimals = 3, dec_mark = ".")
+```
+
+##### Etnia sexo femenino
+
+```{r}
+femenino |> 
+  dplyr::count(Etnia) |> 
+  dplyr::mutate(porcentaje = n / sum(n)) |> 
+  gt() |> gtExtras::gt_theme_538() |> fmt_percent(column = 3, decimals = 3, dec_mark = ".")
+```
+
+##### Etnia sexo masculino
+
+```{r}
+masculino |> 
   dplyr::count(Etnia) |> 
   dplyr::mutate(porcentaje = n / sum(n)) |> 
   gt() |> gtExtras::gt_theme_538() |> fmt_percent(column = 3, decimals = 3, dec_mark = ".")
@@ -148,33 +198,28 @@ Tenemos los siguientes datos atípicos en la variable `Peso`:
 datos[which(datos$Peso>box_peso$stats[5] | datos$Peso<box_peso$stats[1]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
 ```
 
-Distribución de la variable `Peso` distinguiendo por `Sexo`:
+##### Peso sexo femenino
 
 ```{r}
-box_peso_fm <- boxplot(datos$Peso ~ datos$Sexo, xlab = 'Sexo', ylab = 'Peso', 
-                       main = "Boxplot de Peso por Sexo")
+summary(femenino$Peso)
+
+hist(femenino$Peso, freq = FALSE, main = 'Histograma del peso femenino', xlab = 'Peso', ylab = 'Densidad')
+lines(density(femenino$Peso), col = "red")
+box_peso <- boxplot(femenino$Peso, main = "Boxplot de Peso femenino")
+
+femenino[which(femenino$Peso>box_peso$stats[5] | femenino$Peso<box_peso$stats[1]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
 ```
 
-Datos atípicos cuando se distingue por `Sexo` en mujeres:
+##### Peso sexo masculino
 
 ```{r}
-datos |> filter(Sexo == "Femenino") |> 
-  filter(Peso > box_peso_fm$stats[5,1] | Peso < box_peso_fm$stats[1,1]) |> 
-  dplyr::select(-1,-2) |> 
-  gt() |>
-  gtExtras::gt_theme_538() |>
-  tab_options(table.font.size = 9)
-```
+summary(masculino$Peso)
 
-Datos atípicos cuando se distingue por `Sexo` en hombres:
+hist(masculino$Peso, freq = FALSE, main = 'Histograma del peso masculino', xlab = 'Peso', ylab = 'Densidad')
+lines(density(masculino$Peso), col = "red")
+box_peso <- boxplot(masculino$Peso, main = "Boxplot de Peso masculino")
 
-```{r}
-datos |> filter(Sexo == "Masculino") |> 
-  filter(Peso > box_peso_fm$stats[5,2] | Peso < box_peso_fm$stats[1,2]) |> 
-  dplyr::select(-1,-2) |> 
-  gt() |>
-  gtExtras::gt_theme_538() |>
-  tab_options(table.font.size = 9)
+masculino[which(masculino$Peso>box_peso$stats[5] | masculino$Peso<box_peso$stats[1]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
 ```
 
 En resúmen el mínimo de peso en la muestra es 34.20 kg, el máximo son 101.8 kg, la media son 63.26 kg y la mediana 62.60 kg. En la muestra junta, tenemos $8$ datos atípicos (101.80, 98.70, 97.65, 97.40, 97.10, 95.60, 95.10 y 94.20). Cuando se separa por Sexo, tenemos $2$ datos atípicos en Femenino (97.10 y 91.6), y $4$ en Masculino (101.80, 98.70, 97.65 y 97.40). 
@@ -202,24 +247,30 @@ Tenemos un dato atípico en la variable `Talla`:
 datos[which(datos$Talla<box_talla$stats[1]|datos$Talla>box_talla$stats[5]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
 ```
 
-Distinguiendo por `Sexo`:
+##### Talla sexo femenino
 
 ```{r}
-box_talla_fm <- boxplot(datos$Talla ~ datos$Sexo, xlab='Sexo', ylab='Talla',
-                        main = "Boxplot de Talla por Sexo")
+summary(femenino$Talla)
+
+hist(femenino$Talla, freq = FALSE, main = 'Histograma de Talla femenino', xlab= 'Talla', ylab = 'Densidad')
+lines(density(femenino$Talla), col = "red")
+box_talla <- boxplot(femenino$Talla, main = "Boxplot de Talla femenino")
+
+femenino[which(femenino$Talla<box_talla$stats[1]|femenino$Talla>box_talla$stats[5]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
 ```
 
-Datos atípicos cuando se distingue por `Sexo` en mujeres:
+##### Talla sexo masculino
 
 ```{r}
-(datos |> filter(Sexo == "Femenino"))[which((datos |> filter(Sexo == "Femenino"))$Talla<box_talla_fm$stats[1,1]|(datos |> filter(Sexo == "Femenino"))$Talla>box_talla_fm$stats[5,1]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
+summary(masculino$Talla)
+
+hist(masculino$Talla, freq = FALSE, main = 'Histograma de Talla masculino', xlab= 'Talla', ylab = 'Densidad')
+lines(density(masculino$Talla), col = "red")
+box_talla <- boxplot(masculino$Talla, main = "Boxplot de Talla masculino")
+
+masculino[which(masculino$Talla<box_talla$stats[1]|masculino$Talla>box_talla$stats[5]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
 ```
 
-En hombres: 
-
-```{r}
-(datos |> filter(Sexo == "Masculino"))[which((datos |> filter(Sexo == "Masculino"))$Talla<box_talla_fm$stats[1,2]|(datos |> filter(Sexo == "Masculino"))$Talla>box_talla_fm$stats[5,2]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
-```
 
 En resúmen, el mínimo de talla en la muestra es 127.1 cm, el máximo son 181.5 cm, la media son 156.1 cm y la mediana 155.4 cm. En la muestra junta, tenemos un dato atípico (127.1). Cuando se separa por Sexo, hay ocho datos atípicos en Femenino (127.10, 129.25, 132.55, 133.00, 133.85, 133.90, 134.05 y 134.05) y en Masculino dos (142.00 y 141.15). 
 
@@ -246,24 +297,30 @@ Datos atípicos:
 datos[which(datos$LRT_CM<box_LRT_CM$stats[1]|datos$LRT_CM>box_LRT_CM$stats[5]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
 ```
 
-Distribución de la variable `LRT_CM` distinguiendo por `Sexo`:
+##### LRT_CM sexo femenino
 
 ```{r}
-box_LRT_CM_fm <- boxplot(datos$LRT_CM ~ datos$Sexo, xlab='Sexo', ylab='Longitud en cm',
-                         main = "Boxplot de LTR_CM por Sexo")
+summary(femenino$LRT_CM)
+
+hist(femenino$LRT_CM, freq = FALSE, main = 'Histograma de LRT medido con cinta métrica femenino', xlab = 'Longitud en cm', ylab = 'Densidad')
+lines(density(femenino$LRT_CM), col = "red")
+box_LRT_CM <- boxplot(femenino$LRT_CM, main = "Boxplot de LRT_CM femenino")
+
+femenino[which(femenino$LRT_CM<box_LRT_CM$stats[1]|femenino$LRT_CM>box_LRT_CM$stats[5]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
 ```
 
-Datos atípicos cuando se distingue por `Sexo` en mujeres:
+##### LRT_CM sexo masculino
 
 ```{r}
-(datos |> filter(Sexo == "Femenino"))[which((datos |> filter(Sexo == "Femenino"))$LRT_CM<box_LRT_CM_fm$stats[1,1]|(datos |> filter(Sexo == "Femenino"))$LRT_CM>box_LRT_CM_fm$stats[5,1]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
+summary(masculino$LRT_CM)
+
+hist(masculino$LRT_CM, freq = FALSE, main = 'Histograma de LRT medido con cinta métrica masculino', xlab = 'Longitud en cm', ylab = 'Densidad')
+lines(density(masculino$LRT_CM), col = "red")
+box_LRT_CM <- boxplot(masculino$LRT_CM, main = "Boxplot de LRT_CM masculino")
+
+masculino[which(masculino$LRT_CM<box_LRT_CM$stats[1]|masculino$LRT_CM>box_LRT_CM$stats[5]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
 ```
 
-Datos atípicos cuando se distingue por `Sexo` en hombres:
-
-```{r}
-(datos |> filter(Sexo == "Masculino"))[which((datos |> filter(Sexo == "Masculino"))$LRT_CM<box_LRT_CM_fm$stats[1,2]|(datos |> filter(Sexo == "Masculino"))$LRT_CM>box_LRT_CM_fm$stats[5,2]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
-```
 
 En resúmen, el mínimo de LRT con cinta métrica en la muestra es 38 cm, el máximo son 59 cm, la media son 49.02 cm y la mediana 48.75 cm. En la muestra junta, hay tres datos atípicos (59, 39 y 38), cuando se separa por Sexo, hay dos datos atípicos en Femenino (39 y 38) y uno en Masculino (59). 
 
@@ -290,23 +347,28 @@ Datos atípicos en la variable `LRT_A`:
 datos[which(datos$LRT_A<box_LRT_A$stats[1]|datos$LRT_A>box_LRT_A$stats[5]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
 ```
 
-Distribución de la variable `LRT_A` distinguiendo por `Sexo`:
+##### LRT_A sexo femenino
 
 ```{r}
-box_LRT_A_fm <- boxplot(datos$LRT_A ~ datos$Sexo, xlab = 'Sexo', ylab = 'LRT con antropómetro en cm',
-                        main = "Boxplot de LRT_A por Sexo")
+summary(femenino$LRT_A)
+
+hist(femenino$LRT_A, freq = FALSE, main ='Histograma de LRT con antropómetro femenino', xlab = 'Longitud en cm', ylab = 'Densidad')
+lines(density(femenino$LRT_A), col = "red")
+box_LRT_A <- boxplot(femenino$LRT_A, main = "Boxplot de LRT_A femenino")
+
+femenino[which(femenino$LRT_A<box_LRT_A$stats[1]|femenino$LRT_A>box_LRT_A$stats[5]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
 ```
 
-Datos atípicos cuando se distingue por `Sexo` en mujeres:
+##### LRT_A sexo masculino
 
 ```{r}
-(datos |> filter(Sexo == "Femenino"))[which((datos |> filter(Sexo == "Femenino"))$LRT_A<box_LRT_A_fm$stats[1,1]|(datos |> filter(Sexo == "Femenino"))$LRT_A>box_LRT_A_fm$stats[5,1]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
-```
+summary(masculino$LRT_A)
 
-Datos atípicos cuando se distingue por `Sexo` en hombres:
+hist(masculino$LRT_A, freq = FALSE, main ='Histograma de LRT con antropómetro masculino', xlab = 'Longitud en cm', ylab = 'Densidad')
+lines(density(masculino$LRT_A), col = "red")
+box_LRT_A <- boxplot(masculino$LRT_A, main = "Boxplot de LRT_A masculino")
 
-```{r}
-(datos |> filter(Sexo == "Masculino"))[which((datos |> filter(Sexo == "Masculino"))$LRT_A<box_LRT_A_fm$stats[1,2]|(datos |> filter(Sexo == "Masculino"))$LRT_A>box_LRT_A_fm$stats[5,2]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
+masculino[which(masculino$LRT_A<box_LRT_A$stats[1]|masculino$LRT_A>box_LRT_A$stats[5]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
 ```
 
 En resúmen, el mínimo de LRT con antropómetro en la muestra es 36.85 cm, el máximo son 58.35 cm, la media son 47.60 cm y la mediana 47.50 cm. En la muestra junta, tenemos cuatro datos atípicos (57.65, 58.35, 37.00 y 36.85). Cuando se separa por Sexo, hay tres datos atípicos en Femenino (37.00, 36.85 y 38.20) y en Masculino dos (57.65 y 58.35).
@@ -334,24 +396,30 @@ Datos atípicos en la variable `LRM_90`:
 datos[which(datos$LRM_90<box_LRM_90$stats[1]|datos$LRM_90>box_LRM_90$stats[5]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
 ```
 
-Distribución de la variable `LRM_90` distinguiendo por `Sexo`:
+##### LRM_90 sexo femenino
 
 ```{r}
-box_LRM_90_fm <- boxplot(datos$LRM_90 ~ datos$Sexo, xlab = 'Sexo', ylab = 'LRM a 90° en cm',
-                         main = "Boxplot de LRM_90 por Sexo")
+summary(femenino$LRM_90)
+
+hist(femenino$LRM_90, freq = FALSE, main ='Histograma de LRM_90 femenino', xlab = 'Longitud en cm', ylab = 'Densidad')
+lines(density(femenino$LRM_90), col = "red")
+box_LRT_A <- boxplot(femenino$LRM_90, main = "Boxplot de LRM_90 femenino")
+
+femenino[which(femenino$LRM_90<box_LRT_A$stats[1]|femenino$LRM_90>box_LRT_A$stats[5]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
 ```
 
-Datos atípicos en mujeres cuando se distingue por `Sexo`:
+##### LRM_90 sexo masculino
 
 ```{r}
-(datos |> filter(Sexo == "Femenino"))[which((datos |> filter(Sexo == "Femenino"))$LRM_90<box_LRM_90_fm$stats[1,1]|(datos |> filter(Sexo == "Femenino"))$LRM_90>box_LRM_90_fm$stats[5,1]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
+summary(masculino$LRM_90)
+
+hist(masculino$LRM_90, freq = FALSE, main ='Histograma de LRM_90 con antropómetro masculino', xlab = 'Longitud en cm', ylab = 'Densidad')
+lines(density(masculino$LRM_90), col = "red")
+box_LRT_A <- boxplot(masculino$LRM_90, main = "Boxplot de LRM_90 masculino")
+
+masculino[which(masculino$LRM_90<box_LRT_A$stats[1]|masculino$LRM_90>box_LRT_A$stats[5]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
 ```
 
-Datos atípicos en hombres cuando se distingue por `Sexo`:
-
-```{r}
-(datos |> filter(Sexo == "Masculino"))[which((datos |> filter(Sexo == "Masculino"))$LRM_90<box_LRM_90_fm$stats[1,2]|(datos |> filter(Sexo == "Masculino"))$LRM_90>box_LRM_90_fm$stats[5,2]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
-```
 :::
 
 El mínimo de LRM con la pierna a 90° en la muestra es 31.85 cm, el máximo son 53.00 cm, la media son 43.32 cm y la mediana 43.25 cm. En la muestra junta, tenemos 4 datos atípicos (53.00, 52.30, 34.00 y 31.85). Cuando se separa por Sexo, tenemos 2 datos atípicos en Femenino (34.00 y 31.85), y en Masculino 2 (53.00, 52.3).
@@ -379,25 +447,29 @@ Datos atípicos en la variable `LRM_R`:
 datos[which(datos$LRM_R<box_LRM_R$stats[1]|datos$LRM_R>box_LRM_R$stats[5]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
 ```
 
-Distribución de la variable `LRM_R` distinguiendo por `Sexo`:
+##### LRM_R sexo femenino
 
 ```{r}
-box_LRM_R_fm <- boxplot(datos$LRM_R ~ datos$Sexo, xlab = 'Sexo', ylab = 'LRM recta en cm',
-                        main = "Boxplot de LRT_R por Sexo")
+summary(femenino$LRM_R)
+
+hist(femenino$LRM_R, freq = FALSE, main ='Histograma de LRM_90 femenino', xlab = 'Longitud en cm', ylab = 'Densidad')
+lines(density(femenino$LRM_90), col = "red")
+box_LRT_A <- boxplot(femenino$LRM_90, main = "Boxplot de LRM_90 femenino")
+
+femenino[which(femenino$LRM_90<box_LRT_A$stats[1]|femenino$LRM_90>box_LRT_A$stats[5]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
 ```
 
-Datos atípicos en mujeres cuando se distingue por `Sexo`:
+##### LRM_90 sexo masculino
 
 ```{r}
-(datos |> filter(Sexo == "Femenino"))[which((datos |> filter(Sexo == "Femenino"))$LRM_R<box_LRM_R_fm$stats[1,1]|(datos |> filter(Sexo == "Femenino"))$LRM_R>box_LRM_R_fm$stats[5,1]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
+summary(masculino$LRM_90)
+
+hist(masculino$LRM_90, freq = FALSE, main ='Histograma de LRM_90 con antropómetro masculino', xlab = 'Longitud en cm', ylab = 'Densidad')
+lines(density(masculino$LRM_90), col = "red")
+box_LRT_A <- boxplot(masculino$LRM_90, main = "Boxplot de LRM_90 masculino")
+
+masculino[which(masculino$LRM_90<box_LRT_A$stats[1]|masculino$LRM_90>box_LRT_A$stats[5]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
 ```
-
-Datos atípicos en hombres cuando se distingue por `Sexo`:
-
-```{r}
-(datos |> filter(Sexo == "Masculino"))[which((datos |> filter(Sexo == "Masculino"))$LRM_R<box_LRM_R_fm$stats[1,2]|(datos |> filter(Sexo == "Masculino"))$LRM_R>box_LRM_R_fm$stats[5,2]),-c(1,2)] |> gt() |> gtExtras::gt_theme_538() |> tab_options(table.font.size = 9)
-```
-
 El mínimo de LRM con la pierna recta en la muestra es 31.45 cm, el máximo son 52.5 cm, la media son 42.60 cm y la mediana 42.55 cm. En la muestra junta, hay tres datos atípicos (52.50, 52.50 y 31.45), cuando se separa por Sexo, hay dos datos atípicos en Femenino (33.50 y 31.45), y en Masculino seis (52.50, 51.35, 52.50, 51.25, 37.70 y 37.75).
 
 ### Relaciones entre las variables
