@@ -1891,7 +1891,93 @@ modelos_tab <- cbind(nombres, modelos_tab)
 modelos_tab |> gt()
 ```
 
-### Opción 3: Fórmulas de Benjumea LRT_A
+### Opción 3: Modelo normal LRM_R
+
+A continuación se muestran los resultados del modelo normal con LRM_R dentro del conjunto de entrenamiento, de modo que se muestra el tamaño de la muestra de entrenamiento ($n$), el *r-*cuadrado que muestra la varianza explciada por el modelo (R2), el error estándar de la estimación (EE), el valor p de la prueba de normalidad de Lilliefors (Normalidad), y el valor p de la prueba Breusch-Pagan para homocedasticidad (Homocedasticidad).
+
+```{r}
+modelos_tab <- data.frame(n = numeric(),
+                          R2 = numeric(),
+                          EE = numeric(),
+                          Normalidad = numeric(),
+                          Homocedasticidad = numeric())
+
+modelo_femenino <- lm(Talla ~ LRM_R + Edad, data = femenino)
+r2_femenino <- summary(modelo_femenino)$r.squared
+ee_femenino <- sqrt(mean(residuals(modelo_femenino)^2))
+normalidad_femenino <- lillie.test(residuals(modelo_femenino))$p.value
+homocedasticidad_femenino <- bptest(modelo_femenino)$p.value
+
+modelos_tab <- rbind(modelos_tab, 
+                     data.frame(n = nrow(femenino),
+                                R2 = r2_femenino,
+                                EE = ee_femenino,
+                                Normalidad = normalidad_femenino,
+                                Homocedasticidad = homocedasticidad_femenino))
+
+modelo_masculino <- lm(Talla ~ LRM_R + Edad, data = masculino)
+r2_masculino <- summary(modelo_masculino)$r.squared
+ee_masculino <- sqrt(mean(residuals(modelo_masculino)^2))
+normalidad_masculino <- lillie.test(residuals(modelo_masculino))$p.value
+homocedasticidad_masculino <- bptest(modelo_masculino)$p.value
+
+modelos_tab <- rbind(modelos_tab, 
+                     data.frame(n = nrow(masculino),
+                                R2 = r2_masculino,
+                                EE = ee_masculino,
+                                Normalidad = normalidad_masculino,
+                                Homocedasticidad = homocedasticidad_masculino))
+
+nombres <- c("Femenino", "Masculino")
+modelos_tab <- cbind(nombres, modelos_tab)
+
+modelos_tab |> gt()
+```
+
+### Opción 4: Modelo normal LRM_90
+
+A continuación se muestran los resultados del modelo normal con LRM_90 dentro del conjunto de entrenamiento, de modo que se muestra el tamaño de la muestra de entrenamiento ($n$), el *r-*cuadrado que muestra la varianza explciada por el modelo (R2), el error estándar de la estimación (EE), el valor p de la prueba de normalidad de Lilliefors (Normalidad), y el valor p de la prueba Breusch-Pagan para homocedasticidad (Homocedasticidad).
+
+```{r}
+modelos_tab <- data.frame(n = numeric(),
+                          R2 = numeric(),
+                          EE = numeric(),
+                          Normalidad = numeric(),
+                          Homocedasticidad = numeric())
+
+modelo_femenino <- lm(Talla ~ LRM_90 + Edad, data = femenino)
+r2_femenino <- summary(modelo_femenino)$r.squared
+ee_femenino <- sqrt(mean(residuals(modelo_femenino)^2))
+normalidad_femenino <- lillie.test(residuals(modelo_femenino))$p.value
+homocedasticidad_femenino <- bptest(modelo_femenino)$p.value
+
+modelos_tab <- rbind(modelos_tab, 
+                     data.frame(n = nrow(femenino),
+                                R2 = r2_femenino,
+                                EE = ee_femenino,
+                                Normalidad = normalidad_femenino,
+                                Homocedasticidad = homocedasticidad_femenino))
+
+modelo_masculino <- lm(Talla ~ LRM_90 + Edad, data = masculino)
+r2_masculino <- summary(modelo_masculino)$r.squared
+ee_masculino <- sqrt(mean(residuals(modelo_masculino)^2))
+normalidad_masculino <- lillie.test(residuals(modelo_masculino))$p.value
+homocedasticidad_masculino <- bptest(modelo_masculino)$p.value
+
+modelos_tab <- rbind(modelos_tab, 
+                     data.frame(n = nrow(masculino),
+                                R2 = r2_masculino,
+                                EE = ee_masculino,
+                                Normalidad = normalidad_masculino,
+                                Homocedasticidad = homocedasticidad_masculino))
+
+nombres <- c("Femenino", "Masculino")
+modelos_tab <- cbind(nombres, modelos_tab)
+
+modelos_tab |> gt()
+```
+
+### Opción 5: Fórmulas de Benjumea LRT_A
 
 A continuación se muestran los resultados utilizando las fórmulas de Benjumea con LRT_A dentro del conjunto de entrenamiento, de modo que se muestra el tamaño de la muestra de entrenamiento ($n$), el *r-*cuadrado que muestra la varianza explciada por el modelo (R2), el error estándar de la estimación (EE), el valor p de la prueba de normalidad de Lilliefors (Normalidad), y el valor p de la prueba Breusch-Pagan para homocedasticidad (Homocedasticidad).
 
@@ -1968,7 +2054,7 @@ modelos_tab |> gt()
 ```
 
 
-### Opción 4: Fórmulas de Benjumea LRT_CM
+### Opción 6: Fórmulas de Benjumea LRT_CM
 
 A continuación se muestran los resultados utilizando las fórmulas de Benjumea con LRT_CM dentro del conjunto de entrenamiento, de modo que se muestra el tamaño de la muestra de entrenamiento ($n$), el *r-*cuadrado que muestra la varianza explciada por el modelo (R2), el error estándar de la estimación (EE), el valor p de la prueba de normalidad de Lilliefors (Normalidad), y el valor p de la prueba Breusch-Pagan para homocedasticidad (Homocedasticidad).
 
@@ -2039,7 +2125,7 @@ modelos_tab |> gt()
 ```
 
 
-### Opción 5: Fórmulas de Arango y Zamora LRM_R
+### Opción 7: Fórmulas de Arango y Zamora LRM_R
 
 A continuación se muestran los resultados utilizando las fórmulas de Arango y Zamora con LRM_R (pierna estirada) dentro del conjunto de entrenamiento, de modo que se muestra el tamaño de la muestra de entrenamiento ($n$), el *r-*cuadrado que muestra la varianza explciada por el modelo (R2), el error estándar de la estimación (EE), el valor p de la prueba de normalidad de Lilliefors (Normalidad), y el valor p de la prueba Breusch-Pagan para homocedasticidad (Homocedasticidad).
 
@@ -2111,7 +2197,7 @@ modelos_tab |> gt()
 ```
 
 
-### Opción 6: Fórmulas de Arango y Zamora LRM_90
+### Opción 8: Fórmulas de Arango y Zamora LRM_90
 
 A continuación se muestran los resultados utilizando las fórmulas de Arango y Zamora con LRM_90 dentro del conjunto de entrenamiento, de modo que se muestra el tamaño de la muestra de entrenamiento ($n$), el *r-*cuadrado que muestra la varianza explciada por el modelo (R2), el error estándar de la estimación (EE), el valor p de la prueba de normalidad de Lilliefors (Normalidad), y el valor p de la prueba Breusch-Pagan para homocedasticidad (Homocedasticidad).
 
@@ -2299,7 +2385,123 @@ modelos_tab_val <- cbind(nombres, modelos_tab_val)
 modelos_tab_val |> gt()
 ```
 
-### Opción 3: Fórmulas de Benjumea LRT_A
+
+### Opción 3: Modelo normal LRM_R
+
+Se muestra un resumen de los resultados del modelo normal con LRM_R sobre el conjunto de validación, por lo que se encuentra $n$ el  tamaño de muestra del conjunto de validación para cada subgrupo (femenino o masculino), el *r-*cuadrado (R2) y el error puro (Error_Puro).
+
+```{r}
+modelos_tab_val <- data.frame(n = numeric(),
+                              R2 = numeric(),
+                              Error_Puro = numeric())
+
+# Para mujeres
+# Ajustar el modelo en el conjunto de entrenamiento
+modelo <- lm(Talla ~ LRM_R + Edad, data = femenino)
+
+# Hacer predicciones en el conjunto de validación (test)
+predicciones <- predict(modelo, newdata = femenino_test)
+
+# Calcular el R2 en test
+SSE <- sum((femenino_test$Talla - predicciones)^2)  # Suma de errores cuadráticos
+SST <- sum((femenino_test$Talla - mean(femenino_test$Talla))^2)  # Suma total de cuadrados
+R2_test <- 1 - (SSE / SST)
+
+
+MSE_test <- mean((femenino_test$Talla - predicciones)^2)
+
+modelos_tab_val <- rbind(modelos_tab_val,
+                         data.frame(n = nrow(femenino_test),
+                                    R2 = R2_test,
+                                    Error_Puro = sqrt(MSE_test)))
+
+
+
+# Para hombres 
+# Ajustar el modelo en el conjunto de entrenamiento
+modelo <- lm(Talla ~ LRM_R + Edad, data = masculino)
+
+# Hacer predicciones en el conjunto de validación (test)
+predicciones <- predict(modelo, newdata = masculino_test)
+
+# Calcular el R2 en test
+SSE <- sum((masculino_test$Talla - predicciones)^2)  # Suma de errores cuadráticos
+SST <- sum((masculino_test$Talla - mean(masculino_test$Talla))^2)  # Suma total de cuadrados
+R2_test <- 1 - (SSE / SST)
+
+
+MSE_test <- mean((masculino_test$Talla - predicciones)^2)
+
+modelos_tab_val <- rbind(modelos_tab_val,
+                         data.frame(n = nrow(masculino_test),
+                                    R2 = R2_test,
+                                    Error_Puro = sqrt(MSE_test)))
+
+nombres <- c("Femenino", "Masculino")
+modelos_tab_val <- cbind(nombres, modelos_tab_val)
+
+modelos_tab_val |> gt()
+```
+
+### Opción 4: Modelo normal LRM_90
+
+Se muestra un resumen de los resultados del modelo normal con LRM_90 sobre el conjunto de validación, por lo que se encuentra $n$ el  tamaño de muestra del conjunto de validación para cada subgrupo (femenino o masculino), el *r-*cuadrado (R2) y el error puro (Error_Puro).
+
+```{r}
+modelos_tab_val <- data.frame(n = numeric(),
+                              R2 = numeric(),
+                              Error_Puro = numeric())
+
+# Para mujeres
+# Ajustar el modelo en el conjunto de entrenamiento
+modelo <- lm(Talla ~ LRM_90 + Edad, data = femenino)
+
+# Hacer predicciones en el conjunto de validación (test)
+predicciones <- predict(modelo, newdata = femenino_test)
+
+# Calcular el R2 en test
+SSE <- sum((femenino_test$Talla - predicciones)^2)  # Suma de errores cuadráticos
+SST <- sum((femenino_test$Talla - mean(femenino_test$Talla))^2)  # Suma total de cuadrados
+R2_test <- 1 - (SSE / SST)
+
+
+MSE_test <- mean((femenino_test$Talla - predicciones)^2)
+
+modelos_tab_val <- rbind(modelos_tab_val,
+                         data.frame(n = nrow(femenino_test),
+                                    R2 = R2_test,
+                                    Error_Puro = sqrt(MSE_test)))
+
+
+
+# Para hombres 
+# Ajustar el modelo en el conjunto de entrenamiento
+modelo <- lm(Talla ~ LRM_90 + Edad, data = masculino)
+
+# Hacer predicciones en el conjunto de validación (test)
+predicciones <- predict(modelo, newdata = masculino_test)
+
+# Calcular el R2 en test
+SSE <- sum((masculino_test$Talla - predicciones)^2)  # Suma de errores cuadráticos
+SST <- sum((masculino_test$Talla - mean(masculino_test$Talla))^2)  # Suma total de cuadrados
+R2_test <- 1 - (SSE / SST)
+
+
+MSE_test <- mean((masculino_test$Talla - predicciones)^2)
+
+modelos_tab_val <- rbind(modelos_tab_val,
+                         data.frame(n = nrow(masculino_test),
+                                    R2 = R2_test,
+                                    Error_Puro = sqrt(MSE_test)))
+
+nombres <- c("Femenino", "Masculino")
+modelos_tab_val <- cbind(nombres, modelos_tab_val)
+
+modelos_tab_val |> gt()
+```
+
+
+### Opción 5: Fórmulas de Benjumea LRT_A
 
 Se muestra un resumen de los resultados utilizando las fórmulas de Benjumea con LRT_A sobre el conjunto de validación, por lo que se encuentra $n$ el  tamaño de muestra del conjunto de validación para cada subgrupo (femenino o masculino), el *r-*cuadrado (R2) y el error puro (Error_Puro).
 
@@ -2355,7 +2557,7 @@ modelos_tab_val <- cbind(nombres, modelos_tab_val)
 modelos_tab_val |> gt()
 ```
 
-### Opción 4: Fórmulas de Benjumea LRT_CM
+### Opción 6: Fórmulas de Benjumea LRT_CM
 
 Se muestra un resumen de los resultados utilizando las fórmulas de Benjumea con LRT_CM sobre el conjunto de validación, por lo que se encuentra $n$ el  tamaño de muestra del conjunto de validación para cada subgrupo (femenino o masculino), el *r-*cuadrado (R2) y el error puro (Error_Puro).
 
@@ -2408,7 +2610,7 @@ modelos_tab_val <- cbind(nombres, modelos_tab_val)
 modelos_tab_val |> gt()
 ```
 
-### Opción 5: Fórmulas de Arango y Zamora LRM_R
+### Opción 7: Fórmulas de Arango y Zamora LRM_R
 
 Se muestra un resumen de los resultados utilizando las fórmulas de Arango y Zamora con LRM_R (pierna estirada) sobre el conjunto de validación, por lo que se encuentra $n$ el  tamaño de muestra del conjunto de validación para cada subgrupo (femenino o masculino), el *r-*cuadrado (R2) y el error puro (Error_Puro).
 
@@ -2461,7 +2663,7 @@ modelos_tab_val <- cbind(nombres, modelos_tab_val)
 modelos_tab_val |> gt()
 ```
 
-### Opción 6: Fórmulas de Arango y Zamora LRM_90
+### Opción 8: Fórmulas de Arango y Zamora LRM_90
 
 Se muestra un resumen de los resultados utilizando las fórmulas de Arango y Zamora con LRM_90 sobre el conjunto de validación, por lo que se encuentra $n$ el  tamaño de muestra del conjunto de validación para cada subgrupo (femenino o masculino), el *r-*cuadrado (R2) y el error puro (Error_Puro).
 
